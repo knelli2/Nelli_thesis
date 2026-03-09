@@ -1,2 +1,20 @@
 .vscode/
 .claude/
+
+# Tex output
+*.aux
+*.bbl
+*.blg
+*.ent
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.nlo
+*.lot
+*.synctex.gz
+*.toc
+*.pdf
