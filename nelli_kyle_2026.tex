@@ -21,7 +21,7 @@
 
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[sectionbib]{bibunits}
-\defaultbibliographystyle{plainnat}
+% \defaultbibliographystyle{plainnat}
 \usepackage{enumitem}
 
 \usepackage{hyperref, multirow, color, bbold, textcomp}
@@ -192,7 +192,7 @@ thesis. Though maybe that would be better since I share a lot of references?
   methods}
 
 % Use bibunit if using bibtex/natbib
-\begin{bibunit}  
+\begin{bibunit}[unsrtnat]
 
 % \title[Simulating binary black hole mergers using discontinuous Galerkin
 %   methods]{Simulating binary black hole mergers using discontinuous Galerkin
@@ -1855,7 +1855,6 @@ Faculty Fellowship at the International Centre for Theoretical Sciences.
 \newcommand\prd{Phys.~Rev.~D }
 
 \section*{References}
-\bibliographystyle{unsrt}
 \putbib[lovelace_nelli]
 % If you'd like to have separate bibliographies at the end of each chapter, put a \verb|bibunit| around the material of each chapter, passing in the bibliography style to use, then cite as usual -- e.g.~\citep{GMP81,Ful83}. Then do a \verb|\putbib| (with the .bib file to refer to) just before the \verb|bibunit| ends. \index{bibliography!by chapter}
 
@@ -1878,9 +1877,6 @@ Faculty Fellowship at the International Centre for Theoretical Sciences.
 [You can have chapters that were published as part of your thesis. The text style of the body should be single column, as it was submitted to the publisher, not formatted as the publisher did.]
 
 \chapter{This is the Fourth Chapter}
-
-\bibliographystyle{plainnat}
-\bibliography{example}
 
 \appendix
 
