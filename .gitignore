@@ -20,3 +20,4 @@ AGENTS.md
 *.synctex.gz
 *.toc
 *.pdf
+*.out
