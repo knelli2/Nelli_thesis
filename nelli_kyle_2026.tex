@@ -87,52 +87,46 @@ Note that it's not possible to get an existing BibTeX style to sort in reverse c
 \mainmatter
 
 \chapter{Introduction}
-Start off all chapters with \verb|chapter|. \index{chapter!numbered} \verb|\extrachapter| will give you an unnumbered chapter that's added to the Table of Contents. \index{chapter!unnumbered}
 
-Here's an example of a citation \citep{GMP81}. Here's another \citep{PP98}. These will appear in the big bibliography at the end of the thesis.
-\index{bibliography}
+Here's a rough outline of what's going to be in each chapter. Four chapters
+total. I probably want a bibliography for each section, not one for the entire
+thesis. Though maybe that would be better since I share a lot of references?
 
-If you're new to \LaTeX{} and would like to begin by learning the basics, please see our free online course available at:\\ \url{https://www.overleaf.com/latex/learn/free-online-introduction-to-latex-part-1} \index{LaTeX@\LaTeX}
-
-You can define nomenclatures \index{nomenclature} as you talk about key terms in your thesis. So what's a galaxy? \nomenclature{Galaxy}{A system of stars independent from all other systems}
-
-
-\section{This is a Section}
-\lipsum[1-2]
-
-\begin{figure}[hbt!]
-\centering
-\includegraphics[width=.3\textwidth]{caltech.png}
-\caption{This is a figure}\label{fig:logo}
-\index{figures}
-\end{figure}
-
-\subsection{This is a subsection}
-
-\begin{table}[hbt!]
-\centering
-\begin{tabular}{ll}
-\hline
-Area & Count\\
-\hline
-North & 100\\
-South & 200\\
-East & 80\\
-West & 140\\
-\hline
-\end{tabular}
-\caption{This is a table}\label{tab:sample}
-\index{tables}
-\end{table}
-
-\lipsum[3] \nomenclature{Asteroid}{A very small planet ranging from 1,000 km to less than one km in diameter. Asteroids are found commonly around other larger planets}
-
-\lipsum[4-5]
-
-Here's an endnote.\endnote{Endnotes are notes that you can use to explain text in a document.}
-
-\section{This is Another Section}
-\lipsum[6-7]
+\begin{enumerate}
+   \item Introduction
+   \begin{enumerate}
+      \item Broad intro to gravity
+      \begin{enumerate}
+         \item Newtonian Gravity
+         \item GR
+         \item NR (GR on computers, different formulations)
+      \end{enumerate}
+      \item Ultimate goals of Numerical Relativity (models/training)
+      \item Why HPC to achieve goals
+      \item GH and why horizon finding is important
+      \item Chapters of thesis
+      \begin{enumerate}
+         \item Brief on Lovelace and Nelli et al.
+         \item Brief on Nelli et al.
+         \item Brief on Cross code comparison
+      \end{enumerate}
+   \end{enumerate}
+   \item Lovelace and Nelli et al.
+   \item Nelli et al.
+   \item Cross code comparison
+   \begin{enumerate}
+      \item Motivation
+      \begin{enumerate}
+         \item $h_{+}$ and $h_{\times}$ not gauge invariant
+         \item Analog to 4 potential from E\&M
+         \item Different evolution gauges
+      \end{enumerate}
+      \item Overview of CCE (from Jordan's paper)
+      \item Different formulations evolved variable
+      \item Converting to ``standard'' variables for CCE
+      \item Caveat of frame fixing/BMS transforms
+   \end{enumerate}
+\end{enumerate}
 
 \chapter{This is the Second Chapter}
 
