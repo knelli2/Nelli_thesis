@@ -28,4 +28,10 @@ jobs:
           git rm -rf .
           git add NelliKyle2026Thesis.pdf
           git commit -m "PDF built from ${{ github.sha }}"
-          git push origin ci-latexmk-pdf
+        
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ci-latexmk-pdf
+          force: true
