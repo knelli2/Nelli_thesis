@@ -21,3 +21,6 @@ AGENTS.md
 *.toc
 *.pdf
 *.out
+
+# Images
+!images/**/*.pdf
