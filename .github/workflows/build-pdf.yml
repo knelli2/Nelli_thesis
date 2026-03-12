@@ -21,13 +21,10 @@ jobs:
 
       - name: Deploy PDF to orphan branch
         run: |
-          git config user.name "Kyle Nelli (CI)"
-          git config user.email "kcnelli21@gmail.com"
-
           git checkout --orphan ci-latexmk-pdf
           git rm -rf .
           git add NelliKyle2026Thesis.pdf
-          git commit -m "PDF built from ${{ github.sha }}"
+          git -c user.name='Kyle Nelli (CI)' -c user.email='kcnelli21@gmail.com' commit -m "PDF built from ${{ github.sha }}"
         
       - name: Push changes
         uses: ad-m/github-push-action@master
