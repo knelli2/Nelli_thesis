@@ -1,0 +1,40 @@
+name: Build LaTeX PDF
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: nelli_kyle_2026_thesis.tex
+          latexmk_use_lualatex: false
+          args: -pdf -jobname=NelliKyle2026Thesis -synctex=1 -interaction=nonstopmode -file-line-error
+
+      - name: Deploy PDF to orphan branch
+        run: |
+          git config user.name "Kyle Nelli (CI)"
+          git config user.email "kcnelli21@gmail.com"
+
+          # Save the built PDF
+          cp NelliKyle2026Thesis.pdf /tmp/NelliKyle2026Thesis.pdf
+
+          # Check if orphan branch exists on remote
+          if git ls-remote --exit-code --heads origin ci-latexmk-pdf; then
+            git fetch origin ci-latexmk-pdf
+            git checkout ci-latexmk-pdf
+          else
+            git checkout --orphan ci-latexmk-pdf
+            git rm -rf .
+          fi
+
+          cp /tmp/NelliKyle2026Thesis.pdf ./NelliKyle2026Thesis.pdf
+          git add NelliKyle2026Thesis.pdf
+          git commit -m "PDF built from ${{ github.sha }}"
+          git push origin ci-latexmk-pdf
