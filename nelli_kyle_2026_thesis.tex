@@ -27,16 +27,31 @@
 
 \usepackage{hyperref, multirow, color, bbold, textcomp}
 \usepackage{orcidlink}
+\usepackage{amsthm}
+\newtheorem{statement}{Statement}
 \usepackage{amsmath}
 
 \newcommand{\dual}{\,{}^*\!}  \newcommand{\avg}{\mathrm{avg}}
 
 \hyphenation{SpECTRE}
 
+\usepackage[caption=false]{subfig} %use this instead of subcaption
+                                    %replace subfigures with subfloats
+\usepackage[ruled]{algorithm2e}
+\usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{tikz, varwidth}
+\usepackage{tikz, varwidth, changepage}
 \usetikzlibrary{calc,positioning,shapes,shapes.geometric,shapes.misc,
-  shadows,arrows,arrows.meta}
+  shadows,arrows,arrows.meta,math,decorations.pathreplacing}
+
+%tikz styles
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm,
+minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110,
+minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30] 
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text
+centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
 %%%%% Envs %%%%%
 \makeatletter
@@ -86,6 +101,9 @@ of Physics and Astronomy, UCLA, Los Angeles, CA 90095} \newcommand{\UCLAId}{9}
 
 \newcommand{\response}[1]{{\color{black}{#1}}}
 \newcommand{\responsetwo}[1]{{\color{black}{#1}}}
+\newcommand{\spectre}{\texttt{SpECTRE}}
+\newcommand{\spec}{\texttt{SpEC}}
+\newcommand{\edit}[1]{{\color{black}{#1}}}
 
 \begin{document}
 
