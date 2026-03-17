@@ -13,12 +13,12 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 
-\usepackage{todonotes}
+% \usepackage{todonotes}
 
 %% Tentative: newtx for better-looking Times
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{newtxtext,newtxmath}
+\usepackage{newtxtext} %,newtxmath}
 
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[sectionbib]{bibunits}
@@ -104,6 +104,9 @@ of Physics and Astronomy, UCLA, Los Angeles, CA 90095} \newcommand{\UCLAId}{9}
 \newcommand{\spectre}{\texttt{SpECTRE}}
 \newcommand{\spec}{\texttt{SpEC}}
 \newcommand{\edit}[1]{{\color{black}{#1}}}
+\newcommand{\todo}[1]{{\color{blue}\textsf{[TODO:#1]}}}
+
+\includeonly{chapters/4_cross_code_cce}
 
 \begin{document}
 

@@ -1,3 +1,97 @@
-\chapter{Infrastructure for cross-code comparison of CCE waveforms}
+\chapter{Infrastructure for cross-code comparison of CCE waveforms\label{ch:compare}}
 
-TODO: Write this
+\newcommand{\todocite}{\todo{CITE}}
+
+% Use bibunit if using bibtex/natbib
+\begin{bibunit}[unsrtnat]
+
+\begin{enumerate}
+  \item Motivation
+  \begin{enumerate}
+      \item Explain importance about comparing waveforms
+      \item Waveform models, surrogates, etc.
+      \item $h_{+}$ and $h_{\times}$ not gauge invariant
+      \item Analog to 4 potential from E\&M
+      \item Different evolution gauges
+  \end{enumerate}
+  \item Overview of CCE (from Jordan's paper)
+  \item Different formulations evolved variable
+  \item Converting to ``standard'' variables for CCE
+  \item Caveat of frame fixing/BMS transforms
+\end{enumerate}
+
+\section{Introduction}
+
+Being able to compare gravitational waveforms with each other, whether it be
+comparing Numerical Relativity (NR) waveforms with other NR waveforms or
+observed gravitational waves (GWs), is an extremely important ability in GW
+science; potentially the most important. GW detectors compare suspected signals
+to models that have been informed by NR such as the IMRPhenom family
+(examples: \cite{Pratten:2020fqn, Garcia-Quiros:2020qpx, Pratten:2020ceb}) for
+frequency-domain analysis and the SEOBNR family (examples:
+\cite{Khalil:2023kep, Ramos-Buades:2023ehm, vandeMeent:2023ols}) for time-domain
+analysis. NR codes also compare waveforms internally, typically for verification
+of convergence as in \S\ref{sec:gws} or for analysis of trends in GW catalogs
+\cite{Scheel:2025jct}. However, comparing waveforms from different NR
+simulations, even from the same code, have to be done carefully since different
+simulations will be done in different gauges.
+
+\subsection{Electricity and Magnetism example}
+
+To give an example of why we need to consider gauges when comparing NR
+waveforms, let us first look at a more familiar use of gauges in an
+introductory setting such as electricity and magnetism. Maxwell's equations (in
+vector form) are
+\begin{align}
+  \nabla \cdot \mathbf{E} = 4\pi\rho &\quad\quad
+  \nabla \times \mathbf{E} = -\frac{1}{c}\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \cdot \mathbf{B} = 0 &\quad\quad
+  \nabla \times \mathbf{B} = \frac{1}{c}\left(4\pi\mathbf{J} + \frac{\partial \mathbf{E}}{\partial t}\right)
+\end{align}
+From Gauss's law for magnetism and Faraday's equation along with vector calculus
+identities, we can define
+\begin{align}
+  \mathbf{B} &= \nabla \times \mathbf{A}\label{eq:maxwell-b} \\
+  \mathbf{E} &= -\nabla\phi - \frac{\partial \mathbf{A}}{\partial t}\label{eq:maxwell-e}
+\end{align}
+where $\phi$ is the electric potential and $\mathbf{A}$ is the vector potential.
+We notice that if we modify $\phi$ and $\mathbf{A}$ like so
+\begin{align}
+  \mathbf{A} &\rightarrow \mathbf{A} + \nabla\psi\label{eq:maxwell-a} \\
+  \phi &\rightarrow \phi - \frac{\partial \psi}{\partial t}\label{eq:maxwell-phi}
+\end{align}
+for some scalar function $\phi$, $\mathbf{B}$ and $\mathbf{E}$ in
+\ref{eq:maxwell-b} and \ref{eq:maxwell-e}, respectively, remain unchanged. This
+ability to choose $\phi$ and $\mathbf{A}$ is called gauge freedom, and the
+choice that we make is considered the gauge.
+
+In electricity and magnetism there are two common gauges; Coulomb and Lorenz.
+The Coulomb gauge is defined by
+\begin{equation}
+  \nabla \cdot \mathbf{A} = 0
+\end{equation}
+To describe the Lorenz gauge, we combine $\phi$ and $\mathbf{A}$ as a
+four-vector
+\begin{equation}
+  A^\mu = \left(\phi/c,\mathbf{A}\right) .
+\end{equation}
+The Lorenz gauge is then
+\begin{equation}
+  \partial_\mu A^\mu = 0.
+\end{equation}
+This differs from the Coulomb gauge because of the $\partial_0 A^0 \sim
+\partial_t \phi$ part. The implications that this choice of gauge has on the
+equations can be found in virtually any electricity and magnetism textbook
+\todocite. The important point for this discussion is that even though
+$\mathbf{E}$ and $\mathbf{B}$ mathematically remain unchanged depending on which
+gauge is chosen, the gauge dependent quantities $\phi$ and $\mathbf{A}$ cannot
+be compared between gauges.
+
+\subsection{General and Numerical Relativity gauges}
+
+blah
+
+\section*{References}
+\putbib[cross_code_cce]
+
+\end{bibunit}
