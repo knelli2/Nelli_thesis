@@ -1,5 +1,10 @@
 \chapter{Horizon tracking for asynchronous parallel black hole simulations}
 
+\publishedas{nelli_papers}{Nelli:2025vfc}
+
+% Use bibunit if using bibtex/natbib
+\begin{bibunit}[unsrtnat]
+
 % \author{
 %   Kyle C.~Nelli$^{\CaltechId}$\orcidlink{0000-0003-2426-8768},
 %   William Throwe$^{\CornellCcapsId}$\orcidlink{0000-0001-5059-4378},
@@ -131,7 +136,7 @@ results demonstrating the efficiency improvement gained from enabling LTS.} In
 section \ref{sec:bns} we briefly explain how the
 feedback control system can be applied to binary neutron star simulations done
 with asynchronous parallelism in \spectre. And finally, we summarize and
-conclude our findings  in section \ref{sec:conclusion}.
+conclude our findings  in section \ref{sec:3_conclusion}.
 
 \section{Asynchronous parallelism}
 In this section, we first introduce the concept of asynchronous
@@ -1437,7 +1442,7 @@ derivatives, $U(t)$, and eventually $\lambda(t)$. In figure \ref{fig:bns}, we
 show snapshots of an asynchronous BNS simulation done with \spectre~where the
 NSs are tracked with the methods in this paper \cite{Habib:2025inprep}.
 
-\section{Conclusion\label{sec:conclusion}}
+\section{Conclusion\label{sec:3_conclusion}}
 
 In this paper, we present novel methods for finding and tracking apparent
 horizons in asynchronous simulations of black holes using a feedback control
@@ -1527,5 +1532,6 @@ Fullerton.
 % \newcommand\prd{Phys.~Rev.~D }
 
 \section*{References}
-\bibliographystyle{unsrt}
-\bibliography{refs}
+\putbib[nelli_et_al]
+
+\end{bibunit}
