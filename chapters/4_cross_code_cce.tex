@@ -89,13 +89,14 @@ be compared between gauges.
 
 \subsection{General and Numerical Relativity gauges}
 
-Now we move to gauges in general relativity (GR). Instead of putting a constraint on
-the four-potential as our gauge condition, in GR we impose our gauge condition
-on the coordinates $x^\mu$ of our spacetime. We skip a derivation of
-\textit{why} we have this coordinate freedom in the theory of general relativity
-as that's the topic of introductory GR courses, but a derivation can be found in
-virtually any GR text book, including \todocite to name a few. For our purposes,
-let's take a look at a few gauges in GR and NR.
+Now we move to gauges in general relativity (GR). Instead of putting a
+constraint on the four-potential as our gauge condition, in GR we impose our
+gauge condition on the coordinates $x^\mu$ of our spacetime. We skip a
+derivation of \textit{why} we have this coordinate freedom in the theory of
+general relativity as that's the topic of introductory GR courses, but a
+derivation can be found in virtually any GR text book, including
+\cite{Misner:1973prb,Wald:1984rg,Carroll:2004st} to name a few. For our
+purposes, let's take a look at a few gauges in GR and NR.
 
 \subsubsection{Transverse-traceless gauge}
 The first gauge most students encounter is one called the transverse-traceless
@@ -121,7 +122,7 @@ this point where we make a gauge choice of
 \begin{equation}\label{eq:harmonic_gauge}
   \Box x^\mu = 0
 \end{equation}
-which can be shown to simplify to \todocite
+which can be shown to simplify to \cite{Carroll:2004st}
 \begin{equation}\label{eq:linear_harmonic_gauge}
   \Box x^\mu = 0 \rightarrow g^{\mu\nu}\Gamma^\rho_{\mu\nu} = 0 \rightarrow
   \partial_\mu {\bar{h}^\mu}_{\lambda} = 0
@@ -133,7 +134,7 @@ T_{\mu\nu} = 0$), we arrive at a clean result
   \Box \bar{h}_{\mu\nu} = 0 .
 \end{equation}
 It can be shown (through some math that is unimportant to the point here)
-\todocite that
+\cite{Carroll:2004st} that
 \begin{equation}
   h^{\textrm{TT}}_{\mu\nu} = \left(
 \begin{matrix}
@@ -147,16 +148,17 @@ It can be shown (through some math that is unimportant to the point here)
 where we have dropped the bars because $h_{\mu\nu}$ is the trace-reverse of
 $\bar{h}_{\mu\nu}$ which is traceless. These are the familiar GW polarizations
 $h_{+}$ and $h_{\times}$ for a linear GW propagating in the z-direction.
-Therefore, this may be a useful gauge to analyze GWs from one of the detectors
-(though it's quite a bit more complicated than this in reality\todocite).
+Therefore, this is a useful gauge to analyze GWs from one of the detectors
+(though it's quite a bit more complicated than this in reality
+\cite{KAGRA:2021vkt,LIGOScientific:2021usb,LIGOScientific:2020ibl,LIGOScientific:2018mvr}).
 
 \subsubsection{NR gauges}
 
 Moving on to NR, the two most popular formulations of the field equations (Eq.
-\ref{eq:field_equations}) are the Generalized Harmonic (GH) formulation \todocite and
-the BSSN/Z4 family \todocite. Each of these formulations use different gauge
-conditions for the evolution of the coordinates $x^\mu$, none that are equal to
-the TT gauge.
+\ref{eq:field_equations}) are the Generalized Harmonic (GH) formulation
+\cite{Lindblom:2005qh} and the BSSN/Z4 family \todocite. Each of these
+formulations use different gauge conditions for the evolution of the coordinates
+$x^\mu$, none that are equal to the TT gauge.
 
 We start with GH. There are two dominant gauges used when evolving the GH
 formulation. The first is actually the harmonic gauge introduced in Eq.
@@ -181,7 +183,37 @@ purpose for this is to damp away oscillations shift $\alpha$ and drive it to one
 
 For the BSSN/Z4 family of formulations, a gauge condition called the
 moving-puncture gauge, combined with $1+\log$ slicing and a
-$\Gamma$-driver condition, is used.
+$\Gamma$-driver condition, is used. For this family, conditions are put onto the
+lapse function $\alpha$ and the shift vector $\beta^i$ instead of having
+equations for the coordinates themselves. The $1+\log$ slicing condition is (Ch.
+4 of \cite{Baumgarte:2010ndz})
+\begin{equation}
+  \partial_t \alpha = -2\alpha K + \beta^j\partial_j\alpha
+\end{equation}
+where $K$ is the extrinsic curvature. The $\Gamma$-driver condition can come
+in two forms (Ch. 4 of \cite{Baumgarte:2010ndz})
+\begin{equation}
+  \partial_t \beta^i = \eta B^i + \beta^j\partial_j\beta^i,
+\end{equation}
+or (\cite{Hilditch:2012fp})
+\begin{equation}
+  \partial_t \beta^i = \tilde{\Gamma}^i - \eta\beta^i + \beta^j\partial_j\beta^i,
+\end{equation}
+where $\eta$ is a tunable parameter, and $\tilde{\Gamma}^i$ is related to the
+Christoffel symbols. The former is typically used with BSSN while the later is
+used with the Z4 family, but many NR codes make slight modifications to any of
+these gauge equations.
+
+\section{CCE?}
+
+Now that we have detailed a number of different useful gauges, namely the TT,
+harmonic, damped harmonic, and moving-puncture gauges, it should be clear that
+the GW strains $h$ we compute from simulations done in these different gauges
+cannot directly be compared with each other. The coordinate freedom of GR
+implies that even if we use the same formulas to compute $h$, we will get
+different answers because the coordinates are completely different. Therefore,
+how can we compare waveforms across codes?
+
 
 
 \section*{References}
