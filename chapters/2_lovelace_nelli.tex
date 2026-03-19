@@ -693,16 +693,19 @@ element for each step on the least demanding element.
 \subsection{Gauge condition}\label{sec:dh_gauge}
 We evolve binary black holes (\S\ref{sec:bbh results}) using the Damped Harmonic
 gauge condition~\cite{Szilagyi:2009qz, Deppe2018:uye}:
-\begin{eqnarray}
+\begin{eqnarray}\label{eq:dh_gauge_source}
   H_a &=& \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
           \log\left(1/\alpha\right)\right] n_a - \mu_S g_{ai} \beta^i / \alpha,
 \end{eqnarray}
 using
 \begin{eqnarray}
+  \label{eq:dh_mu1}
   \mu_{L1} &=& A_{L1} e^{-(r/\sigma_r)^2}
                \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L1}},\\
+  \label{eq:dh_mu2}
   \mu_{L2} &=& A_{L2} e^{-(r/\sigma_r)^2}
                \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L2}},\\
+  \label{eq:dh_mu3}
   \mu_{S} &=& A_{S} e^{-(r/\sigma_r)^2}
               \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{S}},
 \end{eqnarray} where $r$ is the coordinate distance from the origin. This

@@ -89,7 +89,100 @@ be compared between gauges.
 
 \subsection{General and Numerical Relativity gauges}
 
-blah
+Now we move to gauges in general relativity (GR). Instead of putting a constraint on
+the four-potential as our gauge condition, in GR we impose our gauge condition
+on the coordinates $x^\mu$ of our spacetime. We skip a derivation of
+\textit{why} we have this coordinate freedom in the theory of general relativity
+as that's the topic of introductory GR courses, but a derivation can be found in
+virtually any GR text book, including \todocite to name a few. For our purposes,
+let's take a look at a few gauges in GR and NR.
+
+\subsubsection{Transverse-traceless gauge}
+The first gauge most students encounter is one called the transverse-traceless
+(TT) gauge, occasionally called the radiation gauge. The TT gauge is
+particularly useful in a linearized theory of gravity where we define our metric
+as
+\begin{equation}\label{eq:linear_gravity}
+  g_{\mu\nu} = \eta_{\mu\nu} + \bar{h}_{\mu\nu}
+\end{equation}
+with
+\begin{equation}
+  \bar{h}_{\mu\nu} = h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h
+\end{equation}
+where $\eta_{\mu\nu}$ is our flat background spacetime metric and $h_{\mu\nu}$
+is a small perturbation of this background. Here, $\bar{h}_{\mu\nu}$ is a
+``trace-reversed'' form. We take our field equations
+\begin{equation}\label{eq:field_equations}
+  R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = 8\pi T_{\mu\nu} 
+\end{equation}
+and substitute Eq. \ref{eq:linear_gravity} into them. This will contain second
+derivatives of $\bar{h}_{\mu\nu}$ because of the Ricci tensor and scalar. It is at
+this point where we make a gauge choice of
+\begin{equation}\label{eq:harmonic_gauge}
+  \Box x^\mu = 0
+\end{equation}
+which can be shown to simplify to \todocite
+\begin{equation}\label{eq:linear_harmonic_gauge}
+  \Box x^\mu = 0 \rightarrow g^{\mu\nu}\Gamma^\rho_{\mu\nu} = 0 \rightarrow
+  \partial_\mu {\bar{h}^\mu}_{\lambda} = 0
+\end{equation}
+in the weak-field (linear) limit. Plugging Eq. \ref{eq:linear_harmonic_gauge}
+into Eq. \ref{eq:field_equations} and taking the vacuum case ($R_{\mu\nu} =
+T_{\mu\nu} = 0$), we arrive at a clean result
+\begin{equation}
+  \Box \bar{h}_{\mu\nu} = 0 .
+\end{equation}
+It can be shown (through some math that is unimportant to the point here)
+\todocite that
+\begin{equation}
+  h^{\textrm{TT}}_{\mu\nu} = \left(
+\begin{matrix}
+  0 & 0 & 0 & 0 \\
+  0 & h_{+} & h_{\times} & 0 \\
+  0 & h_{\times} & -h_{+} & 0 \\
+  0 & 0 & 0 & 0
+\end{matrix}
+\right) ,
+\end{equation}
+where we have dropped the bars because $h_{\mu\nu}$ is the trace-reverse of
+$\bar{h}_{\mu\nu}$ which is traceless. These are the familiar GW polarizations
+$h_{+}$ and $h_{\times}$ for a linear GW propagating in the z-direction.
+Therefore, this may be a useful gauge to analyze GWs from one of the detectors
+(though it's quite a bit more complicated than this in reality\todocite).
+
+\subsubsection{NR gauges}
+
+Moving on to NR, the two most popular formulations of the field equations (Eq.
+\ref{eq:field_equations}) are the Generalized Harmonic (GH) formulation \todocite and
+the BSSN/Z4 family \todocite. Each of these formulations use different gauge
+conditions for the evolution of the coordinates $x^\mu$, none that are equal to
+the TT gauge.
+
+We start with GH. There are two dominant gauges used when evolving the GH
+formulation. The first is actually the harmonic gauge introduced in Eq.
+\ref{eq:harmonic_gauge}. The TT gauge is actually a sub-category of the harmonic
+gauge, useful for linear theories. However, GH is the fully non-linear theory of
+gravity and so the TT gauge is not suitable here. The harmonic gauge is
+convenient because the solutions for the equations of the coordinates are
+harmonic (or wave) solutions, hence the name, and we know how to solve for
+waves.
+
+The second gauge commonly used in GH evolutions is one that actually builds off
+of the harmonic gauge, because it's wave solutions are so desirable. The general
+form of this gauge, called the damped-harmonic gauge, is
+\begin{equation}
+  \Box x_\mu = H_\mu(x^\nu, g_{\nu\kappa})
+\end{equation}
+where $H_\mu$ is called the gauge-source function~\cite{Szilagyi:2009qz}, and it
+is a function of the coordinates and the spacetime metric. The gauge source
+function is defined in Eq. \ref{eq:dh_gauge_source}--\ref{eq:dh_mu3}. The main
+purpose for this is to damp away oscillations shift $\alpha$ and drive it to one
+(so the time evolution remains steady).
+
+For the BSSN/Z4 family of formulations, a gauge condition called the
+moving-puncture gauge, combined with $1+\log$ slicing and a
+$\Gamma$-driver condition, is used.
+
 
 \section*{References}
 \putbib[cross_code_cce]
