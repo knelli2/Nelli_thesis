@@ -315,19 +315,77 @@ details of what is on the right hand side are not important. See
    \partial_r (rH) + L_H(J,\beta,Q,U,W)H &\\
    + L_{\bar{H}}(J,\beta,Q,U,W)\bar{H} &= S_H(J,\beta,Q,U,W)
 \end{align}
-The final radial equation for $H$ gives us the right hand side of Eq.
-\ref{eq:bondi_h} and the hierarchy starts over again for the next time step.
+The final radial equation for $H$ lets us solve Eq. \ref{eq:bondi_h} for J at
+the next time step and the hierarchy starts over again.
 
 Now these scalars are defined in terms of our metric expressed in a Bondi-like
 gauge which is useful for evolving the Characteristic system. However, in order
 for us to impose our worldtube data which is in some arbitrary evolved gauge, we
-must transform this evolved gauge into our Bondi-like gauge. The mathematics of
+must transform the evolved gauge into our Bondi-like gauge. The mathematics of
 this transformation are quite tedious and unimportant for the point being made
-here, so we will skip them. To see them in detail, refer to
+here because it uses a number of intermediate coordinates that are only helpful
+for the transformation, so we will skip them. To see them in detail, refer to
 \cite{Moxon:2020gha}. Instead we just state that our scalars defined in
-\ref{eq:bondi_u}-\ref{eq:bondi_h} can be expressed as some function of our
-evolved spacetime metric and both the evolved coordinates and the Bondi-like
-coordinates (e.g. $U = f(u,r,x^A,x^\mu,g_{\mu\nu})$).
+\ref{eq:bondi_u}-\ref{eq:bondi_h} can be expressed as some function of the
+Cauchy spacetime metric and Cauchy evolved coordinates (e.g. $U =
+f(x^\mu,g_{\mu\nu})$, where $x^\mu$ is not related to $x^A$), with all the
+coordinate transformations hidden.
+
+\subsection{Machinery, Figure out section name later}
+
+Now we have the basics of the Characteristic evolution. Specifically that we use
+the Bondi scalars defined in Eqs. \ref{eq:bondi_u}-\ref{eq:bondi_h} as part of a
+hierarchical evolution system, we need those Bondi scalars on the worldtube
+which serve as the inner boundary condition for the Characteristic evolution,
+and these Bondi scalars on the worldtube can be computed from the Cauchy metric,
+coordinates, and the spatial and temporal derivatives of the metric. Next we
+focus on how this last step is implemented in \spectre~and what new features
+were added in \spectre.
+
+\begin{itemize}
+  \item Modal vs nodal
+  \begin{itemize}
+    \item Modal allows for interpolation
+    \item Modal less data on disk
+    \item Nodal is used for evolution (because DG)
+  \end{itemize}
+  \item $g_{\mu\nu}$ in ADM variables with time derivs, for old spec
+  \item Bondi scalars directly from spectre
+  \item Other codes
+  \begin{itemize}
+    \item Nodal easier for output
+    \item Some codes can do modal, less data on disk
+    \item Uses ADM variables but cannot output first time derivs
+    \item Bondi nodal for completeness?
+  \end{itemize}
+  \item \spectre~only accepts Bondi modal
+  \begin{itemize}
+    \item More straight forward for time interpolation
+    \item Create conversion exe to Bondi modal
+    \item Documentation
+  \end{itemize}
+  \item Offer pre-built exes for people to download
+\end{itemize}
+
+Particularly, we specify that the scalars \ref{eq:bondi_u}-\ref{eq:bondi_h} are
+defined in terms of the ADM metric variables $\alpha$, $\beta^i$, $g_{ij}$, and
+their derivatives (both temporal and spatial cartesian).
+
+
+\begin{itemize}
+  \item Need to get to ADM modal form. We have machinery for that
+  \item Input that were already supported
+  \begin{itemize}
+    \item Bondi modal
+    \item Metric modal (dumping all time derivatives because of GH)
+  \end{itemize}
+  \item Input that I added
+  \begin{itemize}
+    \item Bondi nodal
+    \item Metric nodal
+    \item Metric modal (with BSSN/Z4 time derivative compute)
+  \end{itemize}
+\end{itemize}
 
 
 \begin{enumerate}
