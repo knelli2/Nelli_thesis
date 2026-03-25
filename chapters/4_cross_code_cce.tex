@@ -342,6 +342,34 @@ coordinates, and the spatial and temporal derivatives of the metric. Next we
 focus on how this last step is implemented in \spectre~and what new features
 were added in \spectre.
 
+The first detail we need to discuss is how \spectre~actually represents and
+stores the Bondi scalars either in memory of the simulation or on disk. Since we
+need the Bondi scalars on a sphere of constant radius at each timestep,
+representing the scalars as complex spherical harmonic coefficients is the most
+natural. For a surface $S_{\ell,m}$, we require $m=\ell$. This implies we will
+use $M = (\ell+1)^2$ complex-valued coefficients (or modes) to represent each
+Bondi scalar. We will call this the ``modal'' representation. The modal
+representation is extremely useful for two reasons. First is that it is straight
+forward to interpolate between two representations with different $\ell$ since
+the interpolation is either truncating the number of coefficients or appending
+coefficients with value zero. Second, is that the modal representation is
+significantly more compact that a ``nodal'' representation where we represent
+the complex valued scalar at collocation points on a sphere. For the same
+surface $S_{\ell,m}$ the number of nodes needed to represent the scalar is $N =
+(\ell+1)(2\ell+1) > M$. The advantage with using a nodal representation for the
+actual Characteristic evolution is that we can easily perform arithmetic between
+Bondi scalars. This is significantly more difficult with a modal representation
+because you cannot perform arithmetic with coefficients.
+
+We now have a situation where it is ideal to represent the evolved Bondi
+scalars with nodal values, but the worldtube Bondi variables with modal
+coefficients. The worldtube variables must be written to disk during the Cauchy
+evolution, so we want those to take up as little disk space as possible. Also,
+there's no guarantee that the $\ell$ we write the worldtube variables with will
+be the same $\ell$ that we use for the inner boundary of our Characteristic
+evolution. One may even want to run multiple Characteristic evolutions with
+varying resolution.
+
 \begin{itemize}
   \item Modal vs nodal
   \begin{itemize}
