@@ -172,16 +172,16 @@ $\Gamma$-driver condition, is used. For this family, conditions are put onto the
 lapse function $\alpha$ and the shift vector $\beta^i$ instead of having
 equations for the coordinates themselves. The $1+\log$ slicing condition is (Ch.
 4 of \cite{Baumgarte:2010ndz})
-\begin{equation}
+\begin{equation}\label{eq:1_plus_log}
   \partial_t \alpha = -2\alpha K + \beta^j\partial_j\alpha
 \end{equation}
 where $K$ is the extrinsic curvature. The $\Gamma$-driver condition can come
 in two forms (Ch. 4 of \cite{Baumgarte:2010ndz})
-\begin{equation}
+\begin{equation}\label{eq:gamma_driver_1}
   \partial_t \beta^i = \eta B^i + \beta^j\partial_j\beta^i,
 \end{equation}
 or (\cite{Hilditch:2012fp})
-\begin{equation}
+\begin{equation}\label{eq:gamma_driver_2}
   \partial_t \beta^i = \tilde{\Gamma}^i - \eta\beta^i + \beta^j\partial_j\beta^i,
 \end{equation}
 where $\eta$ is a tunable parameter, and $\tilde{\Gamma}^i$ is related to the
@@ -358,8 +358,9 @@ the complex valued scalar at collocation points on a sphere. For the same
 surface $S_{\ell,m}$ the number of nodes needed to represent the scalar is $N =
 (\ell+1)(2\ell+1) > M$. The advantage with using a nodal representation for the
 actual Characteristic evolution is that we can easily perform arithmetic between
-Bondi scalars. This is significantly more difficult with a modal representation
-because you cannot perform arithmetic with coefficients.
+Bondi scalars which is needed for the spectral algorithms that \spectre~uses.
+This is significantly more difficult with a modal representation because you
+cannot perform arithmetic with coefficients.
 
 We now have a situation where it is ideal to represent the evolved Bondi
 scalars with nodal values, but the worldtube Bondi variables with modal
@@ -369,6 +370,74 @@ there's no guarantee that the $\ell$ we write the worldtube variables with will
 be the same $\ell$ that we use for the inner boundary of our Characteristic
 evolution. One may even want to run multiple Characteristic evolutions with
 varying resolution.
+
+The \spectre~CCE algorithm \cite{Moxon:2021gbv} was previously designed to
+accept two different forms of the Bondi variables on the worldtube. The first is
+reading in $\alpha$, $\beta^i$, $g_{ij}$, and their derivatives each written out
+in complex modal form. This was to support a legacy output format from the
+\spec~code \cite{Taylor:2013zia}. The second is directly reading in the Bondi
+scalars in complex modal form in the Cauchy evolution gauge. This format is
+output from the modern \spec~simulations \cite{Scheel:2025jct}, and from all
+\spectre~simulations \cite{deppe_2025_16906840}. Both \spec~and \spectre~have
+routines within the Cauchy evolution that compute the necessary Bondi scalars in
+the evolution gauge on the worldtube. The \spectre~CCE algorithm then reads in
+both these data formats. For the metric variables, a conversion to Bondi scalars
+is first computed within the CCE algorithm.
+
+\subsection{New input formats to \spectre~CCE}
+
+In this work, we have added three more input formats for \spectre~CCE. They are
+1) Bondi scalars in complex nodal format, 2) metric variables in complex modal
+format but without needing the time derivatives of the metric quantities, and 3)
+metric variables in complex nodal format, both with and without the time
+derivatives of the metric quantities. We have added support for reading in nodal
+data formats because it is often easier for other NR codes besides \spec~and
+\spectre~to output data onto a set of grid points rather than transforming the
+data to the exact form of complex spherical harmonic coefficients that
+\spectre~requires. Our spherical harmonic formulation, however, does require the
+worldtube data to be output at specific grid, or collocation, points necessary
+for the CCE algorithm. To aid in giving the correct collocation points,
+\spectre~offers a separate executable that will write the correct collocation
+points for a given radius to a text file in the necessary order. \spectre~also
+offers a C routine that can be added to the source code that will give an array
+of the necessary collocation points.
+
+We have expanded support for reading in metric quantities for the worldtube
+because most other NR codes use either the BSSN or Z4 formulations of Einstein's
+equations. Particularly we have relaxed the requirement to provide time
+derivatives of the metric quantities for the worldtube data. This was done
+because unlike the GH formulation where one of the evolved variables, $\Pi$,
+\textit{is} the time derivative of the spacetime metric, the BSSN and Z4
+formulations only evolve the metric itself. Even though the time derivative of
+the metric quantities are computed for the Cauchy evolution, they are often not
+available for output. The time derivatives within the evolution would be
+out-of-sync with the actual evolved metric quantities by one time step and
+trying to sync up the data is a much larger change for other codes.
+
+Therefore, we allow for computing the time derivatives internally in
+\spectre~CCE. When doing this, extreme care must be taken so that we use the
+correct gauge equations for $\alpha$ and $\beta^i$. Luckily for $\alpha$, most
+other codes use the $1+\log$ slicing condition given by Eq. \ref{eq:1_plus_log}.
+Some codes choose to not include the advective term $\beta^j\partial_j\alpha$,
+so we have added it as optional. For the gamma-driver condition, we support both
+Eqs. \ref{eq:gamma_driver_1} and \ref{eq:gamma_driver_2}. Again, we make the
+advective term $\beta^j\partial_j\beta^i$ optional. For the different
+gamma-driver conditions, they require different variables to be written to disk
+from the Cauchy evolution. This is the responsibility of the user to know which
+variables need to be written out.
+
+Due to the increased number of supported worldtube data formats, the inputs to
+the actual \spectre~CCE algorithm have been simplified. We now restrict the
+worldtube input data format to only be the Bondi variables represented in
+complex modal coefficients. This was done largely to avoid waiting for extra
+computations during the Characteristic evolution for the worldtube data. It was
+also done to simplify the code-paths taken during the Characteristic evolution.
+Therefore, in order to support all these worldtube data formats, \spectre now
+offers a separate executable that will transform the worldtube data from any of
+the supported input formats to the Bondi scalars in complex modal form in a
+separate output file. The new output file is then fed directly into the CCE
+algorithm. The new executable has the ability to handle overlapping output times
+and multiple output files from different checkpointed segments of a simulation.
 
 \begin{itemize}
   \item Modal vs nodal
