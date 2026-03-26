@@ -439,51 +439,33 @@ separate output file. The new output file is then fed directly into the CCE
 algorithm. The new executable has the ability to handle overlapping output times
 and multiple output files from different checkpointed segments of a simulation.
 
-\begin{itemize}
-  \item Modal vs nodal
-  \begin{itemize}
-    \item Modal allows for interpolation
-    \item Modal less data on disk
-    \item Nodal is used for evolution (because DG)
-  \end{itemize}
-  \item $g_{\mu\nu}$ in ADM variables with time derivs, for old spec
-  \item Bondi scalars directly from spectre
-  \item Other codes
-  \begin{itemize}
-    \item Nodal easier for output
-    \item Some codes can do modal, less data on disk
-    \item Uses ADM variables but cannot output first time derivs
-    \item Bondi nodal for completeness?
-  \end{itemize}
-  \item \spectre~only accepts Bondi modal
-  \begin{itemize}
-    \item More straight forward for time interpolation
-    \item Create conversion exe to Bondi modal
-    \item Documentation
-  \end{itemize}
-  \item Offer pre-built exes for people to download
-\end{itemize}
+Finally, in order to make these new improvements available to the NR community,
+\spectre~now offers a
+\href{https://github.com/sxs-collaboration/spectre/releases}{downloadable
+\texttt{tar} file} which has the following pre-built executables:
+\begin{enumerate}
+  \item The CCE executable itself plus an associated input file.
+  \item A preprocessing executable to convert the worldtube data into the Bondi
+        modal format plus an associated input files with examples for each of
+        the accepted input data types.
+  \item An executable to write the collocation points for a sphere at a given
+        radius and angular resolution $\ell$ to interpolate input data to.
+  \item Testing scripts plus a small amount of example worldtube data used to
+        verify the executables work.
+\end{enumerate}
+Additionally, we have added detailed documentation to the
+\href{https://spectre-code.org/index.html}{\spectre~webpage} with instructions
+for how to use these executables, recommended settings for certain input
+parameters, and other small pieces of knowledge that were empirically determined
+while running CCE.
 
-Particularly, we specify that the scalars \ref{eq:bondi_u}-\ref{eq:bondi_h} are
-defined in terms of the ADM metric variables $\alpha$, $\beta^i$, $g_{ij}$, and
-their derivatives (both temporal and spatial cartesian).
+% TODO: Should these be sections?
+\subsection{Frame fixing and BMS transformations}
 
+\subsection{Examples of NR codes using \spectre~CCE}
 
-\begin{itemize}
-  \item Need to get to ADM modal form. We have machinery for that
-  \item Input that were already supported
-  \begin{itemize}
-    \item Bondi modal
-    \item Metric modal (dumping all time derivatives because of GH)
-  \end{itemize}
-  \item Input that I added
-  \begin{itemize}
-    \item Bondi nodal
-    \item Metric nodal
-    \item Metric modal (with BSSN/Z4 time derivative compute)
-  \end{itemize}
-\end{itemize}
-
+ask hengrui, deborah, and dongze about running CCE on different NR codes
+maybe want to talk about BMS transformations and how CCE isn't the final step.
 
 \begin{enumerate}
   \item Motivation
@@ -498,6 +480,7 @@ their derivatives (both temporal and spatial cartesian).
   \item Different formulations evolved variable
   \item Converting to ``standard'' variables for CCE
   \item Caveat of frame fixing/BMS transforms
+  \item Examples of other codes using this
 \end{enumerate}
 
 \section*{References}
