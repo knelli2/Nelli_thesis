@@ -2,8 +2,15 @@ import os
 import pickle
 
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scri
+
+# ── Plot style (matches papers-2024-spectre-first-bbh) ───────────────────────
+plt.style.use("tableau-colorblind10")
+mpl.rcParams['mathtext.fontset'] = 'cm'
+mpl.rcParams['mathtext.rm'] = 'serif'
+mpl.rcParams['font.size'] = 24
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 BASE_DIR = "/home/knelli/Documents/research/sims/lovelace_nelli_bbh_cce"
@@ -27,7 +34,7 @@ M2_PADDING_TIME = 200.0
 PLOT_MODES = [(2, 2), (2, 0), (2, 1)]  # (ell, m) modes to compare
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images")
+OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
 CACHE_DIR = os.path.join(_SCRIPT_DIR, "abd_cache")
 
 # ── Load & downsample ─────────────────────────────────────────────────────────
@@ -72,7 +79,7 @@ def compute_diffs(abds, mode, lo_label, hi_label):
 
     amp_hi = amplitude(h_hi)
     amp_lo_interp = np.interp(t_hi, t_lo, amplitude(h_lo))
-    frac_amp_diff = (amp_lo_interp - amp_hi) / amp_hi
+    frac_amp_diff = np.abs(amp_lo_interp - amp_hi) / amp_hi
 
     phase_hi = phase(h_hi)
     phase_lo_interp = np.interp(t_hi, t_lo, phase(h_lo))
@@ -150,15 +157,16 @@ print("Method 2 done.")
 
 # ── Plotting ──────────────────────────────────────────────────────────────────
 PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]  # (lo, hi)
-COLORS = {"Lev0-Lev1": "C0", "Lev1-Lev2": "C1"}
+COLOR_CYCLE = ['#0F2080', '#F5793A', '#85C0F9', '#A95AA1']
+COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
 
 
 def make_comparison_figure(abds, title, filename):
     n_modes = len(PLOT_MODES)
     fig, axes = plt.subplots(
-        n_modes, 2, figsize=(12, 3.5 * n_modes), sharex=False, squeeze=False
+        n_modes, 2, figsize=(16, 5 * n_modes), sharex=False, squeeze=False
     )
-    fig.suptitle(title, fontsize=14)
+    fig.suptitle(title)
 
     for row, mode in enumerate(PLOT_MODES):
         ell, m = mode
@@ -173,25 +181,27 @@ def make_comparison_figure(abds, title, filename):
 
         ax_amp.set_ylabel(rf"$|\Delta h_{{{ell}{m}}}|/|h_{{{ell}{m}}}|$")
         ax_phase.set_ylabel(rf"$\Delta\phi_{{{ell}{m}}}$")
+        ax_amp.set_xlabel("$t~[M]$")
+        ax_phase.set_xlabel("$t~[M]$")
 
-        ax_amp.legend(fontsize=8)
-        ax_amp.axhline(0, color="k", linewidth=0.5, linestyle="--")
-        ax_phase.axhline(0, color="k", linewidth=0.5, linestyle="--")
+        ax_amp.set_yscale("log")
+        ax_phase.set_yscale("log")
 
-        if row == n_modes - 1:
-            ax_amp.set_xlabel("$t$ [M]")
-            ax_phase.set_xlabel("$t$ [M]")
+        ax_amp.legend(frameon=False)
 
     axes[0, 0].set_title(r"Fractional amplitude difference")
     axes[0, 1].set_title(r"Phase difference")
 
-    fig.tight_layout()
+    for axis in axes.flat:
+        axis.label_outer()
+
+    plt.subplots_adjust(hspace=0.0, wspace=0.15)
     out_path = f"{OUTPUT_DIR}/{filename}"
-    fig.savefig(out_path, bbox_inches="tight")
+    fig.savefig(out_path, dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     print(f"Saved: {out_path}")
 
 
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 make_comparison_figure(abds_m1, "Remnant superrest frame", "method1_superrest_comparison.pdf")
 make_comparison_figure(abds_m2, "Lev2 inspiral superrest frame", "method2_abd_frame_comparison.pdf")
-
-plt.show()
