@@ -24,3 +24,7 @@ AGENTS.md
 
 # Images
 !images/**/*.pdf
+
+# Plotting
+plotting/py_thesis/
+plotting/abd_cache/
