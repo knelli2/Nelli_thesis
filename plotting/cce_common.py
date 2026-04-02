@@ -22,7 +22,7 @@ LEVELS = {
     "Lev2": "RERUN111824_Lev2_Joined/CharacteristicExtractReduction.h5",
 }
 
-PLOT_MODES = [(2, 2), (2, 0), (2, 1)]  # (ell, m) modes to compare
+PLOT_MODES = [(2, 2), (2, 0), (3, 2), (4, 4)]  # (ell, m) modes to compare
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
@@ -218,7 +218,7 @@ def make_comparison_figure(abds, title, filename, ref_time, debug_amp_col=False)
 
         if m == 0:
             ax_phase.text(
-                0.5, 0.5, "This mode has no phase",
+                0.5, 0.5, "This mode is real",
                 transform=ax_phase.transAxes,
                 ha="center", va="center",
             )
