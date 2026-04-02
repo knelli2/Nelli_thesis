@@ -24,7 +24,7 @@ LEVELS = {
 DELTA_T = 1.0  # [M] downsampling interval — increase to speed up
 
 # Method 1: t_0 auto-computed per level as (time of peak |h_22|) + M1_T_OFFSET
-M1_T_OFFSET = 400.0   # [M] offset from peak strain to superrest mapping time
+M1_T_0 = 400.0   # [M] offset from peak strain to superrest mapping time
 M1_PADDING_TIME = 100.0
 
 # Method 2: Lev2 mapped to superrest, Lev0/Lev1 mapped to Lev2 frame
@@ -37,27 +37,41 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
 CACHE_DIR = os.path.join(_SCRIPT_DIR, "abd_cache")
 
-# ── Load & downsample ─────────────────────────────────────────────────────────
-def load_abd(rel_path):
-    abd = scri.create_abd_from_h5(
-        file_format="SpECTRECCE_v1",
-        file_name=f"{BASE_DIR}/{rel_path}",
-    )
-    new_t = np.arange(abd.t[0], abd.t[-1], DELTA_T)
-    return abd.interpolate(new_t)
-
-
-print("Loading waveform data...")
-abds_raw = {label: load_abd(path) for label, path in LEVELS.items()}
-print("Done loading.")
-
-# ── Helpers ───────────────────────────────────────────────────────────────────
 def find_peak_time(abd):
     """Return the time of peak |h_22| amplitude."""
     idx22 = abd.h.index(2, 2)
     amp = np.abs(abd.h.data[:, idx22])
-    return abd.h.t[np.argmax(amp)]
+    return abd.t[np.argmax(amp)]
 
+# ── Load & downsample ─────────────────────────────────────────────────────────
+def load_abd(label, rel_path):
+    cache_path = os.path.join(CACHE_DIR, f"raw_{label.lower()}.pkl")
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    if os.path.exists(cache_path):
+        print(f"  {label}: loading raw abd from cache...")
+        with open(cache_path, "rb") as f:
+            abd = pickle.load(f)
+    else:
+        print(f"  {label}: reading from h5...")
+        abd = scri.create_abd_from_h5(
+            file_format="SpECTRECCE_v1",
+            file_name=f"{BASE_DIR}/{rel_path}",
+        )
+        with open(cache_path, "wb") as f:
+            pickle.dump(abd, f)
+    # t_peak = find_peak_time(abd)
+    t_peak = 0
+    abd.t = abd.t - t_peak
+    new_t = np.arange(abd.t[0], abd.t[-1], DELTA_T)
+    print(f"{label}: start={new_t[0]}, end={new_t[-1]} original peak = {t_peak}")
+    return abd.interpolate(new_t)
+
+
+print("Loading waveform data...")
+abds_raw = {label: load_abd(label, path) for label, path in LEVELS.items()}
+print("Done loading.")
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
 
 def get_h_mode(abd, mode):
     idx = abd.h.index(mode[0], mode[1])
@@ -83,7 +97,7 @@ def compute_diffs(abds, mode, lo_label, hi_label):
 
     phase_hi = phase(h_hi)
     phase_lo_interp = np.interp(t_hi, t_lo, phase(h_lo))
-    phase_diff = phase_lo_interp - phase_hi
+    phase_diff = np.abs(phase_lo_interp - phase_hi)
 
     return t_hi, frac_amp_diff, phase_diff
 
@@ -134,10 +148,8 @@ def map_to_abd_frame_cached(label, abd_raw, target_abd, t_0, padding_time, cache
 print("Method 1: mapping each level to superrest frame...")
 abds_m1 = {}
 for label, abd in abds_raw.items():
-    t_peak = find_peak_time(abd)
-    t_0 = t_peak + M1_T_OFFSET
     cache_path = os.path.join(CACHE_DIR, f"m1_{label.lower()}.pkl")
-    abds_m1[label] = map_to_superrest_cached(label, abd, t_0, M1_PADDING_TIME, cache_path)
+    abds_m1[label] = map_to_superrest_cached(label, abd, M1_T_0, M1_PADDING_TIME, cache_path)
 print("Method 1 done.")
 
 # ── Method 2: Lev2 to superrest, Lev0/Lev1 mapped to Lev2 frame ──────────────
@@ -159,19 +171,48 @@ print("Method 2 done.")
 PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]  # (lo, hi)
 COLOR_CYCLE = ['#0F2080', '#F5793A', '#85C0F9', '#A95AA1']
 COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
+LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CYCLE[2]}
+
+# ── Debug column: set to False (or comment out the block below) to remove ─────
+DEBUG_AMP_COL = True
 
 
 def make_comparison_figure(abds, title, filename):
-    n_modes = len(PLOT_MODES)
-    fig, axes = plt.subplots(
-        n_modes, 2, figsize=(16, 5 * n_modes), sharex=False, squeeze=False
-    )
-    fig.suptitle(title)
+    import matplotlib.gridspec as gridspec
 
+    n_modes = len(PLOT_MODES)
+    n_cols = 3 if DEBUG_AMP_COL else 2
+    fig_width = 24 if DEBUG_AMP_COL else 16
+    col_offset = 1 if DEBUG_AMP_COL else 0
+
+    fig = plt.figure(figsize=(fig_width, 5 * n_modes))
+    fig.suptitle(title)
+    gs = gridspec.GridSpec(n_modes, n_cols, figure=fig, hspace=0.0, wspace=0.15)
+
+    first_amp_ax = first_phase_ax = None
     for row, mode in enumerate(PLOT_MODES):
         ell, m = mode
-        ax_amp = axes[row, 0]
-        ax_phase = axes[row, 1]
+        bottom = row == n_modes - 1
+
+        # ── Debug column: amplitude of each level for this mode ───────────────
+        if DEBUG_AMP_COL:
+            ax_debug = fig.add_subplot(gs[row, 0])
+            for label, abd in abds.items():
+                t, h = get_h_mode(abd, mode)
+                ax_debug.plot(t, amplitude(h), label=label, color=LEVEL_COLORS[label])
+            ax_debug.set_yscale("linear")
+            ax_debug.set_ylabel(rf"$|h_{{{ell}{m}}}|$")
+            ax_debug.legend(frameon=False)
+            if row == 0:
+                ax_debug.set_title("DEBUG: amplitude per level")
+            if bottom:
+                ax_debug.set_xlabel("$t~[M]$")
+            else:
+                ax_debug.tick_params(labelbottom=False)
+        # ── End debug column ──────────────────────────────────────────────────
+
+        ax_amp = fig.add_subplot(gs[row, col_offset])
+        ax_phase = fig.add_subplot(gs[row, col_offset + 1])
 
         for lo_label, hi_label in PAIRS:
             pair_key = f"{lo_label}-{hi_label}"
@@ -181,21 +222,23 @@ def make_comparison_figure(abds, title, filename):
 
         ax_amp.set_ylabel(rf"$|\Delta h_{{{ell}{m}}}|/|h_{{{ell}{m}}}|$")
         ax_phase.set_ylabel(rf"$\Delta\phi_{{{ell}{m}}}$")
-        ax_amp.set_xlabel("$t~[M]$")
-        ax_phase.set_xlabel("$t~[M]$")
-
         ax_amp.set_yscale("log")
         ax_phase.set_yscale("log")
-
         ax_amp.legend(frameon=False)
 
-    axes[0, 0].set_title(r"Fractional amplitude difference")
-    axes[0, 1].set_title(r"Phase difference")
+        if bottom:
+            ax_amp.set_xlabel("$t~[M]$")
+            ax_phase.set_xlabel("$t~[M]$")
+        else:
+            ax_amp.tick_params(labelbottom=False)
+            ax_phase.tick_params(labelbottom=False)
 
-    for axis in axes.flat:
-        axis.label_outer()
+        if first_amp_ax is None:
+            first_amp_ax = ax_amp
+            first_phase_ax = ax_phase
 
-    plt.subplots_adjust(hspace=0.0, wspace=0.15)
+    first_amp_ax.set_title(r"Fractional amplitude difference")
+    first_phase_ax.set_title(r"Phase difference")
     out_path = f"{OUTPUT_DIR}/{filename}"
     fig.savefig(out_path, dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     print(f"Saved: {out_path}")
