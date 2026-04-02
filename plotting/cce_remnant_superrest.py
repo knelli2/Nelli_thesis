@@ -6,7 +6,7 @@ import numpy as np
 
 from cce_common import (
     LEVELS, CACHE_DIR, OUTPUT_DIR,
-    find_peak_time, load_abd,
+    load_abd, interpolate_and_shift_cached,
     map_to_superrest_cached,
     make_comparison_figure,
 )
@@ -15,6 +15,7 @@ from cce_common import (
 DELTA_T = 1.0                     # [M] downsampling interval
 OFFSET_AFTER_PEAK = 200.0         # [M] in peak-recentered time: mapping time after peak
 PADDING_TIME = 100.0
+PHASE_REF_TIME = 0.0              # [M] time at which phase difference is set to zero
 
 # ── Load raw ABDs ─────────────────────────────────────────────────────────────
 print("Loading waveform data...")
@@ -23,10 +24,9 @@ print("Done loading.")
 
 # ── Recenter time at peak |h_22| and downsample ───────────────────────────────
 abds = {}
-for label, abd in abds_raw.items():
-    new_t = np.arange(abd.t[0], abd.t[-1], DELTA_T)
-    tmp_abd = abd.interpolate(new_t)
-    abds[label] = tmp_abd.t_shift_peak_to_zero()
+for label, abd_raw in abds_raw.items():
+    cache_path = os.path.join(CACHE_DIR, f"interp_{label.lower()}_dt{DELTA_T}.pkl")
+    abds[label] = interpolate_and_shift_cached(label, abd_raw, DELTA_T, cache_path)
 
 # ── Map each level to superrest frame ─────────────────────────────────────────
 print("Mapping each level to superrest frame...")
@@ -52,5 +52,6 @@ make_comparison_figure(
     abds_sr_intrp,
     title="Remnant superrest frame",
     filename="spectre_remnant_superrest_comparison.pdf",
+    ref_time=PHASE_REF_TIME,
     debug_amp_col=True,
 )
