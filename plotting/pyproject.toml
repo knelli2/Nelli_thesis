@@ -1,0 +1,20 @@
+[project]
+name = "thesis-plotting"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "scri>=2024.0.10",
+    "h5py>=3.16.0",
+    "matplotlib>=3.10.8",
+    "numpy>=2.2.6",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.backends.legacy:build"
+
+# Generated from py_thesis venv on 2026-04-02.
+# To create an identical environment:
+#   python3.10 -m venv py_thesis
+#   source py_thesis/bin/activate
+#   pip install .
