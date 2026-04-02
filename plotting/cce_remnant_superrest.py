@@ -25,31 +25,26 @@ print("Done loading.")
 abds = {}
 for label, abd in abds_raw.items():
     new_t = np.arange(abd.t[0], abd.t[-1], DELTA_T)
-    abds[label] = abd.interpolate(new_t)
+    tmp_abd = abd.interpolate(new_t)
+    abds[label] = tmp_abd.t_shift_peak_to_zero()
 
 # ── Map each level to superrest frame ─────────────────────────────────────────
 print("Mapping each level to superrest frame...")
 abds_sr = {}
 for label, abd in abds.items():
     cache_path = os.path.join(CACHE_DIR, f"m1_{label.lower()}.pkl")
-    t_peak = find_peak_time(abd)
-    t_0 = t_peak + OFFSET_AFTER_PEAK
-    abds_sr[label] = map_to_superrest_cached(label, abd, t_0, PADDING_TIME, cache_path)
+    abds_sr[label] = map_to_superrest_cached(label, abd, OFFSET_AFTER_PEAK, PADDING_TIME, cache_path)
 print("Done.")
 
-# ── Interpolate then shift so all ABDs share an identical time array ──────────
-t_peaks = {label: find_peak_time(abd) for label, abd in abds_sr.items()}
-
-t_min = max(abd.t[0] - t_peaks[label] for label, abd in abds_sr.items())
-t_max = min(abd.t[-1] - t_peaks[label] for label, abd in abds_sr.items())
+# ── Interpolate all ABDs share an identical time array ──────────
+t_min = max(abd.t[0] for _, abd in abds_sr.items())
+t_max = min(abd.t[-1] for _, abd in abds_sr.items())
 common_t = np.arange(t_min, t_max, DELTA_T)
 print(f"Common post-shift grid: t=[{t_min:.1f}, {t_max:.1f}], N={len(common_t)}")
 
 abds_sr_intrp = {}
 for label, abd in abds_sr.items():
-    abd_interp = abd.interpolate(common_t + t_peaks[label])
-    abd_interp.t = abd_interp.t - t_peaks[label]
-    abds_sr_intrp[label] = abd_interp
+    abds_sr_intrp[label] = abd.interpolate(common_t)
 
 # ── Plot ──────────────────────────────────────────────────────────────────────
 os.makedirs(OUTPUT_DIR, exist_ok=True)
