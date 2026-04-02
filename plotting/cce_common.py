@@ -14,7 +14,7 @@ mpl.rcParams['mathtext.rm'] = 'serif'
 mpl.rcParams['font.size'] = 24
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-BASE_DIR = "/home/knelli/Documents/research/sims/lovelace_nelli_bbh_cce"
+BASE_DIR = "/home/knelli/Documents/research/sims/thesis_data/lovelace_nelli_bbh_cce"
 
 LEVELS = {
     "Lev0": "Lev0_Joined/CharacteristicExtractReduction.h5",
