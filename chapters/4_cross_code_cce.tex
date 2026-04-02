@@ -492,6 +492,8 @@ Now that we have detailed the process for converting Cauchy worldtube data into 
 proper format for \spectre~CCE, let's take a look at some examples where this is
 being used.
 
+\subsubsection{\spectre}
+
 The first example is from \S\ref{sec:gws}. Here we are comparing waveforms from
 different resolutions of a GH BBH simulation with mass ratio $q=1$ and
 non-spinning black holes. Since these simulations were run with \spectre, the
@@ -504,13 +506,35 @@ inspiral of that resolution (i.e. a frame where the binary is a rest during
 early inspiral). Doing this allows for a convergence test because each
 resolution is transformed into a superrest frame without information from the
 other resolutions, effectively keeping each resolution isolated from the others.
-If we had chosen a common superrest frame, then we could have gotten better
-residuals, but each resolutions waveform would have been contaminated with the
-other resolutions' waveforms, thus ruining a convergence analysis.
 
-\todo{Rerun BBH paper analysis, except transforming each resolution into the
-superrest frame of the highest resolution waveform, then generate the same
-plot again.}
+\begin{figure}
+  \hfill
+  \includegraphics[width=1.0\linewidth]{images/cross_code_cce/spectre_inspiral_superrest_comparison.pdf}
+  \caption{GWs mapped to the inspiral superrest frame of the ``Lev2'' simulation
+    at time $t-t_{22}^\mathrm{peak}=-3000M$ before the peak of the amplitude of
+    the $2,2$ mode of the waveform. All waveforms are plotted so $t=0$
+    corresponds to this peak of the $2,2$ mode. The three rows are the
+    $\ell,m=(2,2),(2,0),(2,1)$ modes of the waveforms, respectively. The left
+    column is the amplitude of each mode. The middle column is the fractional
+    amplitude difference with respect to one higher Lev. The third column is the
+    phase difference of the waveforms where we zero out the phase of each
+    waveform at $t-t_{22}^{\mathrm{peak}} = -4000M$, consistent with Fig.
+    \ref{fig:BbhGWs}. Since the $\ell,m=(2,1)$ isn't oscillatory (i.e. real), we
+    omit the phase difference plot for this mode. \label{fig:BbhGWsLev2Superrest}}
+\end{figure}
+
+In Fig. \ref{fig:BbhGWsLev2Superrest} we choose a common superrest frame,
+specifically the inspiral superrest frame of the ``Lev2'' simulation at a time
+of $t-t_{22}^\mathrm{peak}=-3000M$, and then map the other two Levs to this
+superrest frame. The amplitude and phase differences for the $\ell,m=(2,2)$ mode
+are similar to that of Fig. \ref{fig:BbhGWs} and we don't see a noticeable
+improvement mapping to the same superrest frame. For the $2,0$ mode, the early
+time amplitude differences are likely due to poor initial data on the initial
+null slice of the characteristic evolution. The large late time phase
+differences for the $2,1$ mode seem concerning and indicate that further study
+is needed into the resolution and systematics of the Cauchy GH evolution.
+
+\subsubsection{\spec}
 
 The next example is running \spectre~CCE over select simulations from the SXS
 catalog of BBH waveforms \cite{Scheel:2025jct} which were performed using \spec.
@@ -519,6 +543,8 @@ modal format directly accepted by CCE. \todo{Either use Keefe's CCE runs on
 mbot, or rerun certain simulations with CCE. Decide whether you need frame
 fixing or not... Write more.}
 
+\subsubsection{AthenaK}
+
 Next we summarize results from \cite{Radice:2025djo} which runs \spectre~CCE on
 simulations performed with the AthenaK NR code. AthenaK evolves the Z4c
 formalism of Einstein's equations using the moving punctures gauge with the
@@ -526,8 +552,10 @@ $1+\log$ condition and the $\Gamma$-driver condition, both including the
 advective terms. \todo{Possibly run Hengrui's code to generate the CCE
 waveforms. Or maybe if the data is already run, just plot in a fancy way.}
 
+\subsubsection{FIL}
 \todo{Ask Dongze about the FIL data.}
 
+\subsubsection{Maya}
 \todo{Wait for response from Deborah about Maya data.}
 
 \begin{enumerate}
