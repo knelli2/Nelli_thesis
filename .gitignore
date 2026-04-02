@@ -2,6 +2,7 @@
 .claude/
 !.claude/CLAUDE.md
 AGENTS.md
+__pycache__/
 
 # Tex output
 *.aux

@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import scri
 
 # ── Plot style (matches papers-2024-spectre-first-bbh) ───────────────────────
@@ -21,21 +22,20 @@ LEVELS = {
     "Lev2": "RERUN111824_Lev2_Joined/CharacteristicExtractReduction.h5",
 }
 
-DELTA_T = 1.0  # [M] downsampling interval — increase to speed up
-
-# Method 1: t_0 auto-computed per level as (time of peak |h_22|) + M1_T_OFFSET
-M1_T_0 = 400.0   # [M] offset from peak strain to superrest mapping time
-M1_PADDING_TIME = 100.0
-
-# Method 2: Lev2 mapped to superrest, Lev0/Lev1 mapped to Lev2 frame
-M2_T_0 = 2000.0
-M2_PADDING_TIME = 200.0
-
 PLOT_MODES = [(2, 2), (2, 0), (2, 1)]  # (ell, m) modes to compare
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
 CACHE_DIR = os.path.join(_SCRIPT_DIR, "abd_cache")
+
+# ── Plotting constants ────────────────────────────────────────────────────────
+PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]  # (lo, hi)
+COLOR_CYCLE = ['#0F2080', '#F5793A', '#85C0F9', '#A95AA1']
+COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
+LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CYCLE[2]}
+
+
+# ── Waveform helpers ──────────────────────────────────────────────────────────
 
 def find_peak_time(abd):
     """Return the time of peak |h_22| amplitude."""
@@ -43,43 +43,32 @@ def find_peak_time(abd):
     amp = np.abs(abd.h.data[:, idx22])
     return abd.t[np.argmax(amp)]
 
-# ── Load & downsample ─────────────────────────────────────────────────────────
+
 def load_abd(label, rel_path):
+    """Load raw ABD from h5 or pickle cache. No time recentering or interpolation."""
     cache_path = os.path.join(CACHE_DIR, f"raw_{label.lower()}.pkl")
     os.makedirs(CACHE_DIR, exist_ok=True)
     if os.path.exists(cache_path):
         print(f"  {label}: loading raw abd from cache...")
         with open(cache_path, "rb") as f:
-            abd = pickle.load(f)
-    else:
-        print(f"  {label}: reading from h5...")
-        abd = scri.create_abd_from_h5(
-            file_format="SpECTRECCE_v1",
-            file_name=f"{BASE_DIR}/{rel_path}",
-        )
-        with open(cache_path, "wb") as f:
-            pickle.dump(abd, f)
-    # t_peak = find_peak_time(abd)
-    t_peak = 0
-    abd.t = abd.t - t_peak
-    new_t = np.arange(abd.t[0], abd.t[-1], DELTA_T)
-    print(f"{label}: start={new_t[0]}, end={new_t[-1]} original peak = {t_peak}")
-    return abd.interpolate(new_t)
+            return pickle.load(f)
+    print(f"  {label}: reading from h5...")
+    abd = scri.create_abd_from_h5(
+        file_format="SpECTRECCE_v1",
+        file_name=f"{BASE_DIR}/{rel_path}",
+    )
+    with open(cache_path, "wb") as f:
+        pickle.dump(abd, f)
+    return abd
 
-
-print("Loading waveform data...")
-abds_raw = {label: load_abd(label, path) for label, path in LEVELS.items()}
-print("Done loading.")
-
-# ── Helpers ───────────────────────────────────────────────────────────────────
 
 def get_h_mode(abd, mode):
     idx = abd.h.index(mode[0], mode[1])
-    return abd.h.t, abd.h.data[:, idx]
+    return abd.t, abd.h.data[:, idx]
 
 
-def amplitude(h):
-    return np.abs(h)
+def amplitude(h, m_is_zero: bool):
+    return h.real if m_is_zero else np.abs(h)
 
 
 def phase(h):
@@ -87,22 +76,29 @@ def phase(h):
 
 
 def compute_diffs(abds, mode, lo_label, hi_label):
-    """Fractional amplitude diff and phase diff of lo vs hi, on hi's time grid."""
-    t_hi, h_hi = get_h_mode(abds[hi_label], mode)
-    t_lo, h_lo = get_h_mode(abds[lo_label], mode)
+    """Fractional amplitude diff and phase diff of lo vs hi. ABDs must share a common time grid."""
+    t, h_hi = get_h_mode(abds[hi_label], mode)
+    _, h_lo = get_h_mode(abds[lo_label], mode)
 
-    amp_hi = amplitude(h_hi)
-    amp_lo_interp = np.interp(t_hi, t_lo, amplitude(h_lo))
-    frac_amp_diff = np.abs(amp_lo_interp - amp_hi) / amp_hi
+    m_is_zero = mode[1] == 0
+    amp_hi = amplitude(h_hi, m_is_zero)
+    frac_amp_diff = amplitude(h_lo, m_is_zero) - amp_hi
+    if not m_is_zero:
+        frac_amp_diff = np.abs(frac_amp_diff)
+    frac_amp_diff /= amp_hi
+    # amp_lo_interp = np.interp(t1, t2, amplitude(h_lo, mode[1] == 0))
+    # frac_amp_diff = np.abs(amp_lo_interp - amp_hi) / amp_hi
 
     phase_hi = phase(h_hi)
-    phase_lo_interp = np.interp(t_hi, t_lo, phase(h_lo))
-    phase_diff = np.abs(phase_lo_interp - phase_hi)
+    phase_diff = np.abs(phase(h_lo) - phase_hi)
+    # phase_lo_interp = np.interp(t1, t2, phase(h_lo))
+    # phase_diff = np.abs(phase_lo_interp - phase_hi)
 
-    return t_hi, frac_amp_diff, phase_diff
+    return t, frac_amp_diff, phase_diff
 
 
 # ── Pickle cache helpers ──────────────────────────────────────────────────────
+
 def _load_cache(cache_path, t_0, padding_time):
     """Return cached abd if t_0 and padding_time match, else None."""
     if not os.path.exists(cache_path):
@@ -144,46 +140,13 @@ def map_to_abd_frame_cached(label, abd_raw, target_abd, t_0, padding_time, cache
     return abd_mapped
 
 
-# ── Method 1: each level individually to superrest ────────────────────────────
-print("Method 1: mapping each level to superrest frame...")
-abds_m1 = {}
-for label, abd in abds_raw.items():
-    cache_path = os.path.join(CACHE_DIR, f"m1_{label.lower()}.pkl")
-    abds_m1[label] = map_to_superrest_cached(label, abd, M1_T_0, M1_PADDING_TIME, cache_path)
-print("Method 1 done.")
-
-# ── Method 2: Lev2 to superrest, Lev0/Lev1 mapped to Lev2 frame ──────────────
-print("Method 2: mapping Lev2 to superrest frame...")
-cache_path_lev2_sr = os.path.join(CACHE_DIR, "m2_lev2_sr.pkl")
-abd_lev2_sr = map_to_superrest_cached(
-    "Lev2", abds_raw["Lev2"], M2_T_0, M2_PADDING_TIME, cache_path_lev2_sr
-)
-
-abds_m2 = {"Lev2": abd_lev2_sr}
-for label in ["Lev0", "Lev1"]:
-    cache_path = os.path.join(CACHE_DIR, f"m2_{label.lower()}_mapped.pkl")
-    abds_m2[label] = map_to_abd_frame_cached(
-        label, abds_raw[label], abd_lev2_sr, M2_T_0, M2_PADDING_TIME, cache_path
-    )
-print("Method 2 done.")
-
 # ── Plotting ──────────────────────────────────────────────────────────────────
-PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]  # (lo, hi)
-COLOR_CYCLE = ['#0F2080', '#F5793A', '#85C0F9', '#A95AA1']
-COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
-LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CYCLE[2]}
 
-# ── Debug column: set to False (or comment out the block below) to remove ─────
-DEBUG_AMP_COL = True
-
-
-def make_comparison_figure(abds, title, filename):
-    import matplotlib.gridspec as gridspec
-
+def make_comparison_figure(abds, title, filename, debug_amp_col=False):
     n_modes = len(PLOT_MODES)
-    n_cols = 3 if DEBUG_AMP_COL else 2
-    fig_width = 24 if DEBUG_AMP_COL else 16
-    col_offset = 1 if DEBUG_AMP_COL else 0
+    n_cols = 3 if debug_amp_col else 2
+    fig_width = 24 if debug_amp_col else 16
+    col_offset = 1 if debug_amp_col else 0
 
     fig = plt.figure(figsize=(fig_width, 5 * n_modes))
     fig.suptitle(title)
@@ -195,12 +158,13 @@ def make_comparison_figure(abds, title, filename):
         bottom = row == n_modes - 1
 
         # ── Debug column: amplitude of each level for this mode ───────────────
-        if DEBUG_AMP_COL:
+        if debug_amp_col:
             ax_debug = fig.add_subplot(gs[row, 0])
             for label, abd in abds.items():
                 t, h = get_h_mode(abd, mode)
-                ax_debug.plot(t, amplitude(h), label=label, color=LEVEL_COLORS[label])
+                ax_debug.plot(t, amplitude(h, mode[1] ==0), label=label, color=LEVEL_COLORS[label])
             ax_debug.set_yscale("linear")
+            ax_debug.margins(x=0)
             ax_debug.set_ylabel(rf"$|h_{{{ell}{m}}}|$")
             ax_debug.legend(frameon=False)
             if row == 0:
@@ -218,13 +182,25 @@ def make_comparison_figure(abds, title, filename):
             pair_key = f"{lo_label}-{hi_label}"
             t, frac_amp_diff, phase_diff = compute_diffs(abds, mode, lo_label, hi_label)
             ax_amp.plot(t, frac_amp_diff, label=pair_key, color=COLORS[pair_key])
-            ax_phase.plot(t, phase_diff, label=pair_key, color=COLORS[pair_key])
+            if m != 0:
+                ax_phase.plot(t, phase_diff, label=pair_key, color=COLORS[pair_key])
 
         ax_amp.set_ylabel(rf"$|\Delta h_{{{ell}{m}}}|/|h_{{{ell}{m}}}|$")
-        ax_phase.set_ylabel(rf"$\Delta\phi_{{{ell}{m}}}$")
         ax_amp.set_yscale("log")
-        ax_phase.set_yscale("log")
+        ax_amp.margins(x=0)
         ax_amp.legend(frameon=False)
+
+        if m == 0:
+            ax_phase.text(
+                0.5, 0.5, "This mode has no phase",
+                transform=ax_phase.transAxes,
+                ha="center", va="center",
+            )
+            ax_phase.set_yticks([])
+        else:
+            ax_phase.set_ylabel(rf"$\Delta\phi_{{{ell}{m}}}$")
+            ax_phase.set_yscale("log")
+            ax_phase.margins(x=0)
 
         if bottom:
             ax_amp.set_xlabel("$t~[M]$")
@@ -242,9 +218,3 @@ def make_comparison_figure(abds, title, filename):
     out_path = f"{OUTPUT_DIR}/{filename}"
     fig.savefig(out_path, dpi=300, transparent=True, format='pdf', bbox_inches='tight')
     print(f"Saved: {out_path}")
-
-
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-make_comparison_figure(abds_m1, "Remnant superrest frame", "method1_superrest_comparison.pdf")
-make_comparison_figure(abds_m2, "Lev2 inspiral superrest frame", "method2_abd_frame_comparison.pdf")
