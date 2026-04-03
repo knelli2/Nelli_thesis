@@ -539,23 +539,38 @@ modes show similar behavior to the $2,2$, just at a smaller amplitude.
 \begin{figure}
   \hfill
   \includegraphics[width=1.0\linewidth]{images/cross_code_cce/spec_inspiral_superrest_comparison.pdf}
-  \caption{SXS:BBH:2696 GWs mapped to the inspiral superrest frame of each Lev
-    at time $t-t_{22}^\mathrm{peak}=-8694M$ before the peak of the amplitude of
-    the $2,2$ mode of the waveform. All waveforms are plotted so $t=0$
-    corresponds to this peak of the $2,2$ mode. The four rows are the
-    $\ell,m=(2,2),(2,0),(2,1),(3,2)$ modes of the waveforms, respectively. The left
-    column is the amplitude of each mode. The middle column is the fractional
-    amplitude difference with respect to one higher Lev. The third column is the
-    phase difference of the waveforms where we zero out the phase of each
-    waveform at $t-t_{22}^{\mathrm{peak}} = -8000M$. Since the $\ell,m=(2,0)$
-    isn't oscillatory (i.e. real), we omit the phase difference plot for this
-    mode. \label{fig:spec-bbh-cce}}
+  \caption{\texttt{SXS:BBH:2696} GWs mapped to the inspiral superrest frame of
+    each Lev at time $t-t_{22}^\mathrm{peak}=-8694M$ before the peak of the
+    amplitude of the $2,2$ mode of the waveform. All waveforms are plotted so
+    $t=0$ corresponds to this peak of the $2,2$ mode. The four rows are the
+    $\ell,m=(2,2),(2,0),(2,1),(3,2)$ modes of the waveforms, respectively. The
+    left column is the amplitude of each mode. The middle column is the
+    fractional amplitude difference with respect to one higher Lev. The third
+    column is the phase difference of the waveforms where we zero out the phase
+    of each waveform at $t-t_{22}^{\mathrm{peak}} = -8000M$. Since the
+    $\ell,m=(2,0)$ isn't oscillatory (i.e. real), we omit the phase difference
+    plot for this mode. \label{fig:spec-bbh-cce}}
 \end{figure}
 
-The next example is running \spectre~CCE over SXS
-catalog waveforms SXS:BBH:2696 \cite{Scheel:2025jct} which was performed using \spec.
-This simulations was also evolved in the GH gauge and output its data in the Bondi
-modal format directly accepted by CCE. In Fig. \ref{fig:spec-bbh-cce}, we show
+The next example is running \spectre~CCE over a waveform from the SXS catalog
+\cite{Scheel:2025jct}. We chose \texttt{SXS:BBH:2696}, a $q=8$ quasi-circular
+BBH with dimensionless spin $\vec{\chi}=(0,0,0.8)$ on each black hole, which was
+performed using \spec and was simulated for 43 orbits. This simulations was also
+evolved in the GH gauge and output its data in the Bondi modal format directly
+accepted by CCE. In Fig. \ref{fig:spec-bbh-cce}, we show similar plots to Fig.
+\ref{fig:BbhGWsLev2Superrest} with the $(2,2)$, $(2,0)$, and $(3,2)$ modes, but
+we instead plot the $(2,1)$ mode instead of the $(4,4)$ mode since this
+simulation is asymmetric in its masses, so we expect the $(2,1)$ mode to be
+excited.
+
+In Fig. \ref{fig:spec-bbh-cce}, we map each Lev to its own superrest frame at
+time $t-t_{22}^\mathrm{peak}=-8694M$ and then compare the waveforms. All the
+amplitude and phase comparisons appear to be convergent, except for the
+fractional amplitude comparison of the $2,0$ mode. But that only appears
+slightly non-convergent. Otherwise, the amplitude of the $2,0$ mode looks
+significantly better than \spectre s. Also, the phase differences in Fig.
+\ref{fig:spec-bbh-cce} appear to be much better behaved than in \spectre, even
+with a waveform that is roughly double its length.
 
 \subsubsection{AthenaK}
 
