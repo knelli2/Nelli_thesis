@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 from cce_common import (
-    LEVELS, CACHE_DIR, OUTPUT_DIR,
+    LEVELS, CACHE_DIR, OUTPUT_DIR, COLOR_CYCLE,
     load_abd, interpolate_and_shift_cached,
     map_to_superrest_cached,
     make_comparison_figure,
@@ -16,6 +16,12 @@ DELTA_T = 1.0                     # [M] downsampling interval
 OFFSET_AFTER_PEAK = 200.0         # [M] in peak-recentered time: mapping time after peak
 PADDING_TIME = 100.0
 PHASE_REF_TIME = 0.0              # [M] time at which phase difference is set to zero
+
+# ── Plotting constants ─────────────────────────────────────────────────────────
+PLOT_MODES = [(2, 2), (2, 0), (3, 2), (4, 4)]  # (ell, m) modes to compare
+PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]   # (lo, hi)
+COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
+LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CYCLE[2]}
 
 # ── Load raw ABDs ─────────────────────────────────────────────────────────────
 print("Loading waveform data...")
@@ -53,5 +59,9 @@ make_comparison_figure(
     title="Remnant superrest frame",
     filename="spectre_remnant_superrest_comparison.pdf",
     ref_time=PHASE_REF_TIME,
+    plot_modes=PLOT_MODES,
+    pairs=PAIRS,
+    colors=COLORS,
+    level_colors=LEVEL_COLORS,
     debug_amp_col=True,
 )

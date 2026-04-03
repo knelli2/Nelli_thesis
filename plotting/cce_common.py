@@ -22,17 +22,12 @@ LEVELS = {
     "Lev2": "RERUN111824_Lev2_Joined/CharacteristicExtractReduction.h5",
 }
 
-PLOT_MODES = [(2, 2), (2, 0), (3, 2), (4, 4)]  # (ell, m) modes to compare
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
 CACHE_DIR = os.path.join(_SCRIPT_DIR, "abd_cache")
 
-# ── Plotting constants ────────────────────────────────────────────────────────
-PAIRS = [("Lev0", "Lev1"), ("Lev1", "Lev2")]  # (lo, hi)
+# ── Default plotting constants (callers may override) ─────────────────────────
 COLOR_CYCLE = ['#0F2080', '#F5793A', '#85C0F9', '#A95AA1']
-COLORS = {"Lev0-Lev1": COLOR_CYCLE[0], "Lev1-Lev2": COLOR_CYCLE[1]}
-LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CYCLE[2]}
 
 
 # ── Waveform helpers ──────────────────────────────────────────────────────────
@@ -86,9 +81,15 @@ def compute_diffs(abds, mode, lo_label, hi_label, ref_time):
 
     m_is_zero = mode[1] == 0
     amp_hi = amplitude(h_hi, m_is_zero)
-    frac_amp_diff = amplitude(h_lo, m_is_zero) - amp_hi
-    frac_amp_diff = np.abs(frac_amp_diff)
-    frac_amp_diff /= np.abs(amp_hi)
+    amp_lo = amplitude(h_lo, m_is_zero)
+    if m_is_zero:
+        amp_min = min(np.min(amp_hi), np.min(amp_lo))
+        if amp_min < 0.0:
+            amp_hi += 2.0 * abs(amp_min)
+            amp_lo += 2.0 * abs(amp_min)
+    frac_amp_diff = np.abs(amp_hi - amp_lo) / np.abs(amp_hi)
+    # frac_amp_diff = np.abs(frac_amp_diff)
+    # frac_amp_diff /= np.abs(amp_hi)
 
     ref_idx = np.argmin(np.abs(t - ref_time))
     phase_hi = phase(h_hi)
@@ -161,8 +162,9 @@ def map_to_abd_frame_cached(label, abd_raw, target_abd, t_0, padding_time, cache
 
 # ── Plotting ──────────────────────────────────────────────────────────────────
 
-def make_comparison_figure(abds, title, filename, ref_time, debug_amp_col=False):
-    n_modes = len(PLOT_MODES)
+def make_comparison_figure(abds, title, filename, ref_time, plot_modes, pairs, colors,
+                           level_colors, debug_amp_col=False):
+    n_modes = len(plot_modes)
     n_cols = 3 if debug_amp_col else 2
     fig_width = 24 if debug_amp_col else 16
     col_offset = 1 if debug_amp_col else 0
@@ -174,7 +176,7 @@ def make_comparison_figure(abds, title, filename, ref_time, debug_amp_col=False)
     first_amp_ax = first_phase_ax = None
     sci_debug_axes = []  # debug axes that use scientific notation
     phase_axes = []  # non-zero m phase axes for exact tick setting
-    for row, mode in enumerate(PLOT_MODES):
+    for row, mode in enumerate(plot_modes):
         ell, m = mode
         bottom = row == n_modes - 1
 
@@ -183,7 +185,7 @@ def make_comparison_figure(abds, title, filename, ref_time, debug_amp_col=False)
             ax_debug = fig.add_subplot(gs[row, 0])
             for label in sorted(abds.keys()):
                 t, h = get_h_mode(abds[label], mode)
-                ax_debug.plot(t, amplitude(h, mode[1] ==0), label=label, color=LEVEL_COLORS[label])
+                ax_debug.plot(t, amplitude(h, mode[1] == 0), label=label, color=level_colors[label])
             ax_debug.set_yscale("linear")
             ax_debug.margins(x=0)
             ax_debug.set_ylabel(rf"$\ell,m = ({ell},{m})$")
@@ -202,12 +204,12 @@ def make_comparison_figure(abds, title, filename, ref_time, debug_amp_col=False)
         ax_amp = fig.add_subplot(gs[row, col_offset])
         ax_phase = fig.add_subplot(gs[row, col_offset + 1])
 
-        for lo_label, hi_label in PAIRS:
+        for lo_label, hi_label in pairs:
             pair_key = f"{lo_label}-{hi_label}"
             t, frac_amp_diff, phase_diff = compute_diffs(abds, mode, lo_label, hi_label, ref_time)
-            ax_amp.plot(t, frac_amp_diff, label=pair_key, color=COLORS[pair_key])
+            ax_amp.plot(t, frac_amp_diff, label=pair_key, color=colors[pair_key])
             if m != 0:
-                ax_phase.plot(t, phase_diff, label=pair_key, color=COLORS[pair_key])
+                ax_phase.plot(t, phase_diff, label=pair_key, color=colors[pair_key])
 
         if not debug_amp_col:
             ax_amp.set_ylabel(rf"$\ell,m = ({ell},{m})$")

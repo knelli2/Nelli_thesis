@@ -6,9 +6,13 @@ from scri.bms_transformations import BMSTransformation
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import os
+from quaternion.calculus import indefinite_integral as integrate
+from scri.asymptotic_bondi_data.map_to_superrest_frame import MT_to_WM, WM_to_MT
+from spherical_functions import constant_from_ell_0_mode
 from cce_common import (
     CACHE_DIR, OUTPUT_DIR,
     make_comparison_figure,
+    find_peak_time,
 )
 
 # ── Plot style (matches papers-2024-spectre-first-bbh) ───────────────────────
@@ -19,9 +23,9 @@ mpl.rcParams['font.size'] = 24
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 DELTA_T = 1.0
-PHASE_REF_TIME = -4000.0         # [M] time at which phase difference is set to zero
+PHASE_REF_TIME = -8000.0         # [M] time at which phase difference is set to zero
 
-BASE_DIR = "/home/knelli/Documents/research/sims/thesis_data/SXS:BBH:2696"
+BASE_DIR = "/home/fs01/kem343/Annexes/CCEAnnex_final/PublicLinks/SXS:BBH:2696"
 
 LEVELS = [
     "Lev2",
@@ -29,7 +33,7 @@ LEVELS = [
     "Lev4",
 ]
 
-PLOT_MODES = [(2, 2), (2, 0), (3, 2), (4, 4)]  # (ell, m) modes to compare
+PLOT_MODES = [(2, 2), (2, 0), (2, 1), (3, 2)]  # (ell, m) modes to compare
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(_SCRIPT_DIR, "..", "images", "cross_code_cce")
@@ -44,6 +48,11 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 
 abds = {}
 for level in LEVELS:
+    path_to_cce_simulation = f"{BASE_DIR}/{level}"
+    bms = BMSTransformation()
+    bms.from_file(f"{path_to_cce_simulation}/BMS.h5", group="inspiral_superrest")
+    time_shift = constant_from_ell_0_mode(bms.supertranslation[0])
+
     cache_path = os.path.join(CACHE_DIR, f"spec_abd_prime_{level.lower()}.pkl")
     if os.path.exists(cache_path):
         print(f"  {level}: loading abd_prime from cache...")
@@ -76,9 +85,6 @@ for level in LEVELS:
         file_format="RPDMB",
     )
 
-    bms = BMSTransformation()
-    bms.from_file(f"{path_to_cce_simulation}/BMS.h5", group="inspiral_superrest")
-
     print(f"  {level}: applying BMS transformation...")
     abd_prime = abd.transform(
         supertranslation=bms.supertranslation,
@@ -91,6 +97,25 @@ for level in LEVELS:
     with open(cache_path, "wb") as f:
         pickle.dump(abd_peak, f)
     abds[level] = abd_peak
+
+def printTimeToSuperrest():
+    news = MT_to_WM(2.0 * abds["Lev2"].sigma.bar.dot, dataType=scri.hdot)
+    omega = np.linalg.norm(news.angular_velocity(), axis=1)
+    phase = integrate(omega, news.t)
+    t_relax = 1231.5
+    t_shift = news.t[
+        np.argmin(
+            abs(
+                phase
+                - (phase[np.argmin(abs(news.t - t_relax))] + 3 * (2 * np.pi))
+            )
+        )
+    ]
+
+    time = abds["Lev2"].t[0] + t_relax + 0.5 * t_shift
+    print(f"Superrest time = {time}")
+
+printTimeToSuperrest()
 
 t_min = max(abd.t[0] for _, abd in abds.items())
 t_max = min(abd.t[-1] for _, abd in abds.items())
@@ -108,5 +133,9 @@ make_comparison_figure(
     title="Inspiral superrest frame",
     filename="spec_inspiral_superrest_comparison.pdf",
     ref_time=PHASE_REF_TIME,
+    plot_modes=PLOT_MODES,
+    pairs=PAIRS,
+    colors=COLORS,
+    level_colors=LEVEL_COLORS,
     debug_amp_col=True,
 )
