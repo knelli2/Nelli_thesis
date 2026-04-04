@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 from cce_common import (
-    LEVELS, CACHE_DIR, OUTPUT_DIR, COLOR_CYCLE,
+    LEVELS, BASE_DIR, CACHE_DIR, OUTPUT_DIR, COLOR_CYCLE,
     load_abd, interpolate_and_shift_cached,
     map_to_superrest_cached,
     make_comparison_figure,
@@ -25,7 +25,7 @@ LEVEL_COLORS = {"Lev0": COLOR_CYCLE[0], "Lev1": COLOR_CYCLE[1], "Lev2": COLOR_CY
 
 # ── Load raw ABDs ─────────────────────────────────────────────────────────────
 print("Loading waveform data...")
-abds_raw = {label: load_abd(label, path) for label, path in LEVELS.items()}
+abds_raw = {label: load_abd(label, f"{BASE_DIR}/{path}") for label, path in LEVELS.items()}
 print("Done loading.")
 
 # ── Recenter time at peak |h_22| and downsample ───────────────────────────────

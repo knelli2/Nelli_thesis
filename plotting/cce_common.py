@@ -39,7 +39,7 @@ def find_peak_time(abd):
     return abd.t[np.argmax(amp)]
 
 
-def load_abd(label, rel_path):
+def load_abd(label, abs_path):
     """Load raw ABD from h5 or pickle cache. No time recentering or interpolation."""
     cache_path = os.path.join(CACHE_DIR, f"raw_{label.lower()}.pkl")
     os.makedirs(CACHE_DIR, exist_ok=True)
@@ -50,7 +50,7 @@ def load_abd(label, rel_path):
     print(f"  {label}: reading from h5...")
     abd = scri.create_abd_from_h5(
         file_format="SpECTRECCE_v1",
-        file_name=f"{BASE_DIR}/{rel_path}",
+        file_name=abs_path,
     )
     with open(cache_path, "wb") as f:
         pickle.dump(abd, f)

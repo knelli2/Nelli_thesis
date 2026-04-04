@@ -582,10 +582,74 @@ advective terms. \todo{Possibly run Hengrui's code to generate the CCE
 waveforms. Or maybe if the data is already run, just plot in a fancy way.}
 
 \subsubsection{FIL}
-\todo{Ask Dongze about the FIL data.}
+
+\begin{figure}
+  \hfill
+  \includegraphics[width=1.0\linewidth]{images/cross_code_cce/spec_fil_inspiral_superrest_comparison.pdf}
+  \caption{Two BNS simulations from FIL and \spec~with an identical starting
+    configuration mapped to \spec's inspiral
+    superrest frame at time $t-t_{22}^\mathrm{peak}=-3000M$ before the peak of the
+    amplitude of the $2,2$ mode of the waveform. All waveforms are plotted so
+    $t=0$ corresponds to this peak of the $2,2$ mode. The four rows are the
+    $\ell,m=(2,2),(2,0),(3,2),(4,4)$ modes of the waveforms, respectively. The
+    left column is the amplitude of each mode. The middle column is the
+    fractional amplitude difference between the two codes. The third
+    column is the phase difference of the waveforms where we zero out the phase
+    of each waveform at $t-t_{22}^{\mathrm{peak}} = -4000M$. Since the
+    $\ell,m=(2,0)$ isn't oscillatory (i.e. real), we omit the phase difference
+    plot for this mode. \label{fig:spec-fil-bns-cce}}
+\end{figure}
+
+\spectre~CCE can run on more than just data from a BBH. Any compact merger with
+dynamical gravity that can be simulated can supply worldtube data and then be
+run through CCE. In Fig. \ref{fig:spec-fil-bns-cce}, we present a case of two
+binary neutron start (BNS) simulations run through CCE. Even though the
+equations of the characteristic evolution were derived assuming a vacuum
+spacetime, so long as the amount of matter at the worldtube radius is negligible
+and does not meaningfully contribute to the curvature of spacetime, we are safe
+to apply CCE. The two BNS simulations in Fig. \ref{fig:spec-fil-bns-cce} were
+performed with \spec \cite{Duez:2008rb, Foucart:2008qt, Haas:2016cop,
+Foucart:2018lhe} and the Frankfurt-Illinois GRHMD (FIL) \todocite codes. The
+setup for the simulations is equal mass non-spinning $1.35M_{\odot}$ NSs. Here,
+we don't provide an analysis of the waveforms as this work is still in progress
+\footnote{We thank Elias Most and Dongze Sun at Caltech for providing the
+data for the FIL and \spec simulations}, but we simply show this as proof that
+we can run \spectre~CCE on non-SXS codes.
 
 \subsubsection{Maya}
 \todo{Wait for response from Deborah about Maya data.}
+
+\subsection{Future Work}
+Now that \spectre~CCE is able to read worldtube data from most other NR codes,
+there are a couple avenues for future work available. First, with
+\spectre~specifically, is improving the Cauchy evolution to remove the
+undesirable features in the waveforms modes seen in Fig.
+\ref{fig:BbhGWsLev2Superrest}. This is already underway at Caltech, Cornell, and
+Cal State Fullerton and will
+hopefully be ready soon so \spectre~can produce catalog-ready waveforms.
+
+A second avenue for future work which will benefit all that use \spectre~CCE is
+improving the initial data on the first null slice of the characteristic
+evolution. The imperfect initial data can be seen in the early-time amplitude of
+the $2,2$ mode in both Fig. \ref{fig:BbhGWsLev2Superrest} and
+\ref{fig:spec-bbh-cce}. Significant work has already been put into solving this
+problem by Da Re et al. \todocite, but still needs to be investigated further.
+
+A third avenue would be performing a highly detailed study of CCE waveforms from
+BBH simulations by different NR codes. To do this study, the exact same initial
+data should be used by each NR code, and interpolated onto the domains. This
+ensures that the physical parameters for the BBH, e.g. mass ratio and spins, are
+as close as possible. Gauge dependent parameters such as coordinate separation,
+angular velocity, etc may be different though. Then, each NR codes evolves the
+BBH through merger to a sufficient time after the BH has rung down. Ideally the
+resolution of each simulation from the different codes should be roughly the
+same based on some gauge-independent measure. Then all
+codes use \spectre~CCE to extract the GWs at \scri. From here, a number of
+different frame-fixing techniques can be used to analyze the data such as
+mapping to the remnant superrest frame, mapping each codes' waveform to their
+own inspiral superrest frame, or mapping each codes' waveform to one specific
+codes inspiral superrest frame. Once the frame fixing is complete, a full
+analysis of the memory can be done.
 
 \begin{enumerate}
   \item \spectre,\spec
