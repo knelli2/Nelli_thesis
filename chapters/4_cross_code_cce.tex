@@ -465,7 +465,7 @@ offers a separate executable that will transform the worldtube data from any of
 the supported input formats to the Bondi scalars in complex modal form in a
 separate output file. The new output file is then fed directly into the CCE
 algorithm. The new executable has the ability to handle overlapping output times
-and multiple output files from different checkpointed segments of a simulation.
+and multiple output files from different segments of a simulation.
 
 Finally, in order to make these new improvements available to the NR community,
 \spectre~now offers a
@@ -487,12 +487,12 @@ for how to use these executables, recommended settings for certain input
 parameters, and other small pieces of knowledge that were empirically determined
 while running CCE.
 
-\subsection{Examples of NR codes using \spectre~CCE}
+\subsection{Examples of NR codes using \spectre~CCE\label{sec:cce_codes_examples}}
 Now that we have detailed the process for converting Cauchy worldtube data into the
 proper format for \spectre~CCE, let's take a look at some examples where this is
 being used.
 
-\subsubsection{\spectre}
+\subsubsection{\spectre\label{sec:cce_spectre}}
 
 The first example is from \S\ref{sec:gws}. Here we are comparing waveforms from
 different resolutions of a GH BBH simulation with mass ratio $q=1$ and
@@ -534,7 +534,7 @@ null slice of the characteristic evolution. The late time behavior of the $2,0$
 mode is likely due to the cubed spheres that spectre uses. The $3,2$ and $4,4$
 modes show similar behavior to the $2,2$, just at a smaller amplitude.
 
-\subsubsection{\spec}
+\subsubsection{\spec\label{sec:cce_spec}}
 
 \begin{figure}
   \hfill
@@ -572,7 +572,7 @@ significantly better than \spectre s. Also, the phase differences in Fig.
 \ref{fig:spec-bbh-cce} appear to be much better behaved than in \spectre, even
 with a waveform that is roughly double its length.
 
-\subsubsection{AthenaK}
+\subsubsection{AthenaK\label{sec:cce_athenak}}
 
 Next we summarize results from \cite{Radice:2025djo} which runs \spectre~CCE on
 simulations performed with the AthenaK NR code. AthenaK evolves the Z4c
@@ -581,7 +581,7 @@ $1+\log$ condition and the $\Gamma$-driver condition, both including the
 advective terms. \todo{Possibly run Hengrui's code to generate the CCE
 waveforms. Or maybe if the data is already run, just plot in a fancy way.}
 
-\subsubsection{FIL}
+\subsubsection{FIL\label{sec:cce_fil}}
 
 \begin{figure}
   \hfill
@@ -609,24 +609,52 @@ spacetime, so long as the amount of matter at the worldtube radius is negligible
 and does not meaningfully contribute to the curvature of spacetime, we are safe
 to apply CCE. The two BNS simulations in Fig. \ref{fig:spec-fil-bns-cce} were
 performed with \spec \cite{Duez:2008rb, Foucart:2008qt, Haas:2016cop,
-Foucart:2018lhe} and the Frankfurt-Illinois GRHMD (FIL) \todocite codes. The
-setup for the simulations is equal mass non-spinning $1.35M_{\odot}$ NSs. Here,
-we don't provide an analysis of the waveforms as this work is still in progress
-\footnote{We thank Elias Most and Dongze Sun at Caltech for providing the
-data for the FIL and \spec simulations}, but we simply show this as proof that
-we can run \spectre~CCE on non-SXS codes.
+Foucart:2018lhe} and the Frankfurt-Illinois GRMHD (FIL)
+\cite{Etienne:2015cea,Most:2019kfe} codes. The setup for the simulations is
+equal mass non-spinning $1.35M_{\odot}$ NSs. Here, we don't provide an analysis
+of the waveforms as this work is still in progress \footnote{We thank Elias Most
+and Dongze Sun at Caltech for providing the data for the FIL and \spec
+simulations}, but we simply show this as proof that we can run \spectre~CCE on
+non-SXS codes.
 
-\subsubsection{Maya}
+\subsubsection{Maya\label{sec:cce_maya}}
 \todo{Wait for response from Deborah about Maya data.}
 
-\subsection{Future Work}
-Now that \spectre~CCE is able to read worldtube data from most other NR codes,
-there are a couple avenues for future work available. First, with
-\spectre~specifically, is improving the Cauchy evolution to remove the
+\subsection{Conclusion}
+We present additions and improvements to the \spectre~CCE module that allow for
+running CCE on the output of other NR codes besides the SXS Collaboration's
+\spec~and \spectre. \spectre~CCE itself now only accepts worldtube data in the
+form of the Bondi scalars from Eq. \ref{eq:bondi_u}-\ref{eq:bondi_h} represented
+as complex-valued spherical harmonic coefficients/modes. However, now \spectre
+also provides a conversion executable to put worldtube data into this expected
+format. This conversion executable accepts the spatial metric, lapse, and shift,
+along with their spatial derivatives as inputs, plus parameters for choosing
+which gauge conditions the Cauchy evolution were performed with so the
+conversion executable can compute the time derivatives itself.
+
+These improvements were made to better facilitate comparisons of numerical
+waveforms between NR codes. First, CCE better captures the non-linear effects of
+GR compared to extrapolation because the spacetime metric is actually evolved
+out to \scri. Second, CCE accounts for the different evolution gauges used by NR
+codes, by computing waveforms in the same frame at \scri (up to BMS
+transformations which can be freely chosen). Prior to this work, comparing NR
+waveforms consisted of comparing extrapolated waveforms, assuming there are in
+the same gauge.
+
+In \S\ref{sec:cce_codes_examples}, we present several examples of codes using
+\spectre~CCE to extract GWs, along with preliminary frame-fixing analysis of
+some waveforms. We show CCE running with worldtube data from
+\spectre~(\S\ref{sec:cce_spectre}), \spec~(\S\ref{sec:cce_spec}), AthenaK
+(\S\ref{sec:cce_athenak}), FIL (\S\ref{sec:cce_fil}), and Maya
+(\S\ref{sec:cce_fil}). We give examples for frame-fixing analysis for the
+\spectre~and \spec~simulations.
+
+There are a couple avenues for future work available using \spectre~CCE. First,
+with \spectre~specifically, is improving the Cauchy evolution to remove the
 undesirable features in the waveforms modes seen in Fig.
 \ref{fig:BbhGWsLev2Superrest}. This is already underway at Caltech, Cornell, and
-Cal State Fullerton and will
-hopefully be ready soon so \spectre~can produce catalog-ready waveforms.
+Cal State Fullerton and will hopefully be ready soon so \spectre~can produce
+catalog-ready waveforms.
 
 A second avenue for future work which will benefit all that use \spectre~CCE is
 improving the initial data on the first null slice of the characteristic
@@ -643,49 +671,17 @@ as close as possible. Gauge dependent parameters such as coordinate separation,
 angular velocity, etc may be different though. Then, each NR codes evolves the
 BBH through merger to a sufficient time after the BH has rung down. Ideally the
 resolution of each simulation from the different codes should be roughly the
-same based on some gauge-independent measure. Then all
-codes use \spectre~CCE to extract the GWs at \scri. From here, a number of
-different frame-fixing techniques can be used to analyze the data such as
-mapping to the remnant superrest frame, mapping each codes' waveform to their
-own inspiral superrest frame, or mapping each codes' waveform to one specific
-codes inspiral superrest frame. Once the frame fixing is complete, a full
-analysis of the memory can be done.
+same based on some gauge-independent measure. Then all codes use \spectre~CCE to
+extract the GWs at \scri. From here, a number of different frame-fixing
+techniques can be used to analyze the data such as mapping to the remnant
+superrest frame, mapping each codes' waveform to their own inspiral superrest
+frame, or mapping each codes' waveform to one specific codes inspiral superrest
+frame. Once the frame fixing is complete, a full analysis of the memory can be
+done.
 
-\begin{enumerate}
-  \item \spectre,\spec
-  \item Hengrui, Athenak
-  \item Deborah, Maya/ETK
-  \item Dongze/Elias, FIL
-  \item Sarah's paper??
-  \item Hengrui did study with same ID run through AthenaK and \spectre?
-  \item If not, that could be ``future work''
-  \item Future work analyzing the differences in behavior of waveforms produced
-        by different codes.
-\end{enumerate}
-
-\begin{enumerate}
-  \item CCE isn't the final step
-  \item At \scri, we have group freedom (BMS)
-  \item Explain supertranslations (and rotations?)
-  \item Briefly explain memory
-  \item Show examples of (2,0) mode memory correction
-\end{enumerate}
-
-\begin{enumerate}
-  \item Motivation
-  \begin{enumerate}
-      \item Explain importance about comparing waveforms
-      \item Waveform models, surrogates, etc.
-      \item $h_{+}$ and $h_{\times}$ not gauge invariant
-      \item Analog to 4 potential from E\&M
-      \item Different evolution gauges
-  \end{enumerate}
-  \item Overview of CCE (from Jordan's paper)
-  \item Different formulations evolved variable
-  \item Converting to ``standard'' variables for CCE
-  \item Caveat of frame fixing/BMS transforms
-  \item Examples of other codes using this
-\end{enumerate}
+Overall, we believe these improvements to the \spectre~CCE module will benefit
+the NR community by facilitating more comparison studies amongst the different
+NR codes and groups.
 
 \section*{References}
 \putbib[cross_code_cce]
