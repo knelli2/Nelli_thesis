@@ -399,7 +399,7 @@ and the grid or mesh velocity by~\cite{Scheel:2006gg, Teukolsky:2015ega}
 \begin{figure}
   \centering
   \includegraphics[width=0.5\linewidth]{images/lovelace_nelli/block.pdf}
-\caption{A diagram of the forward and reverse mappings $x^i(\hat{t},
+\caption[Diagram of forward and reverse coordinate mappings for an element.]{A diagram of the forward and reverse mappings $x^i(\hat{t},
 \xi^{\hat{\imath}})$ and $\xi^{\hat{\imath}}(t,x^i)$, respectively, from logical
 (right side of the diagram) to inertial coordinates (left side of the diagram)
 for an element $\Omega_k$. \label{fig:logical_map}}
@@ -788,11 +788,11 @@ tolerances of $10^{-8}$ and $10^{-6}$, respectively, unless otherwise stated.
 \begin{figure}
   \centering
   \includegraphics[width=0.3\linewidth]{images/lovelace_nelli/sphere_with_highlighted_wedge_cli_cropped.png}
-\caption{An illustration of a slice through the computational domain used in the evolutions
+\caption[Computational domain used for single black hole evolutions.]{An illustration of a slice through the computational domain used in the evolutions
 of single black holes described in this paper. Six regions, each in the
 shape of a deformed cube, combine to cover the volume of a spherical shell,
-with the inner boundary (the excision surface) inside the black hole's 
-apparent horizon. The six regions are themselves refined radially and 
+with the inner boundary (the excision surface) inside the black hole's
+apparent horizon. The six regions are themselves refined radially and
 angularly into smaller deformed cubes. One of the six regions is shown in blue
 for clarity. \label{fig:bhdomain}}
 \end{figure}
@@ -828,7 +828,7 @@ converge exponentially with increasing $p$-refinement.
 \begin{figure}[h]
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_KerrSchild_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_KerrSchild_0.8spin_Constraints.pdf}
-  \caption{Constraint violations for single black hole evolutions in Kerr-Schild
+  \caption[Constraint violations for single black hole evolutions in Kerr-Schild coordinates.]{Constraint violations for single black hole evolutions in Kerr-Schild
     coordinates with Kerr-Schild initial data. We evolve the
     lowest resolution to time $t=10,000M$ to demonstrate long term stability and
     evolve two higher resolutions to time $t=2,000M$ to assess convergence with
@@ -869,8 +869,8 @@ $r_{\mathrm{out}}=1,000M$.
 \begin{figure}[h]
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_HarmonicSchwarzschild_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_Harmonic_Constraints.pdf}
-  \caption{Constraint violations for single black hole evolutions in harmonic
-    coordinates. We evolve the 
+  \caption[Constraint violations for single black hole evolutions in harmonic coordinates.]{Constraint violations for single black hole evolutions in harmonic
+    coordinates. We evolve the
     lowest resolution to time $t=10,000M$ to demonstrate long term stability and
     evolve two higher resolutions to an earlier time to assess convergence with
     spatial resolution. \textit{Left}: Analytic initial data is in harmonic
@@ -901,7 +901,7 @@ and exponential convergence with increasing $p$-refinement.
 \begin{figure}[h]
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_DampedHarmonic_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_DampedHarmonic_0.8spin_Constraints.pdf}
-  \caption{Constraint violations for single black hole evolutions in damped
+  \caption[Constraint violations for single black hole evolutions in damped harmonic coordinates.]{Constraint violations for single black hole evolutions in damped
     harmonic coordinates with Kerr-Schild initial data. We evolve the
     lowest resolution to time $t=10,000M$ to demonstrate long term stability and
     evolve two higher resolutions to time $t=2,000M$ to assess convergence with
@@ -955,7 +955,7 @@ by the time stepper tolerance.
 \begin{figure}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/GhGaugeWave3DReductions_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/GhGaugeWave3DReductions_Errors.pdf}
-  \caption{Results from an amplitude $0.1$ gauge wave simulation demonstrating
+  \caption[Gauge wave simulation demonstrating long-term stability and convergence.]{Results from an amplitude $0.1$ gauge wave simulation demonstrating
   long term stable and convergent simulations. We show simulations at three
   resolutions, 15, 18, and 20 grid points per element in the $x$-direction.
   {\it Left}: The 1-index and 3-index constraints as a function of time. The
@@ -1023,7 +1023,7 @@ source~\response{\cite{Vu:2021coj, spectrecode_2024}}.
 \begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth]{images/lovelace_nelli/RERUN111824_BbhTrajectories.pdf}
-  \caption{The trajectories of the centers of each apparent horizon during the
+  \caption[Apparent horizon trajectories during the BBH inspiral.]{The trajectories of the centers of each apparent horizon during the
   Lev2 inspiral evolution, in the evolution's asymptotically inertial
   coordinates. The coordinates $x$ and $y$ indicate the position of the black
   hole within the orbital plane in units of the total initial mass $M$ of the
@@ -1044,7 +1044,7 @@ summarized in table~\ref{table:id}, and a plot of the resulting inertial
 trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
 
 \begin{table}
-  \caption{Parameters used to generate the binary-black-hole initial data
+  \caption[Parameters used to generate the BBH initial data.]{Parameters used to generate the binary-black-hole initial data
     evolved in \S\ref{sec:bbh results}: in terms of the sum of the black holes'
     Christodoulou masses $M=M_1+M_2$ of each black hole, the individual masses
     $M_1$ and $M_2$, the dimensionless spin magnitudes $|\chi_1|/M^2$ and
@@ -1080,8 +1080,8 @@ trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
     \includegraphics[width=\linewidth]{images/lovelace_nelli/inspiral_domain_full_zoom_cli.png}
     \\
   \end{minipage}
-  \caption{An illustration of the computational grid used during the inspiral.
-    We make use of two excision regions, 
+  \caption[Computational grid used during the BBH inspiral.]{An illustration of the computational grid used during the inspiral.
+    We make use of two excision regions,
     each region lying inside a black hole's apparent horizon. Each excision is
     surrounded by a spherical shell partitioned into six deformed cubes as in
     figure~\ref{fig:bhdomain}. Each spherical shell is then surrounded by another
@@ -1158,7 +1158,7 @@ crucial for robust inspiral and merger simulations.
 \begin{figure}
   \centering
   \includegraphics[width=0.4\linewidth]{images/lovelace_nelli/ringdown_domain_zoom_cli.png}
-  \caption{An image of the ringdown domain. After a common horizon is found,
+  \caption[Computational domain used during ringdown.]{An image of the ringdown domain. After a common horizon is found,
     the evolution is regridded onto a domain with a single excision as in
     figure~\ref{fig:bhdomain}. Additional time-dependent maps are used to deform
     the excision's spherical shape into one that corresponds to the common
@@ -1293,7 +1293,7 @@ each Gaussian is centered, denoted by $\bar{x}^C$ in
 tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
 
 \begin{table}
-  \caption{\label{table:inspiral_damping} Parameters for the Gaussians that make
+  \caption[Constraint damping parameters during the inspiral.]{\label{table:inspiral_damping} Parameters for the Gaussians that make
     up the constraint damping functions during the
     inspiral. See~(\ref{eq:gamma_0_2_gaussian}) and~(\ref{eq:gamma_1_gaussian})
     for how the coefficients appear in the functional form of the constraint
@@ -1315,7 +1315,7 @@ tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
 \end{table}
 
 \begin{table}
-  \caption{\label{table:ringdown_damping} Parameters for the Gaussians that make
+  \caption[Constraint damping parameters during ringdown.]{\label{table:ringdown_damping} Parameters for the Gaussians that make
     up the constraint damping functions during the
     ringdown. See~(\ref{eq:gamma_0_2_gaussian}) and~(\ref{eq:gamma_1_gaussian})
     for how the coefficients appear in the functional form of the constraint
@@ -1361,7 +1361,7 @@ behavior of the constraints near the time of merger.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\linewidth]{images/lovelace_nelli/RERUN111824_BbhConstraintEnergy.pdf}
-  \caption{L2-norm of the constraint energy $\mathcal{E}$
+  \caption[Constraint energy for equal-mass non-spinning BBH at three resolutions.]{L2-norm of the constraint energy $\mathcal{E}$
   (see~(\ref{eq:constraint energy})) over the entire computational domain for
   evolutions of an equal-mass, non-spinning, binary black hole at low
   (``Lev0''), medium (``Lev1''), and high (``Lev2'') spatial resolution, as a
@@ -1384,7 +1384,7 @@ meaning that our coordinate maps do not affect the results of these simulations.
 }
 
 \begin{table}
-  \caption{\label{table:mapping_error} \response{The L2-norm of the constraint energy
+  \caption[L2-norm of constraint energy and mapping error at $t=3000M$.]{\label{table:mapping_error} \response{The L2-norm of the constraint energy
   $\mathcal{E}$ and jacobian diagnostic $C_{\hat{i}}$ over all gridpoints at
   $t=3000M$ during the inspiral. For all of our resolutions, the jacobian
   diagnostic (which is a measure of our mapping error) is below the error of the
@@ -1445,7 +1445,7 @@ quantify numerical errors in the simulation.
 \begin{figure}
   \hfill
   \includegraphics[width=0.9\linewidth]{images/lovelace_nelli/RERUN111824_BbhApparentHorizonQuantities.pdf}
-  \caption{Apparent horizon masses and spins as a function of time. The left
+  \caption[Apparent horizon masses and spins during inspiral and ringdown.]{Apparent horizon masses and spins as a function of time. The left
     column shows the irreducible mass $M_{\rm irr}$, Christodoulou mass
     $M_{\rm ch}$, and dimensionless spin angular momentum
     $\chi\equiv S/M_{\rm ch}^2$ for one of the individual apparent horizons
@@ -1503,7 +1503,7 @@ fixing.
 \begin{figure}
   \hfill
   \includegraphics[width=0.9\linewidth]{images/lovelace_nelli/RERUN111824_Bbh22Waves.pdf}
-  \caption{The $\ell=m=2$ spin-weighted spherical-harmonic mode of the
+  \caption[The $\ell=m=2$ gravitational-wave mode computed via CCE at three resolutions.]{The $\ell=m=2$ spin-weighted spherical-harmonic mode of the
     gravitational waves, computed using Cauchy Characteristic Evolution (CCE)
     and frame-fixed using the Python package \texttt{scri}, with a worldtube
     radius of $200M$, where $M$ is the total initial Christodoulou mass. From

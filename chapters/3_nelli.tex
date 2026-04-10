@@ -401,7 +401,7 @@ arc(2*180/\numrays:-2*180/\numrays:\maxradius) -- ++(-2*180/\numrays:-\firstradi
 \node[anchor=west] at (\rc,-\maxradius-0.5) {Iteration 1};
 \end{tikzpicture}
 % \end{center}
-\caption{Diagram of how trial horizon-find surfaces can move between cells. The
+\caption[Diagram of trial horizon surfaces moving between cells during fast-flow.]{Diagram of how trial horizon-find surfaces can move between cells. The
    thick black lines are the trial surfaces. Cells containing the trial surface
    are shaded red. \textit{Left:} Trial surface for fast-flow iteration 0 that
    passes through all cells in the inner ring. \textit{Right:} Trial surface for
@@ -561,7 +561,7 @@ such as asynchronous I/O \ref{sec:io} or horizon finding
   \includegraphics[width=0.4\linewidth]{images/nelli/sphere_with_highlighted_wedge_cli_cropped.png}
   \hspace{0.5cm}
   \includegraphics[width=0.4\linewidth]{images/nelli/ringdown_domain_zoom_cli.png}
-  \caption{Equatorial slices of 3D excised spherical computational domains used
+  \caption[Equatorial slices of excised spherical domains for single black hole evolutions.]{Equatorial slices of 3D excised spherical computational domains used
   for the evolution of single black holes in \spectre\cite{Lovelace:2024wra}.
   The thicker black lines represent element boundaries, and the thinner grey
   lines represent grid points. The blue shaded regions represent blocks of
@@ -1020,7 +1020,7 @@ Synchronous}};
 \draw (\tickDx,\asyncytitle) node [align=left] {{\fontfamily{ptm}\selectfont
 Asynchronous}};
 \end{tikzpicture}
-\caption{Timeline for computing $\lambda^\mathrm{new}(t)$ for both the
+\caption[Timeline comparing synchronous and asynchronous computation of $\lambda^\mathrm{new}(t)$.]{Timeline for computing $\lambda^\mathrm{new}(t)$ for both the
 synchronous (\textit{top}) and asynchronous (\textit{bottom}) case. Here $M_j$
 denotes when we perform a measurement (horizon-find), $C_j$ denotes when we
 compute $\lambda^\mathrm{new}(t)$, and $E_j$ denotes the expiration time which
@@ -1423,7 +1423,7 @@ corotating grid.
 \includegraphics[width=0.48\linewidth]{images/nelli/bns_1.png} \\[1ex]
 \includegraphics[width=0.48\linewidth]{images/nelli/bns_2.png}
 \includegraphics[width=0.48\linewidth]{images/nelli/bns_3.png}
-\caption{Snapshots of the rest mass density and grid of a BNS system where the
+\caption[Snapshots of rest mass density and grid for a BNS system.]{Snapshots of the rest mass density and grid of a BNS system where the
 computational domain is rotated and controlled using the methods in this
 paper.}
 \label{fig:bns} 
