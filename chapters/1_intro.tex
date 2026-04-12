@@ -1,8 +1,274 @@
 \chapter{Introduction}
 
-Here's a rough outline of what's going to be in each chapter. Four chapters
-total. I probably want a bibliography for each section, not one for the entire
-thesis. Though maybe that would be better since I share a lot of references?
+The gravity that we know here on Earth is intuitive. It is familiar. It is
+expected. And it is safe (for the most part). But this universe that we live in
+continues to offer so much more than we expected. Starting from observing the
+motion of the planets and stars in the night sky to theorizing about black
+holes, the most compact and extreme objects in the universe, gravity continues
+to humble us.
+
+\section{Newtonian Gravity}
+
+In order to explain black holes, the overarching topic of this thesis, we must
+first start with a more simplified version of gravity and work our way up.
+Newtonian gravity states that the gravitational force between two masses is
+proportional to the two masses and inversely proportional to the square of the
+distance between the masses, or
+\begin{equation}\label{eq:fma}
+   \mathbf{F} = -\frac{Gm_1m_2}{r^2}\mathbf{\hat{r}} ,
+\end{equation}
+with $G$ being Newtons constant. However, we usually don't just have point
+masses like $m_1$ and $m_2$. We often have a distribution of matter which we'll
+represent as a matter density $\rho$. This matter distribution will generate a
+gravitational potential $\Phi$ via Poisson's equation
+\begin{equation}\label{eq:poisson}
+   \nabla^2\Phi = 4\pi G\rho .
+\end{equation}
+
+To relate Eqs. \ref{eq:fma} and \ref{eq:poisson}, we compute the gradient of
+$\Phi$ as a force,
+\begin{equation}
+    \mathbf{F} = -\nabla\Phi.
+\end{equation}
+Then, because of Newtons generic force equations
+\begin{equation}
+   \mathbf{F} = m\mathbf{a} = m\frac{d^2\mathbf{x}}{dt^2},
+\end{equation}
+we can get the equations of motion for any object in Newtonian gravity,
+\begin{equation}
+   m\frac{d^2x_i}{dt^2} = -\frac{\partial \Phi}{\partial x_i} .
+\end{equation}
+
+With these equations, one is able to compute quite a lot of gravitational
+scenarios. This could be the motion of a planet around a star or moving a
+satellite to a Lagrange point of two orbiting bodies. Combined with some ideal
+fluid mechanics for computing $\rho$, they can also be used to model the
+interiors of large gas planets or even stars. These basic starting equations are
+able to unlock a large amount of gravitational physics on their own, making them
+vital, even today, to astrophysical research.
+
+However, Newtonian gravity does have its limitations. One being how simultaneity
+of events is measured. In order to understand simultaneous events, we must
+understand the coordinates that are used and how they transform in Newtonian
+gravity. If we take a step back, one way to conceptually think about Newtonian
+gravity is that we have a time coordinate $t$. And at each time $t$, we have a
+snapshot of our 3D world which is represented by some spatial coordinates
+$x,y,z$. Therefore, two events that happen simultaneously will be labeled with
+the same value for the time coordinate $t$, no matter where we are in our
+spatial coordinates. However, we have some freedom with our spatial coordinates.
+We can freely transform them from cartesian $(x,y,z)$ to spherical
+$(r,\theta,\phi)$ to cylindrical $(s,\phi,z)$ or to any other coordinates we can
+think of without altering our time coordinate, preserving simultaneity.
+Conversely, the only way to transform our time coordinate (and keep the same
+physics) is a simple $t\rightarrow t+\delta t$. Therefore, time and space are
+somewhat decoupled in Newtonian gravity.
+
+Another limitation of Newtonian gravity is that it doesn't account for the
+finite speed of light. Related to the first limitation, events can only be
+considered simultaneous if they occur at the same time $t$. Consider a scenario
+where one person stands at rest at a point $(x,y,z)$ and time $t$ and shines a
+flashlight in the $+x$ direction. A second person is moving with respect to the
+first person in the $+x$ direction with a velocity $v$. This second person has
+their own coordinate system $(t',x',y',z')$ different from the first person at
+rest and would find the relation between the two systems to be
+\begin{align}
+   t' &= t \\
+   x' &= x - vt \\
+   y' &= y \\
+   z' &= z .
+\end{align}
+However, what happens if the second person is moving very close to the speed of
+light? (i.e. $v \approx c$). One may be tempted to think of this scenario as
+similar to a different scenario where the first person throwing a baseball while
+the second rides in a car. It'd be perfectly reasonable for a car to be moving
+faster than a baseball. However, this is fundamentally impossible with light.
+The speed of light is constant in all coordinate systems. So if we try to
+interpret this scenario in a Newtonian way, the second person would be moving
+almost in line with the front of the light beam at the same speed. But then what
+would happen if this second person shined their own flashlight? Would the this
+second beam of light be moving almost twice as fast as the first one? Would it
+stay effectively stationary and not go anywhere because the second person was
+already moving at the speed of light? This inconsistency and impossibility is
+why Newtonian gravity isn't the full picture and why we need a different theory.
+
+\section{Special Relativity}
+
+The theory of special relativity (SR) is able to reconcile and account for the
+finite speed of light in all coordinate systems. Say we have some event $P$.
+Fig. \ref{fig:light_cone} shows a light cone centered at event $P$. The vertical
+axis is time and the horizontal axis is a spatial dimension. The lines at
+$\pm45^{\circ}$ represent the paths that light take both into the future and
+from the past. In the ``Past'' light cone, everything contained within the light
+cone is able to influence event $P$ in a causal way (i.e. things traveling at or
+slower than the speed of light). Everything within the ``Future'' light cone can
+be influenced by event $P$. Events within these light cones are said to be
+causally connected to $P$. However, everything outside the light cone is unable
+to affect or be influence by event $P$, thus we call those events causally
+disconnected.
+
+\begin{figure}[h]
+   \centering
+   \begin{tikzpicture}
+      % Future cone fill — bounded by straight edges and upper arc of top ellipse
+      \fill[gray!20] (0,0) -- (2,2)
+         arc[start angle=0, end angle=180, x radius=2, y radius=0.5]
+         -- cycle;
+      % Past cone fill — bounded by straight edges and lower arc of bottom ellipse
+      \fill[gray!20] (0,0) -- (2,-2)
+         arc[start angle=0, end angle=-180, x radius=2, y radius=0.5]
+         -- cycle;
+      % Cone straight edges
+      \draw[thick] (0,0) -- (2,2);
+      \draw[thick] (0,0) -- (-2,2);
+      \draw[thick] (0,0) -- (2,-2);
+      \draw[thick] (0,0) -- (-2,-2);
+      % Top ellipse: solid upper arc (visible rim), dashed lower arc (hidden rim)
+      \draw[thick] (2,2)
+         arc[start angle=0, end angle=180, x radius=2, y radius=0.4];
+      \draw[thick] (2,2)
+         arc[start angle=0, end angle=-180, x radius=2, y radius=0.25];
+      % Bottom: only the front arc (curved base of past cone, not open)
+      \draw[thick] (2,-2)
+         arc[start angle=0, end angle=-180, x radius=2, y radius=0.5];
+      % Center point
+      \filldraw[black] (0,0) circle (3pt) node[right=4pt] {$P$};
+      % Labels
+      \node at (0, 2.9) {Future};
+      \node at (0,-2.9) {Past};
+      % Axes (left side)
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (-3.2,-0.6) -- (-3.2,0.6) node[above] {$t$};
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (-3.2,-0.6) -- (-2.0,-0.6) node[right] {$x$};
+   \end{tikzpicture}
+   \caption{A light cone centered at the event $P$. The cone edges represent
+   rays propagating at the speed of light $c$.}
+   \label{fig:light_cone}
+\end{figure}
+
+In Newtonian gravity, we have a simple notion of an invariant distance between
+two points, e.g.
+\begin{equation}
+   (\Delta s)^2 = (\Delta x)^2 + (\Delta y)^2 + (\Delta z)^2.
+\end{equation}
+This measure of distance is independent of what coordinate system we use for our
+spatial coordinates and works for Newtonian gravity because all time coordinates
+of all observers are the same. There is a universal time in Newtonian gravity.
+However, in SR we no longer have this universal time which everybody can agree
+on. Therefore, the measure of ``distance'' that we use in SR must account for
+our time coordinate somehow because of the coupling between space and time that
+the finite speed of light demands. For now, we just present this distance
+measure, called the spacetime interval, as
+\begin{equation}\label{eq:spacetime-interval}
+   (\Delta s)^2 = -(\Delta t)^2 + (\Delta x)^2 + (\Delta y)^2 + (\Delta z)^2.
+\end{equation}
+
+First, notice that the units of this don't match. We are adding something like
+(seconds)$^2$ to something like (meters)$^2$. But one can notice that if we
+multiply the $\Delta t$ by the speed of light $c$, we'll get the proper units.
+Very quickly in relativity, it becomes annoying to always have to write and keep
+track of this factor of $c$. Therefore, almost everybody in the field simply
+sets $c=1$ with the assumption that if we ever need to calculate actual
+quantities, we'll add it back in at the end.
+
+Second, we will now use this spacetime interval to motivate constructing
+something called a spacetime ``metric''. Now to fully understand the significance of what
+a metric is and what it represents requires taking courses on differential
+geometry. However, for our purposes, a metric is basically a $4\times 4$ matrix
+that represents how coordinates combine together to form the spacetime interval.
+Therefore, for the interval in Eq. \ref{eq:spacetime-interval}, we can define
+its spacetime metric, named the Minkowski metric, as
+\begin{equation}
+   \eta_{\mu\nu} =\left(
+   \begin{matrix}
+      -1 & 0 & 0 & 0 \\
+       0 & 1 & 0 & 0 \\
+       0 & 0 & 1 & 0 \\
+       0 & 0 & 0 & 1
+   \end{matrix}
+   \right).
+\end{equation}
+It is diagonal because there are no cross-terms in Eq.
+\ref{eq:spacetime-interval} (such as $\Delta x\Delta y$). We can then rewrite
+Eq. \ref{eq:spacetime-interval} using Einstein summation notation (where all
+repeated indices are implicitly summed)
+\begin{equation}
+   (\Delta s)^2 = \eta_{\mu\nu}\Delta x^\mu\Delta x^\nu
+\end{equation}
+where
+\begin{equation}
+   x^\mu =\left(
+   \begin{matrix}
+      t \\
+      x \\
+      y \\
+      z
+   \end{matrix}
+   \right).
+\end{equation}
+
+With a spacetime metric, we are able to do so many things. We can raise and
+lower indices of different quantities (i.e. transform between vectors and dual
+vectors/one-forms, $x_\nu = \eta_{\mu\nu}x^\mu$). We can turn the spacetime
+interval from $\Delta$s into infinitesimals and integrate it to find the length
+of a spacetime curve. But one of the most powerful things we can do is define
+transformations between coordinates that leave spacetime intervals unchanged
+(similar to Newtonian gravity).
+Lets define a transformation from an un-primed coordinate system to a primed one
+with
+\begin{equation}
+   x^{\mu'} = {\Lambda^{\mu'}}_{\mu} x^\mu .
+\end{equation}
+To show that this leaves the spacetime interval unchanged, let's plug it in
+\begin{align}
+   (\Delta s)^2 &= \eta_{\mu\nu}\Delta x^\mu\Delta x^\nu \\
+   &= \eta_{{\mu'}{\nu'}}\Delta x^{\mu'}\Delta x^{\nu'} \\
+   &= \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}\Delta x^{\mu}{\Lambda^{\nu'}}_{\nu}\Delta x^{\nu} \\
+   &= \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}{\Lambda^{\nu'}}_{\nu}\Delta x^{\mu}\Delta x^{\nu}.
+\end{align}
+Therefore, $\Lambda$ is a transformation between coordinates only if
+\begin{equation}
+   \eta_{\mu\nu} = \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}{\Lambda^{\nu'}}_{\nu},
+\end{equation}
+Or said another way, $\Lambda$ doesn't transform the components of the metric.
+If $\Lambda$ satisfies this, then we call it a Lorentz transformation. These
+will be mentioned in Ch. \ref{ch:compare}.
+
+\section{General Relativity}
+Now in going from Newtonian gravity to SR, we didn't actually add in any gravity
+to SR. We only tackled the issues of simultaneity and the speed of light. Now we
+are ready to combine SR with gravity to produce Einstein's theory of general
+relativity (GR). Probably the biggest conceptual difference between GR and
+Newtonian gravity is that Newtonian gravity is explained as a force exerted
+between two masses. And any object that has a force being applied to it will
+accelerate in the direction of that force. Therefore, motion in Newtonian
+gravity arises from forces.
+
+In GR, however, motion does not arise from forces. Instead, in GR we say there
+is some ``background'' spacetime, or some fabric of the universe that matter
+exists both on and in at the same time. In the Newtonian and SR picture, this
+background is ``flat'' meaning that it doesn't affect the matter that lives in
+it. However, in GR this background doesn't have to be flat anymore. It can be
+distorted, or curved; sort of how a trampoline with a heavy object in the middle
+is curved. Motion then arises not because of any force, but simply due to the
+curvature of the background spacetime. The motion of a small mass is dictated by
+how much spacetime is curved. In the trampoline example, a small mass starting
+with a constant velocity on a flat spacetime (flat trampoline) will not deviate
+from its original path and will continue with a constant velocity. That same
+mass moving on a curved spacetime (trampoline with a heavy object in the middle)
+will naturally move towards the heavy object with increasing velocity without
+any outside influence. It's the nature of the curved spacetime which drives the
+motion of matter. And the beauty of Einstein's theory is that it is matter
+itself which drives the curvature of spacetime.
+
+To describe this curvature, similar to SR, GR will also have a metric associated
+with it. We will denote this metric as $g_{\mu\nu}$ because $\eta_{\mu\nu}$ is
+reserved for Minkowski spacetime. Our new metric $g_{\mu\nu}$ will encode
+everything we need to know about the gravity of our spacetime.
+
+We first start by looking back at Poisson's equation for a gravitational
+potential (rewritten here for ease)
+\begin{equation}
+   \nabla^2\Phi = 4\pi G\rho .
+\end{equation}
 
 \begin{enumerate}
    \item Broad intro to gravity
@@ -21,9 +287,12 @@ thesis. Though maybe that would be better since I share a lot of references?
       \end{enumerate}
       \item GR
       \begin{enumerate}
+         \item how vectors move in a curved space
+         \item covariant derivatives,parallel transport
          \item metric
          \item connection
          \item geodesics
+         \item compare with newton
          \item Riemann
          \item Ricii
          \item Einstein tensor
@@ -34,8 +303,9 @@ thesis. Though maybe that would be better since I share a lot of references?
       \end{enumerate}
       \item NR (GR on computers, different formulations)
       \begin{enumerate}
-         \item \todo{Look at B\&S}
+         \item Need to foliate spacetime
          \item Coordinates
+         \item spatial metric, lapse, and shift
          \item 3+1 decomposition
          \item Gauge freedoms
          \item BSSN
