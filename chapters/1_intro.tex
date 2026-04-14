@@ -38,6 +38,13 @@ we can get the equations of motion for any object in Newtonian gravity,
 \begin{equation}
    m\frac{d^2x_i}{dt^2} = -\frac{\partial \Phi}{\partial x_i} .
 \end{equation}
+Additionally, there is a physical constraint on the matter density $\rho$,
+namely the conservation of energy. This looks like
+\begin{equation}
+   \frac{\partial\rho}{\partial t} = -\nabla\cdot(\rho\mathbf{v}).
+\end{equation}
+This equation states that the rate of change of matter over time is given by the
+flux of matter entering or leaving a region.
 
 With these equations, one is able to compute quite a lot of gravitational
 scenarios. This could be the motion of a planet around a star or moving a
@@ -91,7 +98,7 @@ stay effectively stationary and not go anywhere because the second person was
 already moving at the speed of light? This inconsistency and impossibility is
 why Newtonian gravity isn't the full picture and why we need a different theory.
 
-\section{Special Relativity}
+\section{Special Relativity\label{sec:sr}}
 
 The theory of special relativity (SR) is able to reconcile and account for the
 finite speed of light in all coordinate systems. Say we have some event $P$.
@@ -357,11 +364,11 @@ derivative plus some correction that accounts for the coordinates. We define the
 covariant derivative operator $\nabla_\mu$ acting on the components of a vector
 $V^\lambda$ as
 \begin{eqnarray}
-   \nabla_\mu V^\lambda = \partial_\mu V^\lambda + {\Gamma^\lambda}_{\mu\nu}
+   \nabla_\mu V^\lambda = \partial_\mu V^\lambda + \Gamma^\lambda_{\mu\nu}
    V^\nu
 \end{eqnarray}
 where we have again made use of the Einstein summation notation of implicit sums
-over repeated indices. Here we call ${\Gamma^\lambda}_{\mu\nu}$ the connection
+over repeated indices. Here we call $\Gamma^\lambda_{\mu\nu}$ the connection
 coefficients as they connect basis vectors from different points in our
 spacetime. These connection coefficients are a general property of differential
 geometry and depend on the metric chosen, but in GR we call them the Christoffel
@@ -372,11 +379,7 @@ will impose two conditions that turn out to be necessary for GR. First is that
 our spacetime (and by extension the metric and the connection coefficients) are
 torsion free, meaning
 \begin{equation}
-   \nabla_\mu\nabla_\nu = \nabla_\nu\nabla_\mu,
-\end{equation}
-or stated a different way
-\begin{equation}
-   {\Gamma^\lambda}_{\mu\nu} = {\Gamma^\lambda}_{\nu\mu}. 
+   \Gamma^\lambda_{\mu\nu} = \Gamma^\lambda_{\nu\mu}. 
 \end{equation}
 The second condition is that our connection is ``metric compatible'', meaning
 \begin{equation}
@@ -385,8 +388,8 @@ The second condition is that our connection is ``metric compatible'', meaning
 This second condition is important for raising and lowering indices of
 derivative quantities. With these two conditions, we can write the Christoffel
 symbols as sums of partial derivatives of the metric
-\begin{equation}
-   {\Gamma^\lambda}_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(
+\begin{equation}\label{eq:christoffel-symbols}
+   \Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(
       \partial_\mu g_{\nu\rho} + \partial_\nu g_{\rho\mu} - \partial_\rho g_{\mu\nu}
       \right).
 \end{equation}
@@ -399,13 +402,13 @@ path $x(\lambda)$ in our spacetime
 \begin{equation}
    \frac{dx^\mu}{d\lambda}\nabla_\mu V^\sigma =
    \frac{dx^\mu}{d\lambda}\frac{\partial V^\sigma}{\partial x^\mu} + 
-   {\Gamma^\sigma}_{\mu\nu}\frac{dx^\mu}{d\lambda}V^\nu = 0
+   \Gamma^\sigma_{\mu\nu}\frac{dx^\mu}{d\lambda}V^\nu = 0
 \end{equation}
 If the vector that we apply parallel transport to is the tangent vector itself,
 $dx^\mu/d\lambda$, then we get the equation
-\begin{equation}
+\begin{equation}\label{eq:geodesic}
    \frac{d^2x^\mu}{d^2\lambda} +
-   {\Gamma^\mu}_{\rho\sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
+   \Gamma^\mu_{\rho\sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
 \end{equation}
 which is called the geodesic equation. The geodesic equation will be our notion
 of a ``straight line'' in a curved spacetime, i.e. a path without any external
@@ -413,11 +416,204 @@ forces or influence. If you squint hard enough, you may be able to see that this
 is the GR extension of acceleration $\mathbf{a} = d^2\mathbf{x}/dt^2 = 0$ in
 Newtonian gravity.
 
-We first start by looking back at Poisson's equation for a gravitational
-potential (rewritten here for ease)
+Now that we are able to compute how to move vectors around our spacetime, we can
+finally move on to computing the curvature of our spacetime which is where
+gravity in GR derives from. To do this, we start with a vector $V^\rho$. We
+already know if we move this vector along two different paths to the same
+destination, the resulting vectors will be different. This difference is
+precisely what we are going to call curvature. Imagine we first transport the
+vector in some direction $\nabla_\nu$ and then in another direction
+$\nabla_\mu$. This gives us a final vector of $\nabla_\mu\nabla_\nu V^\rho$.
+Now, we swap the order to get $\nabla_\nu\nabla_\mu V^\rho$. Let's take the
+difference and expand the covariant derivatives
+\begin{align}
+   \nabla_\mu\nabla_\nu V^\rho - \nabla_\nu\nabla_\mu V^\rho
+   &= \partial_\mu(\nabla_\nu V^\rho)
+      - \Gamma^\lambda_{\mu\nu}\nabla_\lambda V^\rho
+      + \Gamma^\rho_{\mu\sigma}\nabla_\nu V^\sigma
+      - (\mu \leftrightarrow \nu) \\
+   &= \partial_\mu\partial_\nu V^\rho
+      + \partial_\mu(\Gamma^\rho_{\nu\sigma})V^\sigma
+      + \Gamma^\rho_{\nu\sigma}\partial_\mu V^\sigma
+      - \Gamma^\lambda_{\mu\nu}\partial_\lambda V^\rho \\
+   &\quad  - \Gamma^\lambda_{\mu\nu}\Gamma^\rho_{\lambda\sigma} V^\sigma
+      + \Gamma^\rho_{\mu\sigma}\partial_\nu V^\sigma
+      + \Gamma^\rho_{\mu\sigma}\Gamma^\sigma_{\nu\lambda} V^\lambda
+      - (\mu \leftrightarrow \nu) \\
+   &= (\partial_\mu\Gamma^\rho_{\nu\sigma} - \partial_\nu\Gamma^\rho_{\mu\sigma}
+      + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
+      - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}) V^\sigma
+\end{align}
+In the last line we simplified quite a bit, especially using the torsion-free
+condition, but now we have the difference of moving a vector along two different
+paths. Let's rewrite this in a more compact manner
+\begin{equation}
+   \nabla_\mu\nabla_\nu V^\rho - \nabla_\nu\nabla_\mu V^\rho =
+   {R^\rho}_{\sigma\mu\nu} V^\sigma
+\end{equation}
+where we call ${R^\rho}_{\sigma\mu\nu}$ the Riemann curvature tensor. To write
+it out more explicitly,
+\begin{equation}
+   {R^\rho}_{\sigma\mu\nu} =
+      \partial_\mu\Gamma^\rho_{\nu\sigma} - \partial_\nu\Gamma^\rho_{\mu\sigma}
+      + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
+      - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}.
+\end{equation}
+
+The Riemann curvature tensor is made up of first and second derivatives of the
+metric because the Christoffel symbols (Eq. \ref{eq:christoffel-symbols}) have
+first derivatives of the metric in them. The Riemann tensor encodes everything
+we need to know about the curvature of our spacetime, and it is only computed
+from derivatives of our metric $g_{\mu\nu}$. There are a number of symmetries of
+the Riemann tensor which we won't go over, but they reduce the number of
+independent components from $4^4=256$ to just $20$.
+
+A useful contraction of the Riemann tensor is called the Ricci tensor
+\begin{equation}\label{eq:ricci-tensor}
+   R_{\mu\nu} = {R^\lambda}_{\mu\lambda\nu}.
+\end{equation}
+The Ricci tensor has the property of being symmetric, $R_{\mu\nu} = R_{\nu\mu}$,
+and only has $10$ independent components. Again, we can contract the Ricci
+tensor to get the Ricci scalar
+\begin{equation}\label{eq:ricci-scalar}
+   R = {R^\mu}_{\mu}.
+\end{equation}
+Finally, we are able to combine our work to form the Einstein tensor
+\begin{equation}
+   G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu},
+\end{equation}
+which has the nice property of $\nabla^\mu G_{\mu\nu} = 0$.
+
+Now that we have the Einstein tensor, let us take a step back. In the Einstein
+tensor, we have sums of the metric $g_{\mu\nu}$, its first derivative squared
+$(\partial_\rho g_{\mu\nu})^2$, and second derivatives
+$\partial_\lambda\partial_\rho g_{\mu\nu}$. We know that all these derivatives
+somehow represent the curvature of our spacetime which in turn gives us gravity.
+Let's relate this back to Newtonian gravity to see if we can gain a little
+intuition. Recall  Poisson's equation for a gravitational
+potential $\Phi$ (rewritten here for ease)
 \begin{equation}
    \nabla^2\Phi = 4\pi G\rho .
 \end{equation}
+$\Phi$ encodes the information of our gravitational field. On the left, we have
+two derivatives of this gravitational potential and on the right we have the
+density of matter $\rho$. We also know that Newtonian gravity is a good
+approximation for GR in the case of weak gravity like we have here on Earth.
+We happen to have just constructed a quantity that contains second derivatives
+of the metric $g_\mu\nu$ which is our GR analog of the gravitational potential
+$\Phi$.
+
+Therefore, we can postulate, just as Einstein did, that the equations of GR have
+the following form:
+\begin{equation}
+   G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = 8\pi G T_{\mu\nu}.
+\end{equation}
+These are the infamous Einstein field equations. They are a set of 10 coupled
+non-linear second order partial differential equations (PDEs) for the spacetime
+metric. On the right, we have introduced a quantity $T_{\mu\nu}$ which is called
+the stress energy tensor. This tensor contains all the information about the
+matter and energy distribution in our spacetime. Because we have that
+$\nabla^\mu G_{\mu\nu} = 0$, we also have that $\nabla^\mu T_{\mu\nu} = 0$.
+Based on how we construct $T_{\mu\nu}$, this actually works out to be the
+conditions for conservation of energy and momentum, all wrapped up into one
+tensor equation. Also, it should be noted that $G$ is Newtons gravitational
+constant, and not the trace of $G_{\mu\nu}$. We often set $G=1$ as well to avoid
+confusion and make the equations easier to work with.
+
+There is considerable physics to be studied when we include the stress energy
+tensor in the Einstein field equations such as neutron starts, white dwarf
+stars, cosmology, active galactic nuclei, black hole accretion disks,
+supernovae, and several others. However, for this thesis we will be focusing on
+black holes. And even though many black holes form due to the collapse and/or
+accretion of matter, once a black hole is formed there need not be any matter
+outside the black hole to describe a black hole spacetime. Therefore, for the
+majority of this thesis, we will set $T_{\mu\nu} = 0$. This reduces the Einstein
+field equations significantly to
+\begin{equation}
+   R_{\mu\nu} = 0.
+\end{equation}
+
+As an example, let us look at the simplest black hole spacetime that exists; the
+Schwarzschild spacetime. This is a static spherically symmetric spacetime. The
+metric in spherical coordinates for the Schwarzschild solution is
+\begin{equation}
+   ds^2 = -\left(1-\frac{2M}{r}\right)dt^2 + \left(1-\frac{2M}{r}\right)^{-1}dr^2
+      + r^2\left(d\theta^2 + \sin^2\theta d\phi^2\right),
+\end{equation}
+or written in tensor form
+\begin{equation}
+   g_{\mu\nu} = \left(
+   \begin{matrix}
+      -\left(1-\frac{2M}{r}\right) & 0 & 0 & 0 \\
+      0 & \left(1-\frac{2M}{r}\right)^{-1} & 0 & 0 \\
+      0 & 0 & r^2 & 0 \\
+      0 & 0 & 0 & r^2\sin^2\theta
+   \end{matrix}
+   \right) .
+\end{equation}
+Here, $M$ is the mass of our black hole. For comparison, the Minkowski metric of
+flat spacetime in spherical coordinates is
+\begin{equation}
+   ds^2 = -dt^2 + dr^2 + r^2d\Omega^2.
+\end{equation}
+where $d\Omega^2=\left(d\theta^2 + \sin^2\theta d\phi^2\right)$. An interesting
+property of the Schwarzschild spacetime is that it is actually the unique
+solution for any spherically symmetric vacuum spacetime. The static nature of
+Schwarzschild arises as a byproduct of the spherical symmetry condition.
+
+Looking at the Schwarzschild solution, something interesting happens at $r=2M$.
+The $g_{rr}$ component blows up to infinity. When the metric components go to
+infinity, we call this a singularity. This radius is so important, that it's
+named the Schwarzschild radius,
+\begin{equation}
+   R_S = 2M.
+\end{equation}
+This radius defines the event horizon of the black hole. The event horizon is an
+invisible surface within which nothing (including light) can escape out to
+$r\geq2M$.
+
+Also, if $r=0$, the $g_{tt}$ component of the metric goes to infinity; another
+singularity. However, this singularity is different than $R_S$. We discussed in
+Sec. \ref{sec:sr} the importance of coordinate freedom and being able to switch
+coordinates. Let us make the following coordinate transformations
+\begin{align}
+   r^\star &= r + 2M\ln\left(\frac{r}{2M}-2\right), \\
+   v &= t + r^\star, \\
+   u &= t - r^\star.
+\end{align}
+With these transformations, our metric become
+\begin{equation}
+   ds^2 = -\left(1-\frac{2M}{r}\right)dv^2 + (dvdr+drdv) + rd\Omega^2.
+\end{equation}
+Now, we only have one singularity. Specifically when $r=0$. Therefore, that
+means the $r=2M$ singularity was what we call a ``coordinate'' singularity; i.e.
+not a ``physical'' singularity like $r=0$. This is why we say that the event
+horizon is an invisible boundary because observers falling in to a black hole
+will be uninterrupted at $r=2M$ and continue to fall. However, at $r=0$, our
+classical theory of GR breaks down. In order to describe what happens at (or
+after) $r=0$, we would need a valid theory of quantum gravity which we still do
+not yet have.
+
+There is plenty more analysis one can do with the Schwarzschild solution to gain
+some intuition on how we should think of a curved spacetime. This includes
+computing the components of the Riemann tensor, Ricii tensor, and Christoffel
+symbols, computing the geodesics and stable orbits (Eq. \ref{eq:geodesic}),
+computing the Killing vectors, performing more coordinate transformations and
+expanding the Schwarzschild solution to negative radius, analyzing Kruskal
+diagrams, and more. All of which should give better intuition about the dynamics
+in a curved spacetime. There is also extension of the Schwarzschild solution to
+axial symmetry which is called the Kerr solution, again exploring all the same
+things for this new spacetime. For our purposes though, explaining $R_S$ and the
+$r=0$ physical singularity shall suffice.
+
+\section{Numerical Relativity}
+
+We now have a set of PDEs that we can solve to give us the metric at every point
+in our spacetime. Our job now is to put these equations onto the computer so we
+can solve them numerically. This is necessary because the Schwarzschild and Kerr
+solutions are the only analytic black hole solutions available, which means we
+will need numerical relativity (NR) to generate solutions of two black holes
+merging.
 
 \begin{enumerate}
    \item Broad intro to gravity
