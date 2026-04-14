@@ -259,10 +259,159 @@ any outside influence. It's the nature of the curved spacetime which drives the
 motion of matter. And the beauty of Einstein's theory is that it is matter
 itself which drives the curvature of spacetime.
 
-To describe this curvature, similar to SR, GR will also have a metric associated
+\begin{figure}[h]
+   \centering
+   \begin{tikzpicture}
+      \coordinate (p0)   at ( 2, 0);   % theta = 0
+      \coordinate (ppi2) at ( 0, 2);   % theta = pi/2
+      \coordinate (ppi)  at (-2, 0);   % theta = pi
+      \coordinate (p3pi2)at ( 0,-2);   % theta = 3pi/2
+      % Circle
+      \draw[thick] (0,0) circle (2);
+      % Points
+      \filldraw[black] (ppi)   circle (2pt) node[left=4pt]  {$A$};
+      \filldraw[black] (ppi2)  circle (2pt) node[above=4pt] {$B$};
+      \filldraw[black] (p0)    circle (2pt) node[left=4pt] {$C$};
+      \filldraw[black] (p3pi2) circle (2pt) node[below=4pt] {$D$};
+      % Vectors (all pointing right)
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (p0)    -- ++(1.0, 0);
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ppi2)  -- ++(1.0, 0);
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ppi)   -- ++(1.0, 0);
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (p3pi2) -- ++(1.0, 0);
+   \end{tikzpicture}
+   \caption{Diagram for parallel transporting a vector along two different
+      paths of a flat circle: $A\rightarrow B\rightarrow C$ and $A\rightarrow D
+      \rightarrow C$.}
+   \label{fig:parallel-transport-circle}
+\end{figure}
+
+\begin{figure}[h]
+   \centering
+   \begin{tikzpicture}
+      \coordinate (ptA) at ({2*cos(-45)},{0.5*sin(-45)});
+      \coordinate (ptB) at ({-2*cos(-45)},{0.5*sin(-45)});
+      \coordinate (ptC) at (0,2);
+      \draw[thick] (0,0) circle (2cm);
+      % Equator lines
+      \draw[thick,dotted] (2,0) arc[start angle=0, end angle=-45, x radius=2, y radius=0.5];
+      \draw[thick,dotted] (-2,0) arc[start angle=180, end angle=225, x radius=2, y radius=0.5];
+      \draw[thick] (ptA) arc[start angle=-45, end angle=-135, x radius=2, y radius=0.5];
+      % Meridian arcs
+      \draw[thick] (ptC) .. controls (1.0,1.75) and (1.4,0.36) .. (ptA);
+      \draw[thick] (ptC) .. controls (-1.0,1.75) and (-1.4,0.36) .. (ptB);
+      % Labeled points
+      \filldraw[black] (ptA) circle (1pt) node[below=4pt] {$A$};
+      \filldraw[black] (ptB) circle (1pt) node[below=4pt] {$B$};
+      \filldraw[black] (ptC) circle (2.5pt) node[above=1pt] {$C$};
+      % Tangent vectors
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (0,2) -- (-1.0,2.4);
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (0,2) -- ( 1.0,2.4);
+      % Equator arrows
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ptA) -- (1.4,0.8);
+      \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ptB) -- (-1.4,0.8);
+   \end{tikzpicture}
+   \caption{Diagram for parallel transporting a vector along two different
+      paths of a sphere: $A\rightarrow B\rightarrow C$ and $A\rightarrow C$.}
+   \label{fig:parallel-transport-sphere}
+\end{figure}
+
+Therefore in GR, in order to describe gravity, we actually must describe the
+geometry of spacetime as this is what we experience as gravity. The first thing
+we should probably understand is how motion a curved spacetime is different from
+a flat spacetime. Let's demonstrate this by moving some vectors along some
+curves. In Fig. \ref{fig:parallel-transport-circle}, we take a vector pointing
+to the right at point $A$ and move it to point $C$ along two different paths;
+$A\rightarrow B\rightarrow C$ and $A\rightarrow D\rightarrow C$. We move the
+vectors in such a way that doesn't rotate or scale them. Therefore, somewhat
+intuitively, we expect both vectors at $C$ to be identical because the vectors
+weren't changed in any way except for their positions. Now we do the same thing
+in Fig. \ref{fig:parallel-transport-sphere}, except this time we start with a
+vector at $A$ that lies on the equatorial line of a sphere and move it to point
+$C$ at the pole along two different paths; $A\rightarrow C$ and $A\rightarrow
+B\rightarrow C$. Along the first path, the vector will be pointing tangent to
+the pole towards the left of the image. Along the second path, the arrow is
+first moved along the equatorial line to $B$, and then moved to the pole
+pointing towards the right. Unlike in Fig. \ref{fig:parallel-transport-circle},
+the final vectors are not the same. This demonstrates the unintuitive nature of
+a curved space compared to a flat one, and why will we need some more machinery
+to explain GR.
+
+The reason we are concerned with how vectors change as we move through our space
+is because any coordinate system that we create is made up of basis vectors. In
+a flat space, no matter what closed-loop path we choose, our basis vectors will
+always be the same at the same point. As shown in Fig.
+\ref{fig:parallel-transport-sphere}, this is not true for a curved space.
+Therefore, we must be careful about how we move vectors around our spacetime. To
+describe the curvature, similar to SR, GR will also have a metric associated
 with it. We will denote this metric as $g_{\mu\nu}$ because $\eta_{\mu\nu}$ is
 reserved for Minkowski spacetime. Our new metric $g_{\mu\nu}$ will encode
-everything we need to know about the gravity of our spacetime.
+everything we need to know about the gravity and curvature of our spacetime.
+
+We start by expanding our notion of what a derivative is in our curved
+spacetime. Instead of the typical partial derivative $\partial/\partial x$,
+which works in a flat spacetime, we need a derivative works in a curved
+spacetime, will be independent of our coordinates, and reduces back to the
+partial derivative when the spacetime is flat. Since the partial derivative is
+already a good place to start, we can say that our new derivative is the partial
+derivative plus some correction that accounts for the coordinates. We define the
+covariant derivative operator $\nabla_\mu$ acting on the components of a vector
+$V^\lambda$ as
+\begin{eqnarray}
+   \nabla_\mu V^\lambda = \partial_\mu V^\lambda + {\Gamma^\lambda}_{\mu\nu}
+   V^\nu
+\end{eqnarray}
+where we have again made use of the Einstein summation notation of implicit sums
+over repeated indices. Here we call ${\Gamma^\lambda}_{\mu\nu}$ the connection
+coefficients as they connect basis vectors from different points in our
+spacetime. These connection coefficients are a general property of differential
+geometry and depend on the metric chosen, but in GR we call them the Christoffel
+symbols.
+
+Before we define the Christoffel symbols in terms of the metric $g_{\mu\nu}$, we
+will impose two conditions that turn out to be necessary for GR. First is that
+our spacetime (and by extension the metric and the connection coefficients) are
+torsion free, meaning
+\begin{equation}
+   \nabla_\mu\nabla_\nu = \nabla_\nu\nabla_\mu,
+\end{equation}
+or stated a different way
+\begin{equation}
+   {\Gamma^\lambda}_{\mu\nu} = {\Gamma^\lambda}_{\nu\mu}. 
+\end{equation}
+The second condition is that our connection is ``metric compatible'', meaning
+\begin{equation}
+   \nabla_\rho g_{\mu\nu} = 0.
+\end{equation}
+This second condition is important for raising and lowering indices of
+derivative quantities. With these two conditions, we can write the Christoffel
+symbols as sums of partial derivatives of the metric
+\begin{equation}
+   {\Gamma^\lambda}_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(
+      \partial_\mu g_{\nu\rho} + \partial_\nu g_{\rho\mu} - \partial_\rho g_{\mu\nu}
+      \right).
+\end{equation}
+
+Next we will define how to transport a vector in the most ``constant'' way
+possible along a path in a curved spacetime. This is useful because still want
+to be able to move vectors in our spacetime without them being rotated or
+changed in some way. We define parallel transport of a vector $V^\sigma$ along a
+path $x(\lambda)$ in our spacetime
+\begin{equation}
+   \frac{dx^\mu}{d\lambda}\nabla_\mu V^\sigma =
+   \frac{dx^\mu}{d\lambda}\frac{\partial V^\sigma}{\partial x^\mu} + 
+   {\Gamma^\sigma}_{\mu\nu}\frac{dx^\mu}{d\lambda}V^\nu = 0
+\end{equation}
+If the vector that we apply parallel transport to is the tangent vector itself,
+$dx^\mu/d\lambda$, then we get the equation
+\begin{equation}
+   \frac{d^2x^\mu}{d^2\lambda} +
+   {\Gamma^\mu}_{\rho\sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
+\end{equation}
+which is called the geodesic equation. The geodesic equation will be our notion
+of a ``straight line'' in a curved spacetime, i.e. a path without any external
+forces or influence. If you squint hard enough, you may be able to see that this
+is the GR extension of acceleration $\mathbf{a} = d^2x/dt^2 = 0$ in Newtonian
+gravity.
 
 We first start by looking back at Poisson's equation for a gravitational
 potential (rewritten here for ease)
