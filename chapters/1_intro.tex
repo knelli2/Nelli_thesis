@@ -1,3 +1,5 @@
+% Use bibunit if using bibtex/natbib
+\begin{bibunit}[unsrtnat]
 \chapter{Introduction}
 
 The gravity that we know here on Earth is intuitive. It is familiar. It is
@@ -226,9 +228,9 @@ with
 \end{equation}
 To show that this leaves the spacetime interval unchanged, let's plug it in
 \begin{align}
-   (\Delta s)^2 &= \eta_{\mu\nu}\Delta x^\mu\Delta x^\nu \\
-   &= \eta_{{\mu'}{\nu'}}\Delta x^{\mu'}\Delta x^{\nu'} \\
-   &= \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}\Delta x^{\mu}{\Lambda^{\nu'}}_{\nu}\Delta x^{\nu} \\
+   (\Delta s)^2 &= \eta_{\mu\nu}\Delta x^\mu\Delta x^\nu \nonumber\\
+   &= \eta_{{\mu'}{\nu'}}\Delta x^{\mu'}\Delta x^{\nu'} \nonumber\\
+   &= \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}\Delta x^{\mu}{\Lambda^{\nu'}}_{\nu}\Delta x^{\nu} \nonumber\\
    &= \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}{\Lambda^{\nu'}}_{\nu}\Delta x^{\mu}\Delta x^{\nu}.
 \end{align}
 Therefore, $\Lambda$ is a transformation between coordinates only if
@@ -431,15 +433,15 @@ difference and expand the covariant derivatives
    &= \partial_\mu(\nabla_\nu V^\rho)
       - \Gamma^\lambda_{\mu\nu}\nabla_\lambda V^\rho
       + \Gamma^\rho_{\mu\sigma}\nabla_\nu V^\sigma
-      - (\mu \leftrightarrow \nu) \\
+      - (\mu \leftrightarrow \nu) \nonumber\\
    &= \partial_\mu\partial_\nu V^\rho
       + \partial_\mu(\Gamma^\rho_{\nu\sigma})V^\sigma
       + \Gamma^\rho_{\nu\sigma}\partial_\mu V^\sigma
-      - \Gamma^\lambda_{\mu\nu}\partial_\lambda V^\rho \\
+      - \Gamma^\lambda_{\mu\nu}\partial_\lambda V^\rho \nonumber\\
    &\quad  - \Gamma^\lambda_{\mu\nu}\Gamma^\rho_{\lambda\sigma} V^\sigma
       + \Gamma^\rho_{\mu\sigma}\partial_\nu V^\sigma
       + \Gamma^\rho_{\mu\sigma}\Gamma^\sigma_{\nu\lambda} V^\lambda
-      - (\mu \leftrightarrow \nu) \\
+      - (\mu \leftrightarrow \nu) \nonumber\\
    &= (\partial_\mu\Gamma^\rho_{\nu\sigma} - \partial_\nu\Gamma^\rho_{\mu\sigma}
       + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma}
       - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}) V^\sigma
@@ -615,6 +617,328 @@ solutions are the only analytic black hole solutions available, which means we
 will need numerical relativity (NR) to generate solutions of two black holes
 merging.
 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/intro/foliation.png}
+   \caption{A foliation of spacetime into spatial hypersurfaces $\Sigma_t$,
+   each labeled by a coordinate time $t$. The vector $n^a$ is normal to each
+   spatial hypersurface. This image was taken from \cite{Baumgarte:2010ndz}.}
+   \label{fig:foliation}
+\end{figure}
+
+To put Einstein's equations onto the computer, we first need to split up the
+equations to somewhat disentangle the space and time dimensions from our
+spacetime. This procedure is called the ``3+1'' decomposition of spacetime. We
+do this by creating what is called a spacetime foliation. Fig.
+\ref{fig:foliation} depicts how we will foliate our spacetime. We start by
+splitting the spacetime up into spatial hypersurfaces $\Sigma$ for every time
+$t$ of our spacetime. Each $\Sigma$ is a snapshot of full 3D space at every time
+(even though in the image they are represented as 2D slices, and time is the
+vertical axis). Then we can construct a vector $n^a$ which is normal to our
+$\Sigma$ hypersurfaces and points into the future. Note that for this section,
+we will switch from using greek letters (e.g. $\mu.\nu,\rho$) to latin letters
+(e.g. $a,b,c$) for spacetime symbols. This is purely a convention the NR
+community has adopted (albeit not a great one in our opinion).
+
+We must be careful with our time coordinate. Recall from Sec. \ref{sec:sr} that
+SR has no global time that applies to all spacetime points. This is still true
+in GR, so we must take this in to account. So instead of our time $t$ being a
+single number, we will make it a function. We can use $t$ write describe the
+normal vector $n^a$. We would like $n_a$ to be normalized and timelike
+($n^an_a=-1$) so we define a normalization factor $\alpha$ to achieve this.
+Then, $n^a$ becomes
+\begin{equation}
+   n^a = -\frac{1}{\alpha}\nabla^a t .
+\end{equation}
+Here, the lapse measures how much proper time has elapsed between spatial
+hypersurfaces.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.8\textwidth]{images/intro/lapse_shift.png}
+   \caption{Illustration of the lapse $\alpha$ and shift vector
+   $\beta^i$ in the 3+1 decomposition of spacetime. The lapse $\alpha$
+   measures the proper time between adjacent hypersurfaces, while the shift
+   $\beta^i$ encodes how coordinates move between hypersurfaces. This image was
+   taken from \cite{Baumgarte:2010ndz}.}
+   \label{fig:lapse_shift}
+\end{figure}
+
+Even though we now have how much time elapses between $\Sigma$, there's still
+more to our coordinates. Because of the coordinate freedom of GR, coordinates
+don't have to stay stationary between different $\Sigma$. In fact, we will show
+soon that we actually evolve the coordinates, implying that they will be
+different as time goes on. Our normal timelike normal vector $n^a$ isn't enough
+to describe this movement. Therefore, we introduce a spatial vector
+$\beta^a=(0,\beta^i)$ called the shift which will tell us how much our
+coordinates have moved (or shifted) from the normal vector $n^a$. We can
+therefore construct a new vector $t^a$ that will tell us how the coordinate that
+a grid point represents moves between spatial hypersurfaces
+\begin{equation}\label{eq:t_a}
+   t^a = \alpha n^a + \beta^a .
+\end{equation}
+Figure \ref{fig:lapse_shift} is a great diagram that shows the breakdown of
+$t^a$ into the timelike and spacelike components. It shows how those components
+map a spacetime coordinate at grid point A of one hypersurface to grid point B
+of the next hypersurface. Notice how $\alpha n^a$ gets us from the first
+hypersurface to the next, and $\beta^i$ moves us within the next hypersurface.
+The lapse and shift together are four degrees of freedom, which is the exact
+number of coordinate degrees of freedom that GR lets us specify.
+
+Now that we have the lapse and shift, we can move on to specifying our spacetime
+metric $g_{ab}$ in terms of the lapse and shift. It will be very convenient to
+define a spatial metric within our spatial hypersurface $\Sigma$ which we can
+use for quantities that live in $\Sigma$. We can combine our timelike
+normal vector with the spacetime metric to get
+\begin{equation}\label{eq:spatial_metric}
+   \gamma_{ab} = g_{ab} + n_a n_b .
+\end{equation}
+There's a plus sign because $n^a$ is defined with a minus sign. This means that
+$\gamma_{ab}$ is purely spatial.
+
+With this, we can represent our spacetime metric in terms of
+$\gamma_{ij},\alpha,\beta^i$. If we choose $t^a = (1,0,0,0)$, we can then
+compute $n^a$ from Eq. \ref{eq:t_a} and solve Eq. \ref{eq:spatial_metric} for
+$g_{ab}$ as
+\begin{equation}
+   g_{ab} = \left(
+      \begin{matrix}
+         -\alpha^2 + \beta_l\beta^l & \beta_j \\
+         \beta_j & \gamma_{ij}
+      \end{matrix}
+   \right) .
+\end{equation}
+Or, expressed more commonly as a line element,
+\begin{eqnarray}\label{eq:nr_spacetime_line_element}
+  ds^2 &= g_{ab}dx^a dx^b =-\alpha^2 dt^2 + \gamma_{ij}
+         \left(dx^i+\beta^i dt\right) \left(dx^j +\beta^j dt\right) .
+\end{eqnarray}
+At this point, we are still only at the beginning of manipulating our equations.
+We would like to end up with equations that contain time derivatives
+$\partial_t$ on the left hand side of the equation. These types of equations are
+ones that we can integrate in time to solve for our spacetime metric. We now
+branch off into explaining the two most popular formalisms for writing down
+evolution equations.
+
+\subsection{BSSN}
+The first formalism we will discuss is the Baumgarte-Shapiro-Shibata-Nakamura
+(BSSN) formalism \cite{Shibata:1995we,Baumgarte:1998te}. First, we finish off
+defining the Arnowitt-Deser-Misner (ADM) formalism \cite{Arnowitt:1962hi} as
+it's necessary for the BSSN formalism. This section is heavily based on
+derivations from \cite{Baumgarte:2010ndz}.
+
+We start by defining the extrinsic curvature $K_{ab}$. The
+extrinsic curvature is different than the Riemann curvature, or intrinsic
+curvature. The Riemann curvature tells us about how a spacetime itself is
+curved, and only relies on quantities defined in the spacetime. Said another
+way, intrinsic curvature does not rely on higher dimensions to define the
+curvature. However, our spatial slice $\Sigma$ is a 3D space embedded in a
+higher dimensional (4D) space. Therefore, the extrinsic curvature will tell us
+how $\Sigma$ is curved within the broader 4D spacetime. We define the extrinsic
+curvature by taking gradients of our normal vector $n^a$, and then projecting
+them onto $\Sigma$
+\begin{equation}
+   K_{ab} = -{\gamma_a}^c{\gamma_b}^d\nabla_c n_d .
+\end{equation}
+Using our definitions for $\gamma_{ab}$, we can rewrite this only in terms of
+$n^a$ as
+\begin{equation}
+   K_{ab} = -\nabla_a n_b - n_a n^c\nabla_c n_b .
+\end{equation}
+
+We also introduce a new derivative operator, the Lie derivative
+$\mathcal{L}_\mathbf{X}$ as
+\begin{equation}
+  \mathcal{L}_\mathbf{X} {T^a}_b = X^c\partial_c  {T^a}_b
+      - {T^c}_b\partial_c X^a + {T^a}_c\partial_b X^c .
+\end{equation}
+With the Lie derivative, we can write the extrinsic curvature as
+\begin{equation}
+   K_{ab} = -\frac{1}{2}\mathcal{L}_\mathbf{n}\gamma_{ab} .
+\end{equation}
+We can also define the trace of the extrinsic curvature as
+\begin{equation}
+   K = \gamma^{ab}K_{ab} = -\mathcal{L}_\mathbf{n}\ln\gamma^{1/2} .
+\end{equation}
+
+To get time derivatives of the extrinsic curvature and our spatial metric, we
+will take the Lie derivative of each along our vector $t^a$. For the extrinsic
+curvature this will be (with a lot of simplification)
+\begin{align}
+   \mathcal{L}_\mathbf{t} K_{ab} &= \mathcal{L}_{\alpha\mathbf{n}+\beta} K_{ab} \nonumber\\
+   &= \alpha\mathcal{L}_{\mathbf{n}} K_{ab} + \mathcal{L}_{\beta} K_{ab} \nonumber\\
+   &= -D_aD_b\alpha +
+      \alpha(^{(3)}R_{ab} - 2K_{ac}{K^c}_b + KK_{ab}) + \mathcal{L}_\beta K_{ab}
+\end{align}
+with $^{(3)}R_{ab}$ being the 3-dimensional Ricci tensor and
+$D_af={\gamma_a}^b\nabla_b f$. For the spatial metric, this becomes
+\begin{align}
+   \mathcal{L}_\mathbf{t} \gamma_{ab} &= \mathcal{L}_{\alpha\mathbf{n}+\beta} \gamma_{ab} \nonumber\\
+   &= \alpha\mathcal{L}_{\mathbf{n}} \gamma_{ab} + \mathcal{L}_{\beta} \gamma_{ab} \nonumber\\
+   &= -2\alpha K_{ab} + \mathcal{L}_{\beta} \gamma_{ab} .
+\end{align}
+Because of our definition of $t^a=(1,0,0,0)$ and the fact that $\beta$ is
+spatial, the following derivatives simplify to
+\begin{align}
+   \mathcal{L}_\mathbf{t} &= \partial_t \\
+   \mathcal{L}_\mathbf{\beta} K_{ij} &= \beta^kD_kK_{ij} + K_{ik}D_j\beta^k + K_{kj}D_i\beta^k 
+   \label{eq:dt_ext_curvature}\\
+   \mathcal{L}_\mathbf{\beta} \gamma_{ij} &= D_i\beta_j + D_j\beta_i .\label{eq:dt_spatial_metric}
+\end{align}
+We could also take the trace of both the extrinsic curvature and spatial metric
+to get equations for the evolution of their traces
+\begin{align}
+   \partial_t\ln\gamma^{1/2} &= -\alpha K + D_i\beta^i \\
+   \partial_t K &= -D^2\alpha + \alpha K_{ij}K^{ij} + \beta^i D_i K .
+\end{align}
+There are actually extra terms in these equations for the stress-energy tensor
+following a similar procedure, but we exclude those here because we are only
+concerned with the vacuum equations.
+
+We are unable to evolve the ADM equations stably \cite{Shibata:1995we,Baumgarte:1998te}, so now we move on to
+the BSSN equations. We start by rewriting the spatial metric as
+\begin{equation}
+   \gamma_{ij} = e^{4\phi}\bar{\gamma}_{ij}
+\end{equation}
+where $e^\phi$ is a scalar function called the conformal factor, and
+$\bar{\gamma}_{ij}$ is called the conformal metric. This procedure of rewriting
+a quantity as a different quantity times a scalar function is a conformal
+transformation. The fourth power of $e^\phi$ is arbitrary, but useful for later
+calculation. The determinant of $\bar{\gamma}_{ij}$ is required to be
+$\bar{\gamma}=\eta=1$. We then define the scalar function $\phi$ to be
+\begin{equation}
+   \phi = \frac{1}{12}\ln(\gamma) .
+\end{equation}
+
+We also rewrite the extrinsic curvature as
+\begin{equation}
+   K_{ij} = A_{ij} + \frac{1}{3}K\gamma_{ij}
+\end{equation}
+where $A_{ij}$ is the trace-free part of the extrinsic curvature. We also
+conformally transform this trace-free part as
+\begin{equation}
+   A_{ij} = e^{4\phi}\bar{A}_{ij} .
+\end{equation}
+
+Equation \ref{eq:dt_spatial_metric} for the time derivative of the spatial
+metric will now split into two equations, one for $\phi$ and one for
+$\bar{\gamma}_{ij}$ because of the conformal transformation. Those new equations
+are
+\begin{align}
+   \partial_t \phi &= -\frac{1}{6}\alpha K _ \beta^i\partial_i\phi + \frac{1}{6}\partial_i\beta^i 
+   \label{eq:dt_conformal_factor}\\
+   \partial_t\bar{\gamma}_{ij} &= -2\alpha\bar{A}_{ij} + \beta^k\partial_k\bar{\gamma}_{ij}
+   +\bar{\gamma}_{ik}\partial_j\beta^k + \bar{\gamma}_{kj}\partial_i\beta^k 
+   -\frac{2}{3}\bar{\gamma}_{ij}\partial_k\beta^k\label{eq:dt_conformal_spatial_metric}
+\end{align}
+
+In a similar fashion, Eq. \ref{eq:dt_ext_curvature} for the time derivative of
+the extrinsic curvature will also split into two equations, one for $K$ and one
+for $\bar{A}_{ij}$ because of the conformal transformation. The new equations
+are
+\begin{align}
+   \partial_t K &= -\gamma^{ij}D_jD_i\alpha
+      + \alpha\left(\bar{A}_{ij}\bar{A}^{ij} + \frac{1}{3}K^2\right)
+      + \beta^i\partial_i K, \label{eq:dt_trace_extrinsic_curvature}\\
+   \partial_t\bar{A}_{ij} &= e^{-4\phi}\!\left(
+      -(D_iD_j\alpha)^{TF}
+      + \alpha ^{(3)}R_{ij}^{TF}\right)
+      + \alpha\!\left(K\bar{A}_{ij} - 2\bar{A}_{il}{\bar{A}^l}_j\right)
+      \nonumber\\
+   &\quad + \beta^k\partial_k\bar{A}_{ij}
+      + \bar{A}_{ik}\partial_j\beta^k
+      + \bar{A}_{kj}\partial_i\beta^k
+      - \frac{2}{3}\bar{A}_{ij}\partial_k\beta^k, \label{eq:dt_conformal_traceless_ext_curvature}
+\end{align}
+where $TF$ means the trace-free part of the tensor, e.g. $^{(3)}R_{ij}^{TF} = ^{(3)}R_{ij}
+-^{(3)}R/3\gamma_{ij}$. 
+
+Next, we remember that with a conformal metric $\bar{\gamma}_{ij}$ there
+exists a conformal connection $^{(3)}\bar{\Gamma}^i_{jk}$ since connections are
+tied to metrics. We can contract the conformal connection to get
+\begin{equation}
+   ^{(3)}\bar{\Gamma}^i \equiv \bar{\gamma}^{jk}\ ^{(3)}\bar{\Gamma}^i_{jk} 
+   = -\partial_j\bar{\gamma}^{ij}.
+\end{equation}
+In the BSSN formalism, we promote $\bar{\Gamma}^i$ from a computed quantity to
+an independent variable that is evolved along with all the others. If we take
+the time derivative of the previous equation, substitute in Eq.
+\ref{eq:dt_conformal_spatial_metric}, and simplify a lot to get rid of the
+$\partial_j\bar{A}^{ij}$ term, we wind up with
+\begin{align}
+   \partial_t^{(3)}\bar{\Gamma}^i &= -2\bar{A}^{ij}\partial_j\alpha
+      + 2\alpha\!\left(^{(3)}\bar{\Gamma}^i_{jk}\bar{A}^{kj}
+      - \frac{2}{3}\bar{\gamma}^{ij}\partial_j K
+      + 6\bar{A}^{ij}\partial_j\phi\right) \nonumber\\
+   &\quad
+      + \beta^j\partial_j^{(3)}\bar{\Gamma}^i
+      - ^{(3)}\bar{\Gamma}^j\partial_j\beta^i
+      + \frac{2}{3}^{(3)}\bar{\Gamma}^i\partial_j\beta^j
+      + \frac{1}{3}\bar{\gamma}^{li}\partial_l\partial_j\beta^j
+      + \bar{\gamma}^{lj}\partial_j\partial_l\beta^i \label{eq:dt_conformal_connection}.
+\end{align}
+
+Equations \ref{eq:dt_conformal_factor}, \ref{eq:dt_conformal_spatial_metric},
+\ref{eq:dt_trace_extrinsic_curvature}, \ref{eq:dt_conformal_traceless_ext_curvature},
+and \ref{eq:dt_conformal_connection} make up the evolution equations of the BSSN
+formalism. The last piece we'll need are evolution equations for the gauge
+functions $\alpha$ and $\beta^i$. Coming up with evolution equations for gauge
+quantities is more of an art than a science since, in theory, no matter what
+gauge we choose, we should still get the same physical system. However, solving
+equations numerically usually imposes more practical constraints.
+
+There are several gauge conditions that have been tested and aren't popular
+choices to use with the BSSN equations. One is the geodesic slicing condition,
+$\alpha=1$ and $\beta^i=0$. Another is maximal slicing where $K=0$ turns into an
+elliptic equation for the lapse, $D^2\alpha = \alpha K_{ij}K^{ij}$. Harmonic
+coordinates (which will be discussed more in Sec. \ref{sec:gh}) set $\Gamma^a =
+0$.
+
+Several of the mentioned conditions for the lapse can be described by
+\begin{equation}\label{eq:generic_lapse}
+   (\partial_t -\beta^j\partial_j)\alpha = -\alpha^2 f(\alpha)K
+\end{equation}
+where $f(\alpha)$ is a generic function. Choosing $f(\alpha) = 2/\alpha$, we can
+integrate Eq. \ref{eq:generic_lapse} to get
+\begin{equation}
+   \alpha = 1 + \ln\gamma .
+\end{equation}
+This is appropriately called the $1+\log$ slicing condition and is very popular
+paired with the BSSN formalism.
+
+A choice for the shift is to set $\partial_t\ ^{(3)}\bar{\Gamma}^i = 0$. This is
+named ``gamma freezing''. Plugging this in to Eq.
+\ref{eq:dt_conformal_connection} will yield a very complicated equation to solve
+for $\beta^i$. We can generalize and approximate this to something called a
+``gamma driver'' equation
+\begin{equation}
+   (\partial_t - \beta^j\partial_j)\beta^i = k(\partial_t\ ^{(3)}\bar{\Gamma}^i + 
+      \frac{1}{2}\ ^{(3)}\bar{\Gamma}^i) ,
+\end{equation}
+where $k$ is a positive constant. Since plugging in Eq.
+\ref{eq:dt_conformal_connection} still gives us a parabolic equation, we can
+make one more modification to get the hyperbolic gamma driver condition
+\begin{align}
+   (\partial_t - \beta^j\partial_j)\beta^i &= \frac{3}{4}B^i \\
+   (\partial_t - \beta^j\partial_j)B^i &= \partial_t\ ^{(3)}\bar{\Gamma}^i
+      -\frac{1}{2} B^i.
+\end{align}
+
+The $1+\log$ slicing for the lapse and the both gamma driver equations are the
+most popular gauge conditions to choose for the BSSN formalism. Small tweaks to
+each of these exist in the different codes that use the BSSN formalism. One such
+tweak is removing the advective term $\beta^j\partial_j$ from the left hand side
+of the equations. These two conditions combined are referred as the ``moving
+puncture'' conditions since they follow where the singularities of each black
+hole would be.
+
+\subsection{Generalized Harmonic\label{sec:gh}}
+The next (and final) formalism we will discuss is the generalized harmonic (GH)
+formulation \todocite. This differs quite a bit from the BSSN formalism, but we
+will still borrow some things as we need them. Namely, we will still keep the
+standard 3+1 decomposition of the metric since having the lapse and shift will
+be needed.
+
 \begin{enumerate}
    \item Broad intro to gravity
    \begin{enumerate}
@@ -667,3 +991,6 @@ merging.
       \item Brief on Cross code comparison
    \end{enumerate}
 \end{enumerate}
+
+\putbib[intro]
+\end{bibunit}
