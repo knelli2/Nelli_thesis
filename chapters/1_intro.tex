@@ -720,7 +720,7 @@ ones that we can integrate in time to solve for our spacetime metric. We now
 branch off into explaining the two most popular formalisms for writing down
 evolution equations.
 
-\subsection{BSSN}
+\subsection{BSSN formulation}
 The first formalism we will discuss is the Baumgarte-Shapiro-Shibata-Nakamura
 (BSSN) formalism \cite{Shibata:1995we,Baumgarte:1998te}. First, we finish off
 defining the Arnowitt-Deser-Misner (ADM) formalism \cite{Arnowitt:1962hi} as
@@ -932,55 +932,304 @@ of the equations. These two conditions combined are referred as the ``moving
 puncture'' conditions since they follow where the singularities of each black
 hole would be.
 
-\subsection{Generalized Harmonic\label{sec:gh}}
+\subsection{Generalized Harmonic formulation\label{sec:gh}}
 The next (and final) formalism we will discuss is the generalized harmonic (GH)
-formulation \todocite. This differs quite a bit from the BSSN formalism, but we
+formulation \cite{Lindblom:2005qh}. This differs quite a bit from the BSSN formalism, but we
 will still borrow some things as we need them. Namely, we will still keep the
-standard 3+1 decomposition of the metric since having the lapse and shift will
-be needed.
+standard 3+1 decomposition of the metric since having the lapse, shift, and
+spatial metric will be needed.
+\begin{eqnarray}
+  ds^2 &= g_{ab}dx^a dx^b =-\alpha^2 dt^2 + \gamma_{ij}
+         \left(dx^i+\beta^i dt\right) \left(dx^j +\beta^j dt\right) .
+\end{eqnarray}
+
+Right away, we will start with the gauge as this formalism is based around using
+harmonic coordinates. Given coordinates $x^a$ where each $x^a$ is treated as a
+scalar function, we have the relation that
+\begin{align}
+   \square x^a = g^{bc}\nabla_b\nabla_c x^a &= g^{bc}\nabla_b(\partial_c x^a) \nonumber\\
+   &= g^{bc}(\partial_b\partial_cx^a - \Gamma^d_{bc}\partial_dx^a) \nonumber\\
+   &= -g^{bc}\Gamma^a_{bc} \nonumber\\
+   &= -\Gamma^a
+\end{align}
+$\square$ is the d'Alembertian operator and we have used the fact that since
+$x^a$ is a scalar and are coordinates, $\nabla_cx^a=\partial_cx^a=\delta^a_c$.
+We then express the harmonic gauge condition as
+\begin{equation}
+   \square x^a = -\Gamma^a = 0 .
+\end{equation}
+
+The generalized harmonic gauge condition is then related to the harmonic gauge
+condition, but instead of setting $-\Gamma^a = 0$, we set it as
+\begin{equation}\label{eq:gh_gauge}
+   \square x^a = -\Gamma^a = H^a(x,g) ,
+\end{equation}
+where $H^a$ is some arbitrary function of the coordinates and spacetime metric
+(but not derivatives of the metric!) that we specify. These conditions on $H^a$
+are critical because they preserve the strong hyperbolicity of the Einstein
+equations, which allow for stable evolutions of spacetime. If these conditions
+were not met, any tiny instability or error in our evolutions would grow
+exponentially and spoil our solution. And since we are using computers to solve
+these problems, the finite truncation of floating point numbers will always
+introduce some tiny error so we can be guaranteed an unstable evolution.
+
+Now in the BSSN formalism, we showed that the lapse and the shift contain our
+coordinate freedom and to impose a gauge condition, we had to specify the lapse
+and shift either analytically or by evolving them alongside the spacetime
+quantities. Here we show that specifying $H^a$ is equivalent to specifying the
+lapse and shift with the following evolution equations\cite{Lindblom:2005qh}
+\begin{align}
+   \partial_t\alpha - \beta^j\partial_j\alpha &=
+      -\alpha(H_0 - \beta^iH_i + \alpha K) \\
+   \partial_t\beta^i - \beta^j\partial_j\beta^i &=
+      \alpha\gamma^{ij}\left[\alpha(H_j + \gamma^{kl}\Gamma_{jkl})-\partial_j\alpha\right]
+\end{align}
+where $K$ is the extrinsic curvature and
+$\gamma^{ij}\Gamma_{jkl}=\Gamma^i_{kl}$. Here we can see that even though it may
+not be easy to convert between the lapse and shift and $H^a$, specifying one or
+the other is equivalent.
+
+In the GH formulation, we won't be evolving quantities like $\gamma_{ij}$,
+$K_{ij}$, or $\Gamma^i$. Instead we will be evolving the full spacetime metric
+$g_{ab}$ itself. The specific form of the GH formulation that we will be
+presenting is the first order symmetric hyperbolic GH formulation. In the
+typical formulation, we would time integrate the second time derivative
+$\partial^2_t$ of the metric. In the first order formulation, we only evolve
+$\partial_t$. This is advantageous because there are a number of well-known
+standard integrators that work on first order hyperbolic equations. However,
+this requires us to some how reduce the order of the PDEs since Einstein's
+equations are second order.
+
+To show the procedure, we first start with an example of reducing the order of a
+scalar wave function
+\begin{equation}\label{eq:wave_eq}
+   \square\psi = \left(\frac{\partial^2}{\partial t^2} - \nabla^2\right)\psi=0.
+\end{equation}
+We choose this equation as an example because Einstein's equations themselves
+are basically really complicated wave equations due to the of the second order
+derivatives in both space and time that appear from the Riemann tensor. To
+reduce the order of the scalar wave system, we introduce two new auxiliary
+variables
+\begin{align}
+   \Pi &\equiv -\partial_t\psi, \label{eq:sw_pi_def}\\
+   \Phi_i &\equiv \partial_i\psi \label{eq:sw_phi_def}.
+\end{align}
+Using these new variables, we can take time derivatives of each to get a system
+of equations equivalent to Eq. \ref{eq:wave_eq}
+\begin{align}
+   \partial_t\psi &= -\Pi \\
+   \partial_t\Pi &= -\partial^i\Phi_i \\
+   \partial_t\Phi_i &= -\partial_i\Pi
+\end{align}
+We have transformed a second order equation for $\psi$ into a system of first
+order equations for $\psi,\Pi,\Phi_i$. It can be useful to combine these evolved
+variables in a single vector $u^A=\{\psi,\Pi,\Phi_i\}$. We can then rewrite the
+evolution equations as
+\begin{equation}
+   \partial_t u^A + M^j\partial_j u^A = S(u^A)
+\end{equation}
+where $M^j$ is a coefficient matrix and $S(u^A)$ is a source vector that does
+not contain any derivatives of $u^A$. In this form, if all the left-eigenvectors
+of $M^j$ are linearly independent, then the system is said to be strongly
+hyperbolic. We will return to this shortly.
+
+Notice that Eq. \ref{eq:sw_pi_def} for $\Pi$
+became an evolution equation, but Eq. \ref{eq:sw_phi_def} for $\Phi_i$ isn't an
+evolution equation because it doesn't have time derivatives. It is actually
+called a constraint equation because now we evolve $\psi$ and $\Phi_i$
+independently. We can define two constraint with $\Phi_i$
+\begin{align}
+   \mathcal{C}_i &= \partial_i\psi - \Phi_i = 0 \\
+   \mathcal{C}_{ij} &= \partial_i\Phi_j - \partial_j\Phi_i = 0
+\end{align}
+Therefore, we can actually use $\mathcal{C}_i$ and $\mathcal{C}_{ij}$ throughout
+the simulation to check if our evolution is consistent. Additionally, and more
+importantly, the version of the evolution equations above will leave errors
+around in our solution. To mitigate this, we can actually alter the third
+equation to depend on $\mathcal{C}_i$ which will damp away any errors that
+arise. We do this by adding a multiple of $\mathcal{C}_i$ to the $\Phi_i$
+equation. The modified equations are
+\begin{align}
+   \partial_t\psi &= -\Pi \\
+   \partial_t\Pi &= -\partial^i\Phi_i \\
+   \partial_t\Phi_i &= -\partial_i\Pi + \gamma_2(\partial_i\psi - \Phi_i)\label{eq:sw_phi_damped}
+\end{align}
+where $\gamma_2$ is some analytic function specified for all space and time.
+
+With these new equations we have that
+\begin{equation}
+   M^j = \left(
+      \begin{matrix}
+         0 & 0 & 0 \\
+         0 & 0 & 1 \\
+         -\gamma_2 & 1 & 0
+      \end{matrix}
+   \right),\quad
+   S(u^A) = \left(
+      \begin{matrix}
+         -\Pi \\
+         0 \\
+         -\gamma_2\Phi_i
+      \end{matrix}
+   \right).
+\end{equation}
+The left eigenvectors, or characteristic fields, of this system are
+\begin{align}
+   w^\psi &= \psi \\
+   w^0_i &= (\delta_i^k - n^kn_i)\Phi_k\\
+   w^\pm &= \Pi \pm n^k\Phi_k - \gamma_2\psi \label{eq:sw_char_fields}
+\end{align}
+where $n^k$ is a vector in whatever direction we are interested in analyzing.
+The eigenvalues, or characteristic speeds, associated with these eigenvectors are
+\begin{align}
+   \lambda_\psi &= 0 \label{eq:sw_char_speed_psi}\\
+   \lambda_0 &= 0 \label{eq:sw_char_speed_0}\\
+   \lambda_\pm &= \pm 1  \label{eq:sw_char_speed_pm}
+\end{align}
+And while we won't discuss their use here, it is also useful to express our
+evolved variables $u^A$ in terms of the characteristic fields are
+\begin{align}
+   \psi &= w^\psi \\
+   \Pi &= \frac{1}{2}(w^++w^-) + \gamma_2w^\psi\\
+   \Phi &= \frac{1}{2}(w^+-w^-) + w_i^0
+\end{align}
+
+Lastly, we take a time derivative of our constraint $\mathcal{C}_i$ to see how
+it evolves in time.
+\begin{align}
+   \partial_t\mathcal{C}_i &= \partial_t\partial_i\psi - \partial_t\Phi_i \\
+   &= -\partial_i\Pi - (-\partial_i\Pi + \gamma_2\mathcal{C}_i) \\
+   &= - \gamma_2\mathcal{C}_i
+\end{align}
+where we used $\partial_t\psi=\Pi$ and Eq. \ref{eq:sw_phi_damped}. The solution
+to this differential equation is $\propto e^{-\gamma_2 t}$, so our constraints
+will be exponentially damped. A similar equation exists for $\mathcal{C}_{ij}$
+\begin{equation}
+   \partial_t\mathcal{C}_{ij} = -\gamma_2\mathcal{C}_{ij} .
+\end{equation}
+
+With these characteristic fields, speeds, and constraints, one is also able to
+impose boundary conditions on the incoming characteristic fields rather than
+evolved variables themselves. However, here we skip that as it isn't as
+informative.
+
+Now we can return back to the GH formulation. For gravity, our field will be the
+metric itself $g_{ab}$ instead of $\psi$. Then we define the two auxiliary
+variables as
+\begin{align}
+   \Pi_{ab} &= -n^c\partial_c g_{ab} = -\frac{1}{\alpha}\left(\partial_t g_{ab}
+      - \beta^i\partial_i g_{ab}\right) \label{eq:gh_pi_no_damp}\\
+   \Phi_{iab} &= \partial_i g_{ab}
+\end{align}
+where $n^c=(\alpha^{-1},-\alpha^{-1}\beta^i)$ is a timelike unit normal vector,
+normalized with the spacetime metric in Eq. \ref{eq:nr_spacetime_line_element}.
+The equation for $\Phi_{iab}$ and our gauge condition in Eq.\ref{eq:gh_gauge}
+give us two constraints
+\begin{align}
+   \mathcal{C}_a &= H_a + \Gamma_a = 0 \\
+   \mathcal{C}_{iab} &= \partial_i g_{ab} - \Phi_{iab} = 0 .
+\end{align}
+
+Rearranging Eq. \ref{eq:gh_pi_no_damp}, we can get
+\begin{equation}
+   \partial_t g_{ab} - \beta^i\partial_j g_{ab} = -\alpha\Pi_{ab}.
+\end{equation}
+And if we take the partial derivative of this and rearrange, we can get an
+equation for $\partial_t\Phi_{iab}$. To account for constraint damping, we add
+$\gamma_1\beta^i\mathcal{C}_{iab}$ to the equation for $\partial_t g_{ab}$ and 
+$\gamma_2\alpha\mathcal{C}_{iab}$ to the equation for $\partial_t \Phi_{iab}$.
+The equation for $\partial_t \Pi$ is unfortunately somewhat complicated to
+derive so we omit its derivation, but it will contain terms with $\mathcal{C}_a$ and
+$\gamma_1\gamma_2\beta^i\mathcal{C}_{iab}$ for constraint damping. Instead, we
+simply present the first-order symmetric hyperbolic GH system as
+\begin{align}
+  \partial_t g_{ab}
+  &=\left(1+\gamma_1\right)\beta^k\partial_k g_{ab}
+    -\alpha \Pi_{ab}-\gamma_1\beta^i\Phi_{iab}, \\
+  \partial_t\Phi_{iab}
+  &=\beta^k\partial_k\Phi_{iab} - \alpha \partial_i\Pi_{ab}
+    + \alpha \gamma_2\partial_ig_{ab}
+    +\frac{1}{2}\alpha n^c n^d\Phi_{icd}\Pi_{ab} \nonumber \\
+  &\quad+ \alpha \gamma^{jk}n^c\Phi_{ijc}\Phi_{kab}
+    -\alpha \gamma_2\Phi_{iab},\\
+  \partial_t\Pi_{ab}
+  &=\beta^k\partial_k\Pi_{ab} - \alpha \gamma^{ki}\partial_k\Phi_{iab}
+    + \gamma_1\gamma_2\beta^k\partial_kg_{ab} \nonumber \\
+  &\quad+2\alpha g^{cd}\left(\gamma^{ij}\Phi_{ica}\Phi_{jdb}
+    - \Pi_{ca}\Pi_{db} - g^{ef}\Gamma_{ace}\Gamma_{bdf}\right) \nonumber \\
+  &\quad-2\alpha \nabla_{(a}H_{b)}
+    - \frac{1}{2}\alpha n^c n^d\Pi_{cd}\Pi_{ab}
+    - \alpha n^c \Pi_{ci}\gamma^{ij}\Phi_{jab} \nonumber \\
+  &\quad+\alpha \gamma_0\left(2\delta^c{}_{(a} n_{b)}
+    - g_{ab}n^c\right)\mathcal{C}_c -\gamma_1\gamma_2 \beta^i\Phi_{iab}.
+\end{align}
+
+Just like the scalar wave system, we can compute the characteristic fields as
+\begin{align}
+  w^{g}_{ab} &= g_{ab}, \\
+  w^{0}_{iab} &= (\delta^k_i-s^k s_i)\Phi_{kab}, \\
+  w^{\pm}_{ab} &= \Pi_{ab}\pm s^i\Phi_{iab} -\gamma_2 g_{ab},
+\end{align}
+along with the characteristic speeds
+\begin{align}
+  \lambda_{w^g} =& -(1+\gamma_1)\beta^i s_i, \\
+  \lambda_{w^0} =& -\beta^i s_i, \\
+  \lambda_{w^\pm} =& \pm \alpha - \beta^i s_i,
+\end{align}
+where $s^i$ is the unit normal vector to a 2D surface, the analog of $n^k$ for
+the scalar wave system. Notice that if $\beta^is_i=0$, these
+characteristic speeds are strikingly similar to the ones in Eqs.
+\ref{eq:sw_char_speed_psi}-\ref{eq:sw_char_speed_pm} for the scalar
+wave system.
+
+The evolved variables in terms of the characteristic speeds are then
+\begin{align}
+  g_{ab} &= w^g_{ab}, \\
+  \Pi_{ab} &= \frac{1}{2}\left(w^+_{ab} + w^-_{ab}\right)+\gamma_2 w^g_{ab}, \\
+  \Phi_{iab} &= \frac{1}{2}\left(w^+_{ab} - w^-_{ab}\right)s_i + w^0_{iab}.
+\end{align}
+Again, these are very similar to the scalar wave system, just with the extra
+spacetime indices.
+
+In addition to $\mathcal{C}_a$ and $\mathcal{C}_{iab}$, we are able to define
+more constraints $\mathcal{C}_{ia}$, $\mathcal{C}_{ijab}$, and $\mathcal{F}_a$.
+We don't define them here because only $\mathcal{C}_a$ and $\mathcal{C}_{iab}$
+are added to the evolution equations to damp away errors. However, they are
+still useful for monitoring the simulation for errors. We can also combine all
+of these constraints into a single quantity called the ``constraint energy''
+which gives us an overall notion of how much energy is contained in constraints,
+\begin{align}
+  \mathcal{E}
+  & = \delta^{ab}\left[ \mathcal{C}_a \mathcal{C}_b
+    + \left(\mathcal{F}_a \mathcal{F}_b
+    + \mathcal{C}_{ia} \mathcal{C}_{jb} \gamma^{ij}\right)\right]
+    \nonumber \\
+  &+ \delta^{ab}\delta^{cd}\left(\mathcal{C}_{iac} \mathcal{C}_{jbd}
+    \gamma^{ij}
+    + \mathcal{C}_{ikac} \mathcal{C}_{jlbd}\gamma^{ij} \gamma^{kl}\right).
+\end{align}
+Ideally, we'd like zero constraint energy, but numerical error means we must
+settle for this being as small as possible. Again, we don't go over boundary
+conditions here, but refer the reader to \cite{Lindblom:2005qh} and
+\cite{Rinne:2007ui} for more details.
+
+At this point we will stop our overview of NR. There are still
+a number of different topics which we did not cover such as (a) initial data on the
+first spatial hypersurface, (b) boundary conditions for either BSSN or GH, (c) GW
+extraction via finite radius, extrapolation, or CCE (see Chapter
+\ref{ch:compare}), (d) numerical methods for how to discretize the mesh, (e)
+methods for taking ``good'' numerical derivatives, (f) finding the horizon of a
+black hole (see Sec. \todocite), or (g) any of the previous topics applied to
+simulating matter around black holes or neutron stars. This field is a rich mix
+of theory and computational algorithms and deserves to be explored further.
+
+\section{Goals of NR}
+Since we now have an idea of how to carry out numerical simulations of black
+holes, we try to motivate the \textit{why} of it all and what the purpose of NR
+is.
+
 
 \begin{enumerate}
-   \item Broad intro to gravity
-   \begin{enumerate}
-      \item Newtonian Gravity
-      \begin{enumerate}
-         \item poisson equation
-         \item equations of motion (aka f=-gradPhi=ma)
-         \item simultaneity
-      \end{enumerate}
-      \item SR
-      \begin{enumerate}
-         \item flat space interval
-         \item metric
-         \item lortentz transformations
-      \end{enumerate}
-      \item GR
-      \begin{enumerate}
-         \item how vectors move in a curved space
-         \item covariant derivatives,parallel transport
-         \item metric
-         \item connection
-         \item geodesics
-         \item compare with newton
-         \item Riemann
-         \item Ricii
-         \item Einstein tensor
-         \item Conservation of energy
-         \item Stress energy tensor
-         \item relate poisson equation to Einstein field equations
-         \item vacuum Einstein's equations
-      \end{enumerate}
-      \item NR (GR on computers, different formulations)
-      \begin{enumerate}
-         \item Need to foliate spacetime
-         \item Coordinates
-         \item spatial metric, lapse, and shift
-         \item 3+1 decomposition
-         \item Gauge freedoms
-         \item BSSN
-         \item GH
-      \end{enumerate}
-   \end{enumerate}
    \item Ultimate goals of Numerical Relativity (models/training)
    \item Why HPC to achieve goals
    \item GH and why horizon finding is important

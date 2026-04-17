@@ -188,11 +188,11 @@ of binary black holes with \texttt{SpECTRE}. We briefly conclude in
 
 We adopt the standard 3+1 form of the spacetime metric,~(see,
 e.g.,~\cite{Baumgarte:2010ndz, 2013rehy.book.....R}),
-\begin{eqnarray}
+\begin{align}
   \label{eq:spacetime metric}
   ds^2 &= g_{ab}dx^a dx^b =-\alpha^2 dt^2 + \gamma_{ij}
          \left(dx^i+\beta^i dt\right) \left(dx^j +\beta^j dt\right),
-\end{eqnarray}
+\end{align}
 where $\alpha$ is the lapse, $\beta^i$ the shift vector, and $\gamma_{ij}$ is
 the spatial metric.  We use the Einstein summation convention, summing over
 repeated indices.  Latin indices from the first part of the alphabet
@@ -202,7 +202,7 @@ units where $c = G = 1$.
 
 We evolve the first-order generalized harmonic (FOGH) system, given
 by~\cite{Lindblom:2005qh},
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh metric evolution}
   \partial_t g_{ab}
   &=\left(1+\gamma_1\right)\beta^k\partial_k g_{ab}
@@ -213,20 +213,20 @@ by~\cite{Lindblom:2005qh},
   &=\beta^k\partial_k\Phi_{iab} - \alpha \partial_i\Pi_{ab}
     + \alpha \gamma_2\partial_ig_{ab}
     +\frac{1}{2}\alpha n^c n^d\Phi_{icd}\Pi_{ab} \nonumber \\
-  &+ \alpha \gamma^{jk}n^c\Phi_{ijc}\Phi_{kab}
+  &\quad+ \alpha \gamma^{jk}n^c\Phi_{ijc}\Phi_{kab}
     -\alpha \gamma_2\Phi_{iab},\\
   \label{eq:fosh gh metric conjugate evolution}
   \partial_t\Pi_{ab}
   &=\beta^k\partial_k\Pi_{ab} - \alpha \gamma^{ki}\partial_k\Phi_{iab}
     + \gamma_1\gamma_2\beta^k\partial_kg_{ab} \nonumber \\
-  &+2\alpha g^{cd}\left(\gamma^{ij}\Phi_{ica}\Phi_{jdb}
+  &\quad+2\alpha g^{cd}\left(\gamma^{ij}\Phi_{ica}\Phi_{jdb}
     - \Pi_{ca}\Pi_{db} - g^{ef}\Gamma_{ace}\Gamma_{bdf}\right) \nonumber \\
-  &-2\alpha \nabla_{(a}H_{b)}
+  &\quad-2\alpha \nabla_{(a}H_{b)}
     - \frac{1}{2}\alpha n^c n^d\Pi_{cd}\Pi_{ab}
     - \alpha n^c \Pi_{ci}\gamma^{ij}\Phi_{jab} \nonumber \\
-  &+\alpha \gamma_0\left(2\delta^c{}_{(a} n_{b)}
+  &\quad+\alpha \gamma_0\left(2\delta^c{}_{(a} n_{b)}
     - g_{ab}n^c\right)\mathcal{C}_c -\gamma_1\gamma_2 \beta^i\Phi_{iab},
-\end{eqnarray}
+\end{align}
 where $g_{ab}$ is the spacetime metric, $\Phi_{iab}=\partial_i g_{ab}$,
 $\Pi_{ab} = n^c\partial_cg_{ab}$, $n^a$ is the unit normal vector to the spatial
 slice, $\gamma_0$ damps the 1-index or gauge constraint
@@ -244,37 +244,37 @@ system~\cite{Lindblom:2007xw, Szilagyi:2009qz}.
 Defining $s_i$ to be the unit normal covector to a 2d surface with
 $s_a=(0,s_i)$, and $s^a=g^{ab}s_b$, the characteristic fields for the FOGH
 system are~\cite{Lindblom:2005qh}
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh w g}
   w^{g}_{ab} &= g_{ab}, \\
   \label{eq:fosh gh w 0}
   w^{0}_{iab} &= (\delta^k_i-s^k s_i)\Phi_{kab}, \\
   \label{eq:fosh gh w pm}
   w^{\pm}_{ab} &= \Pi_{ab}\pm s^i\Phi_{iab} -\gamma_2 g_{ab},
-\end{eqnarray}
+\end{align}
 with associated characteristic speeds
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh char speed g}
   \lambda_{w^g} =& -(1+\gamma_1)\beta^i s_i -(1+\gamma_1)v^i_g s_i, \\
   \label{eq:fosh gh char speed 0}
   \lambda_{w^0} =& -\beta^i s_i -v^i_g s_i, \\
   \label{eq:fosh gh char speed pm}
   \lambda_{w^\pm} =& \pm \alpha - \beta^i s_i - v^i_g s_i,
-\end{eqnarray}
+\end{align}
 where we denote the velocity of the grid/mesh as $v^i_g$ (see~\S\ref{sec:dg
   method} for details on our moving mesh method). The evolved variables as a
 function of the characteristic fields are given by
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh metric from char}
   g_{ab} &= w^g_{ab}, \\
   \label{eq:fosh gh pi from char}
   \Pi_{ab} &= \frac{1}{2}\left(w^+_{ab} + w^-_{ab}\right)+\gamma_2 w^g_{ab}, \\
   \label{eq:fosh gh phi from char}
   \Phi_{iab} &= \frac{1}{2}\left(w^+_{ab} - w^-_{ab}\right)s_i + w^0_{iab}.
-\end{eqnarray}
+\end{align}
 
 The constraints for the FOGH system are~\cite{Lindblom:2005qh}
-\begin{eqnarray}
+\begin{align}
   \label{eq:gauge constraint}
   \mathcal{C}_a
   &=H_a+\Gamma_a, \\
@@ -298,9 +298,9 @@ The constraints for the FOGH system are~\cite{Lindblom:2005qh}
   \label{eq:4 index constraint}
   \mathcal{C}_{ijab}
   &=\partial_i\Phi_{jab}-\partial_j\Phi_{iab},
-\end{eqnarray}
+\end{align}
 and
-\begin{eqnarray}
+\begin{align}
   \label{eq:F constraint}
   \mathcal{F}_{a}
   &=
@@ -342,13 +342,13 @@ and
    + \frac{1}{2} n_a \Pi_{cd}g^{cd} H_b n^b
    - n_a \gamma^{ij} \Phi_{ijc} H_d g^{cd}
    +\frac{1}{2}  n_a \gamma^{ij} H_i \Phi_{jcd}g^{cd}.
-\end{eqnarray}
+\end{align}
 While only the gauge constraint~(\ref{eq:gauge constraint}) and 3-index
 constraint~(\ref{eq:3 index constraint}) are damped, all constraints can be
 monitored to check the accuracy of the numerical simulation. All the constraints
 can be combined into a scalar, the constraint energy, given
 by~\cite{Lindblom:2005qh}
-\begin{eqnarray}
+\begin{align}
   \label{eq:constraint energy}
   \mathcal{E}
   & = \delta^{ab}\left[ \mathcal{C}_a \mathcal{C}_b
@@ -358,7 +358,7 @@ by~\cite{Lindblom:2005qh}
   &+ \delta^{ab}\delta^{cd}\left(\mathcal{C}_{iac} \mathcal{C}_{jbd}
     \gamma^{ij}
     + \mathcal{C}_{ikac} \mathcal{C}_{jlbd}\gamma^{ij} \gamma^{kl}\right).
-\end{eqnarray}
+\end{align}
 In practice we have also found that it is typically only necessary to monitor
 violations of the constraints $\mathcal{C}_a$ and $\mathcal{C}_{iab}$, because
 they typically grow first and the other violations grow as a consequence.
@@ -372,11 +372,11 @@ and references therein for a detailed discussion of the method and its
 implementation in \texttt{SpECTRE}; here we summarize the necessary
 results. The FOGH equations are a first-order strongly hyperbolic system in
 non-conservative form, which takes the general form
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh system}
   \partial_t u_\alpha + B_{\alpha\beta}^i(u_\alpha) \partial_i u_{\beta} =
   S_\alpha(u_\alpha),
-\end{eqnarray}
+\end{align}
 where $u_\alpha=\{g_{ab},\Phi_{iab},\Pi_{ab}\}$ is the state vector of evolved
 variables, $B_{\alpha\beta}^i(u)$ is a matrix that depends only on $u_\alpha$,
 and $S_\alpha(u)$ are source terms that also only depend on $u_\alpha$. We
@@ -386,15 +386,15 @@ coordinates as $\{t=\hat{t}, x^i(\hat{t}, \xi^{\hat{\imath}})\}$. We are using a
 moving mesh as in~\cite{Scheel:2006gg, Teukolsky:2015ega}; therefore, the
 mapping from logical to inertial coordinates is time dependent. We denote the
 determinant of the spatial Jacobian of this map as
-\begin{eqnarray}
+\begin{align}
   \label{eq:2}
   J=\det\left(\frac{\partial x^i}{\partial \xi^{\hat{\imath}}}\right),
-\end{eqnarray}
+\end{align}
 and the grid or mesh velocity by~\cite{Scheel:2006gg, Teukolsky:2015ega}
-\begin{eqnarray}
+\begin{align}
   \label{eq:grid velocity}
   v_g^i=\partial_{\hat{t}} x^i.
-\end{eqnarray}
+\end{align}
 
 \begin{figure}
   \centering
@@ -413,16 +413,16 @@ in the $\xi$ direction, $N_{\breve{\jmath}}$ in the $\eta$ direction, and
 $N_{\breve{k}}$ in the $\zeta$ direction below.
 
 Since we use a moving mesh, we evolve the system
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh system moving mesh}
   \partial_{\hat{t}} u_\alpha + \left[B_{\alpha\beta}^i(u_\alpha) -
   v^i_g\delta_{\alpha\beta}\right] \partial_i u_\beta = S(u_\alpha).
-\end{eqnarray}
+\end{align}
 We denote grid point and modal indices with a breve,
 i.e.~$u_{\breve{\imath}\breve{\jmath}\breve{k}}$ is the value of $u$ at the
 grid point $(\breve{\imath},\breve{\jmath},\breve{k})$. The semi-discrete
 equations are given by~\cite{Scheel:2006gg, Teukolsky:2015ega}
-\begin{eqnarray}
+\begin{align}
   \label{eq:dg strong form semi-discrete}
   (\partial_{\hat{t}} u_\alpha)_{\breve{\imath}\breve{\jmath}\breve{k}}
   &=(S_\alpha)_{\breve{\imath}\breve{\jmath}\breve{k}}
@@ -477,7 +477,7 @@ equations are given by~\cite{Scheel:2006gg, Teukolsky:2015ega}
     \frac{\partial\xi^{\hat{3}}}{\partial x^i} \gamma^{ij}
     \frac{\partial\xi^{\hat{3}}}{\partial x^j}} D_\alpha
     \right]_{0\breve{\jmath}\breve{k}}\right\},
-\end{eqnarray}
+\end{align}
 where $w_{\breve{\imath}}$ are the Legendre-Gauss-Lobatto integration weights.
 We use a method of lines approach to integrate these in time, with the details
 discussed in \S\ref{sec:time integration} below.
@@ -485,7 +485,7 @@ discussed in \S\ref{sec:time integration} below.
 For the boundary terms $D_\alpha$, we use an upwind multi-penalty
 method~\cite{Hesthaven1997, Hesthaven1999, Hesthaven2000, Hesthaven2007} given
 by
-\begin{eqnarray}
+\begin{align}
   \label{eq:upwind gh metric}
   D_{g_{ab}}
   &= \tilde{\lambda}_{w^{g}}^{\mathrm{ext}} w^{\mathrm{ext},g}_{ab}
@@ -519,17 +519,17 @@ by
     w^{\mathrm{int},-}_{ab}\right)s_i^{\mathrm{int}}
     - \tilde{\lambda}_{w^0}^{\mathrm{int}}
     w^{\mathrm{int},0}_{iab},
-\end{eqnarray}
+\end{align}
 where the spatial normal vector to the element interface $s^{\mathrm{int}}_i$ is
 pointing out of the DG element and $\tilde{\lambda}=0$ if $\lambda>0$, otherwise
 $\tilde{\lambda}=\lambda$, i.e.~$\tilde{\lambda}=\lambda\Theta(-\lambda)$.
 Note that we assume $s^{\mathrm{ext}}_i$ and $s^{\mathrm{int}}_i$ point in the
 same direction. Also note that these boundary flux terms differ from the
 multi-penalty approach used in \texttt{SpEC} by a factor of $2$. That is,
-\begin{eqnarray}
+\begin{align}
   \label{eq:boundary term compared to spec}
   D^{\mathtt{SpECTRE}} = 2 D^{\mathtt{SpEC}},
-\end{eqnarray}
+\end{align}
 ultimately because the lifting terms are different. In \texttt{SpEC} and,
 similarly in \texttt{bamps}\cite{Hilditch:2015aba}, the penalty term is derived
 from requiring that the total energy be non-increasing, while in
@@ -545,7 +545,7 @@ the evolved variables. We use the characteristic fields and speeds defined
 in~\S\ref{sec:equations}. We define $d_{\hat{t}} w_{\hat{\alpha}}$ as the time
 derivatives substituted into the transformation equations to the characteristic
 fields. That is,
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh dtw g}
   d_{\hat{t}}w^{g}_{ab} &= \partial_{\hat{t}} g_{ab}, \\
   \label{eq:fosh gh dtw 0}
@@ -555,7 +555,7 @@ fields. That is,
   d_{\hat{t}} w^{\pm}_{ab} &= \partial_{\hat{t}} \Pi_{ab}\pm
                              s^i\partial_{\hat{t}} \Phi_{iab}
                              -\gamma_2\partial_{\hat{t}} g_{ab}.
-\end{eqnarray}
+\end{align}
 We also define $D_{\hat{t}} w_{\hat{\alpha}}$ as the characteristic field
 transformation of the volume right-hand-side, i.e. $\partial_{\hat{t}} u_\alpha$
 \textit{without} any boundary terms. Finally, for brevity we define the
@@ -569,7 +569,7 @@ condition for $d_{\hat{t}} w^{-}_{ab}$ is composed of three parts: the
 constraint preserving part, the physical part, and the gauge part. We denote
 these as $B_{ab}^{C}$, $B_{ab}^P$ and $B_{ab}^G$. With this, the boundary
 conditions imposed on the fields are
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh bc d_t char}
   d_{\hat{t}}w^{g}_{ab} &= D_{\hat{t}} w^g_{ab}
                           +\lambda_{w^g}s^i\mathcal{C}_{iab}, \\
@@ -577,10 +577,10 @@ conditions imposed on the fields are
                            +\lambda_{w^0}s^iP^j{}_k\mathcal{C}_{ijab}, \\
   d_{\hat{t}}w^{-}_{ab} &= D_{\hat{t}} w^-_{ab}
                           +\lambda_{w^-}\left[B_{ab}^C+B_{ab}^P+B_{ab}^G\right].
-\end{eqnarray}
+\end{align}
 Transforming to the evolved variables we find that the following terms need to
 be added in order to impose the boundary condition,
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh constraing preserving bc g}
   \partial_{\hat{t}} g_{ab}&\to \partial_{\hat{t}} g_{ab} +
                              \lambda_{w^g}s^i\mathcal{C}_{iab}, \\
@@ -594,28 +594,28 @@ be added in order to impose the boundary condition,
                          -\frac{s_i}{2}\lambda_{w^-}
                          \left[B_{ab}^C+B_{ab}^P+B_{ab}^G\right]
                          +\lambda_{w^0}s^iP^j{}_k\mathcal{C}_{ijab}.
-\end{eqnarray}
+\end{align}
 
 We now need to specify the $B_{ab}$ boundary conditions. The
 constraint-preserving part is
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh bc constraint preserving}
   B_{ab}^C=\sqrt{2}\left(\frac{1}{2}P_{ab}l^c + \frac{1}{2}l_al_bk^c -
   l_{(a}P_{b)}{}^c\right)\left(\mathcal{F}_c-s^k\mathcal{C}_{kc}\right).
-\end{eqnarray}
+\end{align}
 The physical boundary conditions are determined by the propagating parts of the
 Weyl curvature tensor. That is,
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh bc physical}
   B_{ab}^P=\left(P_a{}^cP_b{}^d-\frac{1}{2}P_{ab}P^{cd}\right)\left[C^-_{cd}
   -\gamma_2s^i\mathcal{C}_{icd}\right],
-\end{eqnarray}
+\end{align}
 where $C^-_{ab}$ is the inward propagating part of the Weyl tensor, given by
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh weyl propagating}
   C^{\pm}_{ab}=\left(P_a{}^cP_b{}^d-\frac{1}{2}P_{ab}P^{cd}\right)\left(n^e\mp
   s^e\right)\left(n^f\mp s^f\right)C_{cedf}.
-\end{eqnarray}
+\end{align}
 For the simulations presented here, we set $C^-_{ab}=0$, though
 Cauchy-Characteristic matching~\cite{Ma:2023qjn} can be used to prescribe a more
 physically motivated boundary condition. Recently
@@ -624,7 +624,7 @@ Cauchy-Characteristic matching for providing high-order non-reflecting boundary
 conditions. Finally, the gauge boundary condition is set using a Sommerfeld
 condition on the components not set by the constraint-preserving and physical
 boundary conditions. The projector for the gauge boundary condition is given by
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh bc gauge projection}
   \delta_a^c\delta_b^d-P^{C}_{ab}{}^{cd}-P^P_{ab}{}^{cd}
   &=\delta_a^c\delta_b^d-\frac{1}{2}P_{ab}P^{cd}+2l_{(a}P_{b)}{}^{(c}k^{d)}
@@ -632,15 +632,15 @@ boundary conditions. The projector for the gauge boundary condition is given by
   &-l_al_bk^ck^d-P_a{}^cP_b{}^d+\frac{1}{2}P_{ab}P^{cd} \nonumber \\
   &=\delta_a^c\delta_b^d+2l_{(a}P_{b)}{}^{(c}k^{d)}
     -l_al_bk^ck^d-P_a{}^cP_b{}^d.
-\end{eqnarray}
+\end{align}
 The Sommerfeld condition is
-\begin{eqnarray}
+\begin{align}
   \label{eq:fosh gh bc gauge}
   B_{ab}^G=\frac{1}{\lambda_{w^-}}
   \left(2l_{(a}P_{b)}{}^{(c}k^{d)} - 2k_{(a}l_{b)}k^{(c}l^{d)}
   -k_ak_bl^cl^d\right)\left(\gamma_2 - \frac{1}{r}\right)\partial_t
   g_{cd}.
-\end{eqnarray}
+\end{align}
 
 When evolving spacetimes with black holes, we excise the interior of the black
 hole as is done in \texttt{SpEC}~\cite{Lindblom:2005qh}. At excision boundaries,
@@ -657,16 +657,16 @@ computational domain.
 We use an exponential filter applied to the spectral coefficient $c_i$ in order
 to eliminate aliasing-driven instabilities. Specifically, for a 1d spectral
 expansion
-\begin{eqnarray}
+\begin{align}
   \label{eq:u spectral expansion}
   u(x)=\sum_{\breve{\imath}=0}^{N}c_{\breve{\imath}} P_{\breve{\imath}}(x),
-\end{eqnarray}
+\end{align}
 where $P_{\breve{\imath}}(x)$ are the Legendre polynomials, we use the filter
-\begin{eqnarray}
+\begin{align}
   \label{eq:exponential filter}
   c_{\breve{\imath}} \to c_{\breve{\imath}}
   \exp\left[-a\left(\frac{i}{N}\right)^{2b}\right].
-\end{eqnarray}
+\end{align}
 We choose the parameters $a=64$ and $b=210$ so that only the highest
 spectral mode is filtered. We apply the filter to all FOGH variables $g_{ab}$,
 $\Phi_{iab}$ and $\Pi_{ab}$. Note that the filter drops the order of convergence
@@ -693,12 +693,12 @@ element for each step on the least demanding element.
 \subsection{Gauge condition}\label{sec:dh_gauge}
 We evolve binary black holes (\S\ref{sec:bbh results}) using the Damped Harmonic
 gauge condition~\cite{Szilagyi:2009qz, Deppe2018:uye}:
-\begin{eqnarray}\label{eq:dh_gauge_source}
+\begin{align}\label{eq:dh_gauge_source}
   H_a &=& \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
           \log\left(1/\alpha\right)\right] n_a - \mu_S g_{ai} \beta^i / \alpha,
-\end{eqnarray}
+\end{align}
 using
-\begin{eqnarray}
+\begin{align}
   \label{eq:dh_mu1}
   \mu_{L1} &=& A_{L1} e^{-(r/\sigma_r)^2}
                \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L1}},\\
@@ -708,7 +708,7 @@ using
   \label{eq:dh_mu3}
   \mu_{S} &=& A_{S} e^{-(r/\sigma_r)^2}
               \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{S}},
-\end{eqnarray} where $r$ is the coordinate distance from the origin. This
+\end{align} where $r$ is the coordinate distance from the origin. This
 condition is designed to drive $\sqrt{\gamma}$ and $\alpha$ to one, while damping
 out oscillations in the shift. This is because we observe an explosive growth in
 $\sqrt{\gamma}$ and a rapid collapse in $\alpha$ as the black holes merge. In
@@ -772,10 +772,10 @@ analytic initial data corresponding to a black hole at rest centered at the
 origin with zero spin. We choose the mass of the black hole to be $M=1$ and work
 in units of $M$. In each evolution we use the following values for the FOGH
 constraint damping parameters,
-\begin{eqnarray}
+\begin{align}
   \gamma_0 &= \gamma_2 = A_0 e^{-r^2/w_0^2} + A_1 e^{-r^2/w_1^2},\\
   \gamma_1 &= - 1,
-\end{eqnarray}
+\end{align}
 where $r$ is the coordinate distance from the origin, $A_0=7.0/M$, $A_1=0.1/M$,
 $w_0 = 2.5 M$, and $w_1 = 100.0 M$. The computational domain of each evolution
 covers a spherical shell volume (figure~\ref{fig:bhdomain}) with inner radius
@@ -1271,7 +1271,7 @@ coordinates, which means the width $w$ of the Gaussian must also increase by the
 same amount. Increasing the width is achieved by dividing the width by the
 expansion factor $E(t)$, which starts at $1$ and decreases as the black holes
 inspiral. The specific form of the damping parameters we use is
-\begin{eqnarray}
+\begin{align}
   \label{eq:gamma_0_2_gaussian}
   \gamma_0(t, x^{\bar{\imath}})
   &=& \gamma_2(t, x^{\bar{\imath}}) = C
@@ -1281,7 +1281,7 @@ inspiral. The specific form of the damping parameters we use is
   \label{eq:gamma_1_gaussian}
   \gamma_1(t, x^{\bar{\imath}})
   &=& C + A_{0} \exp\left[-\left(\frac{\bar{r}_0}{\bar{w}_{0}}\right)^2\right],
-\end{eqnarray}
+\end{align}
 where $C$ is a constant, $A_I$ are the amplitudes of the Gaussians, $\bar{r}_I$
 are the grid-frame radii from the center of each Gaussian, and $\bar{w}_I$ are
 the widths of the Gaussians in the grid
