@@ -1226,7 +1226,44 @@ of theory and computational algorithms and deserves to be explored further.
 \section{Goals of NR}
 Since we now have an idea of how to carry out numerical simulations of black
 holes, we try to motivate the \textit{why} of it all and what the purpose of NR
-is.
+is. Einstein predicted GWs back in the early 20th century
+\cite{Einstein:1916cc,Einstein:1918btx}. However, the predictions on the
+amplitude of the GWs were so small, $\Delta L\sim10^{-21}$, that they were
+thought to be impossible to measure. Technology eventually advanced sufficiently
+far that we are now able to measure these GWs here on Earth using lasers in 4km
+long vacuum tubes. The first ever signal of two black holes merging was detected
+by the LIGO \cite{LIGOScientific:2014pky}, VIRGO \cite{VIRGO:2014yos}, and KAGRA
+\cite{KAGRA:2020tym} collaborations in 2015
+\cite{LIGOScientific:2016aoc,KAGRA:2021vkt}.
+
+But when LIGO detected this merger, how did it know it was a merger of two black
+holes? How did it know that it was a merger at all? Well there had to be some
+prediction about what the GWs would look like so data analysts would be able to
+search the observed data for the predicted signal. These predictions must be
+based on some sort of theory.
+
+Because data analysts don't know what parameters black holes will have when they
+see a potential signal, our theory must be able to give a signal with any BH
+parameters very quickly. Actually solving Einstein's equations numerically can
+be very expensive, so a perturbative theory like Post-Newtonian\todocite or
+Post-Minkowskian\todocite is usually better for quick evaluation.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{images/intro/bbh_imr_cropped.png}
+   \caption{The GW150914 signal showing the inspiral, merger, and ringdown of
+      the BBH. Figure taken from \cite{LIGOScientific:2016aoc}.}
+   \label{fig:gw150914_imr}
+\end{figure}
+
+However, these perturbative theories break down when the black holes are close to
+merger because the perturbations of the background spacetime become too large.
+The perturbative methods are useful during the inspiral.
+This is precisely the role that numerical relativity plays in providing a
+template bank of waveforms for LIGO data analysis. NR simulations provide
+accurate waveforms during the plunge, merger, and ringdown phase of merger.
+Figure \ref{fig:gw150914_imr} shows the phases of inspiral, merger, and
+ringdown. Plunge happens just before merger.
 
 
 \begin{enumerate}
