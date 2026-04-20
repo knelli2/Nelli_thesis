@@ -1145,13 +1145,13 @@ simply present the first-order symmetric hyperbolic GH system as
 \begin{align}
   \partial_t g_{ab}
   &=\left(1+\gamma_1\right)\beta^k\partial_k g_{ab}
-    -\alpha \Pi_{ab}-\gamma_1\beta^i\Phi_{iab}, \\
+    -\alpha \Pi_{ab}-\gamma_1\beta^i\Phi_{iab}, \label{eq:intro_gh_g}\\
   \partial_t\Phi_{iab}
   &=\beta^k\partial_k\Phi_{iab} - \alpha \partial_i\Pi_{ab}
     + \alpha \gamma_2\partial_ig_{ab}
     +\frac{1}{2}\alpha n^c n^d\Phi_{icd}\Pi_{ab} \nonumber \\
   &\quad+ \alpha \gamma^{jk}n^c\Phi_{ijc}\Phi_{kab}
-    -\alpha \gamma_2\Phi_{iab},\\
+    -\alpha \gamma_2\Phi_{iab}, \label{eq:intro_gh_phi}\\
   \partial_t\Pi_{ab}
   &=\beta^k\partial_k\Pi_{ab} - \alpha \gamma^{ki}\partial_k\Phi_{iab}
     + \gamma_1\gamma_2\beta^k\partial_kg_{ab} \nonumber \\
@@ -1161,7 +1161,7 @@ simply present the first-order symmetric hyperbolic GH system as
     - \frac{1}{2}\alpha n^c n^d\Pi_{cd}\Pi_{ab}
     - \alpha n^c \Pi_{ci}\gamma^{ij}\Phi_{jab} \nonumber \\
   &\quad+\alpha \gamma_0\left(2\delta^c{}_{(a} n_{b)}
-    - g_{ab}n^c\right)\mathcal{C}_c -\gamma_1\gamma_2 \beta^i\Phi_{iab}.
+    - g_{ab}n^c\right)\mathcal{C}_c -\gamma_1\gamma_2 \beta^i\Phi_{iab}. \label{eq:intro_gh_pi}
 \end{align}
 
 Just like the scalar wave system, we can compute the characteristic fields as
@@ -1190,6 +1190,40 @@ The evolved variables in terms of the characteristic speeds are then
 \end{align}
 Again, these are very similar to the scalar wave system, just with the extra
 spacetime indices.
+
+For GH evolutions, there are two commonly used gauges. The first, harmonic, we
+have already mentioned
+\begin{equation}
+   H_a = -\Gamma_a = 0 .
+\end{equation}
+A different condition, called damped harmonic, which is used by the SXS
+Collaboration is
+\begin{equation}
+  H_a = \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
+          \log\left(1/\alpha\right)\right] n_a - \mu_S g_{ai} \beta^i / \alpha,
+\end{equation}
+with
+\begin{align}
+  \mu_{L1} &= A_{L1} e^{-(r/\sigma_r)^2}
+               \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L1}},\\
+  \mu_{L2} &= A_{L2} e^{-(r/\sigma_r)^2}
+               \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L2}},\\
+  \mu_{S} &= A_{S} e^{-(r/\sigma_r)^2}
+              \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{S}}.
+\end{align}
+Here, $r$ is the 3D distance from the origin and $\sigma_r$ is a decay width.
+The damped harmonic gauge condition works to drive both the lapse $\alpha$ and
+the determinant of the spatial metric $\sqrt{\gamma}$ to one. This avoids two
+different problems. First, driving the lapse to one ensures that we will have
+sufficient proper time elapse between each of our spatial hypersurfaces. If the
+lapse becomes very small, then our evolution will effectively grind to a halt
+because we will need to take a large number of time steps to not actually
+advance the simulation very far. Second, driving $\sqrt{\gamma}$ to one avoids
+exponential growth in the spatial metric when the BHs merge. As the BHs merge,
+spacetime within the computational domain will become more extreme, and if the
+metric starts to diverge, we are no longer able to simulate the BHs accurately
+or stably. The amplitudes and exponents control the amount of damping and the
+falloff of the gauge condition to the harmonic gauge.
 
 In addition to $\mathcal{C}_a$ and $\mathcal{C}_{iab}$, we are able to define
 more constraints $\mathcal{C}_{ia}$, $\mathcal{C}_{ijab}$, and $\mathcal{F}_a$.
@@ -1228,7 +1262,7 @@ Since we now have an idea of how to carry out numerical simulations of black
 holes, we try to motivate the \textit{why} of it all and what the purpose of NR
 is. Einstein predicted GWs back in the early 20th century
 \cite{Einstein:1916cc,Einstein:1918btx}. However, the predictions on the
-amplitude of the GWs were so small, $\Delta L\sim10^{-21}$, that they were
+amplitude of the GWs were so small, $\Delta L\sim10^{-21}$m, that they were
 thought to be impossible to measure. Technology eventually advanced sufficiently
 far that we are now able to measure these GWs here on Earth using lasers in 4km
 long vacuum tubes. The first ever signal of two black holes merging was detected
@@ -1240,13 +1274,15 @@ But when LIGO detected this merger, how did it know it was a merger of two black
 holes? How did it know that it was a merger at all? Well there had to be some
 prediction about what the GWs would look like so data analysts would be able to
 search the observed data for the predicted signal. These predictions must be
-based on some sort of theory.
-
-Because data analysts don't know what parameters black holes will have when they
-see a potential signal, our theory must be able to give a signal with any BH
-parameters very quickly. Actually solving Einstein's equations numerically can
-be very expensive, so a perturbative theory like Post-Newtonian\todocite or
-Post-Minkowskian\todocite is usually better for quick evaluation.
+based on some sort of theory. However, data analysts don't know \textit{a
+priori} what parameters black holes will have when they see a potential signal,
+they would like to work with theories that give them the parameters of a BH
+fairly quickly Actually solving Einstein's equations numerically, though, can be
+very expensive, so a perturbative theory like Post-Newtonian \cite{Blanchet:2013haa} or
+Post-Minkowskian \cite{Bern:2019nnu} is usually better for quick evaluation. These
+perturbative theories break down when the black holes are close to merger
+because the perturbations of the background spacetime become too large. The
+perturbative methods are useful only during the inspiral.
 
 \begin{figure}[htbp]
    \centering
@@ -1256,15 +1292,73 @@ Post-Minkowskian\todocite is usually better for quick evaluation.
    \label{fig:gw150914_imr}
 \end{figure}
 
-However, these perturbative theories break down when the black holes are close to
-merger because the perturbations of the background spacetime become too large.
-The perturbative methods are useful during the inspiral.
-This is precisely the role that numerical relativity plays in providing a
-template bank of waveforms for LIGO data analysis. NR simulations provide
-accurate waveforms during the plunge, merger, and ringdown phase of merger.
-Figure \ref{fig:gw150914_imr} shows the phases of inspiral, merger, and
-ringdown. Plunge happens just before merger.
+NR exists to fill in the gaps left by the perturbative theories, particularly
+during merger and ringdown. Figure \ref{fig:gw150914_imr} shows the phases of
+inspiral, merger, and ringdown from \cite{LIGOScientific:2016aoc}. Plunge
+happens just before merger. A combination of perturbative theory in the inspiral
+and NR for merger and ringdown allow for a full theoretical model of a BBH
+system that LIGO would see. For NR specifically, there exist a number of
+catalogs of pure NR waveforms for various BBH configurations
+\cite{Boyle:2019kee,Healy:2022wdn,Ferguson:2023vta,Hamilton:2023qkv}.
 
+The number of simulations in these catalogs is actually quite low compared to
+the number needed to fully span the parameter space of LIGO BBHs. This is due to
+the computational costs of NR simulations. One method of addressing this issue
+is to create NR surrogate catalogs which will fill in the BBH parameter space
+based on existing simulations
+\cite{Blackman:2017pcm,Varma:2018mmi,Varma:2019jgo,MaganaZertuche:2024ajz}. The
+other, more popular method is to have an analytic model that is in informed by
+NR. The two common methods are frequency-domain analysis (IMRPhenom family
+\cite{Pratten:2020fqn,Garcia-Quiros:2020qpx,Pratten:2020ceb}) and time-domain
+analysis (SEOBNR family
+\cite{Khalil:2023kep,Ramos-Buades:2023ehm,vandeMeent:2023ols}).
+
+\section{Why HPC is necessary}
+In order to actually create the NR and GW catalogs, NR simulations must run on
+supercomputers, or High Performance Computing (HPC) machines, due to the size
+requirements of the simulations. Here we will break down why one can't run
+production-ready BBH simulations on a commercial laptop or even desktop.
+
+First, we start with the number of equations we actually need to solve at every
+single grid point of our domain. For the BSSN formalism this is 24 evolution
+equations and for the GH formalism this is 50 evolution equations. In addition
+to the 50 evolved variables, there are typically hundreds ($10^2$) temporary
+variables needed to compute the right hand sides of the evolution equations.
+This includes spatial derivatives and quantities that are reused in multiple
+equations. This leads to a total of $10^2$-$10^3$ floating point values needed.
+
+The number of grid points needed for an evolution varies, but is typically
+between $10^5$ and $10^8$ depending on the numerical methods. This means that
+for a single time step, we could need approximately $10^{10}$ bytes, or $\sim
+10$GB, of memory. While this isn't a prohibitive amount of memory, the real
+problem is performing these calculations in a timely manner. Taking a look back
+at the BSSN or GH evolution equations, there are many sums that have to be
+computed for every term in the equations. Trying to run all of these sums on a
+single core would be incredibly slow. The solution to this is to then
+parallelize the simulations across many cores, which is where the need for HPC
+comes from.
+
+Simulations typically take around $10^7$-$10^9$ time steps depending on the
+resolution. If a simulation was parallelized enough to take just 1ms per time
+step, the entire simulation would take $10^4$-$10^6$s, or 3 hours to 12 days.
+And this is only if a simulation is able to parallelize efficiently enough.
+Simulations often require weeks to months to run.
+These numbers are also only for vacuum spacetimes. Coupling a curved spacetime
+evolution with matter and magnetic fields increases the number of evolved
+variables and temporaries.
+
+The amount of resources used on HPCs also varies based on the numerical methods
+used. These are often measured in core hours, which is the number of hours used
+times the number of cores used. The SXS Collaboration's recent catalog of 3756
+NR waveforms cost approximately $4.8\times 10^{8}$ core
+hours\cite{Scheel:2025jct}, while a recent paper by Rashti et al. cited 4 high
+resolution NR waveforms costing approximately $1.55\times 10^8$ core hours. This
+difference can likely be attributed to the use of spectral methods vs
+finite-difference methods. In recent years, advancements in GPU architecture
+have made simulations of BBHs and neutron stars possible with GPUs \todocite,
+however there is still much to be done in this area.
+
+\section{Horizon finding in the GH formalism}
 
 \begin{enumerate}
    \item Ultimate goals of Numerical Relativity (models/training)
