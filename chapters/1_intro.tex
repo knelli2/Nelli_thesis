@@ -1267,7 +1267,7 @@ amplitude of the GWs were so small, $\Delta L\sim10^{-21}$m, that they were
 thought to be impossible to measure. Technology eventually advanced sufficiently
 far that we are now able to measure these GWs here on Earth using lasers in 4km
 long vacuum tubes. The first ever signal of two black holes merging was detected
-by the LIGO \cite{LIGOScientific:2014pky}, VIRGO \cite{VIRGO:2014yos}, and KAGRA
+by the LIGO \cite{LIGOScientific:2014pky}, VIRGO \cite{VIRGO:2014yos}, and Kagra
 \cite{KAGRA:2020tym} collaborations in 2015
 \cite{LIGOScientific:2016aoc,KAGRA:2021vkt}.
 
@@ -1495,7 +1495,7 @@ $\Gamma^k_{ij}$ are needed at the points of $r(\theta,\phi)$.
 The most popular method to find $r(\theta,\phi)$ is the fast-flow algorithm by
 \cite{Gundlach:1997us}. We can define $r$ as
 \begin{equation}
-   r(\theta,\phi) = \sum_{\ell,m} a_{\ell m} Y_{\ell m}(\theta,\phi) .
+   r(\theta,\phi) = \sum_{\ell,m}^{L_{\mathrm{max}}} a_{\ell m} Y_{\ell m}(\theta,\phi) .
 \end{equation}
 Then, via some derivation we won't show here, one can show there is a recursion
 relation between successive iterations of the coefficients $a_{\ell m}$ as
@@ -1505,14 +1505,42 @@ relation between successive iterations of the coefficients $a_{\ell m}$ as
 \end{equation}
 where
 \begin{align}
-   A &= \frac{1}{L_{\mathrm{max}}(L_{\mathrm{max}}+1)} + \frac{1}{2} \\
-   B &= \frac{1}{2} \\
-   \rho &= \frac{2|s|r^2}{(\gamma^{ij}-s^is^j)(\delta_{ij}-\hat{r}_i\hat{r}_j)}
+   A &= \frac{1}{L_{\mathrm{max}}(L_{\mathrm{max}}+1)} + \frac{1}{2}, \\
+   B &= \frac{1}{2}, \\
+   \rho &= \frac{2|s|r^2}{(\gamma^{ij}-s^is^j)(\delta_{ij}-\hat{r}_i\hat{r}_j)} .
 \end{align}
-with $L_{\mathrm{max}}$ being the largest $\ell$ we choose to represent our
-surface with. With this algorithm, one must supply an initial guess for $a_{\ell
+With this algorithm, one must supply an initial guess for $a_{\ell
 m}^{(0)}$, which is usually just a sphere. The algorithm continues until the
 expansion $\Theta$ is below some tolerance set by the user.
+
+An AH is only an approximation of the event horizon. However, the AH will always
+be contained entirely within the event horizon. This arises due to the
+definition of AH. Specifically, that it is marginally outer-trapped surface
+contained within a spatial hypersurface at one specific time. At the surface of
+the AH, all null rays are ingoing. However, for an event horizon, there will be
+a region where some null rays are outgoing on a specific spatial hypersurface,
+but they cannot escape to \scri and will eventually become ingoing null rays at
+a later spatial hypersurface. This region will be outside of the first
+hypersurface, thus showing that the AH is within the event horizon. For the Kerr
+(and Schwarzschild spacetime) the AH and the event horizon at a specific spatial
+hypersurface are the same.
+
+We return now to the boundary condition that must be imposed on the excision
+boundary. We will make use of the fact that the AH will always be contained
+within the event horizon. We will mandate that the excision surface always be
+within the AH of the BH we are simulating, therefore all information (null rays)
+at the excision surface must be ingoing (i.e. towards the singularity). With
+this requirement, we need not impose any boundary conditions at the excision
+boundary. This is because there is not any information coming into the
+simulation (i.e. outgoing null rays), therefore we don't need to prescribe how
+information enters the domain if none is entering.
+
+The challenge then becomes ensuring that the excision surface stays inside the
+AH for the entire simulation of two black holes inspiralling and eventually
+merging. More details about how that are done can be found in Ch.
+\ref{ch:nelli_et_al}.
+
+\section{Overview of chapters}
 
 \begin{enumerate}
    \item Ultimate goals of Numerical Relativity (models/training)
