@@ -1355,10 +1355,41 @@ hours\cite{Scheel:2025jct}, while a recent paper by Rashti et al. cited 4 high
 resolution NR waveforms costing approximately $1.55\times 10^8$ core hours. This
 difference can likely be attributed to the use of spectral methods vs
 finite-difference methods. In recent years, advancements in GPU architecture
-have made simulations of BBHs and neutron stars possible with GPUs \todocite,
+have made simulations of BBHs and neutron stars possible with GPUs
+\cite{Peterson:2023azu,Shankar:2022ful,Kalinani:2024rbk,Zhu:2024utz,Fields:2024pob,Ji:2025rpd,Tootle:2025ikk},
 however there is still much to be done in this area.
 
 \section{Horizon finding in the GH formalism}
+Here, we will only discuss horizon finding as it pertains to the GH formalism.
+Horizons can be found in the BSSN formulation as well using similar
+techniques, but we won't discuss those here.
+
+Finding horizons in the GH formalism is necessary for the evolution of the
+equations in a way that it isn't for BSSN. In BSSN, the physical singularities
+are removed from the spacetime and replaced with punctures; approximations of
+the singularities. This works because of some details of the gauge conditions
+used in the BSSN formalism and
+because information can never leave a BH. However, in GH, the harmonic (or
+damped harmonic) gauge conditions don't allow this, so there are two physical
+singularities for a BBH system. At these singularities, the metric becomes
+singular so we must avoid putting any grid points there.
+
+To avoid the singularity simulations of GH typically employ the excision method,
+where a portion of the domain around the singularity is removed and not
+simulated. This cavity, called the excision, avoids the need for resolving the
+spacetime metric near the singularity, but now introduces a new ``outer''
+boundary to our domain. And a new outer boundary implies that there must be a
+new boundary condition.
+
+Before we discuss the new boundary condition, we first briefly describe the
+algorithm for finding apparent horizons (AHs). An apparent horizon approximates
+the 2D surface of an event horizon of a BH at a specific coordinate time, but is
+not exactly equal to the event horizon. This is because an event horizon is the
+surface where no outward pointing null rays will reach future null infinity
+(\scri). However, to know whether a null ray reaches \scri, one must know the
+entire future of the spacetime. We obviously don't have the entire future
+spacetime while trying to simulate spatial slices, so we approximate the event
+horizon with the AH.
 
 \begin{enumerate}
    \item Ultimate goals of Numerical Relativity (models/training)
