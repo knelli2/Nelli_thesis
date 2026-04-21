@@ -1253,9 +1253,10 @@ first spatial hypersurface, (b) boundary conditions for either BSSN or GH, (c) G
 extraction via finite radius, extrapolation, or CCE (see Chapter
 \ref{ch:compare}), (d) numerical methods for how to discretize the mesh, (e)
 methods for taking ``good'' numerical derivatives, (f) finding the horizon of a
-black hole (see Sec. \todocite), or (g) any of the previous topics applied to
-simulating matter around black holes or neutron stars. This field is a rich mix
-of theory and computational algorithms and deserves to be explored further.
+black hole (see Sec. \ref{sec:intro_ah}), or (g) any of the previous topics
+applied to simulating matter around black holes or neutron stars. This field is
+a rich mix of theory and computational algorithms and deserves to be explored
+further.
 
 \section{Goals of NR}
 Since we now have an idea of how to carry out numerical simulations of black
@@ -1359,7 +1360,7 @@ have made simulations of BBHs and neutron stars possible with GPUs
 \cite{Peterson:2023azu,Shankar:2022ful,Kalinani:2024rbk,Zhu:2024utz,Fields:2024pob,Ji:2025rpd,Tootle:2025ikk},
 however there is still much to be done in this area.
 
-\section{Horizon finding in the GH formalism}
+\section{Horizon finding in the GH formalism\label{sec:intro_ah}}
 Here, we will only discuss horizon finding as it pertains to the GH formalism.
 Horizons can be found in the BSSN formulation as well using similar
 techniques, but we won't discuss those here.
@@ -1374,7 +1375,7 @@ damped harmonic) gauge conditions don't allow this, so there are two physical
 singularities for a BBH system. At these singularities, the metric becomes
 singular so we must avoid putting any grid points there.
 
-To avoid the singularity simulations of GH typically employ the excision method,
+To avoid the singularity, simulations of GH typically employ the excision method,
 where a portion of the domain around the singularity is removed and not
 simulated. This cavity, called the excision, avoids the need for resolving the
 spacetime metric near the singularity, but now introduces a new ``outer''
@@ -1390,6 +1391,128 @@ surface where no outward pointing null rays will reach future null infinity
 entire future of the spacetime. We obviously don't have the entire future
 spacetime while trying to simulate spatial slices, so we approximate the event
 horizon with the AH.
+
+\begin{figure}[h]
+   \centering
+   \begin{tikzpicture}[>=stealth, scale=1.3]
+      % Tilted spacelike hypersurface Sigma (parallelogram in perspective)
+      \pgfmathsetmacro{\planeX}{-2.0}  % x of bottom-left corner
+      \pgfmathsetmacro{\planeY}{0.0}   % y of bottom edge
+      \pgfmathsetmacro{\planeW}{5.0}   % width
+      \pgfmathsetmacro{\planeH}{1.3}   % height
+      \pgfmathsetmacro{\planeS}{0.6}   % shift (0 is rectangle)
+      \coordinate (BL) at (\planeX,               \planeY);
+      \coordinate (BR) at (\planeX+\planeW,        \planeY);
+      \coordinate (TR) at (\planeX+\planeW+\planeS,    \planeY+\planeH);
+      \coordinate (TL) at (\planeX+\planeS,            \planeY+\planeH);
+      \fill[gray!15] (BL) -- (BR) -- (TR) -- (TL) -- cycle;
+      \draw[thick]   (BL) -- (BR) -- (TR) -- (TL) -- cycle;
+      \node at (\planeX+\planeS+0.2, \planeY+\planeH-0.3) {$\Sigma$};
+      % Point P on the right side of S
+      \pgfmathsetmacro{\pX}{1.3}
+      \pgfmathsetmacro{\pY}{0.65}
+      \coordinate (P) at (\pX, \pY);
+      \filldraw[black] (P) circle (2pt);
+      % 2-surface S as ellipse lying in the plane
+      \pgfmathsetmacro{\rX}{1.0}
+      \pgfmathsetmacro{\rY}{0.42}
+      \draw[thick] (\pX-\rX, \pY) ellipse ({\rX} and {\rY});
+      \node at (\planeX + 1.2, \planeY + 0.3) {$\mathcal{S}$};
+      % s^a: outward spacelike unit normal to S within Sigma (rightward in plane)
+      \draw[-{Triangle[length=6pt,width=5pt]}, thick]
+         (P) -- ++(1.5, 0.0) node[right] {$s^a$};
+      % n^a: future-directed timelike unit normal to Sigma (straight up)
+      \draw[-{Triangle[length=6pt,width=5pt]}, thick]
+         (P) -- ++(0, 2.5) node[above] {$n^a$};
+      % ell^a: null normal (upper-left, 45 deg from n^a)
+      \draw[-{Triangle[length=6pt,width=5pt]}, thick]
+         (P) -- ++(-1.3, 1.8) node[above left] {$\ell^a$};
+      % k^a: null normal (upper-right, 45 deg from n^a)
+      \draw[-{Triangle[length=6pt,width=5pt]}, thick]
+         (P) -- ++(1.3, 1.8) node[above right] {$k^a$};
+      % Null cone ellipse at top
+      \draw[thin] (P) ++(0, 1.8) ellipse (1.3 and 0.28);
+   \end{tikzpicture}
+   \caption{A closed 2-surface $\mathcal{S}$ embedded in a spacelike hypersurface
+      $\Sigma$. The vectors $\ell^a$ and $k^a$ are the ingoing and outgoing null
+      normals to $\mathcal{S}$, respectively, constructed from the timelike unit
+      normal $n^a$ to $\Sigma$ and the outward spacelike unit normal $s^a$ to
+      $\mathcal{S}$ within $\Sigma$.}
+   \label{fig:apparent_horizon_normals}
+\end{figure}
+
+The process of AH finding is outlined as follows. For more details, see
+\cite{Gundlach:1997us}. We start off with some closed 2-surface $\mathcal{S}$
+embedded in our spatial hypersurface $\Sigma$, as shown in Fig.
+\ref{fig:apparent_horizon_normals}. We define $n^a$ in the usual way as the
+timelike normal to $\Sigma$. We define the spatial (and spacelike) normal to the
+surface $\mathcal{S}$ as $s^a$. Using $n^a$ and $s^a$, we can define three new
+quantities
+\begin{align}
+   m_{ab} &= \gamma_{ab} -s_as_b = g_{ab} + n_an_b - s_as_b \\
+   \ell^a &= \frac{1}{\sqrt{2}}(n^a-s^a) \\
+   k^a &= \frac{1}{\sqrt{2}}(n^a+s^a)
+\end{align}
+where $m_{ab}$ is the metric on the 2-surface constructed from the spatial
+metric $\gamma_{ab}$ and $\ell^a$ and $k^a$ are the ingoing and outgoing null
+vectors from point $P$ on the surface.
+
+We define the expansion of $\mathcal{S}$ as
+\begin{equation}
+   \Theta = g^{ab}\nabla_a k_b = \nabla_a s^a - K + s^as^bk_{ab} \label{eq:ah_expansion}
+\end{equation}
+where $K_{ab}$ and $K$ are the extrinsic curvature and its trace. We define
+$\Theta=0$ as a marginally outer-trapped surface, meaning all null rays are
+ingoing. With some point contained within $\mathcal{S}$ denoted as $c^i$, we
+also define level surfaces as
+\begin{equation}
+   \tau = \sqrt{\delta_{ij}(x^i-c^i)(x^j-c^j)} - r(\theta,\phi) = C
+\end{equation}
+for every point $x^i$ on $\mathcal{S}$ and $C$ is a constant. We can then define
+the surface normal form $s_a=(0,s_i)$ as
+\begin{equation}
+   s_i = \frac{\partial_i \tau}{|s|}, \quad\quad
+   |s| = \sqrt{\delta_{ij}(\partial_i\tau)(\partial_j\tau)}.
+\end{equation}
+
+We can then plug this in to Eq. \ref{eq:ah_expansion} to get
+\begin{equation}
+   \Theta = (\gamma^{ij}-s^is^j)
+   \left(\frac{|s|}{r}(\delta_{ij}-\hat{r}_i\hat{r}_j)
+      -\lambda\partial_i\partial_j\Gamma -s_k\Gamma^k_{ij} - K_{ij}\right)
+\end{equation}
+with
+\begin{align}
+   \hat{r}^i &= \frac{x^i-c^i}{\sqrt{\delta_{kj}(x^k-c^k)(x^j-c^j)}},
+   &s_i &= \frac{1}{|s|}\left(\hat{r}_i-\partial_i r\right), \\
+   \hat{r}_i &= \delta_{ij}\hat{r}^j,
+   &s^i &= \gamma^{ij}s_j .
+\end{align}
+Our goal is to find the $r(\theta,\phi)$ function describing the surface
+$\mathcal{S}$ such that $\tau = 0$. The quantities $\gamma^{ij}$, $K_{ij}$, and
+$\Gamma^k_{ij}$ are needed at the points of $r(\theta,\phi)$.
+
+The most popular method to find $r(\theta,\phi)$ is the fast-flow algorithm by
+\cite{Gundlach:1997us}. We can define $r$ as
+\begin{equation}
+   r(\theta,\phi) = \sum_{\ell,m} a_{\ell m} Y_{\ell m}(\theta,\phi) .
+\end{equation}
+Then, via some derivation we won't show here, one can show there is a recursion
+relation between successive iterations of the coefficients $a_{\ell m}$ as
+\begin{equation}
+   a_{\ell m}^{(n+1)} - a_{\ell m}^{(n)} = \frac{-A}{1+B\ell(\ell+1)}
+   \left(\rho\Theta\right)_{\ell m}^{(n)}
+\end{equation}
+where
+\begin{align}
+   A &= \frac{1}{L_{\mathrm{max}}(L_{\mathrm{max}}+1)} + \frac{1}{2} \\
+   B &= \frac{1}{2} \\
+   \rho &= \frac{2|s|r^2}{(\gamma^{ij}-s^is^j)(\delta_{ij}-\hat{r}_i\hat{r}_j)}
+\end{align}
+with $L_{\mathrm{max}}$ being the largest $\ell$ we choose to represent our
+surface with. With this algorithm, one must supply an initial guess for $a_{\ell
+m}^{(0)}$, which is usually just a sphere. The algorithm continues until the
+expansion $\Theta$ is below some tolerance set by the user.
 
 \begin{enumerate}
    \item Ultimate goals of Numerical Relativity (models/training)
