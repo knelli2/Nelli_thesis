@@ -148,8 +148,9 @@ disconnected.
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (-3.2,-0.6) -- (-3.2,0.6) node[above] {$t$};
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (-3.2,-0.6) -- (-2.0,-0.6) node[right] {$x$};
    \end{tikzpicture}
-   \caption[Light cone centered at event $P$.]{A light cone centered at the event $P$. The cone edges represent
-   rays propagating at the speed of light $c$.}
+   \caption[Light cone centered at event $P$.]{A light cone centered at the
+      event $P$. The cone edges represent rays propagating at the speed of light
+      $c$.}
    \label{fig:light_cone}
 \end{figure}
 
@@ -288,9 +289,9 @@ itself which drives the curvature of spacetime.
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ppi)   -- ++(1.0, 0);
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (p3pi2) -- ++(1.0, 0);
    \end{tikzpicture}
-   \caption[Parallel transport on a flat circle.]{Diagram for parallel transporting a vector along two different
-      paths of a flat circle: $A\rightarrow B\rightarrow C$ and $A\rightarrow D
-      \rightarrow C$.}
+   \caption[Parallel transport on a flat circle.]{Diagram for parallel
+      transporting a vector along two different paths of a flat circle:
+      $A\rightarrow B\rightarrow C$ and $A\rightarrow D \rightarrow C$.}
    \label{fig:parallel-transport-circle}
 \end{figure}
 
@@ -319,8 +320,9 @@ itself which drives the curvature of spacetime.
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ptA) -- (1.4,0.8);
       \draw[-{Triangle[length=5pt,width=4pt]}, thick] (ptB) -- (-1.4,0.8);
    \end{tikzpicture}
-   \caption[Parallel transport on a sphere.]{Diagram for parallel transporting a vector along two different
-      paths of a sphere: $A\rightarrow B\rightarrow C$ and $A\rightarrow C$.}
+   \caption[Parallel transport on a sphere.]{Diagram for parallel transporting a
+      vector along two different paths of a sphere: $A\rightarrow B\rightarrow
+      C$ and $A\rightarrow C$.}
    \label{fig:parallel-transport-sphere}
 \end{figure}
 
@@ -620,9 +622,10 @@ merging.
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.5\textwidth]{images/intro/foliation.png}
-   \caption[Foliation of spacetime into spatial hypersurfaces.]{A foliation of spacetime into spatial hypersurfaces $\Sigma_t$,
-   each labeled by a coordinate time $t$. The vector $n^a$ is normal to each
-   spatial hypersurface. This image was taken from \cite{Baumgarte:2010ndz}.}
+   \caption[Foliation of spacetime into spatial hypersurfaces.]{A foliation of
+      spacetime into spatial hypersurfaces $\Sigma_t$, each labeled by a
+      coordinate time $t$. The vector $n^a$ is normal to each spatial
+      hypersurface. This image was taken from \cite{Baumgarte:2010ndz}.}
    \label{fig:foliation}
 \end{figure}
 
@@ -656,11 +659,12 @@ hypersurfaces.
 \begin{figure}[htbp]
    \centering
    \includegraphics[width=0.8\textwidth]{images/intro/lapse_shift.png}
-   \caption[Lapse and shift in the 3+1 decomposition.]{Illustration of the lapse $\alpha$ and shift vector
-   $\beta^i$ in the 3+1 decomposition of spacetime. The lapse $\alpha$
-   measures the proper time between adjacent hypersurfaces, while the shift
-   $\beta^i$ encodes how coordinates move between hypersurfaces. This image was
-   taken from \cite{Baumgarte:2010ndz}.}
+   \caption[Lapse and shift in the 3+1 decomposition.]{Illustration of the lapse
+      $\alpha$ and shift vector $\beta^i$ in the 3+1 decomposition of spacetime.
+      The lapse $\alpha$ measures the proper time between adjacent
+      hypersurfaces, while the shift $\beta^i$ encodes how coordinates move
+      between hypersurfaces. This image was taken from
+      \cite{Baumgarte:2010ndz}.}
    \label{fig:lapse_shift}
 \end{figure}
 
@@ -725,7 +729,8 @@ The first formalism we will discuss is the Baumgarte-Shapiro-Shibata-Nakamura
 (BSSN) formalism \cite{Shibata:1995we,Baumgarte:1998te}. First, we finish off
 defining the Arnowitt-Deser-Misner (ADM) formalism \cite{Arnowitt:1962hi} as
 it's necessary for the BSSN formalism. This section is heavily based on
-derivations from \cite{Baumgarte:2010ndz}.
+derivations from \cite{Baumgarte:2010ndz}. While we won't derive them here, the
+BSSN formulation is closely related to the Z4 family of formulations \cite{Bona:2003fj,Bernuzzi:2009ex,Hilditch:2012fp,Alic:2011gg}.
 
 We start by defining the extrinsic curvature $K_{ab}$. The
 extrinsic curvature is different than the Riemann curvature, or intrinsic
@@ -795,8 +800,9 @@ There are actually extra terms in these equations for the stress-energy tensor
 following a similar procedure, but we exclude those here because we are only
 concerned with the vacuum equations.
 
-We are unable to evolve the ADM equations stably \cite{Shibata:1995we,Baumgarte:1998te}, so now we move on to
-the BSSN equations. We start by rewriting the spatial metric as
+We are unable to evolve the ADM equations stably
+\cite{Shibata:1995we,Baumgarte:1998te}, so now we move on to the BSSN equations.
+We start by rewriting the spatial metric as
 \begin{equation}
    \gamma_{ij} = e^{4\phi}\bar{\gamma}_{ij}
 \end{equation}
@@ -1544,17 +1550,42 @@ merging. More details about how that are done can be found in Ch.
 
 \section{Overview of chapters}
 
-\begin{enumerate}
-   \item Ultimate goals of Numerical Relativity (models/training)
-   \item Why HPC to achieve goals
-   \item GH and why horizon finding is important
-   \item Chapters of thesis
-   \begin{enumerate}
-      \item Brief on Lovelace and Nelli et al.
-      \item Brief on Nelli et al.
-      \item Brief on Cross code comparison
-   \end{enumerate}
-\end{enumerate}
+Here we give an overview of the remaining chapters of the thesis.
+
+\subsection{Chapter \ref{ch:nelli_et_al}}
+Chapter \ref{ch:nelli_et_al} is the published work~\cite{Nelli:2025vfc}. It
+expands significantly on Sec. \ref{sec:intro_ah}, detailing how horizon finding
+is done in the \spectre~code. Specifically, it goes into detail about how the
+asynchronous nature of \spectre~posed a new challenge for designing the dynamic
+feedback control system that keeps the excisions within the horizons, and the
+same shape as the horizons. It explains our solution to these new challenges and
+gives examples of the control system being used in scientific examples,
+including a binary neutron start system system.
+
+\subsection{Chapter \ref{ch:lovelace_nelli}}
+Chapter \ref{ch:lovelace_nelli} is the published work~\cite{Lovelace:2024wra}.
+It uses the implementation of the control system and horizon finder presented in
+Ch. \ref{ch:nelli_et_al} to perform the first BBH inspiral, merger, and ringdown
+simulation using discontinuous Galerkin spectral methods for the spatial
+discretization. The chapter starts by performing some test cases on single BH
+and gauge wave problems showing convergence and stability. Then, three different
+resolutions of an equal mass non-spinning BBH system are presented along with
+analysis of the constraint violations and numerical waveforms extracted with
+\spectre~CCE. 
+
+\subsection{Chapter \ref{ch:compare}}
+Chapter \ref{ch:compare} is not directly in any existing published work. It
+describes a new feature of the \spectre~CCE module that is able to convert
+worldtube data from other NR codes besides \spec~and \spectre~into the format
+that \spectre~requires. This includes computing time derivatives of the spatial
+metric, lapse, and shift based on the gauge conditions used for the evolution,
+whether it be BSSN or some Z4 variant. In addition to the time derivatives, the
+new feature can also read in the necessary quantities as either nodal values
+(i.e. values at grid points) or modal coefficients (i.e. coefficients in a
+spin-weighted spherical harmonic expansion). This gives the user of \spectre~CCE
+the flexibility to output worldtube data from their code in whatever format is
+easiest for them. This feature has already been used in a published work for the
+AthenaK code~\cite{Radice:2025djo}.
 
 Questions:
 \begin{enumerate}
