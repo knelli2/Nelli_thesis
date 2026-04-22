@@ -72,6 +72,13 @@ centered, draw=black, fill=green!30]
 \def\ack{\section*{Acknowledgments}\noindent\ignorespaces}
 \def\ackn{\section*{Acknowledgment}\noindent\ignorespaces}
 
+\nouppercaseheads
+\createmark{section}{right}{shownumber}{}{\space\itshape}
+\copypagestyle{ruled}{headings}
+\makeoddhead{ruled}{\rightmark}{}{\thepage}
+\makeevenhead{ruled}{\rightmark}{}{\thepage}
+\makeheadrule{ruled}{\textwidth}{\normalrulethickness}
+
 \setsecnumdepth{subsubsection}
 
 %%%%% Commands %%%%%
@@ -113,6 +120,8 @@ of Physics and Astronomy, UCLA, Los Angeles, CA 90095} \newcommand{\UCLAId}{9}
 % \includeonly{chapters/1_intro}
 
 \begin{document}
+
+\pagestyle{ruled}
 
 % Do remember to remove the square bracket!
 \title{Topics in Numerical Relativity: Horizon finding, Asynchronous
