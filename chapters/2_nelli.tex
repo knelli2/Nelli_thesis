@@ -19,28 +19,26 @@
 % \address{$^{\CornellLeppId}$\CornellLepp}
 % \address{$^{\CornellCcapsId}$\CornellCcaps}
 
-\begin{abstract}
+\noindent In the field of gravitational wave science, next-generation detectors will be
+substantially more accurate than the current suite of detectors. Numerical
+relativity simulations of binary black hole (BBH) gravitational waveforms must
+become faster, more efficient, and more accurate to be used in analyses of
+these next-generation detections. One approach, which the \spectre~code
+employs, is using spectral methods for accuracy along with asynchronous
+task-based parallelism to avoid idle time in simulations and make the most
+efficient use of computational resources. When writing an asynchronous
+application, algorithms must be redesigned compared to their synchronous
+counterparts. To illustrate this process, we present novel methods for
+dynamically tracking the apparent horizons in evolutions of BBH mergers using
+a feedback control system, all in the context of asynchronous
+parallelism. \edit{This algorithm enables local time stepping
+  with spectral methods for BBH simulations, which reduces the computational
+  cost of a mass ratio 4 BBH simulation by a factor of five. Further reductions
+  in computational cost are expected for higher mass ratios and spinning
+  binaries.} We also briefly detail how these methods can be applied to binary
+neutron star simulations performed with asynchronous parallelism.
 
-  In the field of gravitational wave science, next-generation detectors will be
-  substantially more accurate than the current suite of detectors. Numerical
-  relativity simulations of binary black hole (BBH) gravitational waveforms must
-  become faster, more efficient, and more accurate to be used in analyses of
-  these next-generation detections. One approach, which the \spectre~code
-  employs, is using spectral methods for accuracy along with asynchronous
-  task-based parallelism to avoid idle time in simulations and make the most
-  efficient use of computational resources. When writing an asynchronous
-  application, algorithms must be redesigned compared to their synchronous
-  counterparts. To illustrate this process, we present novel methods for
-  dynamically tracking the apparent horizons in evolutions of BBH mergers using
-  a feedback control system, all in the context of asynchronous
-  parallelism. \edit{This algorithm enables local time stepping
-    with spectral methods for BBH simulations, which reduces the computational
-    cost of a mass ratio 4 BBH simulation by a factor of five. Further reductions
-    in computational cost are expected for higher mass ratios and spinning
-    binaries.} We also briefly detail how these methods can be applied to binary
-  neutron star simulations performed with asynchronous parallelism.
-
-\end{abstract}
+\newpage
 
 \section{Introduction\label{sec:dgscl introduction}}
 
@@ -1503,7 +1501,7 @@ systems.
 % described here will be a critical ingredient in high-performance BBH
 % simulations.}}
 
-\acknowledgements
+\ack
 
 KCN would like to thank Geoffrey Lovelace for running \spectre~BBH simulations
 and finding various deadlocks that needed to be fixed and accounted for in the

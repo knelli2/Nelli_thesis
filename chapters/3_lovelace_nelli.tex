@@ -55,30 +55,28 @@
 % \ead{glovelace@fullerton.edu}
 % \ead{knelli@caltech.edu}
 
-\begin{abstract}
+\noindent Binary black holes are the most abundant source of gravitational-wave
+observations. Gravitational-wave observatories in the next decade will require
+tremendous increases in the accuracy of numerical waveforms modeling binary
+black holes, compared to today's state of the art. One approach to achieving
+the required accuracy is using spectral-type methods that scale to many
+processors. Using the
+\texttt{SpECTRE} numerical-relativity code, we present the first simulations
+of a binary black hole inspiral, merger, and ringdown using discontinuous
+Galerkin methods. The efficiency of discontinuous Galerkin methods allows us
+to evolve the binary through $\sim18$ orbits at reasonable computational cost.
+We then use \texttt{SpECTRE}'s Cauchy Characteristic Evolution (CCE) code to
+extract the gravitational waves at future null infinity.  The open-source
+nature of \texttt{SpECTRE} means this is the first time a spectral-type method
+for simulating binary black hole evolutions is available to the entire
+numerical-relativity community.
 
-  Binary black holes are the most abundant source of gravitational-wave
-  observations. Gravitational-wave observatories in the next decade will require
-  tremendous increases in the accuracy of numerical waveforms modeling binary
-  black holes, compared to today's state of the art. One approach to achieving
-  the required accuracy is using spectral-type methods that scale to many
-  processors. Using the
-  \texttt{SpECTRE} numerical-relativity code, we present the first simulations
-  of a binary black hole inspiral, merger, and ringdown using discontinuous
-  Galerkin methods. The efficiency of discontinuous Galerkin methods allows us
-  to evolve the binary through $\sim18$ orbits at reasonable computational cost.
-  We then use \texttt{SpECTRE}'s Cauchy Characteristic Evolution (CCE) code to
-  extract the gravitational waves at future null infinity.  The open-source
-  nature of \texttt{SpECTRE} means this is the first time a spectral-type method
-  for simulating binary black hole evolutions is available to the entire
-  numerical-relativity community.
-
-\end{abstract}
-
-\noindent{\it Keywords\/}: discontinuous Galerkin, binary black holes, numerical
-relativity
+% \noindent{\it Keywords\/}: discontinuous Galerkin, binary black holes, numerical
+% relativity
 
 % \submitto{\CQG}
+
+\newpage
 
 \section{Introduction\label{sec:introduction}}
 
