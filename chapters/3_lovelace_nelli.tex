@@ -692,19 +692,19 @@ element for each step on the least demanding element.
 We evolve binary black holes (\S\ref{sec:bbh results}) using the Damped Harmonic
 gauge condition~\cite{Szilagyi:2009qz, Deppe2018:uye}:
 \begin{align}\label{eq:dh_gauge_source}
-  H_a &=& \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
+  H_a &= \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
           \log\left(1/\alpha\right)\right] n_a - \mu_S g_{ai} \beta^i / \alpha,
 \end{align}
 using
 \begin{align}
   \label{eq:dh_mu1}
-  \mu_{L1} &=& A_{L1} e^{-(r/\sigma_r)^2}
+  \mu_{L1} &= A_{L1} e^{-(r/\sigma_r)^2}
                \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L1}},\\
   \label{eq:dh_mu2}
-  \mu_{L2} &=& A_{L2} e^{-(r/\sigma_r)^2}
+  \mu_{L2} &= A_{L2} e^{-(r/\sigma_r)^2}
                \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{L2}},\\
   \label{eq:dh_mu3}
-  \mu_{S} &=& A_{S} e^{-(r/\sigma_r)^2}
+  \mu_{S} &= A_{S} e^{-(r/\sigma_r)^2}
               \left[\log(\sqrt{\gamma}/\alpha)\right]^{e_{S}},
 \end{align} where $r$ is the coordinate distance from the origin. This
 condition is designed to drive $\sqrt{\gamma}$ and $\alpha$ to one, while damping
@@ -771,7 +771,7 @@ origin with zero spin. We choose the mass of the black hole to be $M=1$ and work
 in units of $M$. In each evolution we use the following values for the FOGH
 constraint damping parameters,
 \begin{align}
-  \gamma_0 &= \gamma_2 = A_0 e^{-r^2/w_0^2} + A_1 e^{-r^2/w_1^2},\\
+  \gamma_0 = \gamma_2 &= A_0 e^{-r^2/w_0^2} + A_1 e^{-r^2/w_1^2},\\
   \gamma_1 &= - 1,
 \end{align}
 where $r$ is the coordinate distance from the origin, $A_0=7.0/M$, $A_1=0.1/M$,
@@ -1274,13 +1274,13 @@ inspiral. The specific form of the damping parameters we use is
 \begin{align}
   \label{eq:gamma_0_2_gaussian}
   \gamma_0(t, x^{\bar{\imath}})
-  &=& \gamma_2(t, x^{\bar{\imath}}) = C
+  = \gamma_2(t, x^{\bar{\imath}}) &= C
       + \sum_{I=0}^2 A_I
       \exp\left[-\left(\frac{\bar{r}_I}{\bar{w}_I
       / E(t)}\right)^2\right],\\
   \label{eq:gamma_1_gaussian}
   \gamma_1(t, x^{\bar{\imath}})
-  &=& C + A_{0} \exp\left[-\left(\frac{\bar{r}_0}{\bar{w}_{0}}\right)^2\right],
+  &= C + A_{0} \exp\left[-\left(\frac{\bar{r}_0}{\bar{w}_{0}}\right)^2\right],
 \end{align}
 where $C$ is a constant, $A_I$ are the amplitudes of the Gaussians, $\bar{r}_I$
 are the grid-frame radii from the center of each Gaussian, and $\bar{w}_I$ are
