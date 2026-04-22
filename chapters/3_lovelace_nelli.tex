@@ -824,6 +824,7 @@ we see that the constraints remain \response{approximately} constant and
 converge exponentially with increasing $p$-refinement.
 
 \begin{figure}[h]
+  \centering
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_KerrSchild_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_KerrSchild_0.8spin_Constraints.pdf}
   \caption[Constraint violations for single black hole evolutions in Kerr-Schild coordinates.]{Constraint violations for single black hole evolutions in Kerr-Schild
@@ -865,6 +866,7 @@ travel outward until exiting the domain through the outer boundary at
 $r_{\mathrm{out}}=1,000M$.
 
 \begin{figure}[h]
+  \centering
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_HarmonicSchwarzschild_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_Harmonic_Constraints.pdf}
   \caption[Constraint violations for single black hole evolutions in harmonic coordinates.]{Constraint violations for single black hole evolutions in harmonic
@@ -897,6 +899,7 @@ the right panel of figure~\ref{fig:bh-dh-conv}. Again we see stable evolutions
 and exponential convergence with increasing $p$-refinement.
 
 \begin{figure}[h]
+  \centering
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_DampedHarmonic_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/Figure_DampedHarmonic_0.8spin_Constraints.pdf}
   \caption[Constraint violations for single black hole evolutions in damped harmonic coordinates.]{Constraint violations for single black hole evolutions in damped
@@ -951,6 +954,7 @@ long-term behavior. The highest resolution simulation is close to being limited
 by the time stepper tolerance.
 
 \begin{figure}
+  \centering
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/GhGaugeWave3DReductions_Constraints.pdf}
   \includegraphics[width=0.49\columnwidth]{images/lovelace_nelli/GhGaugeWave3DReductions_Errors.pdf}
   \caption[Gauge wave simulation demonstrating long-term stability and convergence.]{Results from an amplitude $0.1$ gauge wave simulation demonstrating
@@ -1042,6 +1046,7 @@ summarized in table~\ref{table:id}, and a plot of the resulting inertial
 trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
 
 \begin{table}
+  \centering
   \caption[Parameters used to generate the BBH initial data.]{Parameters used to generate the binary-black-hole initial data
     evolved in \S\ref{sec:bbh results}: in terms of the sum of the black holes'
     Christodoulou masses $M=M_1+M_2$ of each black hole, the individual masses
@@ -1050,9 +1055,7 @@ trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
     separation $d_0$ of the horizon centers, the initial orbital angular
     velocity $\Omega_0$, and the initial expansion rate $\dot{a}_0$.}
   \label{table:id}
-  \begin{indented}
-    \lineup
-\item[]\hspace{-1.3em}\begin{tabular}{@{}cccccccc} \br
+  \begin{tabular}{@{}cccccccc} \br
   $M_1/M$ & $M_2/M$ & $|\chi_1| / M^2$
   & $|\chi_2| / M^2$ & $d_0 / M$ & $M \Omega_0$ & $e$ &  $\dot{a}_0$ \\
   \hline
@@ -1061,7 +1064,6 @@ trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
                                                       & $3.4 \times 10^{-5}$ \\
     \br
   \end{tabular}
-\end{indented}
 \end{table}
 
 \subsubsection{Computational domain decomposition}
@@ -1291,14 +1293,13 @@ each Gaussian is centered, denoted by $\bar{x}^C$ in
 tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
 
 \begin{table}
+  \centering
   \caption[Constraint damping parameters during the inspiral.]{\label{table:inspiral_damping} Parameters for the Gaussians that make
     up the constraint damping functions during the
     inspiral. See~(\ref{eq:gamma_0_2_gaussian}) and~(\ref{eq:gamma_1_gaussian})
     for how the coefficients appear in the functional form of the constraint
     damping parameters.}
-  \begin{indented}
-    \lineup
-  \item[]\hspace{-0.0em}\begin{tabular}{@{}ccccccccccc} \br & $C$ & $A_0$ &
+  \begin{tabular}{@{}ccccccccccc} \br & $C$ & $A_0$ &
       $\bar{w}_0$ & $\bar{x}_0^C$ & $A_1$ & $\bar{w}_1$ & $\bar{x}_1^C$
     & $A_2$ & $\bar{w}_2$ & $\bar{x}_2^C$ \\
     \hline $\gamma_0$ & $0.01/M$ & $0.75/M$ & 38.415 & 0 & $8/M$ & 3.5 & 7.683
@@ -1309,18 +1310,16 @@ tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
     & $8/M$ & 3.5 & -7.683 \\
     \br
   \end{tabular}
-\end{indented}
 \end{table}
 
 \begin{table}
+  \centering
   \caption[Constraint damping parameters during ringdown.]{\label{table:ringdown_damping} Parameters for the Gaussians that make
     up the constraint damping functions during the
     ringdown. See~(\ref{eq:gamma_0_2_gaussian}) and~(\ref{eq:gamma_1_gaussian})
     for how the coefficients appear in the functional form of the constraint
     damping parameters.}
-  \begin{indented}
-    \lineup
-  \item[]\hspace{-0.0em}\begin{tabular}{@{}ccccccccccc} \br
+  \begin{tabular}{@{}ccccccccccc} \br
   & $C$ & $A_0$ & $\bar{w}_0$ & $\bar{x}_0^C$
   & $A_1$ & $\bar{w}_1$ & $\bar{x}_1^C$
   & $A_2$ & $\bar{w}_2$ & $\bar{x}_2^C$ \\
@@ -1336,7 +1335,6 @@ tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
   & -- & -- & -- \\
   \br
   \end{tabular}
-\end{indented}
 \end{table}
 
 \subsubsection{Constraint violations\label{sec:constraint violations}}
@@ -1382,14 +1380,13 @@ meaning that our coordinate maps do not affect the results of these simulations.
 }
 
 \begin{table}
+  \centering
   \caption[L2-norm of constraint energy and mapping error at $t=3000M$.]{\label{table:mapping_error} \response{The L2-norm of the constraint energy
   $\mathcal{E}$ and jacobian diagnostic $C_{\hat{i}}$ over all gridpoints at
   $t=3000M$ during the inspiral. For all of our resolutions, the jacobian
   diagnostic (which is a measure of our mapping error) is below the error of the
   constraint energy.}}
-  \begin{indented}
-    \lineup
-  \item[]\hspace{-0.0em}\begin{tabular}{@{}cccc} \br
+  \begin{tabular}{@{}cccc} \br
   L2-norm & Lev0    & Lev1    & Lev2\\
   \hline
   $\mathcal{E}$ & $1.0 \times 10^{-8}$  & $1.9 \times 10^{-10}$ &
@@ -1398,7 +1395,6 @@ meaning that our coordinate maps do not affect the results of these simulations.
   \response{$5.7 \times 10^{-13}$}\\
   \br
   \end{tabular}
-\end{indented}
 \end{table}
 
 After the merger, as the remnant black hole rings down, the constraint
@@ -1441,7 +1437,7 @@ while $\chi$ should remain identically zero. Deviations from this behavior help
 quantify numerical errors in the simulation.
 
 \begin{figure}
-  \hfill
+  \centering
   \includegraphics[width=0.9\linewidth]{images/lovelace_nelli/RERUN111824_BbhApparentHorizonQuantities.pdf}
   \caption[Apparent horizon masses and spins during inspiral and ringdown.]{Apparent horizon masses and spins as a function of time. The left
     column shows the irreducible mass $M_{\rm irr}$, Christodoulou mass
@@ -1499,7 +1495,7 @@ data from the strain and Weyl scalars over the time window $[1800M,2200M]$. See
 fixing.
 
 \begin{figure}
-  \hfill
+  \centering
   \includegraphics[width=0.9\linewidth]{images/lovelace_nelli/RERUN111824_Bbh22Waves.pdf}
   \caption[The $\ell=m=2$ gravitational-wave mode computed via CCE at three resolutions.]{The $\ell=m=2$ spin-weighted spherical-harmonic mode of the
     gravitational waves, computed using Cauchy Characteristic Evolution (CCE)

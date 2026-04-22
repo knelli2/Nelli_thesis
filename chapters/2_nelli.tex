@@ -345,7 +345,7 @@ horizon interpolator is once again asked to interpolate onto the new trial
 surface.
 
 \begin{figure}
-% \begin{center}
+\centering
 \begin{tikzpicture}
 \tikzmath{
   \lc = -1.5;
@@ -398,7 +398,6 @@ arc(2*180/\numrays:-2*180/\numrays:\maxradius) -- ++(-2*180/\numrays:-\firstradi
 % Text
 \node[anchor=west] at (\rc,-\maxradius-0.5) {Iteration 1};
 \end{tikzpicture}
-% \end{center}
 \caption[Diagram of trial horizon surfaces moving between cells during fast-flow.]{Diagram of how trial horizon-find surfaces can move between cells. The
    thick black lines are the trial surfaces. Cells containing the trial surface
    are shaded red. \textit{Left:} Trial surface for fast-flow iteration 0 that
@@ -555,7 +554,7 @@ such as asynchronous I/O \ref{sec:io} or horizon finding
 \ref{sec:horizon-finder} on other processors.
 
 \begin{figure}
-  % \centering
+  \centering
   \includegraphics[width=0.4\linewidth]{images/nelli/sphere_with_highlighted_wedge_cli_cropped.png}
   \hspace{0.5cm}
   \includegraphics[width=0.4\linewidth]{images/nelli/ringdown_domain_zoom_cli.png}
@@ -919,6 +918,7 @@ In computer science language, we use $t_{i+1}$ to establish a
 \textit{happens-before} relation between tasks.
 
 \begin{figure}
+\centering
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=0.75]
 %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
 \tikzmath{
