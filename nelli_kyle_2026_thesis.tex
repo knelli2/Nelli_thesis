@@ -9,6 +9,19 @@
 
 \documentclass[11pt]{caltech_thesis}
 % \documentclass[12pt]{caltech_thesis}
+
+% Set to true for printed book, false for PDF
+\newif\ifbookmode
+\bookmodefalse   % Online PDF mode
+% \bookmodetrue    % Book mode
+
+\ifbookmode
+  \geometry{twoside, inner=1.5in, outer=1in,
+            top=1in, bottom=1in,
+            headsep=\dimexpr 0.25in-1em,
+            marginparwidth=1.25in}
+\fi
+
 \usepackage[hyphens]{url}
 \usepackage{lipsum}
 \usepackage{graphicx}
@@ -144,6 +157,7 @@ Parallelism, and Cross-Code Comparisons of Gravitational Waveforms
 % \rightsstatement{Some rights reserved. This thesis is distributed under a [name license, e.g., ``Creative Commons Attribution-NonCommercial-ShareAlike License'']}
 
 %%  If you'd like to remove the Caltech logo from your title page, simply remove the "[logo]" text from the maketitle command
+\titlingpageend{\clearpage}{\clearpage}
 \maketitle[logo]
 %\maketitle
 
