@@ -223,6 +223,7 @@ Parallelism, and Cross-Code Comparisons of Gravitational Waveforms
       \item Kiran Shila
       \item Quinn
     \end{enumerate}
+    \item Union people
     \item Family
     \begin{enumerate}
       \item Mom, Dad, Erin, Rylee
@@ -233,7 +234,32 @@ Parallelism, and Cross-Code Comparisons of Gravitational Waveforms
 \end{acknowledgements}
 
 \begin{abstract}
-   [This abstract must provide a succinct and informative condensation of your work. Candidates are welcome to prepare a lengthier abstract for inclusion in the dissertation, and provide a shorter one in the CaltechTHESIS record.]
+From their prediction in 1916 by Einstein, to their first detection almost 100
+years later in 2015, gravitational waves provide a new way of looking at the
+universe, completely separate from electromagnetic radiation. They allow us to
+probe and study the most extreme gravitational environments that our universe
+has to offer; black holes. When two black holes merge, they produce a burst of
+gravitational waves which, if energetic enough, are able to be detected here on
+earth.
+
+However, to effectively model these mergers, we cannot solely rely on analytical
+descriptions. They break down near the actual merger, when spacetime is at its
+most extreme. To model this merger, we need numerical simulations of mergers to
+predict what they will look like. These simulations must be extremely accurate
+due to the incredible precision with which we are able to detect gravitational
+waves. Therefore, these expensive simulations need to run on supercomputers and
+be highly efficient in order to meet the necessary accuracy requirements.
+
+In this thesis, we present a novel algorithm for efficiently finding the
+apparent horizons in numerical simulations done with task-based parallelism. The
+performance improvement of task-based parallelism over more traditional
+parallelism is significant, but it introduces considerable algorithmic
+complexity which had to be dealt with. We then use this novel algorithm to
+perform the first binary black hole merger done with discontinuous Galerkin
+methods and analyze the waveform output. Lastly, we present a new feature to the
+\spectre~CCE module which allows it to be run on data from other numerical
+relativity codes. We show this new feature working on simulation data from five
+different numerical relativity codes.
 \end{abstract}
 
 \extrachapter{Published Content and Contributions}
