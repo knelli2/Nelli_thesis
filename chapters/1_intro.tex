@@ -581,13 +581,13 @@ singularity. However, this singularity is different than $R_S$. We discussed in
 Sec. \ref{sec:sr} the importance of coordinate freedom and being able to switch
 coordinates. Let us make the following coordinate transformations
 \begin{align}
-   r^\star &= r + 2M\ln\left(\frac{r}{2M}-2\right), \\
+   r^\star &= r + 2M\ln\left(\frac{r}{2M}-1\right), \\
    v &= t + r^\star, \\
    u &= t - r^\star.
 \end{align}
 With these transformations, our metric become
 \begin{equation}
-   ds^2 = -\left(1-\frac{2M}{r}\right)dv^2 + (dvdr+drdv) + rd\Omega^2.
+   ds^2 = -\left(1-\frac{2M}{r}\right)dv^2 + (dvdr+drdv) + r^2d\Omega^2.
 \end{equation}
 Now, we only have one singularity. Specifically when $r=0$. Therefore, that
 means the $r=2M$ singularity was what we call a ``coordinate'' singularity; i.e.
@@ -1097,7 +1097,7 @@ evolved variables $u^A$ in terms of the characteristic fields are
 \begin{align}
    \psi &= w^\psi \\
    \Pi &= \frac{1}{2}(w^++w^-) + \gamma_2w^\psi\\
-   \Phi &= \frac{1}{2}(w^+-w^-) + w_i^0
+   \Phi_i &= \frac{1}{2}(w^+-w^-)n_i + w_i^0
 \end{align}
 
 Lastly, we take a time derivative of our constraint $\mathcal{C}_i$ to see how
@@ -1107,7 +1107,7 @@ it evolves in time.
    &= -\partial_i\Pi - (-\partial_i\Pi + \gamma_2\mathcal{C}_i) \\
    &= - \gamma_2\mathcal{C}_i
 \end{align}
-where we used $\partial_t\psi=\Pi$ and Eq. \ref{eq:sw_phi_damped}. The solution
+where we used $\partial_t\psi=-\Pi$ and Eq. \ref{eq:sw_phi_damped}. The solution
 to this differential equation is $\propto e^{-\gamma_2 t}$, so our constraints
 will be exponentially damped. A similar equation exists for $\mathcal{C}_{ij}$
 \begin{equation}
@@ -1138,7 +1138,7 @@ give us two constraints
 
 Rearranging Eq. \ref{eq:gh_pi_no_damp}, we can get
 \begin{equation}
-   \partial_t g_{ab} - \beta^i\partial_j g_{ab} = -\alpha\Pi_{ab}.
+   \partial_t g_{ab} - \beta^i\partial_i g_{ab} = -\alpha\Pi_{ab}.
 \end{equation}
 And if we take the partial derivative of this and rearrange, we can get an
 equation for $\partial_t\Phi_{iab}$. To account for constraint damping, we add
