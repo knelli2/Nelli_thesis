@@ -502,11 +502,11 @@ The first example is from \S\ref{sec:gws}. Here we are comparing waveforms from
 different resolutions of a GH BBH simulation with mass ratio $q=1$ and
 non-spinning black holes. Since these simulations were run with \spectre, the
 worldtube data is in the Bondi modal format directly accepted by CCE. The goal
-of comparing the different resolutions is to asses the convergence of
+of comparing the different resolutions is to assess the convergence of
 \spectre~BBH simulations. Therefore, for that study, we did not actually
 transform the different resolutions to a common superrest frame for comparison.
 Instead, we transformed each resolution separately to the superrest frame of the
-inspiral of that resolution (i.e. a frame where the binary is a rest during
+inspiral of that resolution (i.e. a frame where the binary is at rest during
 early inspiral). Doing this allows for a convergence test because each
 resolution is transformed into a superrest frame without information from the
 other resolutions, effectively keeping each resolution isolated from the others.
@@ -559,7 +559,7 @@ modes show similar behavior to the $2,2$, just at a smaller amplitude.
 The next example is running \spectre~CCE over a waveform from the SXS catalog
 \cite{Scheel:2025jct}. We chose \texttt{SXS:BBH:2696}, a $q=8$ quasi-circular
 BBH with dimensionless spin $\vec{\chi}=(0,0,0.8)$ on each black hole, which was
-performed using \spec and was simulated for 43 orbits. This simulations was also
+performed using \spec and was simulated for 43 orbits. This simulation was also
 evolved in the GH gauge and output its data in the Bondi modal format directly
 accepted by CCE. In Fig. \ref{fig:spec-bbh-cce}, we show similar plots to Fig.
 \ref{fig:BbhGWsLev2Superrest} with the $(2,2)$, $(2,0)$, and $(3,2)$ modes, but
@@ -572,7 +572,7 @@ time $t-t_{22}^\mathrm{peak}=-8694M$ and then compare the waveforms. All the
 amplitude and phase comparisons appear to be convergent, except for the
 fractional amplitude comparison of the $2,0$ mode. But that only appears
 slightly non-convergent. Otherwise, the amplitude of the $2,0$ mode looks
-significantly better than \spectre s. Also, the phase differences in Fig.
+significantly better than \spectre's. Also, the phase differences in Fig.
 \ref{fig:spec-bbh-cce} appear to be much better behaved than in \spectre, even
 with a waveform that is roughly double its length.
 
@@ -626,7 +626,7 @@ spherical shell \cite{radice_athenak_tutorial}.
 \spectre~CCE can run on more than just data from a BBH. Any compact merger with
 dynamical gravity that can be simulated can supply worldtube data and then be
 run through CCE. In Fig. \ref{fig:spec-fil-bns-cce}, we present a case of two
-binary neutron start (BNS) simulations run through CCE. Even though the
+binary neutron star (BNS) simulations run through CCE. Even though the
 equations of the characteristic evolution were derived assuming a vacuum
 spacetime, so long as the amount of matter at the worldtube radius is negligible
 and does not meaningfully contribute to the curvature of spacetime, we are safe
@@ -659,7 +659,7 @@ GR compared to extrapolation because the spacetime metric is actually evolved
 out to \scri. Second, CCE accounts for the different evolution gauges used by NR
 codes, by computing waveforms in the same frame at \scri (up to BMS
 transformations which can be freely chosen). Prior to this work, comparing NR
-waveforms consisted of comparing extrapolated waveforms, assuming there are in
+waveforms consisted of comparing extrapolated waveforms, assuming they are in
 the same gauge.
 
 In \S\ref{sec:cce_codes_examples}, we present several examples of codes using
@@ -689,14 +689,14 @@ BBH simulations by different NR codes. To do this study, the exact same initial
 data should be used by each NR code, and interpolated onto the domains. This
 ensures that the physical parameters for the BBH, e.g. mass ratio and spins, are
 as close as possible. Gauge dependent parameters such as coordinate separation,
-angular velocity, etc may be different though. Then, each NR codes evolves the
+angular velocity, etc may be different though. Then, each NR code evolves the
 BBH through merger to a sufficient time after the BH has rung down. Ideally the
 resolution of each simulation from the different codes should be roughly the
 same based on some gauge-independent measure. Then all codes use \spectre~CCE to
 extract the GWs at \scri. From here, a number of different frame-fixing
 techniques can be used to analyze the data such as mapping to the remnant
-superrest frame, mapping each codes' waveform to their own inspiral superrest
-frame, or mapping each codes' waveform to one specific codes inspiral superrest
+superrest frame, mapping each code's waveform to their own inspiral superrest
+frame, or mapping each code's waveform to one specific code's inspiral superrest
 frame. Once the frame fixing is complete, a full analysis of the memory can be
 done.
 
