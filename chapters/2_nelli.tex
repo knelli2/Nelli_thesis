@@ -119,22 +119,22 @@ idle time as possible, no matter the number of resources you run on.
   codes~\cite{2025sxscatalog}.}
 
 The paper is structured
-as follows: In section \ref{sec:async} we introduce the concept of asynchronous
+as follows: In \S~\ref{sec:async} we introduce the concept of asynchronous
 parallelism and how it differs from the synchronous case. We illustrate with a
 straightforward example the difference between the two using input/output (I/O).
-In section \ref{sec:horizon-finder}, we detail how to implement a horizon finder
+In \S~\ref{sec:horizon-finder}, we detail how to implement a horizon finder
 in the context of asynchronous parallelism. In section
 \ref{sec:sync-control-system}, we introduce the synchronous aspects of the
 feedback control system in \spectre\ along with some necessary context about the
 domain and time-dependent coordinate mappings we use. Then in section
 \ref{sec:async-control-system} we detail changes necessary to implement the
 feedback control system with asynchronous parallelism, along with a number of
-subtleties that arise. \edit{Section~\ref{sec:timing} provides performance and timing
+subtleties that arise. \edit{\S~\ref{sec:timing} provides performance and timing
 results demonstrating the efficiency improvement gained from enabling LTS.} In
-section \ref{sec:bns} we briefly explain how the
+\S~\ref{sec:bns} we briefly explain how the
 feedback control system can be applied to binary neutron star simulations done
 with asynchronous parallelism in \spectre. And finally, we summarize and
-conclude our findings  in section \ref{sec:3_conclusion}.
+conclude our findings  in \S~\ref{sec:3_conclusion}.
 
 \section{Asynchronous parallelism}
 In this section, we first introduce the concept of asynchronous
@@ -268,7 +268,7 @@ It is worth noting the potential issues that can arise if an asynchronous
 algorithm is implemented incorrectly, as they can cause issues that one may not
 expect. The I/O example is a passive asynchronous algorithm, meaning that there
 is no feedback from the writing thread onto the rest of the application, so we
-don't have to worry about deadlocks (c.f. section~\ref{sec:deadlock}) here.
+don't have to worry about deadlocks (c.f. \S~\ref{sec:deadlock}) here.
 However, an issue can arise if the number of tasks contributing data to I/O at
 each time is smaller than the number of messages the writing thread expects to
 receive. In this scenario, data will continue to be sent to the writing thread,
@@ -321,7 +321,7 @@ a single process.
 
 The difficulty of implementing a horizon finder with task-based parallelism
 arises in steps \ref{lst:horizon-finder-1} and \ref{lst:horizon-finder-2} above.
-As mentioned before in the I/O example (section \ref{sec:io}), cells are free to
+As mentioned before in the I/O example (\S~\ref{sec:io}), cells are free to
 evolve as far into the future as they can regardless of what other cells may be
 doing (so long as a cell has sufficient data from neighboring cells). This
 poses a significant problem because the iterative horizon finding algorithm
@@ -426,7 +426,7 @@ variables from cells that are slower in their evolution but were not needed to
 interpolate to any trial surfaces. Therefore, our asynchronous algorithm must be
 smart enough to receive these variables from late cells, determine that they are
 no longer needed, and dispose of them to avoid a sort of memory leak similar to
-the one described in section \ref{sec:io-complications}. This necessitates keeping
+the one described in \S~\ref{sec:io-complications}. This necessitates keeping
 ledgers of horizon-find times that are currently being worked on, that are
 waiting to be worked on because a previous horizon-find hasn't finished, and
 that have already finished.
@@ -503,7 +503,7 @@ separate from the asynchronous aspects. The synchronous parts are largely the
 same as described in refs.~\cite{Scheel:2006gg} and~\cite{Hemberger:2012jz}, and
 we summarize them here to point out a few subtle differences that are necessary
 for an asynchronous implementation.  We detail the asynchronous parts in
-section \ref{sec:async-control-system}.
+\S~\ref{sec:async-control-system}.
 
 \spectre~evolves the first-order Generalized Harmonic (FOGH) formulation of
 Einstein's equations~\cite{Lindblom:2005qh} using the Damped Harmonic (DH) gauge
@@ -573,7 +573,7 @@ excisions in \spectre~used for single black hole evolutions. The thick black
 lines are element boundaries and the thin grey lines are grid points. The blue
 shaded regions are the equatorial projections of a single block. The coordinates
 for these grid points in figure \ref{fig:sphere-highlighted} are considered the
-grid coordinates, defined in section \ref{sec:time-dep-map}. The central
+grid coordinates, defined in \S~\ref{sec:time-dep-map}. The central
 excision surface must be kept within an apparent horizon for the entire
 evolution.
 
@@ -672,7 +672,7 @@ $t_{i+1}$ we choose a new set of constants $\lambda_{i+1}$ such that
     \frac{d^{n}\lambda}{dt^{n}}\biggm|_{t=t_{i+1}}\quad\quad\forall\quad0 \leq n
     < N
 \end{eqnarray}
-where $U(t_{i+1})$ will be defined in section \ref{sec:control-error-signal}.
+where $U(t_{i+1})$ will be defined in \S~\ref{sec:control-error-signal}.
 This ensures that all derivatives of $\lambda$ are continuous except the $N$th
 derivative.
 
@@ -690,12 +690,12 @@ postprocessing we used the $\lambda_{i+1}^{(n)}$ coefficients (because we now
 had them), this would produce different values for the coordinate mappings at
 the same time. Our postprocessed data would then be inconsistent with the data
 from the evolution. Additionally, choosing $\lambda_{i+1}^{(n)}$ is necessary
-for an asynchronous implementation (see section \ref{sec:async-control-system}).
+for an asynchronous implementation (see \S~\ref{sec:async-control-system}).
 
 \subsection{Control error and signal\label{sec:control-error-signal}}
 
 For the time-dependent coordinate mappings $\mathcal{M}(\lambda(t))$ described
-in section \ref{sec:time-dep-map}, we choose the form of $\lambda(t)$ in
+in \S~\ref{sec:time-dep-map}, we choose the form of $\lambda(t)$ in
 Eq.~\eqref{eq:lambda} because we \textit{a priori} cannot predict the motion and
 shape of the excision required to stay inside the apparent horizon. Therefore,
 $\lambda(t)$ needs to be dynamically updated as the simulation progresses based
@@ -769,14 +769,14 @@ implemented in \spectre, but neither of these affect the aspects of the control
 system and horizon finding related to synchronous parallelism. Accordingly, we
 refer the reader to \cite{Hemberger:2012jz} for details. Dynamically adjusting
 the damping timescales can affect the asynchronous parallelism and will be
-discussed in section \ref{sec:async-control-system}.
+discussed in \S~\ref{sec:async-control-system}.
 
 \subsection{Computing $\lambda^\mathrm{new}(t)$\label{sec:sync-update-lambda}}
 
 Now that we have gone through the necessary pieces of horizon finding (section
-\ref{sec:horizon-finder}), the computational domain (section \ref{sec:domain}),
-the time-dependent coordinate mappings (section \ref{sec:time-dep-map}), and the
-control signal (section \ref{sec:control-error-signal}), we detail the process
+\ref{sec:horizon-finder}), the computational domain (\S~\ref{sec:domain}),
+the time-dependent coordinate mappings (\S~\ref{sec:time-dep-map}), and the
+control signal (\S~\ref{sec:control-error-signal}), we detail the process
 that occurs in a synchronous application to dynamically update the
 time-dependent coordinate mappings. For simplicity, we will assume the
 following: there is only one time-dependent map parameter $\lambda(t)$ that we
@@ -797,7 +797,7 @@ The (synchronous) steps to compute $\lambda^\mathrm{new}(t)$ are:
 \begin{enumerate}
   \item \label{lst:lambda-1} Wait for all elements to finish their time step.
   Evolution variables are now in a consistent state at the same time.
-  \item Find the apparent horizon (section \ref{sec:horizon-finder}).
+  \item Find the apparent horizon (\S~\ref{sec:horizon-finder}).
   \item Calculate and store $Q(t)$ using the apparent horizon
   \item If not the $M=4\textrm{th}$ measurement, go to step \ref{lst:lambda-1}
   \item At the $M=4\textrm{th}$ measurement, compute $U(t)$ using
@@ -822,7 +822,7 @@ time-dependent parameters needs to happen. This implies the elements could, in
 theory, keep evolving until the $M=4$ measurement without stopping and waiting
 (assuming the horizon finder is implemented asynchronously as in section
 \ref{sec:horizon-finder}). This is precisely the performance improvement we
-employ with our asynchronous approach in section \ref{sec:async-control-system}.
+employ with our asynchronous approach in \S~\ref{sec:async-control-system}.
 
 \section{Asynchronous control system\label{sec:async-control-system}}
 
@@ -833,7 +833,7 @@ updating the time-dependent map parameters in \spectre.
 
 \subsection{Global State\label{sec:global-state}}
 
-In section \ref{sec:time-dep-map}, we briefly mentioned that the time-dependent
+In \S~\ref{sec:time-dep-map}, we briefly mentioned that the time-dependent
 coordinate mappings can be quasi-local in the sense that they can cover multiple
 elements. In turn, because elements are then placed on many cores/nodes, this
 means the mappings can also span multiple cores/nodes. Therefore the mappings
@@ -1181,7 +1181,7 @@ following events could occur sequentially in wallclock time:
 \end{enumerate}
 We now have a scenario where the element is paused waiting for a change that has
 already occurred in step \ref{lst:callback-4}, and our simulation will deadlock
-(section \ref{sec:deadlock}). This is why we must check the same condition a
+(\S~\ref{sec:deadlock}). This is why we must check the same condition a
 second time after step \ref{lst:callback-5}. This second check is line
 \ref{alg:lambda-if-2} in Algorithm \ref{alg:lambda}. When we do this, we'll
 conclude that $\lambda_0(t)$ is in fact ready, remove the callback which is now
@@ -1251,30 +1251,30 @@ time-dependent maps, their parameters, the control system, the horizon-finds, an
 asynchronous communication all interact and influence each other.
 
 \begin{itemize}
-  \item The excision boundaries and the mesh (section \ref{sec:domain}) are
+  \item The excision boundaries and the mesh (\S~\ref{sec:domain}) are
   controlled by time-dependent coordinate maps and their parameters $\lambda(t)$
-  (section \ref{sec:time-dep-map}), which must be updated periodically
+  (\S~\ref{sec:time-dep-map}), which must be updated periodically
   throughout the simulation as the black holes inspiral and merge.
   \item Each $\lambda(t)$ is represented as a piecewise polynomial
   in time (Eq.~\eqref{eq:lambda}).
-  \item Each piece of $\lambda(t)$ will expire (section \ref{sec:exp-time}) at
+  \item Each piece of $\lambda(t)$ will expire (\S~\ref{sec:exp-time}) at
   some time and elements will have to wait for it to be mutated to continue
   their evolution past this expiration time.
   \item For these reasons, $\lambda(t)$ occupies a mutable global state in the
-  simulation (section \ref{sec:global-state}).
-  \item Elements must query (section \ref{sec:async-update-lambda}) $\lambda(t)$
+  simulation (\S~\ref{sec:global-state}).
+  \item Elements must query (\S~\ref{sec:async-update-lambda}) $\lambda(t)$
   at a given time before they can evolve forward and eventually find a horizon.
   \item If the given time is after the expiration time, the element registers a
-  callback (section \ref{sec:async-update-lambda}) for when $\lambda(t)$ is
+  callback (\S~\ref{sec:async-update-lambda}) for when $\lambda(t)$ is
   mutated.
-  \item We mutate $\lambda(t)$ (section \ref{sec:control-error-signal}) with
+  \item We mutate $\lambda(t)$ (\S~\ref{sec:control-error-signal}) with
   information from four previous apparent horizon-finds.
   \item Each horizon-find is done asynchronously and requires novel logic to
   handle the collection of variables from each element (section
   \ref{sec:horizon-finder}).
   \item Once four horizon-finds have happened and $\lambda^\mathrm{new}(t)$ is
   computed, $\lambda(t)$ is mutated in a threadsafe and asynchronously
-  consistent manner (section \ref{sec:async-update-lambda}).
+  consistent manner (\S~\ref{sec:async-update-lambda}).
   \item Any element that registered a callback for when $\Lambda(t)$ was mutated
   is then restarted.
 \end{itemize}
@@ -1444,13 +1444,13 @@ NSs are tracked with the methods in this paper \cite{Habib:2025inprep}.
 
 In this paper, we present novel methods for finding and tracking apparent
 horizons in asynchronous simulations of black holes using a feedback control
-system. We first introduce asynchronous parallelism in section \ref{sec:async}
+system. We first introduce asynchronous parallelism in \S~\ref{sec:async}
 and provide a Statement \ref{statement:a_before_b} about asynchronous
 parallelism that is the cornerstone of all our algorithms. Additionally, we
 present an example of how a common algorithm like I/O must be rethought when
 implementing it in an asynchronous application compared to a synchronous one. We
 then detail how our asynchronous horizon finding algorithm works compared to a
-synchronous implementation in section \ref{sec:horizon-finder}. Maybe
+synchronous implementation in \S~\ref{sec:horizon-finder}. Maybe
 surprisingly, implementing an asynchronous horizon finder itself is not the most
 complicated parallel aspect for our dynamic tracking of apparent horizons.
 
@@ -1469,7 +1469,7 @@ number of publications
 ~\cite{Deppe:2024ckt, Lovelace:2024wra, Lara:2024rwa, Wittek:2024pis,
   Lara:2025kzj, Habib:2025inprep}.
 
-Additionally, in section \ref{sec:bns} we show that, omitting horizon finding,
+Additionally, in \S~\ref{sec:bns} we show that, omitting horizon finding,
 the asynchronous feedback control system can be used for evolutions of BNSs to
 rotate the computational domain to follow the orbit of the NSs. This shows the
 versatility of these algorithms and their potential to be applied to other
@@ -1479,7 +1479,7 @@ hole-neutron star binaries or utilizing \spectre's flexible domains to track
 features in other simulations of general relativistic magnetohydrodynamic
 systems.
 
-\edit{Finally, in section~\ref{sec:timing} we study the runtime of a mass
+\edit{Finally, in \S~\ref{sec:timing} we study the runtime of a mass
   ratio 4 non-spinning BBH simulation. The asynchronous horizon tracking
   algorithm enables the use of local time stepping, which ultimately provides a
   factor of five decrease in runtime. The cost savings is expected to increase

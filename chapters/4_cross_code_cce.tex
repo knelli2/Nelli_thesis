@@ -47,7 +47,7 @@ We notice that if we modify $\phi$ and $\mathbf{A}$ like so
   \phi &\rightarrow \phi - \frac{\partial \psi}{\partial t}\label{eq:maxwell-phi}
 \end{align}
 for some scalar function $\psi$, $\mathbf{B}$ and $\mathbf{E}$ in
-\ref{eq:maxwell-b} and \ref{eq:maxwell-e}, respectively, remain unchanged. This
+Eqs. \ref{eq:maxwell-b} and \ref{eq:maxwell-e}, respectively, remain unchanged. This
 ability to choose $\phi$ and $\mathbf{A}$ is called gauge freedom, and the
 choice that we make is considered the gauge.
 
@@ -77,10 +77,9 @@ be compared between gauges.
 
 Now we move to gauges in general relativity (GR). Instead of putting a
 constraint on the four-potential as our gauge condition, in GR we impose our
-gauge condition on the coordinates $x^\mu$ of our spacetime. We skip a
-derivation of \textit{why} we have this coordinate freedom in the theory of
-general relativity as that's the topic of introductory GR courses, but a
-derivation can be found in virtually any GR text book, including
+gauge condition on the coordinates $x^\mu$ of our spacetime. This coordinate
+freedom is briefly explored in Ch. \ref{ch:intro}, but a full derivation can be
+found in virtually any GR text book, including
 \cite{Misner:1973prb,Wald:1984rg,Carroll:2004st} to name a few. For our
 purposes, let's take a look at a few gauges in GR and NR.
 
@@ -108,12 +107,12 @@ this point where we make a gauge choice of
 \begin{equation}\label{eq:harmonic_gauge}
   \Box x^\mu = 0
 \end{equation}
-which can be shown to simplify to \cite{Carroll:2004st}
+which can be shown to simplify to
 \begin{equation}\label{eq:linear_harmonic_gauge}
   \Box x^\mu = 0 \rightarrow g^{\mu\nu}\Gamma^\rho_{\mu\nu} = 0 \rightarrow
   \partial_\mu {\bar{h}^\mu}_{\lambda} = 0
 \end{equation}
-in the weak-field (linear) limit. Plugging Eq. \ref{eq:linear_harmonic_gauge}
+in the weak-field (linear) limit\cite{Carroll:2004st}. Plugging Eq. \ref{eq:linear_harmonic_gauge}
 into Eq. \ref{eq:field_equations} and taking the vacuum case ($R_{\mu\nu} =
 T_{\mu\nu} = 0$), we arrive at a clean result
 \begin{equation}
@@ -166,8 +165,8 @@ form of this gauge, called the damped-harmonic gauge, is
 where $H_\mu$ is called the gauge-source function~\cite{Szilagyi:2009qz}, and it
 is a function of the coordinates and the spacetime metric. The gauge source
 function is defined in Eq. \ref{eq:dh_gauge_source}--\ref{eq:dh_mu3}. The main
-purpose for this is to damp away oscillations shift $\alpha$ and drive it to one
-(so the time evolution remains steady).
+purpose for this is to damp away oscillations in the shift $\alpha$ and drive it
+to one (so the time evolution remains steady).
 
 For the BSSN/Z4 family of formulations, a gauge condition called the
 moving-puncture gauge, combined with $1+\log$ slicing and a
@@ -220,21 +219,22 @@ Namely at future-null infinity, also denoted \scri. Future-null infinity is the
 location in spacetime that future null rays (e.g. light rays) escape if they
 don't terminate inside the black hole and aren't in a stable orbit.
 
-There are a few ways of computing GWs at \scri that allow for comparison of GWs
+There are a few ways of computing GWs at \scri~that allow for comparison of GWs
 between resolutions or between codes. Most NR codes don't have a computational
 domain that extends out to \scri, as this would be intractably computationally
-expensive with typical methods. Instead, GWs at \scri must be computed in
+expensive with typical methods. Instead, GWs at \scri~must be computed in
 another manner. The first, and by far most inaccurate, method is to simply
 ignore gauge effects and compare GWs that are extracted at finite radii within
 the computational domain, treating them as if they were at \scri. While this
 method cannot be used to compare waveforms between NR codes, when comparing
 similar simulations from the same code, it can be a quick-and-dirty method for a
-quick analysis.
+rapid analysis.
 
-The second, and by far most common, method for computing GWs at \scri is called
+The second, and by far most common, method for computing GWs at \scri~is called
 extrapolation. The details for extrapolation can be found in the SXS
 Collaboration's second catalog release \cite{Boyle:2019kee}. However, the overall
-method is to compute the strain $h$ and the $\Psi_4$ Weyl scalar on a number of
+method is to compute the $\Psi_4$ Weyl scalar and the strain $h$, either
+directly using Regge-Wheeler-Zerilli methods\todocite or taking to time integrals of $\Psi_4$, on a number of
 concentric spheres surrounding the origin of the coordinate system. These
 quantities are then extrapolated with a $1/r^N$ power law, where $N$ is chosen
 based on a number of different conditions described in \cite{Boyle:2019kee}.
@@ -243,14 +243,14 @@ Extrapolation has been very successful and has been widely used by the NR
 community for producing GW catalogs
 \cite{Boyle:2019kee,Healy:2022wdn,Ferguson:2023vta,Hamilton:2023qkv}. However,
 because it simply extrapolates waveforms from the near field region around the
-black hole, some non-linear effects of GR as the wave travels to \scri are not
+black hole, some non-linear effects of GR as the wave travels to \scri~are not
 accounted for and may be important. Even with memory corrected waveforms from
 \cite{Scheel:2025jct}, they still don't account for all non-linear effects. For
-this, a full evolution of Einstein's equations out to \scri is needed.
+this, a full evolution of Einstein's equations out to \scri~is needed.
 
 \subsection{Characteristic Evolution}
 
-A method to evolve Einstein's equations all the way out to \scri is called
+A method to evolve Einstein's equations all the way out to \scri~is called
 Cauchy-Characteristic Extraction/Evolution (CCE). Here, we detail the important
 concepts and equations of CCE that will be needed in the rest of the chapter,
 following \cite{Moxon:2020gha} and \cite{Moxon:2021gbv}.
@@ -260,21 +260,24 @@ the formulations we discussed earlier this chapter (GH, BSSN, Z4). Then, we
 store the spacetime metric and its derivatives on a sphere centered at the
 origin for all times during our simulation. This is called the worldtube. This
 worldtube data is then used as the inner boundary condition for the
-Characteristic evolution which goes out to \scri. This characteristic evolution
-is performed on null-hypersurfaces, unlike the Cauchy evolution which is
-performed on space-like hypersurfaces. This is because with the Characteristic
-evolution, we are primarily concerned with evolving and resolving GWs, which
-travel along null rays, making null-hypersurfaces well suited to this problem.
+Characteristic evolution which is performed on a domain starting at the
+worldtube and extending out to \scri, represented as compactified coordinates.
+This characteristic evolution is performed on null-hypersurfaces, unlike the
+Cauchy evolution which is performed on space-like hypersurfaces. This is because
+with the Characteristic evolution, we are primarily concerned with evolving and
+resolving GWs, which travel along null rays, making null-hypersurfaces well
+suited to this problem.
 
 CCE decomposes the metric into again different coordinates and gauge conditions
 than GH or BSSN. The metric in a Bondi-like spherical coordinate system
 $\{u,r,x^A\}$ is
-\begin{equation}
-  ds^2 = -\left(e^{2\beta}\frac{V}{r} - r^2h_{AB}U^AU^B\right)du^2 - 2e^{2\beta}dudr
-    -2r^2h_{AB}U^Bdudx^A + r^2h_{AB}dx^Adx^B
-\end{equation}
+\begin{align}
+  ds^2 &= -\left(e^{2\beta}\frac{V}{r} - r^2h_{AB}U^AU^B\right)du^2 - 2e^{2\beta}dudr \nonumber\\
+    &\quad\quad -2r^2h_{AB}U^Bdudx^A + r^2h_{AB}dx^Adx^B
+\end{align}
 where $h_{AB}$ is related to the metric on the 2-sphere $q_{AB}$, $V$ and
-$\beta$ are scalar functions, and $U^A$ is a vector on the 2-sphere. These
+$\beta$ are scalar functions, and $U^A$ is a vector on the 2-sphere. Note that
+$\beta$ should not be confused with the shift vector $\beta^i$. These
 Bondi-like coordinates have the gauge conditions that $g_{rr} = g_{rA} = 0$,
 $\det{(h_{AB})} = \det{(q_{AB})}$, and asymptotic behavior
 \begin{equation}
@@ -316,7 +319,7 @@ details of what is on the right hand side are not important. See
    \partial_r (r^2Q) &= S_Q(J,\beta), \\
    \partial_r U &= S_U(J,\beta,Q), \\
    \partial_r (r^2W) &= S_W(J,\beta,Q,U), \\
-   \partial_r (rH) + L_H(J,\beta,Q,U,W)H &\\
+   \partial_r (rH) + L_H(J,\beta,Q,U,W)H &\nonumber\\
    + L_{\bar{H}}(J,\beta,Q,U,W)\bar{H} &= S_H(J,\beta,Q,U,W)
 \end{align}
 The final radial equation for $H$ lets us solve Eq. \ref{eq:bondi_h} for J at
@@ -324,7 +327,8 @@ the next time step and the hierarchy starts over again.
 
 Now these scalars are defined in terms of our metric expressed in a Bondi-like
 gauge which is useful for evolving the Characteristic system. However, in order
-for us to impose our worldtube data which is in some arbitrary evolved gauge, we
+for us to impose boundary conditions with worldtube data from a Cauchy evolution
+performed in some arbitrary evolved gauge, we
 must transform the evolved gauge into our Bondi-like gauge. The mathematics of
 this transformation are quite tedious and unimportant for the point being made
 here because it uses a number of intermediate coordinates that are only helpful
@@ -336,20 +340,21 @@ f(x^\mu,g_{\mu\nu})$, where $x^\mu$ is not related to $x^A$), with all the
 coordinate transformations hidden.
 
 \subsection{Frame fixing and BMS transformations}
-Now that we have a way to evolve GWs out to \scri, unfortunately, we still aren't
-finished. While we could directly compare GWs evolved from CCE, we actually
-still have some coordinate freedom left to exploit, specifically because we are
-at \scri. This coordinate freedom is the Bondi-van der Burg-Metzner-Sachs (BMS)
-group of symmetries, which is the standard Lorentz group plus an infinite
-dimensional group called supertranslations \cite{Bondi:1962px,Sachs:1962wk}. A
-supertranslation is an angle-dependent time translation where every point on the
-2-sphere of \scri can be time translated independently of each other because
-they are all causally disconnected. With this freedom, we can take two NR
-waveforms and map them to a common BMS frame for comparison. The two most common
-frames used are the post-Newtonian (PN) BMS frame (i.e. the frame that PN
-waveforms are in) and the superrest frame (i.e. the frame of the remnant black
-hole after a merger) \cite{Mitman:2022kwt}. The transformation of CCE waveforms
-into one of these frames is called frame fixing.
+Now that we have a way to evolve GWs out to \scri, unfortunately, we still
+aren't finished. While we could directly compare GWs evolved from CCE, we
+actually still have some coordinate freedom left to exploit, specifically
+because we are at \scri. This coordinate freedom is the Bondi-van der
+Burg-Metzner-Sachs (BMS) group of symmetries, which is the standard Lorentz
+group plus an infinite dimensional group called supertranslations
+\cite{Bondi:1962px,Sachs:1962wk}. A supertranslation is an angle-dependent time
+translation where every point on the 2-sphere of \scri~can be time translated
+independently of each other because they are all causally disconnected. With
+this freedom, we can take two NR waveforms and map them to a common BMS frame
+for comparison. The most common frames used are the post-Newtonian (PN) BMS
+frame (i.e. the frame that PN waveforms are in), the inspiral superrest frame
+(i.e. the frame of the inspiraling BHs), and the remnant superrest frame (i.e.
+the frame of the remnant black hole after a merger) \cite{Mitman:2022kwt}. The
+transformation of CCE waveforms into one of these frames is called frame fixing.
 
 The math behind frame fixing to the PN BMS or superrest frame is particularly
 tedious. However, all calculations are provided by the Python code \texttt{scri}
@@ -362,9 +367,7 @@ compare CCE waveforms, we only note it here and refer the reader to the sources
 cited in this section for further details as they are not important to the
 transformation of Cauchy worldtube data described below.
 
-
-\subsection{Original worldtube data format}
-
+\section{Worldtube data formats}
 Now we have the basics of the Characteristic evolution. Specifically that we use
 the Bondi scalars defined in Eqs. \ref{eq:bondi_u}-\ref{eq:bondi_h} as part of a
 hierarchical evolution system, we need those Bondi scalars on the worldtube
@@ -374,6 +377,7 @@ coordinates, and the spatial and temporal derivatives of the metric. Next we
 focus on how this last step is implemented in \spectre~and what new features
 were added in \spectre.
 
+\subsection{Original worldtube data format}
 The first detail we need to discuss is how \spectre~actually represents and
 stores the Bondi scalars either in memory of the simulation or on disk. Since we
 need the Bondi scalars on a sphere of constant radius at each timestep,
@@ -382,8 +386,8 @@ natural. For a surface $S_{\ell,m}$, we require $m=\ell$. This implies we will
 use $M = (\ell+1)^2$ complex-valued coefficients (or modes) to represent each
 Bondi scalar. We will call this the ``modal'' representation. The modal
 representation is extremely useful for two reasons. First is that it is straight
-forward to interpolate between two representations with different $\ell$ since
-the interpolation is either truncating the number of coefficients or appending
+forward to convert between two representations with different $\ell$ since
+the conversion is either truncating the number of coefficients or appending
 coefficients with value zero. Second, is that the modal representation is
 significantly more compact than a ``nodal'' representation where we represent
 the complex valued scalar at collocation points on a sphere. For the same
@@ -447,7 +451,11 @@ out-of-sync with the actual evolved metric quantities by one time step and
 trying to sync up the data is a much larger change for other codes.
 
 Therefore, we allow for computing the time derivatives internally in
-\spectre~CCE. When doing this, extreme care must be taken so that we use the
+\spectre~CCE. For the spatial metric we use the 3+1 equation
+\begin{equation}
+  \partial_t\gamma_{ij} = -2\alpha K_{ij} + D_i\beta_j + D_j\beta_i .
+\end{equation}
+Extreme care must be taken so that we use the
 correct gauge equations for $\alpha$ and $\beta^i$. Luckily for $\alpha$, most
 other codes use the $1+\log$ slicing condition given by Eq. \ref{eq:1_plus_log}.
 Some codes choose to not include the advective term $\beta^j\partial_j\alpha$,
@@ -464,7 +472,7 @@ worldtube input data format to only be the Bondi variables represented in
 complex modal coefficients. This was done largely to avoid waiting for extra
 computations during the Characteristic evolution for the worldtube data. It was
 also done to simplify the code-paths taken during the Characteristic evolution.
-Therefore, in order to support all these worldtube data formats, \spectre now
+Therefore, in order to support all these worldtube data formats, \spectre~now
 offers a separate executable that will transform the worldtube data from any of
 the supported input formats to the Bondi scalars in complex modal form in a
 separate output file. The new output file is then fed directly into the CCE
@@ -493,7 +501,7 @@ while running CCE.
 
 \section{Examples of NR codes using \spectre~CCE\label{sec:cce_codes_examples}}
 Now that we have detailed the process for converting Cauchy worldtube data into the
-proper format for \spectre~CCE, let's take a look at some examples where this is
+proper format for \spectre~CCE, we present some examples where this is
 being used.
 
 \subsection{\spectre\label{sec:cce_spectre}}
@@ -535,8 +543,9 @@ are similar to that of Fig. \ref{fig:BbhGWs} and we don't see a noticeable
 improvement mapping to the same superrest frame. For the $2,0$ mode, the early
 time amplitude differences are likely due to poor initial data on the initial
 null slice of the characteristic evolution. The late time behavior of the $2,0$
-mode is likely due to the cubed spheres that spectre uses. The $3,2$ and $4,4$
-modes show similar behavior to the $2,2$, just at a smaller amplitude.
+mode is likely due to the cubed spheres that \spectre~uses in the ringdown
+domain. The $3,2$ and $4,4$ modes show similar behavior to the $2,2$, just at a
+smaller amplitude.
 
 \subsection{\spec\label{sec:cce_spec}}
 
@@ -559,11 +568,11 @@ modes show similar behavior to the $2,2$, just at a smaller amplitude.
 The next example is running \spectre~CCE over a waveform from the SXS catalog
 \cite{Scheel:2025jct}. We chose \texttt{SXS:BBH:2696}, a $q=8$ quasi-circular
 BBH with dimensionless spin $\vec{\chi}=(0,0,0.8)$ on each black hole, which was
-performed using \spec and was simulated for 43 orbits. This simulation was also
+performed using \spec~and was simulated for 43 orbits. This simulation was also
 evolved in the GH gauge and output its data in the Bondi modal format directly
 accepted by CCE. In Fig. \ref{fig:spec-bbh-cce}, we show similar plots to Fig.
 \ref{fig:BbhGWsLev2Superrest} with the $(2,2)$, $(2,0)$, and $(3,2)$ modes, but
-we instead plot the $(2,1)$ mode instead of the $(4,4)$ mode since this
+we plot the $(2,1)$ mode instead of the $(4,4)$ mode since this
 simulation is asymmetric in its masses, so we expect the $(2,1)$ mode to be
 excited.
 
@@ -646,7 +655,7 @@ We present additions and improvements to the \spectre~CCE module that allow for
 running CCE on the output of other NR codes besides the SXS Collaboration's
 \spec~and \spectre. \spectre~CCE itself now only accepts worldtube data in the
 form of the Bondi scalars from Eq. \ref{eq:bondi_u}-\ref{eq:bondi_h} represented
-as complex-valued spherical harmonic coefficients/modes. However, now \spectre
+as complex-valued spherical harmonic coefficients/modes. However, now \spectre~
 also provides a conversion executable to put worldtube data into this expected
 format. This conversion executable accepts the spatial metric, lapse, and shift,
 along with their spatial derivatives as inputs, plus parameters for choosing
@@ -657,7 +666,7 @@ These improvements were made to better facilitate comparisons of numerical
 waveforms between NR codes. First, CCE better captures the non-linear effects of
 GR compared to extrapolation because the spacetime metric is actually evolved
 out to \scri. Second, CCE accounts for the different evolution gauges used by NR
-codes, by computing waveforms in the same frame at \scri (up to BMS
+codes, by computing waveforms in the same frame at \scri~(up to BMS
 transformations which can be freely chosen). Prior to this work, comparing NR
 waveforms consisted of comparing extrapolated waveforms, assuming they are in
 the same gauge.
@@ -666,7 +675,7 @@ In \S\ref{sec:cce_codes_examples}, we present several examples of codes using
 \spectre~CCE to extract GWs, along with preliminary frame-fixing analysis of
 some waveforms. We show CCE running with worldtube data from
 \spectre~(\S\ref{sec:cce_spectre}), \spec~(\S\ref{sec:cce_spec}), AthenaK
-(\S\ref{sec:cce_athenak}), FIL (\S\ref{sec:cce_fil}), and Maya
+(\S\ref{sec:cce_athenak}), FIL (\S\ref{sec:cce_fil}), and ETK
 (\S\ref{sec:cce_fil}). We give examples for frame-fixing analysis for the
 \spectre~and \spec~simulations.
 
@@ -682,7 +691,7 @@ improving the initial data on the first null slice of the characteristic
 evolution. The imperfect initial data can be seen in the early-time amplitude of
 the $2,2$ mode in both Fig. \ref{fig:BbhGWsLev2Superrest} and
 \ref{fig:spec-bbh-cce}. Significant work has already been put into solving this
-problem by Da Re et al. \cite{DaRe:2026}, but still needs to be investigated further.
+problem \cite{DaRe:2026}, but still needs to be investigated further.
 
 A third avenue would be performing a highly detailed study of CCE waveforms from
 BBH simulations by different NR codes. To do this study, the exact same initial

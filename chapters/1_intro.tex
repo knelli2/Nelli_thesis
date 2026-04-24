@@ -1,6 +1,6 @@
 % Use bibunit if using bibtex/natbib
 \begin{bibunit}[unsrtnat]
-\chapter{Introduction}
+\chapter{Introduction\label{ch:intro}}
 
 The gravity that we know here on Earth is intuitive. It is familiar. It is
 expected. And it is safe (for the most part). But this universe that we live in
@@ -578,7 +578,7 @@ $r\geq2M$.
 
 Also, if $r=0$, the $g_{tt}$ component of the metric goes to infinity; another
 singularity. However, this singularity is different than $R_S$. We discussed in
-Sec. \ref{sec:sr} the importance of coordinate freedom and being able to switch
+\S~\ref{sec:sr} the importance of coordinate freedom and being able to switch
 coordinates. Let us make the following coordinate transformations
 \begin{align}
    r^\star &= r + 2M\ln\left(\frac{r}{2M}-1\right), \\
@@ -643,7 +643,7 @@ we will switch from using greek letters (e.g. $\mu,\nu,\rho$) to latin letters
 (e.g. $a,b,c$) for spacetime symbols. This is purely a convention the NR
 community has adopted (albeit not a great one in our opinion).
 
-We must be careful with our time coordinate. Recall from Sec. \ref{sec:sr} that
+We must be careful with our time coordinate. Recall from \S~\ref{sec:sr} that
 SR has no global time that applies to all spacetime points. This is still true
 in GR, so we must take this into account. So instead of our time $t$ being a
 single number, we will make it a function. We can use $t$ to describe the
@@ -897,7 +897,7 @@ There are several gauge conditions that have been tested and aren't popular
 choices to use with the BSSN equations. One is the geodesic slicing condition,
 $\alpha=1$ and $\beta^i=0$. Another is maximal slicing where $K=0$ turns into an
 elliptic equation for the lapse, $D^2\alpha = \alpha K_{ij}K^{ij}$. Harmonic
-coordinates (which will be discussed more in Sec. \ref{sec:gh}) set $\Gamma^a =
+coordinates (which will be discussed more in \S~\ref{sec:gh}) set $\Gamma^a =
 0$.
 
 Several of the mentioned conditions for the lapse can be described by
@@ -1259,7 +1259,7 @@ first spatial hypersurface, (b) boundary conditions for either BSSN or GH, (c) G
 extraction via finite radius, extrapolation, or CCE (see Chapter
 \ref{ch:compare}), (d) numerical methods for how to discretize the mesh, (e)
 methods for taking ``good'' numerical derivatives, (f) finding the horizon of a
-black hole (see Sec. \ref{sec:intro_ah}), or (g) any of the previous topics
+black hole (see \S~\ref{sec:intro_ah}), or (g) any of the previous topics
 applied to simulating matter around black holes or neutron stars. This field is
 a rich mix of theory and computational algorithms and deserves to be explored
 further.
@@ -1527,7 +1527,7 @@ definition of AH. Specifically, that it is marginally outer-trapped surface
 contained within a spatial hypersurface at one specific time. At the surface of
 the AH, all null rays are ingoing. However, for an event horizon, there will be
 a region where some null rays are outgoing on a specific spatial hypersurface,
-but they cannot escape to \scri and will eventually become ingoing null rays at
+but they cannot escape to \scri~and will eventually become ingoing null rays at
 a later spatial hypersurface. This region will be outside of the first
 hypersurface, thus showing that the AH is within the event horizon. For the Kerr
 (and Schwarzschild spacetime) the AH and the event horizon at a specific spatial
@@ -1544,7 +1544,7 @@ simulation (i.e. outgoing null rays), therefore we don't need to prescribe how
 information enters the domain if none is entering.
 
 The challenge then becomes ensuring that the excision surface stays inside the
-AH for the entire simulation of two black holes inspiralling and eventually
+AH for the entire simulation of two black holes inspiraling and eventually
 merging. More details about how that is done can be found in Ch.
 \ref{ch:nelli_et_al}.
 
@@ -1554,7 +1554,7 @@ Here we give an overview of the remaining chapters of the thesis.
 
 \subsection{Chapter \ref{ch:nelli_et_al}}
 Chapter \ref{ch:nelli_et_al} is the published work~\cite{Nelli:2025vfc}. It
-expands significantly on Sec. \ref{sec:intro_ah}, detailing how horizon finding
+expands significantly on \S~\ref{sec:intro_ah}, detailing how horizon finding
 is done in the \spectre~code. Specifically, it goes into detail about how the
 asynchronous nature of \spectre~posed a new challenge for designing the dynamic
 feedback control system that keeps the excisions within the horizons, and the
