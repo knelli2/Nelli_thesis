@@ -2,12 +2,11 @@
 \begin{bibunit}[unsrtnat]
 \chapter{Introduction\label{ch:intro}}
 
-The gravity that we know here on Earth is intuitive. It is familiar. It is
-expected. And it is safe (for the most part). But this universe that we live in
-continues to offer so much more than we expected. Starting from observing the
-motion of the planets and stars in the night sky to theorizing about black
-holes, the most compact and extreme objects in the universe, gravity continues
-to humble us.
+The gravity that we know here on Earth is intuitive. It is familiar. And it is
+safe (for the most part). But this universe that we live in continues to offer
+so much more than we expected. Starting from observing the motion of the planets
+and stars in the night sky to theorizing about black holes, the most compact and
+extreme objects in the universe, gravity continues to humble us.
 
 \section{Newtonian Gravity}
 
@@ -41,7 +40,7 @@ we can get the equations of motion for any object in Newtonian gravity,
    m\frac{d^2x_i}{dt^2} = -\frac{\partial \Phi}{\partial x_i} .
 \end{equation}
 Additionally, there is a physical constraint on the matter density $\rho$,
-namely the conservation of energy. This looks like
+namely the conservation of mass. This looks like
 \begin{equation}
    \frac{\partial\rho}{\partial t} = -\nabla\cdot(\rho\mathbf{v}).
 \end{equation}
@@ -239,8 +238,7 @@ Therefore, $\Lambda$ is a transformation between coordinates only if
    \eta_{\mu\nu} = \eta_{{\mu'}{\nu'}}{\Lambda^{\mu'}}_{\mu}{\Lambda^{\nu'}}_{\nu},
 \end{equation}
 Or said another way, $\Lambda$ doesn't transform the components of the metric.
-If $\Lambda$ satisfies this, then we call it a Lorentz transformation. These
-will be mentioned in Ch. \ref{ch:compare}.
+If $\Lambda$ satisfies this, then we call it a Lorentz transformation.
 
 \section{General Relativity}
 Now in going from Newtonian gravity to SR, we didn't actually add in any gravity
@@ -249,8 +247,8 @@ are ready to combine SR with gravity to produce Einstein's theory of general
 relativity (GR). Probably the biggest conceptual difference between GR and
 Newtonian gravity is that Newtonian gravity is explained as a force exerted
 between two masses. And any object that has a force being applied to it will
-accelerate in the direction of that force. Therefore, motion in Newtonian
-gravity arises from forces.
+accelerate in the direction of that force. Therefore, a change of motion in
+Newtonian gravity arises from forces.
 
 In GR, however, motion does not arise from forces. Instead, in GR we say there
 is some ``background'' spacetime, or some fabric of the universe that matter
@@ -335,17 +333,18 @@ to the right at point $A$ and move it to point $C$ along two different paths;
 $A\rightarrow B\rightarrow C$ and $A\rightarrow D\rightarrow C$. We move the
 vectors in such a way that doesn't rotate or scale them. Therefore, somewhat
 intuitively, we expect both vectors at $C$ to be identical because the vectors
-weren't changed in any way except for their positions. Now we do the same thing
-in Fig. \ref{fig:parallel-transport-sphere}, except this time we start with a
-vector at $A$ that lies on the equatorial line of a sphere and move it to point
-$C$ at the pole along two different paths; $A\rightarrow C$ and $A\rightarrow
-B\rightarrow C$. Along the first path, the vector will be pointing tangent to
-the pole towards the left of the image. Along the second path, the arrow is
-first moved along the equatorial line to $B$, and then moved to the pole
-pointing towards the right. Unlike in Fig. \ref{fig:parallel-transport-circle},
-the final vectors are not the same. This demonstrates the unintuitive nature of
-a curved space compared to a flat one, and why we will need some more machinery
-to explain GR.
+weren't changed in any way except for their positions.
+
+Now we do the same thing in Fig. \ref{fig:parallel-transport-sphere}, except
+this time on the surface of a sphere. We start with a vector at $A$ that lies on
+the equatorial line of the sphere and move it to point $C$ at the pole along two
+different paths; $A\rightarrow C$ and $A\rightarrow B\rightarrow C$. Along the
+first path, the vector will be pointing tangent to the pole towards the left of
+the image. Along the second path, the arrow is first moved along the equatorial
+line to $B$, and then moved to the pole pointing towards the right. Unlike in
+Fig. \ref{fig:parallel-transport-circle}, the final vectors are not the same.
+This demonstrates the unintuitive nature of a curved space compared to a flat
+one, and why we will need some more machinery to explain GR.
 
 The reason we are concerned with how vectors change as we move through our space
 is because any coordinate system that we create is made up of basis vectors. In
@@ -360,8 +359,8 @@ everything we need to know about the gravity and curvature of our spacetime.
 
 We start by expanding our notion of what a derivative is in our curved
 spacetime. Instead of the typical partial derivative $\partial/\partial x$,
-which works in a flat spacetime, we need a derivative works in a curved
-spacetime, will be independent of our coordinates, and reduces back to the
+which works in a flat spacetime, a derivative which works in a curved
+spacetime will be independent of our coordinates and will reduce back to the
 partial derivative when the spacetime is flat. Since the partial derivative is
 already a good place to start, we can say that our new derivative is the partial
 derivative plus some correction that accounts for the coordinates. We define the
@@ -399,8 +398,8 @@ symbols as sums of partial derivatives of the metric
 \end{equation}
 
 Next we will define how to transport a vector in the most ``constant'' way
-possible along a path in a curved spacetime. This is useful because we still want
-to be able to move vectors in our spacetime without them being rotated or
+possible along a path in a curved spacetime. This is useful because we still
+want to be able to move vectors in our spacetime without them being rotated or
 changed in some way. We define parallel transport of a vector $V^\sigma$ along a
 path $x(\lambda)$ in our spacetime
 \begin{equation}
@@ -409,7 +408,7 @@ path $x(\lambda)$ in our spacetime
    \Gamma^\sigma_{\mu\nu}\frac{dx^\mu}{d\lambda}V^\nu = 0
 \end{equation}
 If the vector that we apply parallel transport to is the tangent vector itself,
-$dx^\mu/d\lambda$, then we get the equation
+$V^\mu=dx^\mu/d\lambda$, then we get the equation
 \begin{equation}\label{eq:geodesic}
    \frac{d^2x^\mu}{d^2\lambda} +
    \Gamma^\mu_{\rho\sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
@@ -417,8 +416,8 @@ $dx^\mu/d\lambda$, then we get the equation
 which is called the geodesic equation. The geodesic equation will be our notion
 of a ``straight line'' in a curved spacetime, i.e. a path without any external
 forces or influence. If you squint hard enough, you may be able to see that this
-is the GR extension of acceleration $\mathbf{a} = d^2\mathbf{x}/dt^2 = 0$ in
-Newtonian gravity.
+is the GR extension of zero acceleration, $\mathbf{a} = d^2\mathbf{x}/dt^2 = 0$,
+in Newtonian gravity.
 
 Now that we are able to compute how to move vectors around our spacetime, we can
 finally move on to computing the curvature of our spacetime which is where
@@ -504,7 +503,7 @@ two derivatives of this gravitational potential and on the right we have the
 density of matter $\rho$. We also know that Newtonian gravity is a good
 approximation for GR in the case of weak gravity like we have here on Earth.
 We happen to have just constructed a quantity that contains second derivatives
-of the metric $g_\mu\nu$ which is our GR analog of the gravitational potential
+of the metric $g_{\mu\nu}$ which is our GR analog of the gravitational potential
 $\Phi$.
 
 Therefore, we can postulate, just as Einstein did, that the equations of GR have
@@ -526,8 +525,8 @@ confusion and make the equations easier to work with.
 
 There is considerable physics to be studied when we include the stress energy
 tensor in the Einstein field equations such as neutron stars, white dwarf
-stars, cosmology, active galactic nuclei, black hole accretion disks,
-supernovae, and several others. However, for this thesis we will be focusing on
+stars, cosmology, active galactic nuclei, black hole accretion disks, and
+supernovae to name a few. However, for this thesis we will be focusing on
 black holes. And even though many black holes form due to the collapse and/or
 accretion of matter, once a black hole is formed there need not be any matter
 outside the black hole to describe a black hole spacetime. Therefore, for the
@@ -641,15 +640,15 @@ vertical axis). Then we can construct a vector $n^a$ which is normal to our
 $\Sigma$ hypersurfaces and points into the future. Note that for this section,
 we will switch from using greek letters (e.g. $\mu,\nu,\rho$) to latin letters
 (e.g. $a,b,c$) for spacetime symbols. This is purely a convention the NR
-community has adopted (albeit not a great one in our opinion).
+community has adopted.
 
 We must be careful with our time coordinate. Recall from \S~\ref{sec:sr} that
 SR has no global time that applies to all spacetime points. This is still true
 in GR, so we must take this into account. So instead of our time $t$ being a
 single number, we will make it a function. We can use $t$ to describe the
 normal vector $n^a$. We would like $n_a$ to be normalized and timelike
-($n^an_a=-1$) so we define a normalization factor $\alpha$ to achieve this.
-Then, $n^a$ becomes
+($n^an_a=-1$) so we define a normalization factor $\alpha$, called the lapse, to
+achieve this. Then, $n^a$ becomes
 \begin{equation}
    n^a = -\frac{1}{\alpha}\nabla^a t .
 \end{equation}
@@ -727,10 +726,11 @@ evolution equations.
 \subsection{BSSN formulation}
 The first formalism we will discuss is the Baumgarte-Shapiro-Shibata-Nakamura
 (BSSN) formalism \cite{Shibata:1995we,Baumgarte:1998te}. First, we finish off
-defining the Arnowitt-Deser-Misner (ADM) formalism \cite{Arnowitt:1962hi} as
-it's necessary for the BSSN formalism. This section is heavily based on
-derivations from \cite{Baumgarte:2010ndz}. While we won't derive them here, the
-BSSN formulation is closely related to the Z4 family of formulations \cite{Bona:2003fj,Bernuzzi:2009ex,Hilditch:2012fp,Alic:2011gg}.
+defining the 3+1, or Arnowitt-Deser-Misner \cite{Arnowitt:1962hi} (ADM),
+formalism  as it's necessary for the BSSN formalism. This section is heavily
+based on derivations from \cite{Baumgarte:2010ndz}. While we won't derive them
+here, the BSSN formulation is closely related to the Z4 family of formulations
+\cite{Bona:2003fj,Bernuzzi:2009ex,Hilditch:2012fp,Alic:2011gg}.
 
 We start by defining the extrinsic curvature $K_{ab}$. The
 extrinsic curvature is different than the Riemann curvature, or intrinsic
@@ -856,8 +856,8 @@ are
       + \bar{A}_{kj}\partial_i\beta^k
       - \frac{2}{3}\bar{A}_{ij}\partial_k\beta^k, \label{eq:dt_conformal_traceless_ext_curvature}
 \end{align}
-where $TF$ means the trace-free part of the tensor, e.g. $^{(3)}R_{ij}^{TF} = ^{(3)}R_{ij}
--^{(3)}R/3\gamma_{ij}$. 
+where $TF$ means the trace-free part of the tensor, e.g. $^{(3)}R_{ij}^{TF} =\ ^{(3)}\!R_{ij}
+-\ ^{(3)}\!R/3\gamma_{ij}$. 
 
 Next, we remember that with a conformal metric $\bar{\gamma}_{ij}$ there
 exists a conformal connection $^{(3)}\bar{\Gamma}^i_{jk}$ since connections are
@@ -866,7 +866,7 @@ tied to metrics. We can contract the conformal connection to get
    ^{(3)}\bar{\Gamma}^i \equiv \bar{\gamma}^{jk}\ ^{(3)}\bar{\Gamma}^i_{jk} 
    = -\partial_j\bar{\gamma}^{ij}.
 \end{equation}
-In the BSSN formalism, we promote $\bar{\Gamma}^i$ from a computed quantity to
+In the BSSN formalism, we promote $^{(3)}\bar{\Gamma}^i$ from a computed quantity to
 an independent variable that is evolved along with all the others. If we take
 the time derivative of the previous equation, substitute in Eq.
 \ref{eq:dt_conformal_spatial_metric}, and simplify a lot to get rid of the
@@ -980,8 +980,8 @@ these problems, the finite truncation of floating point numbers will always
 introduce some tiny error so we can be guaranteed an unstable evolution.
 
 Now in the BSSN formalism, we showed that the lapse and the shift contain our
-coordinate freedom and to impose a gauge condition, we had to specify the lapse
-and shift either analytically or by evolving them alongside the spacetime
+coordinate freedom. Then to impose a gauge condition, we had to specify the
+lapse and shift either analytically or by evolving them alongside the spacetime
 quantities. Here we show that specifying $H^a$ is equivalent to specifying the
 lapse and shift with the following evolution equations\cite{Lindblom:2005qh}
 \begin{align}
@@ -1116,8 +1116,8 @@ will be exponentially damped. A similar equation exists for $\mathcal{C}_{ij}$
 
 With these characteristic fields, speeds, and constraints, one is also able to
 impose boundary conditions on the incoming characteristic fields rather than
-evolved variables themselves. However, here we skip that as it isn't as
-informative.
+evolved variables themselves. However, here we skip that as we are more
+interested in the evolution equations themselves.
 
 Now we can return back to the GH formulation. For gravity, our field will be the
 metric itself $g_{ab}$ instead of $\psi$. Then we define the two auxiliary
@@ -1237,7 +1237,8 @@ We don't define them here because only $\mathcal{C}_a$ and $\mathcal{C}_{iab}$
 are added to the evolution equations to damp away errors. However, they are
 still useful for monitoring the simulation for errors. We can also combine all
 of these constraints into a single quantity called the ``constraint energy''
-which gives us an overall notion of how much energy is contained in constraints,
+which gives us an overall notion of how much energy is contained in all of our
+constraint violations,
 \begin{align}
   \mathcal{E}
   & = \delta^{ab}\left[ \mathcal{C}_a \mathcal{C}_b
@@ -1282,14 +1283,15 @@ holes? How did it know that it was a merger at all? Well there had to be some
 prediction about what the GWs would look like so data analysts would be able to
 search the observed data for the predicted signal. These predictions must be
 based on some sort of theory. However, data analysts don't know \textit{a
-priori} what parameters black holes will have when they see a potential signal,
-they would like to work with theories that give them the parameters of a BH
-fairly quickly Actually solving Einstein's equations numerically, though, can be
-very expensive, so a perturbative theory like Post-Newtonian \cite{Blanchet:2013haa} or
-Post-Minkowskian \cite{Bern:2019nnu} is usually better for quick evaluation. These
-perturbative theories break down when the black holes are close to merger
-because the perturbations of the background spacetime become too large. The
-perturbative methods are useful only during the inspiral.
+priori} what parameters black holes will have when they see a potential signal.
+They would like to work with theories that give them the parameters of a BH
+fairly quickly so they can test many predictions. Actually solving Einstein's
+equations numerically, though, can be very expensive, so a perturbative theory
+like Post-Newtonian \cite{Blanchet:2013haa} or Post-Minkowskian
+\cite{Bern:2019nnu} is usually better for quick evaluation. These perturbative
+theories break down when the black holes are close to merger because the
+perturbations of the background spacetime become too large. The perturbative
+methods are useful only during the inspiral.
 
 \begin{figure}[htbp]
    \centering
@@ -1311,17 +1313,29 @@ catalogs of pure NR waveforms for various BBH configurations
 
 The number of simulations in these catalogs is actually quite low compared to
 the number needed to fully span the parameter space of LIGO BBHs. This is due to
-the computational costs of NR simulations. One method of addressing this issue
-is to create NR surrogate catalogs which will fill in the BBH parameter space
-based on existing simulations
+the computational costs of NR simulations (\S\ref{sec:intro_why_hpc}). One
+method of addressing this issue is to create NR surrogate catalogs which will
+fill in the BBH parameter space based on existing simulations
 \cite{Blackman:2017pcm,Varma:2018mmi,Varma:2019jgo,MaganaZertuche:2024ajz}. The
-other, more popular method is to have an analytic model that is informed by
-NR. The two common methods are frequency-domain analysis (IMRPhenom family
+other, more popular method is to have an analytic model that is informed by NR.
+The two common methods are frequency-domain analysis (IMRPhenom family
 \cite{Pratten:2020fqn,Garcia-Quiros:2020qpx,Pratten:2020ceb}) and time-domain
 analysis (SEOBNR family
 \cite{Khalil:2023kep,Ramos-Buades:2023ehm,vandeMeent:2023ols}).
 
-\section{Why HPC is necessary}
+Now that LVK has seen hundreds of black hole mergers~\cite{KAGRA:2021vkt} and
+done BH population analysis on them~\cite{KAGRA:2021duu}, there are two natural
+next steps. First is observing these BBHs with even more precision to better
+test the theory of GR. Second is expanding the physical systems we are able to
+detect to include many more binary neutron star systems. Both of these goals,
+and more, will be accomplished with new, more sensitive, GW detectors. These
+include Cosmic Explorer~\cite{Evans:2021gyd,Evans:2023eyw}, Einstein
+Telescope~\cite{Maggiore:2019uih,Branchesi:2023mws}, and the
+Laser-Interferometer-Space-Antenna
+(LISA)~\cite{LISA:2017pwj,Amaro-Seoane:2022rxf,Colpi:2024xhw}, which will all
+hopefully be operational in the next couple decades.
+
+\section{Why HPC is necessary\label{sec:intro_why_hpc}}
 In order to actually create the NR and GW catalogs, NR simulations must run on
 supercomputers, or High Performance Computing (HPC) machines, due to the size
 requirements of the simulations. Here we will break down why one can't run
@@ -1476,8 +1490,8 @@ also define level surfaces as
 \begin{equation}
    \tau = \sqrt{\delta_{ij}(x^i-c^i)(x^j-c^j)} - r(\theta,\phi) = C
 \end{equation}
-for every point $x^i$ on $\mathcal{S}$ and $C$ is a constant. We can then define
-the surface normal form $s_a=(0,s_i)$ as
+for every point $x^i$ on $\mathcal{S}$. Here, $C$ is a constant. We can then
+define the surface normal form $s_a=(0,s_i)$ as
 \begin{equation}
    s_i = \frac{\partial_i \tau}{|s|}, \quad\quad
    |s| = \sqrt{\delta_{ij}(\partial_i\tau)(\partial_j\tau)}.
@@ -1528,10 +1542,11 @@ contained within a spatial hypersurface at one specific time. At the surface of
 the AH, all null rays are ingoing. However, for an event horizon, there will be
 a region where some null rays are outgoing on a specific spatial hypersurface,
 but they cannot escape to \scri~and will eventually become ingoing null rays at
-a later spatial hypersurface. This region will be outside of the first
-hypersurface, thus showing that the AH is within the event horizon. For the Kerr
-(and Schwarzschild spacetime) the AH and the event horizon at a specific spatial
-hypersurface are the same.
+a later spatial hypersurface. This region in the first hypersurface will be
+outside of the AH (because the null rays are outgoing), but still inside the
+event horizon, thus showing that the AH is within the event horizon. For the
+Kerr (and Schwarzschild spacetime) the AH and the event horizon at a specific
+spatial hypersurface are the same.
 
 We return now to the boundary condition that must be imposed on the excision
 boundary. We will make use of the fact that the AH will always be contained
@@ -1544,7 +1559,7 @@ simulation (i.e. outgoing null rays), therefore we don't need to prescribe how
 information enters the domain if none is entering.
 
 The challenge then becomes ensuring that the excision surface stays inside the
-AH for the entire simulation of two black holes inspiraling and eventually
+AH for the entire simulation of two BHs inspiraling and eventually
 merging. More details about how that is done can be found in Ch.
 \ref{ch:nelli_et_al}.
 
@@ -1585,16 +1600,8 @@ new feature can also read in the necessary quantities as either nodal values
 spin-weighted spherical harmonic expansion). This gives the user of \spectre~CCE
 the flexibility to output worldtube data from their code in whatever format is
 easiest for them. This feature has already been used in a published work for the
-AthenaK code~\cite{Radice:2025djo}.
-
-Questions:
-\begin{enumerate}
-   \item Style for Fig. Eq. Sec. Ch., etc
-   \item Style for bibliography
-   \item one bib or separate?
-   \item abbreviations
-   \item Style for published content
-\end{enumerate}
+AthenaK code~\cite{Radice:2025djo}, and a soon-to-be-published work for the
+Einstein Toolkit~\cite{Loffler:2011ay,EinsteinToolkit:2025_05}.
 
 \putbib[intro]
 \end{bibunit}
