@@ -648,7 +648,35 @@ of the waveforms as this work is still in progress \cite{Sun:2026}, but we
 simply show this as proof that we can run \spectre~CCE on non-SXS codes.
 
 \subsection{Einstein Toolkit\label{sec:cce_etk}}
-\todo{Wait for response from Deborah about ETK data.}
+
+\begin{figure}
+  \hfill
+  \includegraphics[width=1.0\linewidth]{images/etk_cce/etk_q1_nonspinning_inspiral_superrest.pdf}
+  \caption[ETK equal-mass nonspinning BBH GW modes mapped to the inspiral superrest frame.]{Equal-mass nonspinning BBH waveform from the Einstein Toolkit
+    mapped to the inspiral superrest frame at time
+    $t-t_{22}^\mathrm{peak}=-1500$ before the peak of the
+    amplitude of the $2,2$ mode. All waveforms are plotted so
+    $t=0$ corresponds to this peak of the $2,2$ mode. The four rows are the
+    $\ell,m=(2,2),(2,0),(3,2)$ modes of the waveform, respectively. We
+    plot the real part, imaginary part, and amplitude for each mode except the
+    $2,0$ mode which is only real.\label{fig:etk-q1ns-cce}}
+\end{figure}
+
+Finally, we show in-progress work of \spectre~CCE running on worldtube data
+produced by the Einstein Toolkit~\cite{Loffler:2011ay,EinsteinToolkit:2025_05}.
+The data was output with the \texttt{CCE\_Export}
+thorn~\cite{Ferguson:2025CCEExport}, developed specifically to output the
+worldtube in metric modal format, specifying the gauge information in the CCE
+input file to compute the time derivatives. In Fig. \ref{fig:etk-q1ns-cce}, we
+show some example modes from an equal mass quasi-circular non-spinning BBH
+simulation which started with separation $12M$. The $(2,0)$ mode shows a similar
+post-merger behavior to Fig. \ref{fig:BbhGWsLev2Superrest}, suggesting more
+resolution is needed during and after ringdown. Also the amplitude of the
+$(2,2)$ mode appears to be oscillating throughout the inspiral. This could
+potentially be due to some non-zero eccentricity or some mode-mixing. Further
+study would be needed to understand the glitch in the $(2,0)$ and $(3,2)$ mode
+around time $-1900M$, since this does not coincide with the worldtube radius of
+$R=200M$ used here.
 
 \section{Conclusion}
 We present additions and improvements to the \spectre~CCE module that allow for
