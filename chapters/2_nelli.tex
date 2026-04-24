@@ -408,14 +408,14 @@ arc(2*180/\numrays:-2*180/\numrays:\maxradius) -- ++(-2*180/\numrays:-\firstradi
 \end{figure}
 
 However, we must be careful now because this new trial surface is different from
-the previous one, and thus may have moved between cells, as shown in figure
+the previous one, and thus may have moved between cells, as shown in Fig.~
 \ref{fig:horizon-moving}. Therefore, the horizon interpolator must now check
 again if it has received enough data from the cells so that the interpolation
 onto the new trial surface can be completed. If not, the horizon interpolator
 must wait for data from additional cells. It can sometimes be the case that
 enough cells have sent their evolution variables for the first iteration to
-finish (left panel of figure \ref{fig:horizon-moving}), but not for the second
-iteration (right panel of figure \ref{fig:horizon-moving}); i.e., if only the
+finish (left panel of Fig.~\ref{fig:horizon-moving}), but not for the second
+iteration (right panel of Fig.~\ref{fig:horizon-moving}); i.e., if only the
 inner ring of cells in the figure have sent data before it is time to do
 Iteration 1. This implies our asynchronous algorithm must be able to dynamically
 receive data from new cells and store them.
@@ -568,11 +568,11 @@ such as asynchronous I/O \ref{sec:io} or horizon finding
   \label{fig:sphere-highlighted}
 \end{figure}
 
-Figure \ref{fig:sphere-highlighted} shows examples of computational domains with
+Fig.~\ref{fig:sphere-highlighted} shows examples of computational domains with
 excisions in \spectre~used for single black hole evolutions. The thick black
 lines are element boundaries and the thin grey lines are grid points. The blue
 shaded regions are the equatorial projections of a single block. The coordinates
-for these grid points in figure \ref{fig:sphere-highlighted} are considered the
+for these grid points in Fig.~\ref{fig:sphere-highlighted} are considered the
 grid coordinates, defined in \S~\ref{sec:time-dep-map}. The central
 excision surface must be kept within an apparent horizon for the entire
 evolution.
@@ -594,7 +594,7 @@ We start with a computational mesh that is described by coordinates $\{\hat{t},
 are stationary and do not change over the course of an evolution. They can be
 thought of as a sort of comoving coordinates. An example of grid coordinates for
 a single black hole is shown in the left panel of
-figure~\ref{fig:sphere-highlighted}. We then apply a coordinate mapping of the
+Fig.~\ref{fig:sphere-highlighted}. We then apply a coordinate mapping of the
 form
 \begin{eqnarray}
   t &=& \hat{t} \\
@@ -605,7 +605,7 @@ grid coordinates.
 We call $\{t, x^{i}\}$ the ``inertial coordinates'' as they represent
 coordinates where a binary system would orbit and have the separation shrink. An
 example of inertial coordinates for a single black hole is shown in the right
-panel of figure~\ref{fig:sphere-highlighted}. From now on, we will only use $t$,
+panel of Fig.~\ref{fig:sphere-highlighted}. From now on, we will only use $t$,
 not $\hat{t}$, when referring to the coordinate time since they are the same.
 
 The spatial mapping $\mathcal{M}(t)$ is a composition of analytic functions
@@ -1045,7 +1045,7 @@ wait, causing low utilization of the computational resources. A different
 mutation structure is needed in order to minimize how much time the elements
 wait.
 
-This new mutation structure is depicted in figure \ref{fig:exp-time}. The
+This new mutation structure is depicted in Fig.~\ref{fig:exp-time}. The
 horizontal axes represent time. The top axis is for the synchronous case, and
 the bottom axis is for the asynchronous case. Here $M_j$ denotes when we perform
 a measurement (horizon-find), $C_j$ denotes when we compute
@@ -1061,7 +1061,7 @@ immediately. We'd like to have them continue evolving for a short while so the
 horizon-find has a chance to finish and we can mutate
 $\lambda^\mathrm{old}(t)\rightarrow\lambda^\mathrm{new}(t)$ before the element
 reaches the expiration time. Therefore we need to decouple $C$ and $E$ in
-figure~\ref{fig:exp-time} for the asynchronous case.
+Fig.~\ref{fig:exp-time} for the asynchronous case.
 We achieve this by delaying $E$ by
 one extra measurement of $\lambda^\mathrm{old}(t)$. Then, when we start the
 measurement $C$ that will be used to compute $\lambda^\mathrm{new}(t)$, the
@@ -1078,7 +1078,7 @@ nicely into the existing implementation infrastructure.
 
 We note that this change of delaying the mutation by one (old)
 measurement time means that we will be using ``outdated'' information when we
-mutate $\lambda(t)$ at $E$. In the bottom axis of figure \ref{fig:exp-time} this
+mutate $\lambda(t)$ at $E$. In the bottom axis of Fig.~\ref{fig:exp-time} this
 is shown with the measurement $M_1$ which occurs at the same time as $E_1$ but
 will be used as the first measurement for computing $C_2$ (not shown). This
 measurement $M_1$ is performed with $\lambda^\mathrm{old}(t)$, not
@@ -1349,7 +1349,7 @@ algorithm is incompatible with the synchronous, step-based control-system
 implementation used in our older code \spec{}, and, for simplicity, we have
 chosen to use the fully asynchronous algorithm even when LTS is disabled.  We
 can, however, adjust the delay in the update of $\lambda$ to switch between the
-two update schemes shown in figure \ref{fig:exp-time}, while still using the
+two update schemes shown in Fig.~\ref{fig:exp-time}, while still using the
 asynchronous infrastructure.  The ``synchronous'' scheme introduces more
 dependencies between the tasks in the evolution, and results in elements
 waiting for the horizon finder more often than the ``asynchronous'' scheme.
@@ -1436,7 +1436,7 @@ tracking the evolution of the BNS system. The overall method in section
 update the angular velocity of the computational domain, except we don't use
 horizon-finds as our measurements. Instead, we find the center of mass of each
 NS and the system as a whole and use these measurements to compute $Q(t)$, its
-derivatives, $U(t)$, and eventually $\lambda(t)$. In figure \ref{fig:bns}, we
+derivatives, $U(t)$, and eventually $\lambda(t)$. In Fig.~\ref{fig:bns}, we
 show snapshots of an asynchronous BNS simulation done with \spectre~where the
 NSs are tracked with the methods in this paper \cite{Habib:2025inprep}.
 

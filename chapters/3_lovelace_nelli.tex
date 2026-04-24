@@ -172,12 +172,12 @@ gravitational-wave data analysis. By implementing our approach in
 spectral-type binary-black-hole evolution code available to the entire
 NR community for the first time.
 
-The rest of this paper is organized as follows. In \S\ref{sec:methods}, we
+The rest of this paper is organized as follows. In \S~\ref{sec:methods}, we
 discuss the numerical methods used in \texttt{SpECTRE}'s binary-black-hole
-simulations. Then, in \S\ref{sec:results}, we first test our method's stability
+simulations. Then, in \S~\ref{sec:results}, we first test our method's stability
 with simulations of single black holes before presenting results for simulations
 of binary black holes with \texttt{SpECTRE}. We briefly conclude in
-\S\ref{sec:conclusion}.
+\S~\ref{sec:conclusion}.
 
 \section{Methods\label{sec:methods}}
 
@@ -232,7 +232,7 @@ $\mathcal{C}_a=H_a+\Gamma_a$, $\gamma_1$ controls the linear degeneracy of the
 system, $\gamma_2$ damps the 3-index constraint
 $\mathcal{C}_{iab}=\partial_i g_{ab}-\Phi_{iab}$, $\Gamma_{abc}$ are the
 spacetime Christoffel symbols of the first kind, $\Gamma_a=g^{bc}\Gamma_{bca}$,
-and $v^k_g$ is the grid/mesh velocity as discussed in \S\ref{sec:dg method}.
+and $v^k_g$ is the grid/mesh velocity as discussed in \S~\ref{sec:dg method}.
 
 The gauge source function $H_a$ can be any arbitrary function depending only
 upon the spacetime coordinates $x^a$ and $g_{ab}$, but not derivatives of
@@ -259,7 +259,7 @@ with associated characteristic speeds
   \label{eq:fosh gh char speed pm}
   \lambda_{w^\pm} =& \pm \alpha - \beta^i s_i - v^i_g s_i,
 \end{align}
-where we denote the velocity of the grid/mesh as $v^i_g$ (see~\S\ref{sec:dg
+where we denote the velocity of the grid/mesh as $v^i_g$ (see~\S~\ref{sec:dg
   method} for details on our moving mesh method). The evolved variables as a
 function of the characteristic fields are given by
 \begin{align}
@@ -405,7 +405,7 @@ for an element $\Omega_k$. \label{fig:logical_map}}
 
 \texttt{SpECTRE} decomposes the domain into a set of non-overlapping hexahedra
 which are deformed using the map $x^i(\hat{t}, \xi^{\hat{\imath}})$ illustrated
-in figure~\ref{fig:logical_map}. \texttt{SpECTRE} uses a different number of
+in Fig.~\ref{fig:logical_map}. \texttt{SpECTRE} uses a different number of
 grid points in each logical direction, which we denote by $N_{\breve{\imath}}$
 in the $\xi$ direction, $N_{\breve{\jmath}}$ in the $\eta$ direction, and
 $N_{\breve{k}}$ in the $\zeta$ direction below.
@@ -478,7 +478,7 @@ equations are given by~\cite{Scheel:2006gg, Teukolsky:2015ega}
 \end{align}
 where $w_{\breve{\imath}}$ are the Legendre-Gauss-Lobatto integration weights.
 We use a method of lines approach to integrate these in time, with the details
-discussed in \S\ref{sec:time integration} below.
+discussed in \S~\ref{sec:time integration} below.
 
 For the boundary terms $D_\alpha$, we use an upwind multi-penalty
 method~\cite{Hesthaven1997, Hesthaven1999, Hesthaven2000, Hesthaven2007} given
@@ -540,7 +540,7 @@ At the outer radial boundary, we apply constraint-preserving boundary
 conditions~\cite{Lindblom:2005qh, Rinne:2007ui} by adding terms to the time
 derivative of the characteristic fields and thus also the time derivatives of
 the evolved variables. We use the characteristic fields and speeds defined
-in~\S\ref{sec:equations}. We define $d_{\hat{t}} w_{\hat{\alpha}}$ as the time
+in~\S~\ref{sec:equations}. We define $d_{\hat{t}} w_{\hat{\alpha}}$ as the time
 derivatives substituted into the transformation equations to the characteristic
 fields. That is,
 \begin{align}
@@ -647,7 +647,7 @@ boundary condition needs to be applied. However, we monitor the characteristic
 speeds,~(\ref{eq:fosh gh char speed g}-\ref{eq:fosh gh char speed pm}),
 and terminate the code if any of them point into the computational domain. We
 denote the radius of the excision surfaces by $r_{\mathrm{exc}}$. See 
-\S\ref{sec:control systems} for a brief explanation of how we control
+\S~\ref{sec:control systems} for a brief explanation of how we control
 $r_{\mathrm{exc}}$ to avoid any characteristic speed pointing into the
 computational domain.
 
@@ -678,18 +678,18 @@ Adams-Moulton predictor-corrector method~\cite{ThroweLTSAM}.  The
 step size in each element is chosen based on an estimate of the truncation error
 of the time step, using the algorithm described in \cite{NumericalRecipes}
 \S17.2.1. The specific values for the absolute and relative tolerances are
-given in \S\ref{sec:results}. As the time-stepping algorithm
+given in \S~\ref{sec:results}. As the time-stepping algorithm
 is more efficient for aligned steps of the same size, the step size in each
 element is rounded down to a value of the form $0.1 M / 2^n$ for some
 non-negative integer $n$.  For the highest-resolution binary-black-hole run in
-\S\ref{sec:bbh results}, 
+\S~\ref{sec:bbh results}, 
 this results in the most-demanding element taking $2^6$--$2^8$ steps for each
 step on the least demanding element for most of the inspiral. At the time of
 merger, this can increase to as high as $2^{11}$ steps for the most-demanding
 element for each step on the least demanding element.
 
 \subsection{Gauge condition}\label{sec:dh_gauge}
-We evolve binary black holes (\S\ref{sec:bbh results}) using the Damped Harmonic
+We evolve binary black holes (\S~\ref{sec:bbh results}) using the Damped Harmonic
 gauge condition~\cite{Szilagyi:2009qz, Deppe2018:uye}:
 \begin{align}\label{eq:dh_gauge_source}
   H_a &= \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
@@ -719,19 +719,19 @@ $A_{L1}=A_S = 1$, $A_{L2}=0$, $e_{L1}=e_{L2}=e_{S}=2$, and $\sigma_r = 100 /
 \sqrt{34.54}$. This choice for $\sigma_r$ ensures that the spatial decay
 Gaussian falls to $10^{-15}$ at a distance $r=100$ from the origin.
 
-For some of the single black-hole evolutions (\S\ref{sec:kerr black hole}), we
+For some of the single black-hole evolutions (\S~\ref{sec:kerr black hole}), we
 instead choose $H_a$ to be $\Gamma_a$ of the analytic initial data. For other
 single black-hole evolutions, we evolve in harmonic gauge, setting $H_a=0$
-everywhere.  For the gauge wave evolution (\S\ref{sec:gauge wave}), we set
+everywhere.  For the gauge wave evolution (\S~\ref{sec:gauge wave}), we set
 $H_a(t, x^i)$ to the value of $\Gamma_a(t, x^i)$ of the gauge wave analytic
 solution.
 
 \subsection{Control systems\label{sec:control systems}} When evolving the FOGH
 system, if there are black holes, the physical singularities inside of the black
 holes must be excised from the computational domain. To position the excisions
-with our moving mesh (described in \S\ref{sec:dg method}), we use a feedback
+with our moving mesh (described in \S~\ref{sec:dg method}), we use a feedback
 control system similar to what is presented in~\cite{Scheel:2006gg}
-and~\cite{Hemberger:2012jz}. As discussed in \S\ref{sec:boundary conditions},
+and~\cite{Hemberger:2012jz}. As discussed in \S~\ref{sec:boundary conditions},
 the excision surfaces must have all characteristic speeds pointing out of the
 computational domain, so that no boundary condition must be imposed. In practice
 this means that the excision surfaces must remain inside the apparent horizons,
@@ -748,17 +748,17 @@ signals used to update them are discussed in~\cite{Hemberger:2012jz} in
 
 The details of how the control systems are implemented within the context of
 asynchronous task-based parallelism along with the local adaptive time stepping
-described in \S\ref{sec:time integration} are described in
+described in \S~\ref{sec:time integration} are described in
 \cite{Nelli:2025inprep}.
 
 \section{Results\label{sec:results}}
 
 In this section, we begin by testing \texttt{SpECTRE}'s long-term stability and
 convergence; first with evolutions of single black holes in different coordinate
-systems (\S\ref{sec:kerr black hole}) and then with an evolution of a
-time-dependent gauge wave on a flat spacetime background (\S\ref{sec:gauge
+systems (\S~\ref{sec:kerr black hole}) and then with an evolution of a
+time-dependent gauge wave on a flat spacetime background (\S~\ref{sec:gauge
 wave}). Finally, we present results from a complete simulation of the inspiral,
-merger, and ringdown of two black holes (\S\ref{sec:bbh results}). The
+merger, and ringdown of two black holes (\S~\ref{sec:bbh results}). The
 \texttt{SpECTRE} input files used for simulations, including generating the BBH
 initial data, are provided as ancillary material with the paper.
 
@@ -776,7 +776,7 @@ constraint damping parameters,
 \end{align}
 where $r$ is the coordinate distance from the origin, $A_0=7.0/M$, $A_1=0.1/M$,
 $w_0 = 2.5 M$, and $w_1 = 100.0 M$. The computational domain of each evolution
-covers a spherical shell volume (figure~\ref{fig:bhdomain}) with inner radius
+covers a spherical shell volume (Fig.~\ref{fig:bhdomain}) with inner radius
 $r_{\mathrm{in}}=r_{\mathrm{exc}}$ which differs for our different test cases,
 and outer boundary coordinate radius
 $r_{\rm out}=1,000M$. We apply boundary conditions as described
@@ -802,7 +802,7 @@ initial data. The inner radius of the computational domain is
 \response{$r_{\mathrm{in}}=r_{\mathrm{exc}}=1.9M$}. In this case there are no
 coordinate dynamics, so a feedback control system is not necessary, though it is
 enabled in the simulations presented here. The left panel of
-figure~\ref{fig:bh-ks-conv} shows the gauge constraint $\mathcal{C}_a$ and the
+Fig.~\ref{fig:bh-ks-conv} shows the gauge constraint $\mathcal{C}_a$ and the
 3-index constraint $\mathcal{C}_{iab}$ as a function of time for several
 different resolutions.  We evolve the lowest resolution to time $t=10,000M$ to
 assess long-term stability, and we evolve the medium and high resolutions to
@@ -817,7 +817,7 @@ increasing $p$-refinement (that is, increasing points per cell per dimension),
 as expected. \response{We suspect the transient at $t=2000M$ results from
 constraint violations reflecting off the outer boundary back to the interior.}
 
-The right panel of figure~\ref{fig:bh-ks-conv} demonstrates long-term stability
+The right panel of Fig.~\ref{fig:bh-ks-conv} demonstrates long-term stability
 and convergence for the same setup but with a black hole of dimensionless spin
 $\chi\equiv S/M^2=0.8$ (with $r_{\mathrm{in}}=r_{\mathrm{exc}}=1.57M$).  Again,
 we see that the constraints remain \response{approximately} constant and
@@ -843,7 +843,7 @@ also in harmonic gauge. Here, $r_{\mathrm{in}}=r_{\mathrm{exc}}=0.9M$. The
 absolute and relative time stepper tolerances for the highest resolution of this
 test case are $10^{-10}$ and $10^{-8}$, respectively. Again,
 since the initial data and evolution use the same gauge there are no gauge
-dynamics. The left panel of figure~\ref{fig:bh-harmonic-conv} shows the gauge
+dynamics. The left panel of Fig.~\ref{fig:bh-harmonic-conv} shows the gauge
 constraint $\mathcal{C}_a$ and the 3-index constraint $\mathcal{C}_{iab}$ as a
 function of time for several different resolutions. We evolve the lowest
 resolution to time $t=10,000M$ to assess stability and two higher resolutions to
@@ -854,10 +854,10 @@ As a first test of the control system, we evolve a Kerr-Schild black hole in
 harmonic coordinates. The inner radius of the domain again is
 $r_{\mathrm{in}}=r_{\mathrm{exc}}=1.8M$. The differing gauge choices in the
 initial data and evolution create coordinate dynamics that cause the BH horizon
-to shrink. The control system (\S\ref{sec:control systems}) must decrease the
+to shrink. The control system (\S~\ref{sec:control systems}) must decrease the
 radius of the excision surface smoothly and precisely to avoid incoming
 characteristic speeds, so that the problem remains well-posed and the code does
-not terminate. The right panel of figure~\ref{fig:bh-harmonic-conv} shows
+not terminate. The right panel of Fig.~\ref{fig:bh-harmonic-conv} shows
 constraint violations over time for three resolutions. All evolutions are
 stable, and the constraint violations converge away. However, the constraints
 remain larger until after time $1,000M$. We suspect this is caused by initial
@@ -887,7 +887,7 @@ $r_{\mathrm{out}}=1,000M$.
 Our final single-black-hole test consists of evolving Kerr-Schild analytic
 initial data in damped harmonic gauge with
 $r_{\mathrm{in}}=r_{\mathrm{exc}}=1.8M$.  The left panel of
-figure~\ref{fig:bh-dh-conv} shows the constraints as a function of time for
+Fig.~\ref{fig:bh-dh-conv} shows the constraints as a function of time for
 several different resolutions. Just as in the harmonic gauge case, the
 non-trivial gauge dynamics cause larger constraint violations until after one
 light-crossing time to the outer boundary of $r_{\mathrm{out}}=1,000M$.  The
@@ -895,7 +895,7 @@ evolutions are
 stable and converge with increasing resolution. We also repeated this evolution
 but for a black hole with a dimensionless spin of $\chi=0.8$ and
 $r_{\mathrm{in}}=r_{\mathrm{exc}}=0.57M$.  We show the constraint violations in
-the right panel of figure~\ref{fig:bh-dh-conv}. Again we see stable evolutions
+the right panel of Fig.~\ref{fig:bh-dh-conv}. Again we see stable evolutions
 and exponential convergence with increasing $p$-refinement.
 
 \begin{figure}[h]
@@ -942,12 +942,12 @@ simulations we choose $A=0.1$ and $d=1$.
 Gauge wave simulations are known to be unstable in the BSSN formulation of the
 Einstein equations~\cite{Babiuc:2007vr}, but are stable in the Z4
 system~\cite{Alic:2011gg}. \response{Gauge wave simulations are stable in the FOGH system,
-as we demonstrate with \texttt{SpECTRE} in figure~\ref{fig:nbh-gauge-wave-conv}}.
-The left panel of figure~\ref{fig:nbh-gauge-wave-conv} shows the $L_2$ norm of
+as we demonstrate with \texttt{SpECTRE} in Fig.~\ref{fig:nbh-gauge-wave-conv}}.
+The left panel of Fig.~\ref{fig:nbh-gauge-wave-conv} shows the $L_2$ norm of
 the 1-index and 3-index constraints as a function of time. While the lowest
 resolution ($P_{14}$) simulation has exponentially growing constraints, the
 higher resolution simulations have constant and convergent
-constraints. Similarly, the right panel of figure~\ref{fig:nbh-gauge-wave-conv}
+constraints. Similarly, the right panel of Fig.~\ref{fig:nbh-gauge-wave-conv}
 shows the $L_2$ norm of the error in the evolved variables $g_{ab}$, $\Pi_{ab}$,
 and $\Phi_{iab}$ at the three resolutions. We observe stable and convergent
 long-term behavior. The highest resolution simulation is close to being limited
@@ -1042,13 +1042,13 @@ loop we performed eccentricity reduction by evolving the initial data for a few
 orbits and adjusting the initial orbital parameters to iteratively reduce the
 eccentricity of the orbit~\cite{Buonanno:2010, Habib:2024soh} to
 \response{$7.2\times10^{-4}$}.  The resulting initial data parameters are
-summarized in table~\ref{table:id}, and a plot of the resulting inertial
-trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
+summarized in Table~\ref{table:id}, and a plot of the resulting inertial
+trajectories for Lev2 is shown in Fig.~\ref{fig:trajectories}.
 
 \begin{table}
   \centering
   \caption[Parameters used to generate the BBH initial data.]{Parameters used to generate the binary-black-hole initial data
-    evolved in \S\ref{sec:bbh results}: in terms of the sum of the black holes'
+    evolved in \S~\ref{sec:bbh results}: in terms of the sum of the black holes'
     Christodoulou masses $M=M_1+M_2$ of each black hole, the individual masses
     $M_1$ and $M_2$, the dimensionless spin magnitudes $|\chi_1|/M^2$ and
     $|\chi_2|/M^2$, the orbital eccentricity $e$, the initial coordinate
@@ -1084,7 +1084,7 @@ trajectories for Lev2 is shown in figure~\ref{fig:trajectories}.
     We make use of two excision regions,
     each region lying inside a black hole's apparent horizon. Each excision is
     surrounded by a spherical shell partitioned into six deformed cubes as in
-    figure~\ref{fig:bhdomain}. Each spherical shell is then surrounded by another
+    Fig.~\ref{fig:bhdomain}. Each spherical shell is then surrounded by another
     shell of six deformed cubes that transition to a cubical boundary. Then the
     two cubes themselves are surrounded by a transitionary envelope which becomes
     spherical. \textit{Left:} The transitionary envelope. \textit{Right:} A
@@ -1103,8 +1103,8 @@ differentiable at
 element boundaries. This provides the flexibility necessary to construct the
 complicated domains needed for binary merger simulations using DG methods. An
 example of the domain used during the inspiral is shown in
-figure~\ref{fig:bbhdomain} and an example of the ringdown domain is shown in
-figure~\ref{fig:ringdown_domain}. While the coordinate maps provide
+Fig.~\ref{fig:bbhdomain} and an example of the ringdown domain is shown in
+Fig.~\ref{fig:ringdown_domain}. While the coordinate maps provide
 significant flexibility, we found that instabilities arise if neighboring
 elements differ by significantly more than a factor of two in size, placing a
 practical constraint on how quickly the resolution can be reduced as one moves
@@ -1114,7 +1114,7 @@ Our computational domain is the region of space between the outer spherical
 boundary and the excision boundaries that remove the black hole singularities
 from the domain. The excision boundaries are spherical in the comoving
 coordinates with their sizes and shapes in the inertial coordinates informed by
-the size and shape of the apparent horizons (\S\ref{sec:control systems}). At
+the size and shape of the apparent horizons (\S~\ref{sec:control systems}). At
 merger the apparent horizons of
 the inspiraling black holes become enveloped by a single common apparent
 horizon.  We handle the different number of excision boundaries during the
@@ -1142,14 +1142,14 @@ logarithmically in radius and equiangularly~\cite{Sadourny:1972, RONCHI199693}
 in angles significantly reduces computational cost.
 
 The second layer uses a set of wedges that wrap the shells around each black
-hole in a cubical shell, as seen in figure~\ref{fig:bbhdomain}. A consequence
+hole in a cubical shell, as seen in Fig.~\ref{fig:bbhdomain}. A consequence
 of the decreasing separation between the two black holes during the inspiral is
 that the size of the excision within each cube grows as the simulation
 progresses. Since we only deform the region inside the cubes to conform to the
 shape of the apparent horizons, the simulation will fail if the apparent
 horizons grow beyond the cube boundaries. We remedy this by decoupling the
 excision center from the center of the cube (see the right panel of
-figure~\ref{fig:bbhdomain}),
+Fig.~\ref{fig:bbhdomain}),
 effectively increasing the size of the cube relative to the size of
 the excision by a constant factor that is sufficient to keep the apparent
 horizons within the cubes throughout the simulation. This generalized map is
@@ -1160,7 +1160,7 @@ crucial for robust inspiral and merger simulations.
   \includegraphics[width=0.4\linewidth]{images/lovelace_nelli/ringdown_domain_zoom_cli.png}
   \caption[Computational domain used during ringdown.]{An image of the ringdown domain. After a common horizon is found,
     the evolution is regridded onto a domain with a single excision as in
-    figure~\ref{fig:bhdomain}. Additional time-dependent maps are used to deform
+    Fig.~\ref{fig:bhdomain}. Additional time-dependent maps are used to deform
     the excision's spherical shape into one that corresponds to the common
     horizon shape.
     \label{fig:ringdown_domain}
@@ -1202,7 +1202,7 @@ diagnostic quantity (which we refer to as the ``jacobian diagnostic'') as
   C_{\hat{i}} = 1 - \frac{\sum_i |\partial_{\hat{i}} x^i|}
     {\sum_i |D_{\hat{i}} x^i|},
 \end{equation}
-following the convention in \S\ref{sec:dg method} where hatted quantities are in
+following the convention in \S~\ref{sec:dg method} where hatted quantities are in
 the logical coordinates and non-hatted quantities are in the inertial
 coordinates. In the numerator, $\partial_{\hat{i}} x^i$ is the analytic Jacobian
 provided by the analytic coordinate mappings (both time dependent and
@@ -1219,8 +1219,8 @@ Legendre-Gauss-Lobatto DG scheme.
 
 The ringdown domain is a single excision domain used after a common apparent
 horizon has formed. An example of this domain is shown in
-figure~\ref{fig:ringdown_domain}. It is similar in structure to the domain used
-in the single black hole tests in \S\ref{sec:kerr black hole}. We use a
+Fig.~\ref{fig:ringdown_domain}. It is similar in structure to the domain used
+in the single black hole tests in \S~\ref{sec:kerr black hole}. We use a
 logarithmic radial map from the excision surface to $r=50M$ and use a linear
 spacing further away to resolve the gravitational waves. We used an equidistant
 map instead of an equiangular map in the angular directions.
@@ -1251,7 +1251,7 @@ gridpoint every $\Delta t = 0.01M$. Then, we chose to terminate the inspiral
 portion of the simulation when the coordinate separation between the two black
 holes decreased to less than $2.138M$. This value was chosen to be late enough
 that it yielded enough distinct common horizon finds, but also early enough that
-the constraint energy (cf. \S\ref{sec:constraint violations}) didn't grow too
+the constraint energy (cf. \S~\ref{sec:constraint violations}) didn't grow too
 large. In the future, we intend to implement the techniques that \texttt{SpEC}
 uses to automate the transition process.}
 
@@ -1286,7 +1286,7 @@ where $C$ is a constant, $A_I$ are the amplitudes of the Gaussians, $\bar{r}_I$
 are the grid-frame radii from the center of each Gaussian, and $\bar{w}_I$ are
 the widths of the Gaussians in the grid
 frame. Table~\ref{table:inspiral_damping} shows the parameters during the
-inspiral and table~\ref{table:ringdown_damping} shows them during the
+inspiral and Table~\ref{table:ringdown_damping} shows them during the
 ringdown. In the grid frame the black holes are always located on the
 $\bar{x}$-axis so we only specify the grid frame $\bar{x}$-coordinate at which
 each Gaussian is centered, denoted by $\bar{x}^C$ in
@@ -1339,7 +1339,7 @@ tables~\ref{table:inspiral_damping} and~\ref{table:ringdown_damping}.
 
 \subsubsection{Constraint violations\label{sec:constraint violations}}
 
-Figure~\ref{fig:bbh-constraints} shows the constraint energy $\mathcal{E}$
+Fig.~\ref{fig:bbh-constraints} shows the constraint energy $\mathcal{E}$
 (see~(\ref{eq:constraint energy})) as a function
 of time at each resolution. Experience from \texttt{SpEC} suggests that the
 initial, rapid growth in $\mathcal{E}$ is caused by not resolving the initial
@@ -1374,7 +1374,7 @@ behavior of the constraints near the time of merger.
 \response{
 To ensure the errors from our coordinate mappings do not affect our constraint
 violations, we compare the L2-norms of the constraint energy and the jacobian
-diagnostic in table \ref{table:mapping_error} at $t=3000M$ during the inspiral.
+diagnostic in Table~\ref{table:mapping_error} at $t=3000M$ during the inspiral.
 For all our resolutions, the mapping error is below our constraint violations,
 meaning that our coordinate maps do not affect the results of these simulations.
 }
@@ -1452,7 +1452,7 @@ quantify numerical errors in the simulation.
 \end{figure}
 
 
-Figure~\ref{fig:massesAndSpins} shows $M_{\mathrm{irr}}$, $M_{\mathrm{Ch}}$, and
+Fig.~\ref{fig:massesAndSpins} shows $M_{\mathrm{irr}}$, $M_{\mathrm{Ch}}$, and
 $\chi$ during the inspiral and ringdown. We find that the masses and spins over
 time are convergent, in the sense that the difference between Lev0 and Lev1 is
 greater than the difference between Lev1 and Lev2. During the inspiral, after
@@ -1514,7 +1514,7 @@ fixing.
     amplitude goes below $\sim10^{-3}$. \label{fig:BbhGWs}}
 \end{figure}
 
-Figure~\ref{fig:BbhGWs} shows the leading-order $\ell=m=2$ spin-weighted
+Fig.~\ref{fig:BbhGWs} shows the leading-order $\ell=m=2$ spin-weighted
 spherical harmonic mode of the gravitational-wave strain as a function of
 retarded time $t$. To estimate the accuracy of the waveforms, we first apply a
 time shift $t_{22}^{\rm peak}$ so that the peak amplitudes at each spatial
@@ -1524,7 +1524,7 @@ time $t-t_{22}^{\rm peak}=-4000M$. This time was chosen as an early time after
 most of the initial spurious ``junk'' radiation (especially visible in the
 amplitude at early times) has been emitted. This junk radiation is
 characteristically different than the junk radiation seen in
-figure~\ref{fig:bbh-constraints}. The junk radiation in figure~\ref{fig:BbhGWs}
+Fig.~\ref{fig:bbh-constraints}. The junk radiation in Fig.~\ref{fig:BbhGWs}
 is of a lower frequency and is due to our choice of data on the initial null
 slice. It is an active area of research to improve data on the initial null
 slice.

@@ -26,7 +26,7 @@ gravitational potential $\Phi$ via Poisson's equation
    \nabla^2\Phi = 4\pi G\rho .
 \end{equation}
 
-To relate Eqs. \ref{eq:fma} and \ref{eq:poisson}, we compute the gradient of
+To relate Eqs.~\ref{eq:fma} and \ref{eq:poisson}, we compute the gradient of
 $\Phi$ as a force,
 \begin{equation}
     \mathbf{F} = -\nabla\Phi.
@@ -103,7 +103,7 @@ why Newtonian gravity isn't the full picture and why we need a different theory.
 
 The theory of special relativity (SR) is able to reconcile and account for the
 finite speed of light in all coordinate systems. Say we have some event $P$.
-Fig. \ref{fig:light_cone} shows a light cone centered at event $P$. The vertical
+Fig.~\ref{fig:light_cone} shows a light cone centered at event $P$. The vertical
 axis is time and the horizontal axis is a spatial dimension. The lines at
 $\pm45^{\circ}$ represent the paths that light take both into the future and
 from the past. In the ``Past'' light cone, everything contained within the light
@@ -183,7 +183,7 @@ something called a spacetime ``metric''. Now to fully understand the significanc
 a metric is and what it represents requires taking courses on differential
 geometry. However, for our purposes, a metric is basically a $4\times 4$ matrix
 that represents how coordinates combine together to form the spacetime interval.
-Therefore, for the interval in Eq. \ref{eq:spacetime-interval}, we can define
+Therefore, for the interval in Eq.~\ref{eq:spacetime-interval}, we can define
 its spacetime metric, named the Minkowski metric, as
 \begin{equation}
    \eta_{\mu\nu} =\left(
@@ -197,7 +197,7 @@ its spacetime metric, named the Minkowski metric, as
 \end{equation}
 It is diagonal because there are no cross-terms in Eq.
 \ref{eq:spacetime-interval} (such as $\Delta x\Delta y$). We can then rewrite
-Eq. \ref{eq:spacetime-interval} using Einstein summation notation (where all
+Eq.~\ref{eq:spacetime-interval} using Einstein summation notation (where all
 repeated indices are implicitly summed)
 \begin{equation}
    (\Delta s)^2 = \eta_{\mu\nu}\Delta x^\mu\Delta x^\nu
@@ -328,21 +328,21 @@ Therefore in GR, in order to describe gravity, we actually must describe the
 geometry of spacetime as this is what we experience as gravity. The first thing
 we should probably understand is how motion in a curved spacetime is different from
 a flat spacetime. Let's demonstrate this by moving some vectors along some
-curves. In Fig. \ref{fig:parallel-transport-circle}, we take a vector pointing
+curves. In Fig.~\ref{fig:parallel-transport-circle}, we take a vector pointing
 to the right at point $A$ and move it to point $C$ along two different paths;
 $A\rightarrow B\rightarrow C$ and $A\rightarrow D\rightarrow C$. We move the
 vectors in such a way that doesn't rotate or scale them. Therefore, somewhat
 intuitively, we expect both vectors at $C$ to be identical because the vectors
 weren't changed in any way except for their positions.
 
-Now we do the same thing in Fig. \ref{fig:parallel-transport-sphere}, except
+Now we do the same thing in Fig.~\ref{fig:parallel-transport-sphere}, except
 this time on the surface of a sphere. We start with a vector at $A$ that lies on
 the equatorial line of the sphere and move it to point $C$ at the pole along two
 different paths; $A\rightarrow C$ and $A\rightarrow B\rightarrow C$. Along the
 first path, the vector will be pointing tangent to the pole towards the left of
 the image. Along the second path, the arrow is first moved along the equatorial
 line to $B$, and then moved to the pole pointing towards the right. Unlike in
-Fig. \ref{fig:parallel-transport-circle}, the final vectors are not the same.
+Fig.~\ref{fig:parallel-transport-circle}, the final vectors are not the same.
 This demonstrates the unintuitive nature of a curved space compared to a flat
 one, and why we will need some more machinery to explain GR.
 
@@ -464,7 +464,7 @@ it out more explicitly,
 \end{equation}
 
 The Riemann curvature tensor is made up of first and second derivatives of the
-metric because the Christoffel symbols (Eq. \ref{eq:christoffel-symbols}) have
+metric because the Christoffel symbols (Eq.~\ref{eq:christoffel-symbols}) have
 first derivatives of the metric in them. The Riemann tensor encodes everything
 we need to know about the curvature of our spacetime, and it is only computed
 from derivatives of our metric $g_{\mu\nu}$. There are a number of symmetries of
@@ -600,7 +600,7 @@ not yet have.
 There is plenty more analysis one can do with the Schwarzschild solution to gain
 some intuition on how we should think of a curved spacetime. This includes
 computing the components of the Riemann tensor, Ricci tensor, and Christoffel
-symbols, computing the geodesics and stable orbits (Eq. \ref{eq:geodesic}),
+symbols, computing the geodesics and stable orbits (Eq.~\ref{eq:geodesic}),
 computing the Killing vectors, performing more coordinate transformations and
 expanding the Schwarzschild solution to negative radius, analyzing Kruskal
 diagrams, and more. All of which should give better intuition about the dynamics
@@ -680,7 +680,7 @@ a grid point represents moves between spatial hypersurfaces
 \begin{equation}\label{eq:t_a}
    t^a = \alpha n^a + \beta^a .
 \end{equation}
-Figure \ref{fig:lapse_shift} is a great diagram that shows the breakdown of
+Fig.~\ref{fig:lapse_shift} is a great diagram that shows the breakdown of
 $t^a$ into the timelike and spacelike components. It shows how those components
 map a spacetime coordinate at grid point A of one hypersurface to grid point B
 of the next hypersurface. Notice how $\alpha n^a$ gets us from the first
@@ -701,7 +701,7 @@ $\gamma_{ab}$ is purely spatial.
 
 With this, we can represent our spacetime metric in terms of
 $\gamma_{ij},\alpha,\beta^i$. If we choose $t^a = (1,0,0,0)$, we can then
-compute $n^a$ from Eq. \ref{eq:t_a} and solve Eq. \ref{eq:spatial_metric} for
+compute $n^a$ from Eq.~\ref{eq:t_a} and solve Eq.~\ref{eq:spatial_metric} for
 $g_{ab}$ as
 \begin{equation}
    g_{ab} = \left(
@@ -826,7 +826,7 @@ conformally transform this trace-free part as
    A_{ij} = e^{4\phi}\bar{A}_{ij} .
 \end{equation}
 
-Equation \ref{eq:dt_spatial_metric} for the time derivative of the spatial
+Eq.~\ref{eq:dt_spatial_metric} for the time derivative of the spatial
 metric will now split into two equations, one for $\phi$ and one for
 $\bar{\gamma}_{ij}$ because of the conformal transformation. Those new equations
 are
@@ -838,7 +838,7 @@ are
    -\frac{2}{3}\bar{\gamma}_{ij}\partial_k\beta^k\label{eq:dt_conformal_spatial_metric}
 \end{align}
 
-In a similar fashion, Eq. \ref{eq:dt_ext_curvature} for the time derivative of
+In a similar fashion, Eq.~\ref{eq:dt_ext_curvature} for the time derivative of
 the extrinsic curvature will also split into two equations, one for $K$ and one
 for $\bar{A}_{ij}$ because of the conformal transformation. The new equations
 are
@@ -884,7 +884,7 @@ $\partial_j\bar{A}^{ij}$ term, we wind up with
       + \bar{\gamma}^{lj}\partial_j\partial_l\beta^i \label{eq:dt_conformal_connection}.
 \end{align}
 
-Equations \ref{eq:dt_conformal_factor}, \ref{eq:dt_conformal_spatial_metric},
+Eqs.~\ref{eq:dt_conformal_factor}, \ref{eq:dt_conformal_spatial_metric},
 \ref{eq:dt_trace_extrinsic_curvature}, \ref{eq:dt_conformal_traceless_ext_curvature},
 and \ref{eq:dt_conformal_connection} make up the evolution equations of the BSSN
 formalism. The last piece we'll need are evolution equations for the gauge
@@ -904,7 +904,7 @@ Several of the mentioned conditions for the lapse can be described by
    (\partial_t -\beta^j\partial_j)\alpha = -\alpha^2 f(\alpha)K
 \end{equation}
 where $f(\alpha)$ is a generic function. Choosing $f(\alpha) = 2/\alpha$, we can
-integrate Eq. \ref{eq:generic_lapse} to get
+integrate Eq.~\ref{eq:generic_lapse} to get
 \begin{equation}
    \alpha = 1 + \ln\gamma .
 \end{equation}
@@ -1020,7 +1020,7 @@ variables
    \Phi_i &\equiv \partial_i\psi \label{eq:sw_phi_def}.
 \end{align}
 Using these new variables, we can take time derivatives of each to get a system
-of equations equivalent to Eq. \ref{eq:wave_eq}
+of equations equivalent to Eq.~\ref{eq:wave_eq}
 \begin{align}
    \partial_t\psi &= -\Pi \\
    \partial_t\Pi &= -\partial^i\Phi_i \\
@@ -1038,8 +1038,8 @@ not contain any derivatives of $u^A$. In this form, if all the left-eigenvectors
 of $M^j$ are linearly independent, then the system is said to be strongly
 hyperbolic. We will return to this shortly.
 
-Notice that Eq. \ref{eq:sw_pi_def} for $\Pi$
-became an evolution equation, but Eq. \ref{eq:sw_phi_def} for $\Phi_i$ isn't an
+Notice that Eq.~\ref{eq:sw_pi_def} for $\Pi$
+became an evolution equation, but Eq.~\ref{eq:sw_phi_def} for $\Phi_i$ isn't an
 evolution equation because it doesn't have time derivatives. It is actually
 called a constraint equation because now we evolve $\psi$ and $\Phi_i$
 independently. We can define two constraints with $\Phi_i$
@@ -1106,7 +1106,7 @@ it evolves in time.
    &= -\partial_i\Pi - (-\partial_i\Pi + \gamma_2\mathcal{C}_i) \\
    &= - \gamma_2\mathcal{C}_i
 \end{align}
-where we used $\partial_t\psi=-\Pi$ and Eq. \ref{eq:sw_phi_damped}. The solution
+where we used $\partial_t\psi=-\Pi$ and Eq.~\ref{eq:sw_phi_damped}. The solution
 to this differential equation is $\propto e^{-\gamma_2 t}$, so our constraints
 will be exponentially damped. A similar equation exists for $\mathcal{C}_{ij}$
 \begin{equation}
@@ -1127,15 +1127,15 @@ variables as
    \Phi_{iab} &= \partial_i g_{ab}
 \end{align}
 where $n^c=(\alpha^{-1},-\alpha^{-1}\beta^i)$ is a timelike unit normal vector,
-normalized with the spacetime metric in Eq. \ref{eq:nr_spacetime_line_element}.
-The equation for $\Phi_{iab}$ and our gauge condition in Eq.\ref{eq:gh_gauge}
+normalized with the spacetime metric in Eq.~\ref{eq:nr_spacetime_line_element}.
+The equation for $\Phi_{iab}$ and our gauge condition in Eq.~\ref{eq:gh_gauge}
 give us two constraints
 \begin{align}
    \mathcal{C}_a &= H_a + \Gamma_a = 0 \\
    \mathcal{C}_{iab} &= \partial_i g_{ab} - \Phi_{iab} = 0 .
 \end{align}
 
-Rearranging Eq. \ref{eq:gh_pi_no_damp}, we can get
+Rearranging Eq.~\ref{eq:gh_pi_no_damp}, we can get
 \begin{equation}
    \partial_t g_{ab} - \beta^i\partial_i g_{ab} = -\alpha\Pi_{ab}.
 \end{equation}
@@ -1302,7 +1302,7 @@ methods are useful only during the inspiral.
 \end{figure}
 
 NR exists to fill in the gaps left by the perturbative theories, particularly
-during merger and ringdown. Figure \ref{fig:gw150914_imr} shows the phases of
+during merger and ringdown. Fig.~\ref{fig:gw150914_imr} shows the phases of
 inspiral, merger, and ringdown from \cite{LIGOScientific:2016aoc}. Plunge
 happens just before merger. A combination of perturbative theory in the inspiral
 and NR for merger and ringdown allow for a full theoretical model of a BBH
@@ -1312,7 +1312,7 @@ catalogs of pure NR waveforms for various BBH configurations
 
 The number of simulations in these catalogs is actually quite low compared to
 the number needed to fully span the parameter space of LIGO BBHs. This is due to
-the computational costs of NR simulations (\S\ref{sec:intro_why_hpc}). One
+the computational costs of NR simulations (\S~\ref{sec:intro_why_hpc}). One
 method of addressing this issue is to create NR surrogate catalogs which will
 fill in the BBH parameter space based on existing simulations
 \cite{Blackman:2017pcm,Varma:2018mmi,Varma:2019jgo,MaganaZertuche:2024ajz}. The
@@ -1496,7 +1496,7 @@ define the surface normal form $s_a=(0,s_i)$ as
    |s| = \sqrt{\delta_{ij}(\partial_i\tau)(\partial_j\tau)}.
 \end{equation}
 
-We can then plug this into Eq. \ref{eq:ah_expansion} to get
+We can then plug this into Eq.~\ref{eq:ah_expansion} to get
 \begin{equation}
    \Theta = (\gamma^{ij}-s^is^j)
    \left(\frac{|s|}{r}(\delta_{ij}-\hat{r}_i\hat{r}_j)
@@ -1566,8 +1566,8 @@ merging. More details about how that is done can be found in Ch.
 
 Here we give an overview of the remaining chapters of the thesis.
 
-\subsection{Chapter \ref{ch:nelli_et_al}}
-Chapter \ref{ch:nelli_et_al} is the published work~\cite{Nelli:2025vfc}. It
+\subsection{Chapter~\ref{ch:nelli_et_al}}
+Ch.~\ref{ch:nelli_et_al} is the published work~\cite{Nelli:2025vfc}. It
 expands significantly on \S~\ref{sec:intro_ah}, detailing how horizon finding
 is done in the \spectre~code. Specifically, it goes into detail about how the
 asynchronous nature of \spectre~posed a new challenge for designing the dynamic
@@ -1576,10 +1576,10 @@ same shape as the horizons. It explains our solution to these new challenges and
 gives examples of the control system being used in scientific examples,
 including a binary neutron star system.
 
-\subsection{Chapter \ref{ch:lovelace_nelli}}
-Chapter \ref{ch:lovelace_nelli} is the published work~\cite{Lovelace:2024wra}.
+\subsection{Chapter~\ref{ch:lovelace_nelli}}
+Ch.~\ref{ch:lovelace_nelli} is the published work~\cite{Lovelace:2024wra}.
 It uses the implementation of the control system and horizon finder presented in
-Ch. \ref{ch:nelli_et_al} to perform the first BBH inspiral, merger, and ringdown
+Ch.~\ref{ch:nelli_et_al} to perform the first BBH inspiral, merger, and ringdown
 simulation using discontinuous Galerkin spectral methods for the spatial
 discretization. The chapter starts by performing some test cases on single BH
 and gauge wave problems showing convergence and stability. Then, three different
@@ -1587,8 +1587,8 @@ resolutions of an equal mass non-spinning BBH system are presented along with
 analysis of the constraint violations and numerical waveforms extracted with
 \spectre~CCE. 
 
-\subsection{Chapter \ref{ch:compare}}
-Chapter \ref{ch:compare} is not directly in any existing published work. It
+\subsection{Chapter~\ref{ch:compare}}
+Ch.~\ref{ch:compare} is not directly in any existing published work. It
 describes a new feature of the \spectre~CCE module that is able to convert
 worldtube data from other NR codes besides \spec~and \spectre~into the format
 that \spectre~requires. This includes computing time derivatives of the spatial
