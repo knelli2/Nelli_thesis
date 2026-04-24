@@ -234,7 +234,7 @@ The second, and by far most common, method for computing GWs at \scri~is called
 extrapolation. The details for extrapolation can be found in the SXS
 Collaboration's second catalog release \cite{Boyle:2019kee}. However, the overall
 method is to compute the $\Psi_4$ Weyl scalar and the strain $h$, either
-directly using Regge-Wheeler-Zerilli methods~\cite{Sarbach:2001PhysRevD,Regge:1957PhysRev,Zerilli:1970PhysRevLett} or taking to time integrals of $\Psi_4$, on a number of
+directly using Regge-Wheeler-Zerilli methods~\cite{Sarbach:2001PhysRevD,Regge:1957PhysRev,Zerilli:1970PhysRevLett} or taking two time integrals of $\Psi_4$, on a number of
 concentric spheres surrounding the origin of the coordinate system. These
 quantities are then extrapolated with a $1/r^N$ power law, where $N$ is chosen
 based on a number of different conditions described in \cite{Boyle:2019kee}.
@@ -385,8 +385,8 @@ representing the scalars as complex spherical harmonic coefficients is the most
 natural. For a surface $S_{\ell,m}$, we require $m=\ell$. This implies we will
 use $M = (\ell+1)^2$ complex-valued coefficients (or modes) to represent each
 Bondi scalar. We will call this the ``modal'' representation. The modal
-representation is extremely useful for two reasons. First is that it is straight
-forward to convert between two representations with different $\ell$ since
+representation is extremely useful for two reasons. First is that it is straightforward
+to convert between two representations with different $\ell$ since
 the conversion is either truncating the number of coefficients or appending
 coefficients with value zero. Second, is that the modal representation is
 significantly more compact than a ``nodal'' representation where we represent
@@ -440,7 +440,7 @@ of the necessary collocation points.
 
 We have expanded support for reading in metric quantities for the worldtube
 because most other NR codes use either the BSSN or Z4 formulations of Einstein's
-equations. Particularly we have relaxed the requirement to provide time
+equations. Particularly, we have relaxed the requirement to provide time
 derivatives of the metric quantities for the worldtube data. This was done
 because unlike the GH formulation where one of the evolved variables, $\Pi$,
 \textit{is} the time derivative of the spacetime metric, the BSSN and Z4
@@ -654,7 +654,7 @@ simply show this as proof that we can run \spectre~CCE on non-SXS codes.
   \includegraphics[width=1.0\linewidth]{images/etk_cce/etk_q1_nonspinning_inspiral_superrest.pdf}
   \caption[ETK equal-mass nonspinning BBH GW modes mapped to the inspiral superrest frame.]{Equal-mass nonspinning BBH waveform from the Einstein Toolkit
     mapped to the inspiral superrest frame at time
-    $t-t_{22}^\mathrm{peak}=-1500$ before the peak of the
+    $t-t_{22}^\mathrm{peak}=-1500M$ before the peak of the
     amplitude of the $2,2$ mode. All waveforms are plotted so
     $t=0$ corresponds to this peak of the $2,2$ mode. The four rows are the
     $\ell,m=(2,2),(2,0),(3,2)$ modes of the waveform, respectively. We
@@ -704,7 +704,7 @@ In \S\ref{sec:cce_codes_examples}, we present several examples of codes using
 some waveforms. We show CCE running with worldtube data from
 \spectre~(\S\ref{sec:cce_spectre}), \spec~(\S\ref{sec:cce_spec}), AthenaK
 (\S\ref{sec:cce_athenak}), FIL (\S\ref{sec:cce_fil}), and ETK
-(\S\ref{sec:cce_fil}). We give examples for frame-fixing analysis for the
+(\S\ref{sec:cce_etk}). We give examples for frame-fixing analysis for the
 \spectre~and \spec~simulations.
 
 There are a couple avenues for future work available using \spectre~CCE. First,

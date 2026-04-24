@@ -161,7 +161,7 @@ have only one MPI rank per node. The rest of the cores on the node are then used
 for OpenMP acceleration in \texttt{for} loops. While this does differ from the
 typical MPI application because not every core runs the same application,
 there's still one core on a node which runs the same application and is strongly
-synchronized between other ranks. Therefore, this method is still synchronous,
+synchronized with other ranks. Therefore, this method is still synchronous,
 but may have better performance.
 
 Asynchronous parallelism (also called task-based parallelism or asynchronous
@@ -857,7 +857,7 @@ global state when porting a synchronous application to be asynchronous is called
 privatization of the global state \cite{Solihin2020-en}. Instead of the global
 state being located in a common place accessible to all tasks, a local copy of
 the global state is stored in each task. Then, a task simply continues until
-it's local copy of the global state is invalid and/or it receives a new global
+its local copy of the global state is invalid and/or it receives a new global
 state.
 
 While this is theoretically possible in our case, privatization becomes

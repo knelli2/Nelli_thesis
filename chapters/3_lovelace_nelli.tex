@@ -1196,7 +1196,7 @@ and center of mass motion of the binary system.
 
 \response{
 To characterize the errors in these coordinate mappings, we introduce the
-diagnostic quantity (which we refer to as the ``jacobian diagnsotic'') as
+diagnostic quantity (which we refer to as the ``jacobian diagnostic'') as
 
 \begin{equation}
   C_{\hat{i}} = 1 - \frac{\sum_i |\partial_{\hat{i}} x^i|}
@@ -1234,11 +1234,11 @@ map we perform a least squares fit in time to the spherical harmonic
 coefficients of the common horizon \response{(and their time derivatives)} found during the
 inspiral. We fit to 100 times, and then initialize the shape \response{of the excision} by
 evaluating the fit at the transition time. For the size \response{of the excision}, we
-manually specify an excision radius $r_{\mathrm{exc}} = 1.45$ and gave the
+manually specified an excision radius $r_{\mathrm{exc}} = 1.45$ and gave the
 excision surface an initial outward \response{radial} velocity of 1.0; we adjusted these
 choices by hand until the ringdown was able to begin successfully, with the
 excision surface remaining inside the common apparent horizon while having all
-characteristic characteristic speeds pointing out of the computational domain
+characteristic speeds pointing out of the computational domain
 (cf.~\ref{sec:boundary conditions}).
 
 \response{For the simulations presented here, we carried out the transition from the
@@ -1412,7 +1412,7 @@ refinement during the ringdown, to future work.
 
 Another way of measuring the accuracy of BBH simulations is to track the masses
 and spins of the BHs using the apparent horizon surfaces. \response{We find the apparent
-horizons surfaces using a ``fast flow'' approach similar to the one outlined in
+horizon surfaces using a ``fast flow'' approach similar to the one outlined in
 \cite{Gundlach:1997us}. There are a number of subtleties that arise when
 implementing this approach with an asynchronous task-based parallelism setting.
 These are due to the fact that the ``fast flow'' approach is an iterative method
@@ -1510,7 +1510,7 @@ fixing.
     amplitude; iv) the difference in phase $\Delta \phi_{22}$, defined as the
     difference between the $\ell=m=2$ gravitational-wave phase at two different
     spatial resolutions, with each phase offset such that the phase vanishes at
-    $t - t_{22}^{\rm peak} = -4000 M$. The vertical black lines shows where the
+    $t - t_{22}^{\rm peak} = -4000 M$. The vertical black lines show where the
     amplitude goes below $\sim10^{-3}$. \label{fig:BbhGWs}}
 \end{figure}
 
