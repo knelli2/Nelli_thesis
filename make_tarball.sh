@@ -22,3 +22,28 @@ tar -czf "$TARBALL" \
   NelliKyle2026Thesis.pdf
 
 echo "Created: $TARBALL"
+
+# --- self-contained build test ---
+# Pass --test to verify the tarball builds the PDF from scratch.
+if [[ "${1:-}" == "--test" ]]; then
+  WORK_DIR="$(mktemp -d)"
+  echo "Testing tarball in $WORK_DIR ..."
+  tar -xzf "$TARBALL" -C "$WORK_DIR"
+
+  BUILD_LOG="$WORK_DIR/latexmk.log"
+  latexmk -pdf -cd -interaction=nonstopmode \
+    -jobname=NelliKyle2026Thesis \
+    "$WORK_DIR/nelli_kyle_2026_thesis.tex" \
+    > "$BUILD_LOG" 2>&1
+
+  OUTPUT_PDF="$WORK_DIR/NelliKyle2026Thesis.pdf"
+  if [[ -f "$OUTPUT_PDF" ]]; then
+    echo "Test passed: PDF built successfully."
+  else
+    echo "Test FAILED: PDF not produced." >&2
+  fi
+  echo "PDF path: $OUTPUT_PDF"
+  echo "Build log: $BUILD_LOG"
+
+  [[ -f "$OUTPUT_PDF" ]] || exit 1
+fi
