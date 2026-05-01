@@ -10,7 +10,8 @@ extreme objects in the universe, gravity continues to humble us.
 
 \section{Newtonian Gravity}
 
-In order to explain black holes, the overarching topic of this thesis, we must
+In order to explain black holes, the overarching topic of this thesis, we
+\red{\sout{must}}
 first start with a more simplified version of gravity and work our way up.
 Newtonian gravity states that the gravitational force between two masses is
 proportional to the two masses and inversely proportional to the square of the
@@ -55,7 +56,7 @@ interiors of large gas planets or even stars. These basic starting equations are
 able to unlock a large amount of gravitational physics on their own, making them
 vital, even today, to astrophysical research.
 
-However, Newtonian gravity does have its limitations. One being how simultaneity
+However, Newtonian gravity does have its limitations. One \red{\sout{being} is} how simultaneity
 of events is measured. In order to understand simultaneous events, we must
 understand the coordinates that are used and how they transform in Newtonian
 gravity. If we take a step back, one way to conceptually think about Newtonian
@@ -250,7 +251,8 @@ between two masses. And any object that has a force being applied to it will
 accelerate in the direction of that force. Therefore, a change of motion in
 Newtonian gravity arises from forces.
 
-In GR, however, motion does not arise from forces. Instead, in GR we say there
+In GR, however, motion does not arise from \red{\sout{forces} the force
+of gravity}. Instead, in GR we say there
 is some ``background'' spacetime, or some fabric of the universe that matter
 exists both on and in at the same time. In the Newtonian and SR picture, this
 background is ``flat'' meaning that it doesn't affect the matter that lives in
@@ -389,7 +391,8 @@ The second condition is that our connection is ``metric compatible'', meaning
    \nabla_\rho g_{\mu\nu} = 0.
 \end{equation}
 This second condition is important for raising and lowering indices of
-derivative quantities. With these two conditions, we can write the Christoffel
+derivative quantities. With these two conditions, \red{it turns out
+that} we can write the Christoffel
 symbols as sums of partial derivatives of the metric
 \begin{equation}\label{eq:christoffel-symbols}
    \Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(
@@ -420,11 +423,11 @@ is the GR extension of zero acceleration, $\mathbf{a} = d^2\mathbf{x}/dt^2 = 0$,
 in Newtonian gravity.
 
 Now that we are able to compute how to move vectors around our spacetime, we can
-finally move on to computing the curvature of our spacetime which is where
+finally move on to computing the curvature of our spacetime, which is where
 gravity in GR derives from. To do this, we start with a vector $V^\rho$. We
 already know if we move this vector along two different paths to the same
 destination, the resulting vectors will be different. This difference is
-precisely what we are going to call curvature. Imagine we first transport the
+precisely what we are going to \red{\sout{call} use to define} curvature. Imagine we first transport the
 vector in some direction $\nabla_\nu$ and then in another direction
 $\nabla_\mu$. This gives us a final vector of $\nabla_\mu\nabla_\nu V^\rho$.
 Now, we swap the order to get $\nabla_\nu\nabla_\mu V^\rho$. Let's take the
@@ -588,13 +591,13 @@ With these transformations, our metric becomes
 \begin{equation}
    ds^2 = -\left(1-\frac{2M}{r}\right)dv^2 + (dvdr+drdv) + r^2d\Omega^2.
 \end{equation}
-Now, we only have one singularity. Specifically when $r=0$. Therefore, that
+Now, we only have one singularity, specifically when $r=0$. Therefore, that
 means the $r=2M$ singularity was what we call a ``coordinate'' singularity; i.e.
 not a ``physical'' singularity like $r=0$. This is why we say that the event
 horizon is an invisible boundary because observers falling into a black hole
 will be uninterrupted at $r=2M$ and continue to fall. However, at $r=0$, our
 classical theory of GR breaks down. In order to describe what happens at (or
-after) $r=0$, we would need a valid theory of quantum gravity which we still do
+after) $r=0$, we would need a valid theory of quantum gravity, which we still do
 not yet have.
 
 There is plenty more analysis one can do with the Schwarzschild solution to gain
@@ -603,7 +606,7 @@ computing the components of the Riemann tensor, Ricci tensor, and Christoffel
 symbols, computing the geodesics and stable orbits (Eq.~\ref{eq:geodesic}),
 computing the Killing vectors, performing more coordinate transformations and
 expanding the Schwarzschild solution to negative radius, analyzing Kruskal
-diagrams, and more. All of which should give better intuition about the dynamics
+diagrams, and more. All of this should give better intuition about the dynamics
 in a curved spacetime. There is also an extension of the Schwarzschild solution to
 axial symmetry which is called the Kerr solution, again exploring all the same
 things for this new spacetime. For our purposes though, explaining $R_S$ and the
@@ -800,8 +803,12 @@ There are actually extra terms in these equations for the stress-energy tensor
 following a similar procedure, but we exclude those here because we are only
 concerned with the vacuum equations.
 
-We are unable to evolve the ADM equations stably
-\cite{Shibata:1995we,Baumgarte:1998te}, so now we move on to the BSSN equations.
+\red{\sout{We are unable to evolve the ADM equations stably} It turns
+out that the ADM equations do not lead to stable numerical evolutions
+for reasons that are well understood mathematically}.
+Accordingly, we now
+move on to the BSSN equations
+\cite{Shibata:1995we,Baumgarte:1998te}.
 We start by rewriting the spatial metric as
 \begin{equation}
    \gamma_{ij} = e^{4\phi}\bar{\gamma}_{ij}
@@ -811,7 +818,7 @@ $\bar{\gamma}_{ij}$ is called the conformal metric. This procedure of rewriting
 a quantity as a different quantity times a scalar function is a conformal
 transformation. The fourth power of $e^\phi$ is arbitrary, but useful for later
 calculation. The determinant of $\bar{\gamma}_{ij}$ is required to be
-$\bar{\gamma}=\eta=1$. We then define the scalar function $\phi$ to be
+$\bar{\gamma}=\eta=1$. \red{Omit $\eta$??} We then define the scalar function $\phi$ to be
 \begin{equation}
    \phi = \frac{1}{12}\ln(\gamma) .
 \end{equation}
@@ -972,7 +979,7 @@ condition, but instead of setting $-\Gamma^a = 0$, we set it as
 where $H^a$ is some arbitrary function of the coordinates and spacetime metric
 (but not derivatives of the metric!) that we specify. These conditions on $H^a$
 are critical because they preserve the strong hyperbolicity of the Einstein
-equations, which allow for stable evolutions of spacetime. If these conditions
+equations, which allows for stable evolutions of spacetime. If these conditions
 were not met, any tiny instability or error in our evolutions would grow
 exponentially and spoil our solution. And since we are using computers to solve
 these problems, the finite truncation of floating point numbers will always
@@ -997,11 +1004,11 @@ the other is equivalent.
 In the GH formulation, we won't be evolving quantities like $\gamma_{ij}$,
 $K_{ij}$, or $\Gamma^i$. Instead we will be evolving the full spacetime metric
 $g_{ab}$ itself. The specific form of the GH formulation that we will be
-presenting is the first order symmetric hyperbolic GH formulation. In the
+presenting is the first-order symmetric hyperbolic GH formulation. In the
 typical formulation, we would time integrate the second time derivative
-$\partial^2_t$ of the metric. In the first order formulation, we only evolve
+$\partial^2_t$ of the metric. In the first-order formulation, we only evolve
 $\partial_t$. This is advantageous because there are a number of well-known
-standard integrators that work on first order hyperbolic equations. However,
+standard integrators that work on first-order hyperbolic equations. However,
 this requires us to somehow reduce the order of the PDEs since Einstein's
 equations are second order.
 
@@ -1026,8 +1033,8 @@ of equations equivalent to Eq.~\ref{eq:wave_eq}
    \partial_t\Pi &= -\partial^i\Phi_i \\
    \partial_t\Phi_i &= -\partial_i\Pi
 \end{align}
-We have transformed a second order equation for $\psi$ into a system of first
-order equations for $\psi,\Pi,\Phi_i$. It can be useful to combine these evolved
+We have transformed a second-order equation for $\psi$ into a system of
+first-order equations for $\psi,\Pi,\Phi_i$. It can be useful to combine these evolved
 variables in a single vector $u^A=\{\psi,\Pi,\Phi_i\}$. We can then rewrite the
 evolution equations as
 \begin{equation}
@@ -1202,7 +1209,7 @@ have already mentioned
    H_a = -\Gamma_a = 0 .
 \end{equation}
 A different condition, called damped harmonic, which is used by the SXS
-Collaboration is
+Collaboration, is
 \begin{equation}
   H_a = \left[\mu_{L1} \log\left(\sqrt{\gamma}/\alpha\right) + \mu_{L2}
           \log\left(1/\alpha\right)\right] n_a - \mu_S g_{ai} \beta^i / \alpha,
@@ -1271,14 +1278,15 @@ is. Einstein predicted GWs back in the early 20th century
 \cite{Einstein:1916cc,Einstein:1918btx}. However, the predictions on the
 amplitude of the GWs were so small, $\Delta L\sim10^{-21}$m, that they were
 thought to be impossible to measure. Technology eventually advanced sufficiently
-far that we are now able to measure these GWs here on Earth using lasers in 4km
-long vacuum tubes. The first ever signal of two black holes merging was detected
+far that we are now able to measure these GWs here on Earth using lasers in
+4km-long vacuum tubes. The first ever signal of two black holes merging was detected
 by the LIGO \cite{LIGOScientific:2014pky}, VIRGO \cite{VIRGO:2014yos}, and Kagra
 \cite{KAGRA:2020tym} collaborations in 2015
 \cite{LIGOScientific:2016aoc,KAGRA:2021vkt}.
 
 But when LIGO detected this merger, how did it know it was a merger of two black
-holes? How did it know that it was a merger at all? Well there had to be some
+holes? How did it know that it was a merger at all? \red{\sout{Well}}
+There had to be some
 prediction about what the GWs would look like so data analysts would be able to
 search the observed data for the predicted signal. These predictions must be
 based on some sort of theory. However, data analysts don't know \textit{a
@@ -1336,7 +1344,7 @@ hopefully be operational in the next couple decades.
 
 \section{Why HPC is necessary\label{sec:intro_why_hpc}}
 In order to actually create the NR and GW catalogs, NR simulations must run on
-supercomputers, or High Performance Computing (HPC) machines, due to the size
+supercomputers, or High Performance Computing (HPC) machines, because of the size
 requirements of the simulations. Here we will break down why one can't run
 production-ready BBH simulations on a commercial laptop or even desktop.
 
@@ -1363,7 +1371,7 @@ Simulations typically take around $10^7$-$10^9$ time steps depending on the
 resolution. If a simulation was parallelized enough to take just 1ms per time
 step, the entire simulation would take $10^4$-$10^6$s, or 3 hours to 12 days.
 And this is only if a simulation is able to parallelize efficiently enough.
-Simulations often require weeks to months to run.
+Simulations \red{actually} often require weeks to months to run.
 These numbers are also only for vacuum spacetimes. Coupling a curved spacetime
 evolution with matter and magnetic fields increases the number of evolved
 variables and temporaries.
@@ -1372,26 +1380,28 @@ The amount of resources used on HPCs also varies based on the numerical methods
 used. These are often measured in core hours, which is the number of hours used
 times the number of cores used. The SXS Collaboration's recent catalog of 3756
 NR waveforms cost approximately $4.8\times 10^{8}$ core
-hours\cite{Scheel:2025jct}, while a recent paper by Rashti et al. cited 4 high
+hours\cite{Scheel:2025jct}, while a recent paper by Rashti et al. cited
+just 4 high
 resolution NR waveforms costing approximately $1.55\times 10^8$ core hours. This
 difference can likely be attributed to the use of spectral methods vs
 finite-difference methods. In recent years, advancements in GPU architecture
 have made simulations of BBHs and neutron stars possible with GPUs
-\cite{Peterson:2023azu,Shankar:2022ful,Kalinani:2024rbk,Zhu:2024utz,Fields:2024pob,Ji:2025rpd,Tootle:2025ikk},
-however there is still much to be done in this area.
+\cite{Peterson:2023azu,Shankar:2022ful,Kalinani:2024rbk,Zhu:2024utz,Fields:2024pob,Ji:2025rpd,Tootle:2025ikk};
+however, there is still much to be done in this area.
 
 \section{Horizon finding in the GH formalism\label{sec:intro_ah}}
 Here, we will only discuss horizon finding as it pertains to the GH formalism.
 Horizons can be found in the BSSN formulation as well using similar
-techniques, but we won't discuss those here.
+techniques. \red{\sout{but we won't discuss those here.}}
 
 Finding horizons in the GH formalism is necessary for the evolution of the
 equations in a way that it isn't for BSSN. In BSSN, the physical singularities
-are removed from the spacetime and replaced with punctures; approximations of
+are removed from the spacetime and replaced with punctures that approximate
 the singularities. This works because of some details of the gauge conditions
 used in the BSSN formalism and
 because information can never leave a BH. However, in GH, the harmonic (or
-damped harmonic) gauge conditions don't allow this, so there are two physical
+damped harmonic) gauge conditions don't allow this
+treatment, so there are two physical
 singularities for a BBH system. At these singularities, the metric becomes
 singular so we must avoid putting any grid points there.
 
@@ -1480,7 +1490,7 @@ vectors from point $P$ on the surface.
 
 We define the expansion of $\mathcal{S}$ as
 \begin{equation}
-   \Theta = g^{ab}\nabla_a k_b = \nabla_a s^a - K + s^as^bk_{ab} \label{eq:ah_expansion}
+   \Theta = g^{ab}\nabla_a k_b = \nabla_a s^a - K + s^as^bK_{ab} \label{eq:ah_expansion}
 \end{equation}
 where $K_{ab}$ and $K$ are the extrinsic curvature and its trace. We define
 $\Theta=0$ as a marginally outer-trapped surface, meaning all null rays are
@@ -1542,7 +1552,7 @@ the AH, all null rays are ingoing. However, for an event horizon, there will be
 a region where some null rays are outgoing on a specific spatial hypersurface,
 but they cannot escape to \scri~and will eventually become ingoing null rays at
 a later spatial hypersurface. This region in the first hypersurface will be
-outside of the AH (because the null rays are outgoing), but still inside the
+outside the AH (because the null rays are outgoing), but still inside the
 event horizon, thus showing that the AH is within the event horizon. For the
 Kerr (and Schwarzschild spacetime) the AH and the event horizon at a specific
 spatial hypersurface are the same.

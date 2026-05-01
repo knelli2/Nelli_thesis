@@ -8,7 +8,7 @@
 Being able to compare gravitational waveforms with each other, whether it be
 comparing Numerical Relativity (NR) waveforms with other NR waveforms or
 observed gravitational waves (GWs), is an extremely important ability in GW
-science; potentially the most important. GW detectors compare suspected signals
+science, potentially the most important. GW detectors compare suspected signals
 to models that have been informed by NR such as the IMRPhenom family
 (examples: \cite{Pratten:2020fqn, Garcia-Quiros:2020qpx, Pratten:2020ceb}) for
 frequency-domain analysis and the SEOBNR family (examples:
@@ -41,15 +41,20 @@ identities, we can define
   \mathbf{E} &= -\nabla\phi - \frac{\partial \mathbf{A}}{\partial t}\label{eq:maxwell-e}
 \end{align}
 where $\phi$ is the electric potential and $\mathbf{A}$ is the vector potential.
-We notice that if we modify $\phi$ and $\mathbf{A}$ like so
+We notice that if we modify $\phi$ and $\mathbf{A}$ \red{\sout{like so}
+according to}
 \begin{align}
   \mathbf{A} &\rightarrow \mathbf{A} + \nabla\psi\label{eq:maxwell-a} \\
   \phi &\rightarrow \phi - \frac{\partial \psi}{\partial t}\label{eq:maxwell-phi}
 \end{align}
 for some scalar function $\psi$, $\mathbf{B}$ and $\mathbf{E}$ in
-Eqs.~\ref{eq:maxwell-b} and \ref{eq:maxwell-e}, respectively, remain unchanged. This
+Eqs.~\ref{eq:maxwell-b} and \ref{eq:maxwell-e}
+\red{\sout{respectively,} Avoid using ``respectively'' when things are in
+the obvious order. The word causes the reader to stop and go back. I charge
+a fee of \$5 to use the word.}
+remain unchanged. This
 ability to choose $\phi$ and $\mathbf{A}$ is called gauge freedom, and the
-choice that we make is considered the gauge.
+choice that we make is called the gauge.
 
 In electricity and magnetism there are two common gauges; Coulomb and Lorenz.
 The Coulomb gauge is defined by
@@ -149,21 +154,23 @@ $x^\mu$, none that are equal to the TT gauge.
 
 We start with GH. There are two dominant gauges used when evolving the GH
 formulation. The first is actually the harmonic gauge introduced in Eq.
-\ref{eq:harmonic_gauge}. The TT gauge is actually a sub-category of the harmonic
-gauge, useful for linear theories. However, GH is the fully non-linear theory of
+\ref{eq:harmonic_gauge}. The TT gauge \red{\sout{is actually a sub-category of the harmonic
+gauge, useful for linear theories.} is the specialization of the harmonic
+gauge to the linear approximation to GR.}
+However, GH describes the fully non-linear theory of
 gravity and so the TT gauge is not suitable here. The harmonic gauge is
 convenient because the solutions for the equations of the coordinates are
 harmonic (or wave) solutions, hence the name, and we know how to solve for
 waves.
 
 The second gauge commonly used in GH evolutions is one that actually builds off
-of the harmonic gauge, because its wave solutions are so desirable. The general
+the harmonic gauge, because its wave solutions are so desirable. The general
 form of this gauge, called the damped-harmonic gauge, is
 \begin{equation}
   \Box x_\mu = H_\mu(x^\nu, g_{\nu\kappa})
 \end{equation}
-where $H_\mu$ is called the gauge-source function~\cite{Szilagyi:2009qz}, and it
-is a function of the coordinates and the spacetime metric. The gauge source
+where $H_\mu$ is called the gauge-source function~\cite{Szilagyi:2009qz},
+a function of the coordinates and the spacetime metric. The gauge source
 function is defined in Eq.~\ref{eq:dh_gauge_source}--\ref{eq:dh_mu3}. The main
 purpose for this is to damp away oscillations in the shift $\alpha$ and drive it
 to one (so the time evolution remains steady).
@@ -192,7 +199,7 @@ used with the Z4 family, but many NR codes make slight modifications to any of
 these gauge equations.
 
 It should be fairly clear that trying to compare a GW produced with the GH
-formulation to a GW produced with the BSSN formulation is not well-defined
+formulation to a GW produced with the BSSN formulation is not well defined
 because the gauges that are used are completely different. However, more subtly,
 comparing GWs that were produced with the same formulation is also ill-defined.
 This is due to the limitations of numerical resolution and floating-point
@@ -213,9 +220,11 @@ the GW strains $h$ we compute from simulations done in these different gauges
 cannot directly be compared with each other. The coordinate freedom of GR
 implies that even if we use the same formulas to compute $h$, we will get
 different answers because the coordinates are completely different. Therefore,
-how can we compare waveforms across codes? The answer is, by comparing the
-waveforms at a location where our choice of coordinates mostly don't matter;
-Namely at future-null infinity, also denoted \scri. Future-null infinity is the
+how can we compare waveforms across codes? The answer is by comparing the
+waveforms at a location where \red{\sout{our choice of coordinates mostly don't matter; Namely at }there is a well-defined way of choosing coordinates and using the
+remaining gauge freedom to transofrm the waveforms to the same gauge. This
+location is}
+future-null infinity, also denoted \scri. Future-null infinity is the
 location in spacetime that future null rays (e.g. light rays) escape if they
 don't terminate inside the black hole and aren't in a stable orbit.
 
@@ -244,7 +253,7 @@ community for producing GW catalogs
 \cite{Boyle:2019kee,Healy:2022wdn,Ferguson:2023vta,Hamilton:2023qkv}. However,
 because it simply extrapolates waveforms from the near field region around the
 black hole, some non-linear effects of GR as the wave travels to \scri~are not
-accounted for and may be important. Even with memory corrected waveforms from
+accounted for and may be important. Even with memory-corrected waveforms from
 \cite{Scheel:2025jct}, they still don't account for all non-linear effects. For
 this, a full evolution of Einstein's equations out to \scri~is needed.
 
@@ -256,16 +265,16 @@ concepts and equations of CCE that will be needed in the rest of the chapter,
 following \cite{Moxon:2020gha} and \cite{Moxon:2021gbv}.
 
 CCE works by first performing a Cauchy evolution of the spacetime using one of
-the formulations we discussed earlier this chapter (GH, BSSN, Z4). Then, we
+the formulations we discussed earlier in this chapter (GH, BSSN, Z4). Then, we
 store the spacetime metric and its derivatives on a sphere centered at the
 origin for all times during our simulation. This is called the worldtube. This
 worldtube data is then used as the inner boundary condition for the
-Characteristic evolution which is performed on a domain starting at the
-worldtube and extending out to \scri, represented as compactified coordinates.
-This characteristic evolution is performed on null-hypersurfaces, unlike the
+Characteristic evolution, which is performed on a domain starting at the
+worldtube and extending out to \scri, represented with compactified coordinates.
+This characteristic evolution is performed on null hypersurfaces, unlike the
 Cauchy evolution which is performed on space-like hypersurfaces. This is because
-with the Characteristic evolution, we are primarily concerned with evolving and
-resolving GWs, which travel along null rays, making null-hypersurfaces well
+with the characteristic evolution we are primarily concerned with evolving and
+resolving GWs, which travel along null rays, making null hypersurfaces well
 suited to this problem.
 
 CCE decomposes the metric into yet another set of coordinates and gauge
@@ -283,7 +292,7 @@ $\det{(h_{AB})} = \det{(q_{AB})}$, and asymptotic behavior
 \begin{equation}
   \lim_{x\rightarrow\infty} \{\beta, U^A, h_{AB}, \frac{V-r}{r^2} \} = \mathcal{O}(r^0) .
 \end{equation}
-We can define a complex dyad $q^A$ (basis vector) of $q_{AB}$ as the following
+We can define a complex dyad $q^A$ (basis vector) of $q_{AB}$ as follows
 \begin{equation}
   q_{AB} = \frac{1}{2}\left(q_A\bar{q}_B + \bar{q}_Aq_B\right),
 \end{equation}
@@ -322,16 +331,16 @@ details of what is on the right hand side are not important. See
    \partial_r (rH) + L_H(J,\beta,Q,U,W)H &\nonumber\\
    + L_{\bar{H}}(J,\beta,Q,U,W)\bar{H} &= S_H(J,\beta,Q,U,W)
 \end{align}
-The final radial equation for $H$ lets us solve Eq.~\ref{eq:bondi_h} for J at
+The final radial equation for $H$ lets us solve Eq.~\ref{eq:bondi_h} for $J$ at
 the next time step and the hierarchy starts over again.
 
 Now these scalars are defined in terms of our metric expressed in a Bondi-like
-gauge which is useful for evolving the Characteristic system. However, in order
+gauge which is useful for evolving the characteristic system. However, in order
 for us to impose boundary conditions with worldtube data from a Cauchy evolution
 performed in some arbitrary evolved gauge, we
 must transform the evolved gauge into our Bondi-like gauge. The mathematics of
 this transformation are quite tedious and unimportant for the point being made
-here because it uses a number of intermediate coordinates that are only helpful
+here.It uses a number of intermediate coordinates that are only helpful
 for the transformation, so we will skip them. To see them in detail, refer to
 \cite{Moxon:2020gha}. Instead we just state that our scalars defined in
 \ref{eq:bondi_u}-\ref{eq:bondi_h} can be expressed as some function of the
@@ -345,7 +354,7 @@ aren't finished. While we could directly compare GWs evolved from CCE, we
 actually still have some coordinate freedom left to exploit, specifically
 because we are at \scri. This coordinate freedom is the Bondi-van der
 Burg-Metzner-Sachs (BMS) group of symmetries, which is the standard Lorentz
-group plus an infinite dimensional group called supertranslations
+group plus an infinite-dimensional group called supertranslations
 \cite{Bondi:1962px,Sachs:1962wk}. A supertranslation is an angle-dependent time
 translation where every point on the 2-sphere of \scri~can be time translated
 independently of each other because they are all causally disconnected. With
@@ -364,16 +373,17 @@ characteristic evolutions with \spectre~CCE, but one must also perform frame
 fixing on the CCE output of two waveforms being compared to put them into the
 same BMS frame. While this final frame fixing is crucial for being able to
 compare CCE waveforms, we only note it here and refer the reader to the sources
-cited in this section for further details as they are not important to the
+cited in this section for further details---they are not important to the
 transformation of Cauchy worldtube data described below.
 
 \section{Worldtube data formats}
-Now we have the basics of the Characteristic evolution. Specifically that we use
+We have described
+the basics of characteristic evolution. Specifically, we use
 the Bondi scalars defined in Eqs.~\ref{eq:bondi_u}-\ref{eq:bondi_h} as part of a
 hierarchical evolution system, we need those Bondi scalars on the worldtube
-which serve as the inner boundary condition for the Characteristic evolution,
+that serves as the inner boundary condition for the characteristic evolution,
 and these Bondi scalars on the worldtube can be computed from the Cauchy metric,
-coordinates, and the spatial and temporal derivatives of the metric. Next we
+coordinates, and spatial and temporal derivatives of the metric. Next we
 focus on how this last step is implemented in \spectre~and what new features
 were added in \spectre.
 
@@ -385,26 +395,27 @@ representing the scalars as complex spherical harmonic coefficients is the most
 natural. For a surface $S_{\ell,m}$, we require $m=\ell$. This implies we will
 use $M = (\ell+1)^2$ complex-valued coefficients (or modes) to represent each
 Bondi scalar. We will call this the ``modal'' representation. The modal
-representation is extremely useful for two reasons. First is that it is straightforward
+representation is extremely useful for two reasons. First, it is straightforward
 to convert between two representations with different $\ell$ since
 the conversion is either truncating the number of coefficients or appending
-coefficients with value zero. Second, is that the modal representation is
+coefficients with value zero. Second, the modal representation is
 significantly more compact than a ``nodal'' representation where we represent
 the complex valued scalar at collocation points on a sphere. For the same
 surface $S_{\ell,m}$ the number of nodes needed to represent the scalar is $N =
 (\ell+1)(2\ell+1) > M$. The advantage with using a nodal representation for the
-actual Characteristic evolution is that we can easily perform arithmetic between
+actual characteristic evolution is that we can easily perform \red{nonlinear}
+arithmetic between
 Bondi scalars which is needed for the spectral algorithms that \spectre~uses.
 This is significantly more difficult with a modal representation because you
-cannot perform arithmetic with coefficients.
+cannot perform such arithmetic with coefficients.
 
 We now have a situation where it is ideal to represent the evolved Bondi
 scalars with nodal values, but the worldtube Bondi variables with modal
 coefficients. The worldtube variables must be written to disk during the Cauchy
 evolution, so we want those to take up as little disk space as possible. Also,
 there's no guarantee that the $\ell$ we write the worldtube variables with will
-be the same $\ell$ that we use for the inner boundary of our Characteristic
-evolution. One may even want to run multiple Characteristic evolutions with
+be the same $\ell$ that we use for the inner boundary of our characteristic
+evolution. One may even want to run multiple characteristic evolutions with
 varying resolution.
 
 The \spectre~CCE algorithm \cite{Moxon:2021gbv} was previously designed to
@@ -440,11 +451,11 @@ of the necessary collocation points.
 
 We have expanded support for reading in metric quantities for the worldtube
 because most other NR codes use either the BSSN or Z4 formulations of Einstein's
-equations. Particularly, we have relaxed the requirement to provide time
+equations. In particular, we have relaxed the requirement to provide time
 derivatives of the metric quantities for the worldtube data. This was done
 because unlike the GH formulation where one of the evolved variables, $\Pi$,
 \textit{is} the time derivative of the spacetime metric, the BSSN and Z4
-formulations only evolve the metric itself. Even though the time derivative of
+formulations only evolve the metric itself. Even though the time derivatives of
 the metric quantities are computed for the Cauchy evolution, they are often not
 available for output. The time derivatives within the evolution would be
 out-of-sync with the actual evolved metric quantities by one time step and
@@ -470,8 +481,8 @@ Due to the increased number of supported worldtube data formats, the inputs to
 the actual \spectre~CCE algorithm have been simplified. We now restrict the
 worldtube input data format to only be the Bondi variables represented in
 complex modal coefficients. This was done largely to avoid waiting for extra
-computations during the Characteristic evolution for the worldtube data. It was
-also done to simplify the code-paths taken during the Characteristic evolution.
+computations during the characteristic evolution for the worldtube data. It was
+also done to simplify the code-paths taken during the characteristic evolution.
 Therefore, in order to support all these worldtube data formats, \spectre~now
 offers a separate executable that will transform the worldtube data from any of
 the supported input formats to the Bondi scalars in complex modal form in a

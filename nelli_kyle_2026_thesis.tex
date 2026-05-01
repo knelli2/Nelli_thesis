@@ -133,6 +133,9 @@ of Physics and Astronomy, UCLA, Los Angeles, CA 90095} \newcommand{\UCLAId}{9}
 
 % \includeonly{chapters/4_cross_code_cce}
 
+\usepackage[normalem]{ulem} %for \sout
+\newcommand{\red}[1]{{\color{red}{#1}}}
+
 \begin{document}
 
 \pagestyle{ruled}
@@ -255,7 +258,7 @@ In this thesis, we present a novel algorithm for efficiently finding the
 apparent horizons in numerical simulations done with task-based parallelism. The
 performance improvement of task-based parallelism over more traditional
 parallelism is significant, but it introduces considerable algorithmic
-complexity which had to be dealt with. We then use this novel algorithm to
+complexity which \red{\sout{had} has} to be dealt with. We \red{\sout{then}} use this novel algorithm to
 perform the first binary black hole merger done with discontinuous Galerkin
 methods and analyze the waveform output. Lastly, we present a new feature to the
 \spectre~CCE module which allows it to be run on data from other numerical
