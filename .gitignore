@@ -29,3 +29,6 @@ __pycache__/
 # Plotting
 plotting/py_thesis/
 plotting/abd_cache/
+
+# Tarballs
+tarballs/
