@@ -85,6 +85,10 @@ centered, draw=black, fill=green!30]
 \def\ack{\section*{Acknowledgments}\noindent\ignorespaces}
 \def\ackn{\section*{Acknowledgment}\noindent\ignorespaces}
 
+\newenvironment{coauthor}
+  {\extrachapter{Other Co-Author Contributions}}
+  {\clearpage}
+
 \nouppercaseheads
 \createmark{section}{right}{shownumber}{}{\space\itshape}
 \copypagestyle{ruled}{headings}
@@ -272,17 +276,27 @@ different numerical relativity codes.
 % The list will be formatted according to \defaultbibliographystyle in the preamble. Use the "note" field instead of the "addendum" field to describe author's role.
 
 \begin{publishedcontent}[iknowwhattodo]
-First author contributions:
-\cite{Nelli:2025vfc},
-\cite{Lovelace:2024wra}
+\begin{bibunit}[unsrtnat]
+Chapter \ref{ch:nelli_et_al}~\cite{Nelli:2025vfc}. KCN wrote the code, ran
+simulations, and wrote a majority of the manuscript.
 
+Chapter \ref{ch:lovelace_nelli}~\cite{Lovelace:2024wra}. KCN wrote a majority of
+the code, helped debug simulations, and wrote a significant portion of the
+manuscript.
+
+\putbib[refs]
+\end{bibunit}
+\end{publishedcontent}
+
+\begin{coauthor}
+\begin{bibunit}[unsrtnat]
 Major contributions:
 \cite{Deppe:2024ckt},
 \cite{Ma:2023qjn},
 \cite{Ruiz:2020zaz}
 
 \spectre~core developer and maintainer of Cauchy-Characteristic
-Extraction (CCE) module: 
+Extraction (CCE) module:
 \cite{Khairnar:2026mtm},
 \cite{Habib:2025bkb},
 \cite{Lara:2025kzj},
@@ -306,7 +320,8 @@ Extraction (CCE) module:
 \cite{Deppe:2021bhi}
 
 \putbib[refs]
-\end{publishedcontent}
+\end{bibunit}
+\end{coauthor}
 
 
 \tableofcontents
