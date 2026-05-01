@@ -25,7 +25,7 @@ mpl.rcParams['font.size'] = 24
 DELTA_T = 1.0
 PHASE_REF_TIME = -8000.0         # [M] time at which phase difference is set to zero
 
-BASE_DIR = "/home/fs01/kem343/Annexes/CCEAnnex_final/PublicLinks/SXS:BBH:2696"
+BASE_DIR = "/home/knelli/Documents/research/sims/thesis_data/SXS:BBH:2696"
 
 LEVELS = [
     "Lev2",

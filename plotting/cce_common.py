@@ -170,7 +170,7 @@ def make_comparison_figure(abds, title, filename, ref_time, plot_modes, pairs, c
     col_offset = 1 if debug_amp_col else 0
 
     fig = plt.figure(figsize=(fig_width, 5 * n_modes))
-    fig.suptitle(title)
+    # fig.suptitle(title)
     gs = gridspec.GridSpec(n_modes, n_cols, figure=fig, hspace=0.0, wspace=0.2)
 
     first_amp_ax = first_phase_ax = None
