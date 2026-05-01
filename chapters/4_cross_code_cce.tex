@@ -41,20 +41,15 @@ identities, we can define
   \mathbf{E} &= -\nabla\phi - \frac{\partial \mathbf{A}}{\partial t}\label{eq:maxwell-e}
 \end{align}
 where $\phi$ is the electric potential and $\mathbf{A}$ is the vector potential.
-We notice that if we modify $\phi$ and $\mathbf{A}$ \red{\sout{like so}
-according to}
+We notice that if we modify $\phi$ and $\mathbf{A}$ according to
 \begin{align}
   \mathbf{A} &\rightarrow \mathbf{A} + \nabla\psi\label{eq:maxwell-a} \\
   \phi &\rightarrow \phi - \frac{\partial \psi}{\partial t}\label{eq:maxwell-phi}
 \end{align}
 for some scalar function $\psi$, $\mathbf{B}$ and $\mathbf{E}$ in
-Eqs.~\ref{eq:maxwell-b} and \ref{eq:maxwell-e}
-\red{\sout{respectively,} Avoid using ``respectively'' when things are in
-the obvious order. The word causes the reader to stop and go back. I charge
-a fee of \$5 to use the word.}
-remain unchanged. This
-ability to choose $\phi$ and $\mathbf{A}$ is called gauge freedom, and the
-choice that we make is called the gauge.
+Eqs.~\ref{eq:maxwell-b} and \ref{eq:maxwell-e} remain unchanged. This ability to
+choose $\phi$ and $\mathbf{A}$ is called gauge freedom, and the choice that we
+make is called the gauge.
 
 In electricity and magnetism there are two common gauges; Coulomb and Lorenz.
 The Coulomb gauge is defined by
@@ -154,14 +149,12 @@ $x^\mu$, none that are equal to the TT gauge.
 
 We start with GH. There are two dominant gauges used when evolving the GH
 formulation. The first is actually the harmonic gauge introduced in Eq.
-\ref{eq:harmonic_gauge}. The TT gauge \red{\sout{is actually a sub-category of the harmonic
-gauge, useful for linear theories.} is the specialization of the harmonic
-gauge to the linear approximation to GR.}
-However, GH describes the fully non-linear theory of
-gravity and so the TT gauge is not suitable here. The harmonic gauge is
-convenient because the solutions for the equations of the coordinates are
-harmonic (or wave) solutions, hence the name, and we know how to solve for
-waves.
+\ref{eq:harmonic_gauge}. The TT gauge is the specialization of the harmonic
+gauge to the linear approximation of GR. However, GH describes the fully
+non-linear theory of gravity and so the TT gauge is not suitable here. The
+harmonic gauge is convenient because the solutions for the equations of the
+coordinates are harmonic (or wave) solutions, hence the name, and we know how to
+solve for waves.
 
 The second gauge commonly used in GH evolutions is one that actually builds off
 the harmonic gauge, because its wave solutions are so desirable. The general
@@ -221,12 +214,11 @@ cannot directly be compared with each other. The coordinate freedom of GR
 implies that even if we use the same formulas to compute $h$, we will get
 different answers because the coordinates are completely different. Therefore,
 how can we compare waveforms across codes? The answer is by comparing the
-waveforms at a location where \red{\sout{our choice of coordinates mostly don't matter; Namely at }there is a well-defined way of choosing coordinates and using the
-remaining gauge freedom to transofrm the waveforms to the same gauge. This
-location is}
-future-null infinity, also denoted \scri. Future-null infinity is the
-location in spacetime that future null rays (e.g. light rays) escape if they
-don't terminate inside the black hole and aren't in a stable orbit.
+waveforms at a location where there is a well-defined way of choosing
+coordinates. This location is future-null infinity, also denoted \scri.
+Future-null infinity is the location in spacetime that future null rays (e.g.
+light rays) escape if they don't terminate inside the black hole and aren't in a
+stable orbit.
 
 There are a few ways of computing GWs at \scri~that allow for comparison of GWs
 between resolutions or between codes. Most NR codes don't have a computational
@@ -396,18 +388,17 @@ natural. For a surface $S_{\ell,m}$, we require $m=\ell$. This implies we will
 use $M = (\ell+1)^2$ complex-valued coefficients (or modes) to represent each
 Bondi scalar. We will call this the ``modal'' representation. The modal
 representation is extremely useful for two reasons. First, it is straightforward
-to convert between two representations with different $\ell$ since
-the conversion is either truncating the number of coefficients or appending
-coefficients with value zero. Second, the modal representation is
-significantly more compact than a ``nodal'' representation where we represent
-the complex valued scalar at collocation points on a sphere. For the same
-surface $S_{\ell,m}$ the number of nodes needed to represent the scalar is $N =
+to convert between two representations with different $\ell$ since the
+conversion is either truncating the number of coefficients or appending
+coefficients with value zero. Second, the modal representation is significantly
+more compact than a ``nodal'' representation where we represent the complex
+valued scalar at collocation points on a sphere. For the same surface
+$S_{\ell,m}$ the number of nodes needed to represent the scalar is $N =
 (\ell+1)(2\ell+1) > M$. The advantage with using a nodal representation for the
-actual characteristic evolution is that we can easily perform \red{nonlinear}
-arithmetic between
-Bondi scalars which is needed for the spectral algorithms that \spectre~uses.
-This is significantly more difficult with a modal representation because you
-cannot perform such arithmetic with coefficients.
+actual characteristic evolution is that we can easily perform nonlinear
+arithmetic between Bondi scalars which is needed for the spectral algorithms
+that \spectre~uses. This is significantly more difficult with a modal
+representation because you cannot perform such arithmetic with coefficients.
 
 We now have a situation where it is ideal to represent the evolved Bondi
 scalars with nodal values, but the worldtube Bondi variables with modal

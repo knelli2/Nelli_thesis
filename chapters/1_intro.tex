@@ -11,7 +11,6 @@ extreme objects in the universe, gravity continues to humble us.
 \section{Newtonian Gravity}
 
 In order to explain black holes, the overarching topic of this thesis, we
-\red{\sout{must}}
 first start with a more simplified version of gravity and work our way up.
 Newtonian gravity states that the gravitational force between two masses is
 proportional to the two masses and inversely proportional to the square of the
@@ -56,7 +55,7 @@ interiors of large gas planets or even stars. These basic starting equations are
 able to unlock a large amount of gravitational physics on their own, making them
 vital, even today, to astrophysical research.
 
-However, Newtonian gravity does have its limitations. One \red{\sout{being} is} how simultaneity
+However, Newtonian gravity does have its limitations. One is how simultaneity
 of events is measured. In order to understand simultaneous events, we must
 understand the coordinates that are used and how they transform in Newtonian
 gravity. If we take a step back, one way to conceptually think about Newtonian
@@ -251,23 +250,22 @@ between two masses. And any object that has a force being applied to it will
 accelerate in the direction of that force. Therefore, a change of motion in
 Newtonian gravity arises from forces.
 
-In GR, however, motion does not arise from \red{\sout{forces} the force
-of gravity}. Instead, in GR we say there
-is some ``background'' spacetime, or some fabric of the universe that matter
-exists both on and in at the same time. In the Newtonian and SR picture, this
-background is ``flat'' meaning that it doesn't affect the matter that lives in
-it. However, in GR this background doesn't have to be flat anymore. It can be
-distorted, or curved; sort of how a trampoline with a heavy object in the middle
-is curved. Motion then arises not because of any force, but simply due to the
-curvature of the background spacetime. The motion of a small mass is dictated by
-how much spacetime is curved. In the trampoline example, a small mass starting
-with a constant velocity on a flat spacetime (flat trampoline) will not deviate
-from its original path and will continue with a constant velocity. That same
-mass moving on a curved spacetime (trampoline with a heavy object in the middle)
-will naturally move towards the heavy object with increasing velocity without
-any outside influence. It's the nature of the curved spacetime which drives the
-motion of matter. And the beauty of Einstein's theory is that it is matter
-itself which drives the curvature of spacetime.
+In GR, however, motion does not arise from the force of gravity. Instead, in GR
+we say there is some ``background'' spacetime, or some fabric of the universe
+that matter exists both on and in at the same time. In the Newtonian and SR
+picture, this background is ``flat'' meaning that it doesn't affect the matter
+that lives in it. However, in GR this background doesn't have to be flat
+anymore. It can be distorted, or curved; sort of how a trampoline with a heavy
+object in the middle is curved. Motion then arises not because of any force, but
+simply due to the curvature of the background spacetime. The motion of a small
+mass is dictated by how much spacetime is curved. In the trampoline example, a
+small mass starting with a constant velocity on a flat spacetime (flat
+trampoline) will not deviate from its original path and will continue with a
+constant velocity. That same mass moving on a curved spacetime (trampoline with
+a heavy object in the middle) will naturally move towards the heavy object with
+increasing velocity without any outside influence. It's the nature of the curved
+spacetime which drives the motion of matter. And the beauty of Einstein's theory
+is that it is matter itself which drives the curvature of spacetime.
 
 \begin{figure}[h]
    \centering
@@ -391,9 +389,8 @@ The second condition is that our connection is ``metric compatible'', meaning
    \nabla_\rho g_{\mu\nu} = 0.
 \end{equation}
 This second condition is important for raising and lowering indices of
-derivative quantities. With these two conditions, \red{it turns out
-that} we can write the Christoffel
-symbols as sums of partial derivatives of the metric
+derivative quantities. With these two conditions, it turns out that we can write
+the Christoffel symbols as sums of partial derivatives of the metric
 \begin{equation}\label{eq:christoffel-symbols}
    \Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(
       \partial_\mu g_{\nu\rho} + \partial_\nu g_{\rho\mu} - \partial_\rho g_{\mu\nu}
@@ -427,11 +424,11 @@ finally move on to computing the curvature of our spacetime, which is where
 gravity in GR derives from. To do this, we start with a vector $V^\rho$. We
 already know if we move this vector along two different paths to the same
 destination, the resulting vectors will be different. This difference is
-precisely what we are going to \red{\sout{call} use to define} curvature. Imagine we first transport the
-vector in some direction $\nabla_\nu$ and then in another direction
-$\nabla_\mu$. This gives us a final vector of $\nabla_\mu\nabla_\nu V^\rho$.
-Now, we swap the order to get $\nabla_\nu\nabla_\mu V^\rho$. Let's take the
-difference and expand the covariant derivatives
+precisely what we are going to use to define curvature. Imagine we first
+transport the vector in some direction $\nabla_\nu$ and then in another
+direction $\nabla_\mu$. This gives us a final vector of $\nabla_\mu\nabla_\nu
+V^\rho$. Now, we swap the order to get $\nabla_\nu\nabla_\mu V^\rho$. Let's take
+the difference and expand the covariant derivatives
 \begin{align}
    \nabla_\mu\nabla_\nu V^\rho - \nabla_\nu\nabla_\mu V^\rho
    &= \partial_\mu(\nabla_\nu V^\rho)
@@ -803,13 +800,11 @@ There are actually extra terms in these equations for the stress-energy tensor
 following a similar procedure, but we exclude those here because we are only
 concerned with the vacuum equations.
 
-\red{\sout{We are unable to evolve the ADM equations stably} It turns
-out that the ADM equations do not lead to stable numerical evolutions
-for reasons that are well understood mathematically}.
-Accordingly, we now
-move on to the BSSN equations
-\cite{Shibata:1995we,Baumgarte:1998te}.
-We start by rewriting the spatial metric as
+It turns out that the ADM equations do not lead to stable numerical evolutions
+for reasons that are well understood mathematically
+\cite{Kidder:2001tz,Baumgarte:2010ndz}. Accordingly, we now move on to the BSSN
+equations \cite{Shibata:1995we,Baumgarte:1998te}. We start by rewriting the
+spatial metric as
 \begin{equation}
    \gamma_{ij} = e^{4\phi}\bar{\gamma}_{ij}
 \end{equation}
@@ -818,7 +813,7 @@ $\bar{\gamma}_{ij}$ is called the conformal metric. This procedure of rewriting
 a quantity as a different quantity times a scalar function is a conformal
 transformation. The fourth power of $e^\phi$ is arbitrary, but useful for later
 calculation. The determinant of $\bar{\gamma}_{ij}$ is required to be
-$\bar{\gamma}=\eta=1$. \red{Omit $\eta$??} We then define the scalar function $\phi$ to be
+$\bar{\gamma}=1$. We then define the scalar function $\phi$ to be
 \begin{equation}
    \phi = \frac{1}{12}\ln(\gamma) .
 \end{equation}
@@ -1285,8 +1280,7 @@ by the LIGO \cite{LIGOScientific:2014pky}, VIRGO \cite{VIRGO:2014yos}, and Kagra
 \cite{LIGOScientific:2016aoc,KAGRA:2021vkt}.
 
 But when LIGO detected this merger, how did it know it was a merger of two black
-holes? How did it know that it was a merger at all? \red{\sout{Well}}
-There had to be some
+holes? How did it know that it was a merger at all? There had to be some
 prediction about what the GWs would look like so data analysts would be able to
 search the observed data for the predicted signal. These predictions must be
 based on some sort of theory. However, data analysts don't know \textit{a
@@ -1371,10 +1365,10 @@ Simulations typically take around $10^7$-$10^9$ time steps depending on the
 resolution. If a simulation was parallelized enough to take just 1ms per time
 step, the entire simulation would take $10^4$-$10^6$s, or 3 hours to 12 days.
 And this is only if a simulation is able to parallelize efficiently enough.
-Simulations \red{actually} often require weeks to months to run.
-These numbers are also only for vacuum spacetimes. Coupling a curved spacetime
-evolution with matter and magnetic fields increases the number of evolved
-variables and temporaries.
+Simulations actually often require weeks to months to run. These numbers are
+also only for vacuum spacetimes. Coupling a curved spacetime evolution with
+matter and magnetic fields increases the number of evolved variables and
+temporaries.
 
 The amount of resources used on HPCs also varies based on the numerical methods
 used. These are often measured in core hours, which is the number of hours used
@@ -1392,7 +1386,7 @@ however, there is still much to be done in this area.
 \section{Horizon finding in the GH formalism\label{sec:intro_ah}}
 Here, we will only discuss horizon finding as it pertains to the GH formalism.
 Horizons can be found in the BSSN formulation as well using similar
-techniques. \red{\sout{but we won't discuss those here.}}
+techniques.
 
 Finding horizons in the GH formalism is necessary for the evolution of the
 equations in a way that it isn't for BSSN. In BSSN, the physical singularities
