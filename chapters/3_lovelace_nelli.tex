@@ -785,14 +785,15 @@ predictor-corrector time integrator with absolute and relative time stepper
 tolerances of $10^{-8}$ and $10^{-6}$, respectively, unless otherwise stated.
 \begin{figure}
   \centering
-  \includegraphics[width=0.3\linewidth]{images/lovelace_nelli/sphere_with_highlighted_wedge_cli_cropped.png}
-\caption[Computational domain used for single black hole evolutions.]{An illustration of a slice through the computational domain used in the evolutions
-of single black holes described in this paper. Six regions, each in the
-shape of a deformed cube, combine to cover the volume of a spherical shell,
-with the inner boundary (the excision surface) inside the black hole's
-apparent horizon. The six regions are themselves refined radially and
-angularly into smaller deformed cubes. One of the six regions is shown in blue
-for clarity. \label{fig:bhdomain}}
+  \includegraphics[width=0.5\linewidth]{images/lovelace_nelli/sphere_with_highlighted_wedge_cli_cropped.png}
+\caption[Computational domain used for single black hole evolutions.]{An
+illustration of a slice through the computational domain used in the evolutions
+of single black holes described in this paper. Six regions, each in the shape of
+a deformed cube, combine to cover the volume of a spherical shell, with the
+inner boundary (the excision surface) inside the black hole's apparent horizon.
+The six regions are themselves refined radially and angularly into smaller
+deformed cubes. One of the six regions is shown in blue for clarity.
+\label{fig:bhdomain}}
 \end{figure}
 
 \subsubsection{Kerr-Schild coordinates\label{sec:kerr-schild single hole}}
@@ -1069,7 +1070,7 @@ trajectories for Lev2 is shown in Fig.~\ref{fig:trajectories}.
 \subsubsection{Computational domain decomposition}
 
 \begin{figure}
-  \raggedleft
+  \centering
   \begin{minipage}{0.43\columnwidth}
     \centering
     \includegraphics[width=\linewidth]{images/lovelace_nelli/inspiral_domain_mid_zoom_cli.png}
@@ -1080,16 +1081,17 @@ trajectories for Lev2 is shown in Fig.~\ref{fig:trajectories}.
     \includegraphics[width=\linewidth]{images/lovelace_nelli/inspiral_domain_full_zoom_cli.png}
     \\
   \end{minipage}
-  \caption[Computational grid used during the BBH inspiral.]{An illustration of the computational grid used during the inspiral.
-    We make use of two excision regions,
-    each region lying inside a black hole's apparent horizon. Each excision is
-    surrounded by a spherical shell partitioned into six deformed cubes as in
-    Fig.~\ref{fig:bhdomain}. Each spherical shell is then surrounded by another
-    shell of six deformed cubes that transition to a cubical boundary. Then the
-    two cubes themselves are surrounded by a transitionary envelope which becomes
-    spherical. \textit{Left:} The transitionary envelope. \textit{Right:} A
-    close-up of the domain structure around the excisions. The center of each
-    excision is offset from the center of the cube.}\label{fig:bbhdomain}
+  \caption[Computational grid used during the BBH inspiral.]{An illustration of
+    the computational grid used during the inspiral. We make use of two excision
+    regions, each region lying inside a black hole's apparent horizon. Each
+    excision is surrounded by a spherical shell partitioned into six deformed
+    cubes as in Fig.~\ref{fig:bhdomain}. Each spherical shell is then surrounded
+    by another shell of six deformed cubes that transition to a cubical
+    boundary. Then the two cubes themselves are surrounded by a transitionary
+    envelope which becomes spherical. \textit{Left:} The transitionary envelope.
+    \textit{Right:} A close-up of the domain structure around the excisions. The
+    center of each excision is offset from the center of the
+    cube.}\label{fig:bbhdomain}
 \end{figure}
 
 The numerical evolution of the FOGH system is performed with a DG scheme in which
@@ -1157,7 +1159,7 @@ crucial for robust inspiral and merger simulations.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\linewidth]{images/lovelace_nelli/ringdown_domain_zoom_cli.png}
+  \includegraphics[width=0.5\linewidth]{images/lovelace_nelli/ringdown_domain_zoom_cli.png}
   \caption[Computational domain used during ringdown.]{An image of the ringdown domain. After a common horizon is found,
     the evolution is regridded onto a domain with a single excision as in
     Fig.~\ref{fig:bhdomain}. Additional time-dependent maps are used to deform
