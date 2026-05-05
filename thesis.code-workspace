@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../sims/thesis_data"
+		},
+		{
+			"path": "../sims"
 		}
 	],
 	"settings": {
