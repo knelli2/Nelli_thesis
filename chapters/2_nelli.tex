@@ -598,7 +598,7 @@ Fig.~\ref{fig:sphere-highlighted}. We then apply a coordinate mapping of the
 form
 \begin{eqnarray}
   t &=& \hat{t} \\
-  x^{i} &=& \mathcal{M}(\hat{t}) \xi^{i}
+  x^{i} &=& \mathcal{M}(\lambda(t)) \xi^{i}
 \end{eqnarray}
 where $\mathcal{M}(\hat{t})$ is a (generally) non-linear operator acting on the
 grid coordinates.
@@ -1207,7 +1207,7 @@ release the mutation and acquire the callback lock, this is not an issue.
 Whether $\Lambda(t)$ is ready or not, this newly registered callback will still
 be called. If $\Lambda(t)$ is ready, then the callback will likely restart the
 evolution of an element. If a $\lambda_k(t)$ still isn't ready, then a new
-callback will just be registered for when a different $\lambda_l(t)$ in
+callback will just be registered when a different $\lambda_l(t)$ in
 $\Lambda(t)$ is ready.
 
 \subsection{Eventual Concurrency}
